@@ -32,6 +32,8 @@ The design follows the user-supplied mockup. Photography is recreated illustrati
 - A long CV renders as three A4 pages, preserving both experience end markers and all remaining sections. PDF text stays inside the checked page bounds.
 - All fixture pages were rendered for visual review. A real browser download from the editor was also opened and checked for accents, structured content and page bounds.
 - Browser checks cover contact fields, adding experience/education, removal/undo, template changes, local draft restoration and direct download.
-- Hosting is pending the correct DGC connection, email `nguyenhai1080@gmail.com`. The currently available connection still identifies GST Vietnam. No hosting mutation has been made since the user's account correction.
+- The connector identifies GST Vietnam and was not used for the corrected DGC deployment. The user's signed-in browser independently confirmed DGC ownership, email `nguyenhai1080@gmail.com`.
 - The final revision passes the production build and a real PDF download from the local standalone production server. Add/remove/undo/reorder, persistent restoration and the mobile edit/preview switch were checked in the browser.
 - The browser profile independently confirms DGC (`nguyenhai1080@gmail.com`, Pro plan). The connector remains GST and must not be used for the DGC deployment.
+- The structured editor revision is now online in DGC at `https://cvmais-dgc.n1.tinhgon.xyz`, project `cmvlbkah40mef0i5fzrjkbvcd`, application commit `e6fb6a5`. The DGC project overview shows online/version 1.
+- Live DGC smoke checks passed for homepage, editor, health and fonts. A real PDF download from the DGC site was verified for A4, Portuguese accents and entered experience content. No changes were made to the historical GST project after the correction.

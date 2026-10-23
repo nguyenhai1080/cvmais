@@ -1,8 +1,23 @@
 # Vibehost deployment
 
-## Required destination: DGC
+## Active deployment: DGC
 
-The user corrected the hosting destination to DGC, email `nguyenhai1080@gmail.com`. Confirm this email through `whoami` before connector mutations. The exposed connector last reported `nguyenhai1080+basic@gmail.com` / GST Vietnam. The user's browser profile at `https://v2.tinhgon.xyz/profile` has independently confirmed `nguyenhai1080@gmail.com`, display name `Công ty Cổ Phần Đầu Tư và Truyền Thông Số`, account ID `cmucbxmf00a5j0h5fjwzjwky7`, Pro plan. Deployment can proceed through that verified browser account. The new structured editor and browser-generated PDF implementation have not been deployed to GST.
+The required owner is DGC, email `nguyenhai1080@gmail.com`. The exposed connector still identifies `nguyenhai1080+basic@gmail.com` / GST Vietnam and must not be used for DGC mutations. Deployment was completed through the user's browser after its visible profile confirmed the DGC email, display name `Công ty Cổ Phần Đầu Tư và Truyền Thông Số`, account ID `cmucbxmf00a5j0h5fjwzjwky7`, Pro plan.
+
+- Live URL: https://cvmais-dgc.n1.tinhgon.xyz
+- Project ID: `cmvlbkah40mef0i5fzrjkbvcd`
+- Management page: https://v2.tinhgon.xyz/projects/cmvlbkah40mef0i5fzrjkbvcd
+- State: online, version 1, deployed 24 October 2026.
+- Application commit: `e6fb6a5` (structured editor and browser PDF download).
+- Source: `https://github.com/nguyenhai1080/cvmais.git`, default branch `main`, repository root.
+- Runtime: 0.3 CPU, 512 MB RAM, application port 3000.
+- Automatic GitHub deployment: off, as shown in the DGC project overview. Pushes do not deploy by themselves.
+- Custom domain: not connected. `cvmais.co.mz` still requires DNS/domain setup.
+- No database or persistent server data. Drafts are saved in the visitor's browser; PDFs are generated there.
+
+Live HTTPS checks passed for the homepage, editor, health endpoint and both local font files. The deployed editor was used to add a profile and a structured experience and download a real PDF. The downloaded file was opened and verified as A4 with correct Portuguese accents and content. The DGC projects list and project overview both showed CVMais online. The old GST project was not modified after the user's account correction.
+
+For updates, use the DGC management page above while signed in as the confirmed owner. Use connector deployment tools only after `whoami.email` reports the DGC address. Do not reuse the GST project ID below.
 
 ## Historical GST deployment (wrong destination; do not redeploy)
 

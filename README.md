@@ -2,6 +2,8 @@
 
 Responsive Next.js App Router UI for `cvmais.co.mz`, written in Portuguese for Mozambique (`pt-MZ`).
 
+Live DGC deployment: https://cvmais-dgc.n1.tinhgon.xyz. Hosting/account details are in `DEPLOYMENT.md`.
+
 ## Run locally
 
 Requires Node.js 22 or later.
