@@ -20,5 +20,7 @@ Validated on 24 October 2026, Asia/Saigon.
 - Empty print sections and editor placeholder hints are hidden in print styles. The printable content now uses the full page width, with page breaks allowed inside long sections.
 - The PDF action requires a name and at least one completed content section.
 - Docker Desktop was unavailable during the follow-up. The earlier Docker validation above applies to the preceding UI revision; the updated revision is checked with the local production build and Vibehost deployment.
+- Updated local production build passed. Vibehost built and deployed application commit `fe06a17aedd3d00b92bc01e885d3b0c8607451a1` successfully; the project reports `online`.
+- Live HTTPS smoke checks passed for the homepage, editor, health endpoint and hero/community images. Online browser checks passed for template selection, data entry, draft saving, PDF-action enablement and 390 px layout width. See `DEPLOYMENT.md` for deployment identifiers and domain status.
 
 The design follows the user-supplied mockup. Photography is recreated illustration; it is not a pixel-identical extraction of the original mockup.
