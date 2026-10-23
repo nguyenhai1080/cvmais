@@ -1,0 +1,35 @@
+import React from 'react';
+import { renderToBuffer } from '@react-pdf/renderer';
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { CVDocument, prepareFonts } from '../src/components/pdf-document';
+import { emptyCV, models, type CVData } from '../src/lib/cv';
+
+async function main() {
+  const directory = path.resolve('work/pdf-qa');
+  await mkdir(directory, { recursive: true });
+  prepareFonts(path.resolve('public/fonts').replaceAll('\\', '/'));
+  const sample: CVData = {
+    ...emptyCV(), name: 'João José Mucavele', role: 'Assistente de operações',
+    email: 'candidato@exemplo.com', phone: '+258 84 000 0000', city: 'Maputo, Moçambique', website: 'linkedin.com/in/exemplo',
+    profile: 'Profissional organizado, com experiência em operações e atendimento. Procuro contribuir para uma equipa que valorize a comunicação, a colaboração e a melhoria contínua.',
+    experiences: [{ id: 'work-1', title: 'Assistente de operações', organisation: 'Organização de demonstração', period: '2022 - actual',
+      description: 'Organização de documentos e apoio às actividades da equipa.\nCoordenação de pedidos e acompanhamento de fornecedores.\nPreparação de relatórios e melhoria dos processos de arquivo.' }],
+    education: [{ id: 'study-1', title: 'Licenciatura em Gestão', organisation: 'Instituição de demonstração', period: '2018 - 2022', description: 'Projecto final sobre gestão de pequenas empresas.' }],
+    skills: 'Microsoft Excel · Comunicação · Trabalho em equipa\nOrganização de documentos · Atendimento ao cliente',
+    languages: 'Português - fluente\nInglês - intermédio\nChangana - língua materna',
+  };
+  for (const model of models) {
+    const buffer = await renderToBuffer(<CVDocument data={{ ...sample, model }} />);
+    await writeFile(path.join(directory, `${model}.pdf`), buffer);
+    process.stdout.write(`${model}: ${buffer.length} bytes\n`);
+  }
+  const paragraph = 'Organização e coordenação de processos administrativos, comunicação com fornecedores e preparação de relatórios de gestão. Atenção ao detalhe, planeamento e acompanhamento das actividades da equipa. ';
+  const long = { ...sample, model: 'classico' as const, experiences: [
+    { ...sample.experiences[0], description: paragraph.repeat(17) + ' FIM DA PRIMEIRA EXPERIÊNCIA.' },
+    { ...sample.experiences[0], id: 'work-2', title: 'Estágio profissional', period: '2020 - 2022', description: paragraph.repeat(17) + ' FIM DA SEGUNDA EXPERIÊNCIA.' },
+  ] };
+  await writeFile(path.join(directory, 'long-cv.pdf'), await renderToBuffer(<CVDocument data={long} />));
+  await writeFile(path.join(directory, 'sample.json'), JSON.stringify(sample, null, 2));
+}
+main().catch(error => { console.error(error); process.exitCode = 1; });

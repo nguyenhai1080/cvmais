@@ -1,5 +1,11 @@
 # Vibehost deployment
 
+## Required destination: DGC
+
+The user corrected the hosting destination to DGC, email `nguyenhai1080@gmail.com`. Confirm this email through `whoami` before connector mutations. The exposed connector last reported `nguyenhai1080+basic@gmail.com` / GST Vietnam. The user's browser profile at `https://v2.tinhgon.xyz/profile` has independently confirmed `nguyenhai1080@gmail.com`, display name `Công ty Cổ Phần Đầu Tư và Truyền Thông Số`, account ID `cmucbxmf00a5j0h5fjwzjwky7`, Pro plan. Deployment can proceed through that verified browser account. The new structured editor and browser-generated PDF implementation have not been deployed to GST.
+
+## Historical GST deployment (wrong destination; do not redeploy)
+
 - Live URL: https://cvmais.n1.tinhgon.xyz
 - Project ID: `cmvlan14e0m1i0i5fy9egu3uu`
 - Deployment ID: `cmvlan19z0m1m0i5ff1m8zyj9`

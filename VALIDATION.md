@@ -24,3 +24,14 @@ Validated on 24 October 2026, Asia/Saigon.
 - Live HTTPS smoke checks passed for the homepage, editor, health endpoint and hero/community images. Online browser checks passed for template selection, data entry, draft saving, PDF-action enablement and 390 px layout width. See `DEPLOYMENT.md` for deployment identifiers and domain status.
 
 The design follows the user-supplied mockup. Photography is recreated illustration; it is not a pixel-identical extraction of the original mockup.
+
+## Structured editor and direct PDF revision (local)
+
+- Seven data tests pass, including legacy draft migration, malformed data, entry limits, independent state and safe PDF filenames.
+- Five PDF styles render as single-page A4 samples with embedded regular/bold Noto Sans and correct Portuguese text extraction.
+- A long CV renders as three A4 pages, preserving both experience end markers and all remaining sections. PDF text stays inside the checked page bounds.
+- All fixture pages were rendered for visual review. A real browser download from the editor was also opened and checked for accents, structured content and page bounds.
+- Browser checks cover contact fields, adding experience/education, removal/undo, template changes, local draft restoration and direct download.
+- Hosting is pending the correct DGC connection, email `nguyenhai1080@gmail.com`. The currently available connection still identifies GST Vietnam. No hosting mutation has been made since the user's account correction.
+- The final revision passes the production build and a real PDF download from the local standalone production server. Add/remove/undo/reorder, persistent restoration and the mobile edit/preview switch were checked in the browser.
+- The browser profile independently confirms DGC (`nguyenhai1080@gmail.com`, Pro plan). The connector remains GST and must not be used for the DGC deployment.
