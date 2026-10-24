@@ -39,3 +39,5 @@ The backup preparation revision brings the suite to fifteen tests. A synthetic S
 - Local HTTP checks pass for disabled mail configuration, same-origin enforcement, successful verification, purpose/single-use rejection, password reset and session revocation. Existing storage/erasure HTTP regression passes.
 - Real B2 encrypted snapshot downloaded and restored into a new isolated database; integrity and original production persistence fixture verified.
 - cvmais.win verified in Resend; owner-approved delivery test reported Delivered. Replaced the first unused sending key after revoking it. No key values are included in source.
+
+- DGC v9 / source 56a5284: live health and auth pages HTTP 200; email enabled confirmed; original account/CV survived redeployment. Local browser confirmation succeeded and persisted to SQLite.

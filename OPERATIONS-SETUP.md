@@ -8,7 +8,7 @@ Resend domain `cvmais.win` (cc34e471-6454-4adc-972d-324451aa2e46) is Verified, T
 
 The first unused sending key was revoked and replaced with `cvmais-auth-mail-v2`, Sending access restricted to cvmais.win. Its value is saved only in DGC environment configuration. Never put secrets in chat, source or NEXT_PUBLIC variables. Sender: `CVMais <nao-responder@cvmais.win>`. One owner-approved test to nguyenhai1080@gmail.com was reported Delivered, receipt 01a16d7a-0e0d-7d04-b153-6a7000a14caf.
 
-MAIL_ENABLED controls activation; MAIL_FROM, RESEND_API_KEY and APP_ORIGIN are server-only settings. Application verification/reset links are hashed in SQLite, expire in 24 hours/30 minutes, are purpose-bound and single-use. Requests are rate-limited; reset responses do not reveal whether an account exists. Reset revokes sessions and rotates recovery codes. Delivery runs after the HTTP response, without a durable retry queue. Failed delivery requires requesting a new link. Plain-text messages contain no tracking pixels. Recovery codes remain a fallback.
+MAIL_ENABLED=true is active on DGC v9; MAIL_FROM, RESEND_API_KEY and APP_ORIGIN are server-only settings. Application verification/reset links are hashed in SQLite, expire in 24 hours/30 minutes, are purpose-bound and single-use. Requests are rate-limited; reset responses do not reveal whether an account exists. Reset revokes sessions and rotates recovery codes. Delivery runs after the HTTP response, without a durable retry queue. Failed delivery requires requesting a new link. Plain-text messages contain no tracking pixels. Recovery codes remain a fallback.
 
 Required Resend DNS records shown by the live console (public values, not secrets):
 
