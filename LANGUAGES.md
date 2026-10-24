@@ -9,3 +9,5 @@ Portuguese (Mozambique) is always the default. The browser language is not used 
 - Public guidance, account screens, photo/import/deletion controls, navigation and editor UI have English text. Portuguese remains the server-rendered/search-indexed default at the existing URLs; these are not separate English SEO routes. Verification/recovery emails and operational alerts retain their existing Portuguese text; this change does not alter mail transport or authentication.
 
 Implementation: `ui-en.ts` contains original English UI text; `ui-translate.ts` performs explicit text lookup. Components subscribe to `ui-language.ts`; server metadata remains in route modules, while language-aware content lives in client components. CV/PDF headings come from `cv-language.ts`, not the interface preference. User-entered values bypass UI translation lookups. Dates, organisations, qualifications and factual skill levels remain user-authored.
+
+Pre-download review also follows the interface language while explicitly showing the independently selected CV language. It does not translate the CV text.

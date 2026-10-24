@@ -9,6 +9,7 @@ import { useCVStorage } from '@/lib/use-cv-storage';
 import EditorPreview from '@/components/editor-preview';
 import GuestBackupImport from '@/components/guest-backup-import';
 import PhotoPicker from '@/components/photo-picker';
+import CVExportReview from '@/components/cv-export-review';
 import ContentSamples from '@/components/content-samples';
 import type { SampleFilters, SampleKind } from '@/lib/content-samples';
 import { MAX_ENTRIES, isModel, normaliseCV, canExport, pdfFilename,
@@ -98,10 +99,10 @@ export default function Editor() {const {translate:ui}=useUILanguage();
           <button type="button" className="icon-button" onClick={() => moveEntry(kind, index, 1)} disabled={index === data[kind].length - 1} aria-label={`${ui('Mover para baixo')} · ${ui(noun)} ${index+1}`}><ArrowDown size={16} /></button>
           <button type="button" className="icon-button danger" onClick={() => removeEntry(kind, index)} aria-label={`${ui('Remover')} · ${ui(noun)} ${index+1}`}><Trash2 size={16} /></button>
         </div></div>
-        <label>{work ? ui("Cargo / função") : ui("Curso / qualificação")}<input value={entry.title} maxLength={150} onChange={e => editEntry(kind, entry.id, 'title', e.target.value)} placeholder={work ? ui("Ex.: Assistente administrativa") : ui("Ex.: Licenciatura em Gestão")} /></label>
-        <label>{work ? ui("Organização") : ui("Instituição")}<input value={entry.organisation} maxLength={150} onChange={e => editEntry(kind, entry.id, 'organisation', e.target.value)} placeholder={work ? ui("Nome da organização") : ui("Nome da instituição")} /></label>
-        <label>{ui("Período")}<input value={entry.period} maxLength={100} onChange={e => editEntry(kind, entry.id, 'period', e.target.value)} placeholder={ui("Ex.: 2022 - 2025 ou 2023 - actual")} /></label>
-        <label>{work ? ui("Responsabilidades e resultados") : ui("Informação adicional (opcional)")}<textarea value={entry.description} maxLength={4000} onChange={e => editEntry(kind, entry.id, 'description', e.target.value)} placeholder={work ? ui("Descreve o que fizeste e os resultados que alcançaste.") : ui("Área de especialização, projectos ou distinções relevantes.")} /></label>
+        <label>{work ? ui("Cargo / função") : ui("Curso / qualificação")}<input id={`${kind}-${entry.id}-title`} value={entry.title} maxLength={150} onChange={e => editEntry(kind, entry.id, 'title', e.target.value)} placeholder={work ? ui("Ex.: Assistente administrativa") : ui("Ex.: Licenciatura em Gestão")} /></label>
+        <label>{work ? ui("Organização") : ui("Instituição")}<input id={`${kind}-${entry.id}-organisation`} value={entry.organisation} maxLength={150} onChange={e => editEntry(kind, entry.id, 'organisation', e.target.value)} placeholder={work ? ui("Nome da organização") : ui("Nome da instituição")} /></label>
+        <label>{ui("Período")}<input id={`${kind}-${entry.id}-period`} value={entry.period} maxLength={100} onChange={e => editEntry(kind, entry.id, 'period', e.target.value)} placeholder={ui("Ex.: 2022 - 2025 ou 2023 - actual")} /></label>
+        <label>{work ? ui("Responsabilidades e resultados") : ui("Informação adicional (opcional)")}<textarea id={`${kind}-${entry.id}-description`} value={entry.description} maxLength={4000} onChange={e => editEntry(kind, entry.id, 'description', e.target.value)} placeholder={work ? ui("Descreve o que fizeste e os resultados que alcançaste.") : ui("Área de especialização, projectos ou distinções relevantes.")} /></label>
         {samples(work ? 'experience' : 'education', entry.description, text => editEntry(kind, entry.id, 'description', text), entry.id)}
       </div>)}
       <button className="add-entry" type="button" onClick={() => addEntry(kind)} disabled={data[kind].length >= MAX_ENTRIES}><Plus size={17} />{ui(" Adicionar ")}{ui(noun)}</button>
@@ -114,7 +115,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
       <div className="editor-top"><div><Link className="text-link" href="/#modelos"><ArrowLeft size={16} />{ui(" Voltar aos modelos")}</Link>
         <h1>{ui("O teu percurso, nas tuas palavras.")}</h1><p>{ui("Personaliza o teu CV e descarrega um PDF pronto para enviar.")}</p></div>
         <div className="editor-top-actions"><button className="button outline" disabled={!ready || exporting} onClick={save}><Save size={17} />{ui(" Guardar")}</button>
-          <button className="button" disabled={!ready || !canExport(data) || exporting} onClick={exportPDF}><Download size={18} /> {exporting ? ui("A preparar PDF…") : ui("Descarregar PDF")}</button></div>
+          <CVExportReview data={data} ready={ready} exporting={exporting} onDownload={exportPDF} onEdit={id=>{setView('edit');requestAnimationFrame(()=>{const field=document.getElementById(id);field?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});field?.focus({preventScroll:true});});}}/></div>
       </div>
       <div className="editor-feedback"><p className={saveError ? 'saved-status save-error' : 'saved-status'} role="status">{ui(status)}</p>
         <span><ShieldCheck size={14} /> {cloud ? ui("CV privado na tua conta.") : ui("Os teus dados ficam no teu dispositivo.")}</span></div>

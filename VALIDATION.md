@@ -84,3 +84,9 @@ Six short English PDF styles plus a two-page English document and all existing P
 Local browser: UI English with CV Portuguese, then CV English with UI Portuguese; entered profile unchanged; CV choice and interface preference survive reload independently. English template category filtering works. Desktop 1440px, tablet 820px and mobile 390px inspected without horizontal overflow. Photo, account, guidance and privacy controls localised. Email example content is English in English UI; no actual email was sent. No console errors observed.
 
 DGC v13 verified live: initial UI pt and CV pt; selecting English produces html lang=en and CV article lang=en, without horizontal overflow. Both choices restored to pt/pt-MZ and retained after reload. Cross-origin authenticated fixture confirms cvLanguage=en round-trip; original persistence fixture unchanged. DB/backup health HTTP 200. Proof saved as cvmais-language-editor-v13.png.
+
+## Pre-download review, 25 October 2026
+
+34 automated tests pass. New review tests cover multilingual example markers, exact repeated-entry input targets, immutable content, optional contacts and no photo/degree/employment requirement. Production build and TypeScript pass.
+
+Isolated local UI at port 3004: empty CV review gives actionable name/content/contact reminders with export still disabled; inserting a profile marker opens review before download; explicit download-anyway creates the PDF without changing the original text. Reviewing an experience marker focuses its specific description. With these points resolved, direct download works without a dialog. At 390px, English review fits without horizontal overflow, correctly labels one item and the Portuguese CV language, switches from preview to editing when selecting a field and closes with Escape. Downloaded QA files contain only fictional data. No production user data was modified during these tests. PDF rendering itself is unchanged.

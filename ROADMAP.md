@@ -52,3 +52,10 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 - Independent per-CV Portuguese/English choice, language-specific headings in preview/PDF and suggested examples.
 - Choice persists in local drafts, JSON copies and account sync; legacy CVs default to Portuguese and old clients preserve existing choices.
 - User-written content is retained verbatim. See LANGUAGES.md for scope and delivery validation.
+
+## Pre-download review, 25 October 2026
+
+- Local review for possible sample placeholders across fields/entries, incomplete email formatting and absent email/mobile contact.
+- Explicit field links focus the exact input, including from mobile preview; shows the selected CV language.
+- Users can continue downloading after reading optional reminders. Name/content prerequisites remain the existing export requirements. No grading, automatic rewriting, external analysis or new stored data.
+- Portuguese and English controls; wider actual Android/iPhone pilot still pending.

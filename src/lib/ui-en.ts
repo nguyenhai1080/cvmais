@@ -777,6 +777,25 @@ export const uiEnglish: Record<string,string> = {
   "Este CV foi alterado. Actualiza a lista antes de eliminar.": "This CV has changed. Refresh the list before deleting it.",
   "Escreve o nome completo do CV para confirmar.": "Enter the complete CV name to confirm.",
   "Conta não encontrada.": "Account not found.",
-  "A ligação é inválida ou expirou. Pede uma nova ligação.": "The link is invalid or has expired. Request a new link."
-  ,"Atendimento":"Customer service"
+  "A ligação é inválida ou expirou. Pede uma nova ligação.": "The link is invalid or has expired. Request a new link.",
+  "Atendimento": "Customer service",
+  "Rever CV": "Review CV",
+  "ANTES DE DESCARREGAR": "BEFORE DOWNLOADING",
+  "Uma última revisão ao teu CV.": "One last review of your CV.",
+  "Fechar revisão": "Close review",
+  "Confere os campos abaixo e lê o PDF antes de enviar. Esta revisão identifica apenas alguns detalhes que podem ter ficado por completar.": "Check the fields below and read the PDF before sending. This review identifies only some details that may still need attention.",
+  "Alterar idioma": "Change language",
+  "ponto para conferir": "item to check",
+  "pontos para conferir": "items to check",
+  "Rever campo": "Review field",
+  "Pode haver texto de exemplo entre parênteses rectos. Confirma se deve ficar no teu CV.": "There may be example text in square brackets. Check whether it belongs in your CV.",
+  "O formato do email parece incompleto. Confirma o endereço antes de enviar.": "The email format looks incomplete. Check the address before sending.",
+  "Ainda não indicaste email nem telemóvel. Considera adicionar um contacto para receber respostas.": "You have not added an email or mobile number. Consider adding a contact so you can receive replies.",
+  "Adiciona o teu nome para identificar o CV.": "Add your name to identify the CV.",
+  "Adiciona pelo menos uma secção sobre o teu percurso.": "Add at least one section about your background.",
+  "Email / Telemóvel": "Email / Mobile number",
+  "Não encontrámos estes pontos por rever. Lê o conteúdo e abre o PDF para confirmar todas as páginas antes de enviar.": "We did not find these issues. Read your content and open the PDF to check every page before sending.",
+  "A revisão é feita neste dispositivo. O teu conteúdo não é enviado para um serviço de análise.": "The review runs on this device. Your content is not sent to an analysis service.",
+  "Continuar a editar": "Continue editing",
+  "Descarregar mesmo assim": "Download anyway"
 };
