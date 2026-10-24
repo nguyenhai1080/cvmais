@@ -9,13 +9,13 @@ Updated 24 October 2026. This records delivered work and the next launch priorit
 3. Permanent account/CV erasure with password confirmation, session revocation and matching local-copy cleanup.
 4. Resend cvmais.win verified sender, optional email confirmation and expiring single-use password reset; approved owner delivery test reported Delivered. Encrypted daily B2 backup plus real download/restore verification.
 
-## Current release: public domain and continuity
+## Delivered in DGC v10: public domain and continuity
 
 - Attach cvmais.win and www in DGC, DNS and HTTPS; www canonical redirect.
 - New email links use cvmais.win. Both exact application origins accepted during transition.
 - Keep guest drafts on their original origin; provide export/import, explicit review/undo and migration guidance. Same account database across both origins.
 - Homepage canonical/share metadata, sitemap/robots and noindex headers on private/editor/auth routes.
-- Verify HTTPS, account/CV persistence, both-origin login and saves, guest import and mobile layout before declaring complete.
+- Verified HTTPS, original account/CV persistence, both-origin login and saves, guest import/undo and mobile migration guide.
 
 ## Next launch priorities
 

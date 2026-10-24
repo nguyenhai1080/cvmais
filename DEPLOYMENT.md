@@ -4,15 +4,16 @@
 
 The required owner is DGC, email `nguyenhai1080@gmail.com`. The exposed connector still identifies `nguyenhai1080+basic@gmail.com` / GST Vietnam and must not be used for DGC mutations. Deployment was completed through the user's browser after its visible profile confirmed the DGC email, display name `Công ty Cổ Phần Đầu Tư và Truyền Thông Số`, account ID `cmucbxmf00a5j0h5fjwzjwky7`, Pro plan.
 
-- Live URL: https://cvmais-dgc.n1.tinhgon.xyz
+- Primary live URL: https://cvmais.win
+- Legacy URL: https://cvmais-dgc.n1.tinhgon.xyz
 - Project ID: `cmvlbkah40mef0i5fzrjkbvcd`
 - Management page: https://v2.tinhgon.xyz/projects/cmvlbkah40mef0i5fzrjkbvcd
-- State: online, version 9, deployed and checked 24 October 2026.
-- Application commit: `56a5284` (verified-domain authentication email and single-use account recovery).
+- State: online, version 10, deployed and checked 24 October 2026.
+- Application commit: `482826c` (custom domain, draft migration and canonical metadata).
 - Source: `https://github.com/nguyenhai1080/cvmais.git`, default branch `main`, repository root.
 - Runtime: 0.3 CPU, 512 MB RAM, application port 3000.
 - Automatic GitHub deployment: off, as shown in the DGC project overview. Pushes do not deploy by themselves.
-- Custom domain: not connected. cvmais.win is configured for email sending only; website DNS and cvmais.co.mz are not attached.
+- Custom domain: cvmais.win primary, www.cvmais.win redirects to root with path and query preserved. Both have DNS and valid HTTPS. Cloudflare A @ and A www point to 103.138.88.28, DNS-only. cvmais.co.mz is not attached.
 - SQLite database: `/data/cvmais.sqlite`, with `/data` declared as persistent storage. DATABASE_PATH and APP_ORIGIN are configured in the DGC project. Guest drafts and PDF generation remain in the browser.
 
 Live HTTPS checks pass for the homepage and database-backed health endpoint. The gallery shows all six new templates and enlarged previews. Production API checks pass for credentials, sessions, CSRF protection, ownership, another-device session, revision conflicts, trash/restore, recovery and logout.
@@ -43,3 +44,5 @@ Validated over HTTPS: homepage, CV editor, health endpoint and both editorial im
 Historical record only. Do not redeploy this GST project. Use the active DGC project and verified DGC browser profile above.
 
 Version 9: production health and all authentication pages return HTTP 200. `/api/storage/email-status` confirms enabled=true. The original version-2 account/CV fixture still passes fresh-login persistence checks. Live account UI offers email reset and recovery-code fallback. Resend reports the owner test email Delivered; the unused original key was revoked before replacement. Daily encrypted B2 backups remain enabled.
+
+Version 10: both custom domains pass HTTPS; www preserves path/query when redirecting to cvmais.win. APP_ORIGIN=https://cvmais.win, APP_ALLOWED_ORIGINS=https://cvmais-dgc.n1.tinhgon.xyz. Actual HTTP checks passed both-origin login, CV create/read/update across origins, original persistence fixture and safe removal of only the new fictional test CV. Canonical homepage, sitemap, robots and private-path noindex headers verified. Existing guest drafts stay on the old origin; no automatic redirect or upload moves them. The old origin displays migration guidance and guest JSON import supports review/undo. Mobile migration guide has no horizontal overflow at a 390px viewport (375px content width with scrollbar).

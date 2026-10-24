@@ -45,3 +45,5 @@ The backup preparation revision brings the suite to fifteen tests. A synthetic S
 ## Public-domain release
 
 19 automated tests pass, including exact origin allowlist/lookalike rejection and portable backup malformed/oversize checks. Local storage/erasure and email HTTP regression pass. Browser guest import review, confirmation and undo pass with a fictional portrait CV; previous local draft restored after undo. Production build passes. Both new domains resolve to 103.138.88.28 and pass real HTTPS checks; www redirects to the root.
+
+DGC v10 / source 482826c: live checks pass HTTPS on primary/legacy, www path/query redirect, primary canonical, sitemap/robots, private-path noindex, both-origin login and shared CV create/read/update. The original persistence fixture remains unchanged. The additional fictional test CV was removed and both test sessions signed out. Mobile migration guide has equal client/scroll width (375px at 390px viewport).
