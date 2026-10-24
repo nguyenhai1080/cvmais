@@ -1,4 +1,5 @@
 import { NextRequest, after } from 'next/server';
+import { allowedOrigin } from '@/lib/server/origins';
 import { store, StoreError } from '@/lib/server/store';
 import { normaliseCV } from '@/lib/cv';
 import { mailEnabled, sendTokenEmail, type MailPurpose } from '@/lib/server/mail';
@@ -43,8 +44,7 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
     const token = request.cookies.get(cookie)?.value || '';
     const user = db.user(token);
     if (method !== 'GET') {
-      const expected = process.env.APP_ORIGIN || new URL(request.url).origin;
-      if (request.headers.get('origin') !== expected) throw new StoreError('Origem do pedido inválida.', 403);
+      if (!allowedOrigin(request.headers.get('origin'), new URL(request.url).origin)) throw new StoreError('Origem do pedido inválida.', 403);
       if (request.headers.get('sec-fetch-site') === 'cross-site') throw new StoreError('Pedido inválido.', 403);
     }
     const reply = (value: unknown, status = 200, setCookie?: string) => Response.json(value, { status, headers: { ...headers, ...(setCookie ? { 'Set-Cookie': setCookie } : {}) } });

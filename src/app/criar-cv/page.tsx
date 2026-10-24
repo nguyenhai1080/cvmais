@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Header from '@/components/header';
 import { useCVStorage } from '@/lib/use-cv-storage';
 import EditorPreview from '@/components/editor-preview';
+import GuestBackupImport from '@/components/guest-backup-import';
 import PhotoPicker from '@/components/photo-picker';
 import { MAX_ENTRIES, isModel, normaliseCV, canExport, pdfFilename,
   models, modelLabels, type CVData, type Entry } from '@/lib/cv';
@@ -115,6 +116,7 @@ export default function Editor() {
         const url = URL.createObjectURL(new Blob([JSON.stringify({ format: 'cvmais-backup-v1', data }, null, 2)], { type: 'application/json' }));
         const a = document.createElement('a'); a.href = url; a.download = 'cvmais-copia-seguranca.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
       }}>Descarregar cópia de segurança</button></div>
+      {!cloud && <GuestBackupImport disabled={!ready || exporting} current={data} onImport={change} />}
       {pdfError && <p className="pdf-error" role="alert">{pdfError}</p>}
       {exporting && <p role="status" className="export-status">A preparar o teu PDF com texto seleccionável e fontes incluídas…</p>}
       {removed && <div className="undo-entry" role="status">Item removido. <button type="button" disabled={data[removed.kind].length >= MAX_ENTRIES} onClick={() => {

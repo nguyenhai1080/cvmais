@@ -1,7 +1,7 @@
 # CVMais
 
 Next.js application in Portuguese for Mozambique. Canonical source: `D:\Projects\CVMais`.
-Live DGC site: https://cvmais-dgc.n1.tinhgon.xyz. Source: https://github.com/nguyenhai1080/cvmais.git.
+Primary site: https://cvmais.win. Legacy DGC address: https://cvmais-dgc.n1.tinhgon.xyz. Source: https://github.com/nguyenhai1080/cvmais.git.
 
 ## Development
 
@@ -14,7 +14,7 @@ Checks: `npm test`, `npm run typecheck`, `npm run build`.
 - Responsive landing page based on the approved mockup, illustrative candidate photography, benefits, community placeholder and practical guidance.
 - Six original templates: Maputo, Índico, Essencial, Coral, Prestígio and Horizonte. Gallery previews come from actual PDFs. Filters and enlarged previews help selection.
 - Structured editor: optional portrait upload with crop/zoom, contacts, profile, repeatable experience/education, reorder, undo, skills, languages, live preview, JSON backup and direct browser PDF download. Images are prepared as 256px JPEGs in the browser; raw files are not sent to an image service.
-- Guests keep one localStorage draft in the current browser. No automatic upload occurs on sign-in. Earlier local/session drafts migrate when available.
+- Guests keep one localStorage draft in the current browser. Guest JSON import shows a review, explicit replacement confirmation and undo. No automatic upload occurs on sign-in. Earlier local/session drafts migrate when available.
 - `/conta`: register, sign in and reset access with a one-time recovery code. Optional email confirmation and email password reset use expiring, hashed, single-use links. The recovery-code fallback remains available. Resend sends from cvmais.win.
 - `/meus-cvs`: private account documents, create, explicitly copy a guest draft, JSON import, duplicate, rename, trash and restore. Trashed CVs can be permanently erased after exact-title confirmation and password reauthentication. Account erasure requires the exact email and password, removes all its CVs and revokes all sessions. Limit: 100 documents including trash.
 - Account CVs autosave to the server database and can be opened on another signed-in device. Revision checks prevent silent overwrites. Pending changes attempt a local backup scoped to the user and document, recoverable explicitly.
@@ -26,7 +26,7 @@ Checks: `npm test`, `npm run typecheck`, `npm run build`.
 
 Set DATABASE_PATH to `/data/cvmais.sqlite`, declare `/data` as persistent storage in Vibehost, and set APP_ORIGIN to the exact HTTPS application origin. Update APP_ORIGIN when connecting a custom domain. Never put the database in public files or Git.
 
-SQLite uses WAL and foreign keys on the DGC server. Passwords use salted scrypt. Session/recovery tokens are stored hashed. Session cookies are HttpOnly, SameSite=Lax, Secure in production and expire in 30 days. Writes require the configured Origin. Queries enforce ownership; persisted limits protect authentication and saves.
+SQLite uses WAL and foreign keys on the DGC server. Passwords use salted scrypt. Session/recovery tokens are stored hashed. Session cookies are HttpOnly, SameSite=Lax, Secure in production and expire in 30 days. Writes require an exact configured origin (APP_ORIGIN plus explicit APP_ALLOWED_ORIGINS during migration; no wildcards). Queries enforce ownership; persisted limits protect authentication and saves.
 
 CV text is not end-to-end encrypted. Administrators with server access can access it for maintenance. Unsynced local copies can remain after sign-out; shared-device users should use separate browser profiles. PDFs and downloaded JSON files stay on users' devices.
 
@@ -51,3 +51,7 @@ Authentication mail requires MAIL_ENABLED=true, MAIL_FROM, RESEND_API_KEY and th
 Noto Sans and Source Serif fonts and open font licences are under `public/fonts/`. Research sources and rationale are in TEMPLATE-RESEARCH.md. Deployment details are in DEPLOYMENT.md.
 
 The photo revision adds full-width identity blocks, contact icons, experience timelines, textual skill chips and richer two-column layouts. Gallery portraits are fictional illustrations prepared from the existing AI assets using the same photo picker as users. CVs without portraits remain supported. Older open editor clients preserve an existing account portrait when they omit the new photo field.
+
+## Custom domain and migration
+
+cvmais.win is the primary public address; www redirects to the root with its path. Both A records point to 103.138.88.28, DNS-only in Cloudflare, with Vibehost HTTPS. APP_ORIGIN must be https://cvmais.win so new authentication emails use the new address. APP_ALLOWED_ORIGINS keeps the legacy DGC address working during transition. Account data stays in the same SQLite database; cookies and guest localStorage are isolated by origin. The legacy address shows a migration notice and /mudar-endereco explains JSON export/import. No automatic redirect moves or uploads guest drafts. Homepage canonical/Open Graph and sitemap use cvmais.win; private/editor/auth paths carry X-Robots-Tag noindex, nofollow and are excluded from robots. See ROADMAP.md for remaining launch work.

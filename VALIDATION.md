@@ -41,3 +41,7 @@ The backup preparation revision brings the suite to fifteen tests. A synthetic S
 - cvmais.win verified in Resend; owner-approved delivery test reported Delivered. Replaced the first unused sending key after revoking it. No key values are included in source.
 
 - DGC v9 / source 56a5284: live health and auth pages HTTP 200; email enabled confirmed; original account/CV survived redeployment. Local browser confirmation succeeded and persisted to SQLite.
+
+## Public-domain release
+
+19 automated tests pass, including exact origin allowlist/lookalike rejection and portable backup malformed/oversize checks. Local storage/erasure and email HTTP regression pass. Browser guest import review, confirmation and undo pass with a fictional portrait CV; previous local draft restored after undo. Production build passes. Both new domains resolve to 103.138.88.28 and pass real HTTPS checks; www redirects to the root.

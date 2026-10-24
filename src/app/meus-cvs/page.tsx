@@ -1,4 +1,5 @@
 'use client';
+import { parseCVBackup } from '@/lib/cv-backup';
 import { useEffect, useRef, useState } from 'react';
 import Header from '@/components/header';
 import EraseData from '@/components/erase-data';
@@ -58,9 +59,7 @@ export default function MyCVs() {
         const selected = e.target.files?.[0]; e.target.value = ''; if (!selected) return;
         void action(async () => {
           if (selected.size > 512_000) throw new Error('O ficheiro é demasiado grande.');
-          const value = JSON.parse(await selected.text());
-          if (value?.format !== 'cvmais-backup-v1' || !value.data || typeof value.data !== 'object' || Array.isArray(value.data)) throw new Error('Selecciona uma cópia de segurança CVMais válida.');
-          await create(normaliseCV(value.data), 'CV importado');
+          await create(normaliseCV(parseCVBackup(await selected.text())), 'CV importado');
         });
       }} />
       {guest && !trash && <section className="local-import"><div><h2>Tens um rascunho neste dispositivo</h2><p>Podes copiá-lo para a tua conta. O original continua guardado neste navegador.</p></div><button className="button outline" disabled={busy} onClick={() => void action(async () => {

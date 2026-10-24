@@ -1,6 +1,6 @@
 # CVMais operational services
 
-Updated 24 October 2026. DGC owner: nguyenhai1080@gmail.com. Main host remains https://cvmais-dgc.n1.tinhgon.xyz; no website custom domain is attached.
+Updated 24 October 2026. DGC owner: nguyenhai1080@gmail.com. Primary site: https://cvmais.win. Legacy https://cvmais-dgc.n1.tinhgon.xyz remains available during migration. cvmais.win and www have valid HTTPS; www redirects to the root. Website DNS adds A @ and A www to 103.138.88.28, DNS-only; email DNS is unchanged.
 
 ## Email
 
