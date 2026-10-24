@@ -48,3 +48,35 @@ test('accounts, credentials, ownership, conflict detection, trash and recovery p
     assert.throws(() => db.limit('test-limit', 1), { status: 429 });
   } finally { db.db.close(); rmSync(directory, { recursive: true, force: true }); }
 });
+
+test('permanent erasure requires trash, exact confirmation and current revision; account removal cascades and persists', async () => {
+  const directory = mkdtempSync(join(tmpdir(), 'cvmais-erasure-'));
+  const path = join(directory, 'test.sqlite');
+  let db = new Store(path);
+  try {
+    const a = await db.register('erase@example.test', 'a-long-test-password');
+    const b = await db.register('keep@example.test', 'b-long-test-password');
+    const first = db.create(a.user.id, 'Eliminar este CV', { name: 'Exemplo' });
+    const other = db.create(b.user.id, 'Manter', { name: 'Outro exemplo' });
+    assert.throws(() => db.eraseCV(b.user.id, first.id, 1, first.title), { status: 404 });
+    assert.throws(() => db.eraseCV(a.user.id, first.id, 1, first.title), { status: 409 });
+    const trash = db.update(a.user.id, first.id, 1, first.title, first.data, true);
+    assert.throws(() => db.eraseCV(a.user.id, first.id, 1, first.title), { status: 409 });
+    assert.throws(() => db.eraseCV(a.user.id, first.id, 2, 'incorrecto'), { status: 400 });
+    db.eraseCV(a.user.id, first.id, trash.revision, first.title);
+    assert.throws(() => db.cv(a.user.id, first.id), { status: 404 });
+    const active = db.create(a.user.id, 'Activo', {});
+    const deleted = db.create(a.user.id, 'Lixo', {});
+    db.update(a.user.id, deleted.id, 1, deleted.title, {}, true);
+    const sessions = [db.session(a.user.id), db.session(a.user.id)];
+    db.eraseAccount(a.user.id);
+    assert.deepEqual(db.list(a.user.id), []);
+    sessions.forEach(token => assert.equal(db.user(token), null));
+    assert.throws(() => db.cv(a.user.id, active.id), { status: 404 });
+    await assert.rejects(db.login(a.user.email, 'a-long-test-password'), { status: 401 });
+    await assert.rejects(db.recover(a.user.email, a.recovery, 'another-long-password'), { status: 401 });
+    db.db.close(); db = new Store(path);
+    assert.equal(db.db.prepare('SELECT count(*) AS n FROM users WHERE id=?').get(a.user.id).n, 0);
+    assert.equal(db.cv(b.user.id, other.id).title, 'Manter');
+  } finally { db.db.close(); rmSync(directory, { recursive: true, force: true }); }
+});

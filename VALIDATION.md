@@ -15,6 +15,8 @@ The connector still identifies GST. Hosting mutations use the browser profile in
 
 Practical limits: no email verification/delivery, permanent account erasure or scheduled off-server backups. Recovery codes and reversible trash are described accurately in the UI. SQLite is intended for one container; horizontal scaling needs shared storage architecture.
 
+The permanent-erasure limit above describes v4 and is superseded by the revision below.
+
 ## Production completion
 
 DGC version 3 runs application commit `c088f60`. HTTPS checks and the API ownership/session suite pass. A fictional account and CV saved on version 2 were retrieved with a fresh login after deploying version 3, preserving the revision and full content. Database health reports ready. The public gallery and enlarged template preview were checked on DGC and captured as screenshots. No changes were made to GST.
@@ -24,3 +26,7 @@ DGC version 3 runs application commit `c088f60`. HTTPS checks and the API owners
 Ten unit/storage tests pass, including real prepared JPEG round-tripping and rejection of SVG, external/file URLs, malformed and oversized image values. Local API checks include portrait save/read from a second session and preservation when an older client omits the photo field. Browser checks cover crop/zoom, prepared-image backup, draft reload and actual PDF download with an embedded portrait. Six fictional portrait examples remain one-page A4 documents; all long-CV and long-support fixtures preserve content and pass bounds/font checks.
 
 DGC version 4 runs application commit `b62e5d1`. The production API suite including photo round-trip and legacy-client preservation passes. The pre-existing persistence probe survives another redeployment. Health reports ready. All six new gallery images and the enlarged Coral preview load on the live site; the mobile gallery has no horizontal overflow. Production build succeeds with two workers, avoiding excessive local build concurrency.
+
+## Data control revision
+
+Twelve unit tests pass. New checks cover exact-title/revision/trash guards, permanent CV removal, account removal cascading to active/trashed CVs and sessions, failed login/recovery after erasure, persistence after reopening SQLite, and isolation of another account. Local-copy tests preserve guest drafts and other accounts while notifying current tabs. Local HTTP integration checks pass for password reauthentication, unauthorised/cross-origin/other-owner rejection, stale revision rejection, refusal to restore erased CVs, session revocation and exact-email confirmation. A manual snapshot of the fictional local QA database passes SQLite integrity validation. External email and backup services remain unconfigured.

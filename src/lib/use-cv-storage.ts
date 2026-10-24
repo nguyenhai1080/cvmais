@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { DRAFT_KEY, emptyCV, isModel, readDraft, normaliseCV, type CVData } from './cv';
 import { api, APIError, errorMessage, type Account, type CloudCV } from './client-api';
+import { ERASURE_EVENT } from './local-erasure';
 
 export function useCVStorage() {
   const [data, setData] = useState<CVData>(emptyCV);
@@ -17,6 +18,7 @@ export function useCVStorage() {
   const saving = useRef(false);
   const conflict = useRef(false);
   const mounted = useRef(true);
+  const erased = useRef(false);
 
   useEffect(() => {
     mounted.current = true;
@@ -49,23 +51,36 @@ export function useCVStorage() {
           if (isModel(model)) restored.model = model;
           setStatus('Modo visitante · O rascunho fica apenas neste navegador.');
         }
-        if (cancelled) return;
+        if (cancelled || erased.current) return;
         latest.current = restored; setData(restored); setReady(true);
       } catch (error) { if (!cancelled) { setSaveError(true); setStatus(errorMessage(error)); } }
     }
     void load();
     const flush = (event?: BeforeUnloadEvent) => {
-      if (!dirty.current) return;
+      if (!dirty.current || erased.current) return;
       try { localStorage.setItem(key.current, JSON.stringify(latest.current)); if (!record.current) dirty.current = false; }
       catch { /* Keep the unload warning when storage cannot be written. */ }
       if (record.current || dirty.current) event?.preventDefault();
     };
+    const onErasure = (event: StorageEvent) => {
+      if (event.key !== ERASURE_EVENT || !event.newValue) return;
+      try {
+        const value = JSON.parse(event.newValue);
+        if (typeof value.userId !== 'string' || !key.current.startsWith(`cvmais-pending:${value.userId}:`)) return;
+        if (value.cvId && key.current !== `cvmais-pending:${value.userId}:${value.cvId}`) return;
+        erased.current = true; dirty.current = false; conflict.current = true; record.current = null;
+        try { localStorage.removeItem(key.current); } catch { /* Optional local copy. */ }
+        latest.current = emptyCV(); setData(latest.current); setPending(null); setReady(false); setSaveError(true);
+        setStatus('Este CV ou a conta foi eliminado noutro separador. O editor foi fechado.');
+      } catch { /* Ignore unrelated or malformed storage events. */ }
+    };
     window.addEventListener('beforeunload', flush);
-    return () => { cancelled = true; mounted.current = false; window.removeEventListener('beforeunload', flush); flush(); };
+    window.addEventListener('storage', onErasure);
+    return () => { cancelled = true; mounted.current = false; window.removeEventListener('beforeunload', flush); window.removeEventListener('storage', onErasure); flush(); };
   }, []);
 
   async function save() {
-    if (!ready || saving.current) return;
+    if (!ready || saving.current || erased.current) return;
     if (conflict.current) { setStatus('Existe uma versão mais recente na conta. Descarrega a cópia de segurança antes de voltar a abrir o CV.'); return; }
     saving.current = true;
     try {
@@ -76,6 +91,7 @@ export function useCVStorage() {
         try { localStorage.setItem(key.current, JSON.stringify(snapshot)); localSaved = true; } catch { /* A successful cloud save is still valid. */ }
         if (record.current) {
           const saved = await api<CloudCV>(`cvs/${record.current.id}`, 'PUT', { ...record.current, data: snapshot, deleted: false });
+          if (erased.current) return;
           record.current = saved;
           if (!mounted.current) return;
           if (latest.current === snapshot) {
@@ -102,6 +118,7 @@ export function useCVStorage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, ready]);
   function change(next: CVData) {
+    if (erased.current) return;
     latest.current = next; dirty.current = true; setData(next); setStatus('A guardar alterações…');
   }
   function restorePending() { if (pending) { change(pending); setPending(null); } }

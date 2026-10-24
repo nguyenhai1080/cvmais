@@ -64,6 +64,23 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
       return reply(result, path[0] === 'register' ? 201 : 200, sessionCookie(db.session(result.user.id)));
     }
     if (!user) throw new StoreError('Entra na tua conta para continuar.', 401);
+    if (method === 'DELETE' && ((path.length === 1 && path[0] === 'account') || (path.length === 2 && path[0] === 'cvs' && /^[a-f0-9-]{36}$/.test(path[1])))) {
+      db.limit('erase-global', 60, 60_000);
+      db.limit(`erase:${user.id}`, 5);
+      const input = await body(request);
+      if (typeof input.confirmation !== 'string') throw new StoreError('Confirma a eliminação.');
+      if (path[0] === 'account' && input.confirmation !== user.email) throw new StoreError('Escreve o email completo para confirmar.');
+      await db.login(user.email, credential(input.password, 'password'));
+      // Recovery, sign-out or deletion may revoke this session during password verification.
+      if (db.user(token)?.id !== user.id) throw new StoreError('A sessão terminou. Entra novamente.', 401);
+      if (path[0] === 'account') {
+        db.eraseAccount(user.id);
+        return reply({ ok: true }, 200, sessionCookie('', true));
+      }
+      if (!Number.isSafeInteger(input.revision) || Number(input.revision) < 1) throw new StoreError('Versão do CV inválida.');
+      db.eraseCV(user.id, path[1], Number(input.revision), input.confirmation);
+      return reply({ ok: true });
+    }
     if (path[0] === 'cvs' && path.length === 1 && method === 'GET') return reply({ cvs: db.list(user.id) });
     if (path[0] === 'cvs' && path.length === 1 && method === 'POST') {
       db.limit(`write:${user.id}`, 120, 60_000);
@@ -93,4 +110,4 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
     return Response.json({ error: 'Não foi possível aceder aos dados. Tenta novamente; mantém uma cópia local do CV.' }, { status: 503, headers });
   }
 }
-export { handle as GET, handle as POST, handle as PUT };
+export { handle as GET, handle as POST, handle as PUT, handle as DELETE };

@@ -16,9 +16,9 @@ Checks: `npm test`, `npm run typecheck`, `npm run build`.
 - Structured editor: optional portrait upload with crop/zoom, contacts, profile, repeatable experience/education, reorder, undo, skills, languages, live preview, JSON backup and direct browser PDF download. Images are prepared as 256px JPEGs in the browser; raw files are not sent to an image service.
 - Guests keep one localStorage draft in the current browser. No automatic upload occurs on sign-in. Earlier local/session drafts migrate when available.
 - `/conta`: register, sign in and reset access with a one-time recovery code. Email verification/delivery is not configured. Users must save the displayed recovery code themselves.
-- `/meus-cvs`: private account documents, create, explicitly copy a guest draft, JSON import, duplicate, rename, trash and restore. Limit: 100 documents including trash.
+- `/meus-cvs`: private account documents, create, explicitly copy a guest draft, JSON import, duplicate, rename, trash and restore. Trashed CVs can be permanently erased after exact-title confirmation and password reauthentication. Account erasure requires the exact email and password, removes all its CVs and revokes all sessions. Limit: 100 documents including trash.
 - Account CVs autosave to the server database and can be opened on another signed-in device. Revision checks prevent silent overwrites. Pending changes attempt a local backup scoped to the user and document, recoverable explicitly.
-- `/privacidade`: actual storage, pending local copies, recovery and retention. Permanent document/account erasure is not implemented; trash is reversible.
+- `/privacidade`: actual storage, pending local copies, recovery, erasure and backup limits. Erasure clears matching pending copies in the current browser when possible and notifies current editor tabs. Guest drafts, downloads and other devices require separate cleanup.
 - `/api/health` checks database availability without exposing records.
 - All sample CVs are fictional. No invented customers, counts or testimonials.
 
@@ -35,6 +35,8 @@ This deployment uses one application container. Do not scale to independent SQLi
 Docker builds Next.js standalone output, runs as UID 1001 and serves port 3000. Mount a named volume at `/data` and supply APP_ORIGIN. Production cookies require HTTPS.
 
 Run `node scripts/backup-db.mjs` in the container to make a consistent SQLite backup under `/data/backups` (or BACKUP_DIR). Backups contain private CVs and credential hashes: control access and keep an encrypted off-server copy. Scheduled off-server backups are not configured. Persistent storage protects redeploys; it does not replace backups.
+
+The backup command verifies SQLite integrity before reporting success and restricts snapshot file permissions on Linux. Registration guidance for the proposed external email and backup services is in OPERATIONS-SETUP.md. They are not connected yet. Earlier backups may contain erased records; restoration must reconcile subsequent erasure requests before reopening the service.
 
 ## PDF and API validation
 

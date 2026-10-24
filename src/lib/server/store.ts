@@ -56,8 +56,8 @@ export class Store {
     // Run the same expensive operation for unknown emails to reduce timing disclosure.
     const valid = await this.verify(password, row?.password || `${'0'.repeat(32)}:${'0'.repeat(128)}`);
     if (!row || !valid) throw new StoreError('Email ou palavra-passe incorrectos.', 401);
-    const current = this.db.prepare('SELECT password FROM users WHERE id=?').get(row.id) as { password: string };
-    if (current.password !== row.password) throw new StoreError('A palavra-passe foi alterada. Tenta entrar novamente.', 401);
+    const current = this.db.prepare('SELECT password FROM users WHERE id=?').get(row.id) as { password: string } | undefined;
+    if (current?.password !== row.password) throw new StoreError('A conta ou a palavra-passe foi alterada. Tenta entrar novamente.', 401);
     return { id: row.id, email: row.email };
   }
   session(userId: string) {
@@ -107,6 +107,18 @@ export class Store {
       throw new StoreError('Este CV foi alterado noutro separador ou dispositivo. Guarda uma cópia local e volta a abrir o CV para carregar a versão mais recente.', 409);
     }
     return this.cv(user, id);
+  }
+  eraseCV(user: string, id: string, revision: number, confirmation: string) {
+    const cv = this.cv(user, id);
+    if (!cv.deleted) throw new StoreError('Move primeiro este CV para o lixo.', 409);
+    if (cv.revision !== revision) throw new StoreError('Este CV foi alterado. Actualiza a lista antes de eliminar.', 409);
+    if (confirmation !== cv.title) throw new StoreError('Escreve o nome completo do CV para confirmar.');
+    this.db.prepare('DELETE FROM cvs WHERE id=? AND user_id=? AND revision=? AND deleted IS NOT NULL').run(id, user, revision);
+  }
+  eraseAccount(user: string) {
+    // Foreign keys remove private CVs and every session atomically with the user.
+    const result = this.db.prepare('DELETE FROM users WHERE id=?').run(user);
+    if (!result.changes) throw new StoreError('Conta não encontrada.', 404);
   }
 }
 let singleton: Store | undefined;
