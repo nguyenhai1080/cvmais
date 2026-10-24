@@ -13,7 +13,7 @@ Checks: `npm test`, `npm run typecheck`, `npm run build`.
 
 - Responsive landing page based on the approved mockup, illustrative candidate photography, benefits, community placeholder and practical guidance.
 - Six original templates: Maputo, Índico, Essencial, Coral, Prestígio and Horizonte. Gallery previews come from actual PDFs. Filters and enlarged previews help selection.
-- Structured editor: contacts, profile, repeatable experience/education, reorder, undo, skills, languages, live preview, JSON backup and direct browser PDF download.
+- Structured editor: optional portrait upload with crop/zoom, contacts, profile, repeatable experience/education, reorder, undo, skills, languages, live preview, JSON backup and direct browser PDF download. Images are prepared as 256px JPEGs in the browser; raw files are not sent to an image service.
 - Guests keep one localStorage draft in the current browser. No automatic upload occurs on sign-in. Earlier local/session drafts migrate when available.
 - `/conta`: register, sign in and reset access with a one-time recovery code. Email verification/delivery is not configured. Users must save the displayed recovery code themselves.
 - `/meus-cvs`: private account documents, create, explicitly copy a guest draft, JSON import, duplicate, rename, trash and restore. Limit: 100 documents including trash.
@@ -45,3 +45,5 @@ Run `node scripts/backup-db.mjs` in the container to make a consistent SQLite ba
 - `node scripts/check-storage-api.mjs`: HTTP integration tests against TEST_ORIGIN (default localhost:3001). Creates isolated synthetic accounts; use a test database. Covers CSRF, sessions, ownership, conflicts, second-device sessions, trash, recovery and logout.
 
 Noto Sans and Source Serif fonts and open font licences are under `public/fonts/`. Research sources and rationale are in TEMPLATE-RESEARCH.md. Deployment details are in DEPLOYMENT.md.
+
+The photo revision adds full-width identity blocks, contact icons, experience timelines, textual skill chips and richer two-column layouts. Gallery portraits are fictional illustrations prepared from the existing AI assets using the same photo picker as users. CVs without portraits remain supported. Older open editor clients preserve an existing account portrait when they omit the new photo field.

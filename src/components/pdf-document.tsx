@@ -1,78 +1,77 @@
 import React from 'react';
-import { Document, Page, Text, View, Font, StyleSheet, pdf } from '@react-pdf/renderer';
-import { contactLine, hasEntryContent, usesSidebar, type CVData, type Entry } from '../lib/cv';
+import { Document, Page, Text, View, Image, Svg, Path, Font, StyleSheet, pdf } from '@react-pdf/renderer';
+import { hasEntryContent, usesSidebar, type CVData, type Entry } from '../lib/cv';
+import { themes, contacts, chips, iconPaths, type IconKind } from '../lib/resume-design';
 let registeredBase = '';
 export function prepareFonts(base = '/fonts') {
   if (registeredBase === base) return;
-  Font.register({ family: 'Noto Sans', fonts: [
-    { src: `${base}/NotoSans-Regular.ttf`, fontWeight: 400 },
-    { src: `${base}/NotoSans-Bold.ttf`, fontWeight: 700 },
-  ] });
-  Font.register({ family: 'Source Serif', fonts: [
-    { src: `${base}/SourceSerif4-Regular.ttf`, fontWeight: 400 },
-    { src: `${base}/SourceSerif4-Bold.ttf`, fontWeight: 700 },
-  ] });
+  Font.register({ family: 'Noto Sans', fonts: [{ src: `${base}/NotoSans-Regular.ttf`, fontWeight: 400 }, { src: `${base}/NotoSans-Bold.ttf`, fontWeight: 700 }] });
+  Font.register({ family: 'Source Serif', fonts: [{ src: `${base}/SourceSerif4-Regular.ttf`, fontWeight: 400 }, { src: `${base}/SourceSerif4-Bold.ttf`, fontWeight: 700 }] });
   Font.registerHyphenationCallback(word => word.length > 32 ? word.match(/.{1,24}/gu) || [word] : [word]);
   registeredBase = base;
 }
-const styles = StyleSheet.create({
-  page: { fontFamily: 'Noto Sans', fontSize: 9, lineHeight: 1.6, color: '#243C4C', paddingTop: 40, paddingBottom: 42, paddingHorizontal: 40 },
-  header: { paddingBottom: 20, marginBottom: 8, borderBottom: '1 solid #DCE5E5' },
-  name: { fontSize: 29, fontWeight: 700, lineHeight: 1.15 },
-  role: { fontSize: 10.5, color: '#087F82', marginTop: 9 },
-  contact: { fontSize: 8, color: '#5A6C78', marginTop: 12, lineHeight: 1.8 },
+const s = StyleSheet.create({
+  page: { fontFamily: 'Noto Sans', fontSize: 9, lineHeight: 1.52, padding: 34, paddingBottom: 40, color: '#263D49' },
+  header: { position: 'relative', paddingBottom: 20 },
+  identity: { flexDirection: 'row', alignItems: 'center' },
+  name: { fontSize: 31, lineHeight: 1.12, fontWeight: 700 },
+  role: { fontSize: 11, marginTop: 7 },
+  portrait: { width: 82, height: 82, objectFit: 'cover', borderRadius: 9 },
+  contactBar: { flexDirection: 'row', flexWrap: 'wrap', backgroundColor: '#F1F5F4', padding: 10, marginBottom: 2 },
+  contact: { flexDirection: 'row', width: '50%', paddingVertical: 3, paddingRight: 10, alignItems: 'flex-start' },
+  contactText: { fontSize: 7.6, flex: 1, marginLeft: 6, lineHeight: 1.55 },
+  summary: { fontSize: 9.2, lineHeight: 1.6, marginTop: 12 },
   section: { marginTop: 19 },
-  sectionTitle: { fontSize: 9, fontWeight: 700, letterSpacing: 1.1, marginBottom: 9, textTransform: 'uppercase' },
-  entry: { marginBottom: 13 },
-  entryTitle: { fontSize: 10, fontWeight: 700, lineHeight: 1.5 },
-  entryMeta: { fontSize: 8, color: '#6C7B86', marginTop: 3, marginBottom: 6 },
+  sectionHeading: { flexDirection: 'row', alignItems: 'center', paddingBottom: 6, marginBottom: 10, borderBottom: '1 solid #DDE7E7' },
+  sectionTitle: { fontSize: 10.5, fontWeight: 700, letterSpacing: 0.35, marginLeft: 7, textTransform: 'uppercase' },
+  entry: { paddingLeft: 14, borderLeft: '0.7 solid #DCE7E7', marginLeft: 3, paddingBottom: 15, position: 'relative' },
+  dot: { width: 6, height: 6, position: 'absolute', left: -3.4, top: 5, borderRadius: 3 },
+  entryTitle: { fontSize: 10.8, lineHeight: 1.35, fontWeight: 700 },
+  organisation: { fontSize: 9, marginTop: 3, lineHeight: 1.4 },
+  period: { fontSize: 7.5, marginTop: 3, marginBottom: 7 },
+  bullet: { flexDirection: 'row', marginBottom: 4 },
+  bulletMark: { width: 9, fontSize: 8 },
+  bulletText: { flex: 1 },
+  chipList: { flexDirection: 'row', flexWrap: 'wrap' },
+  chip: { paddingVertical: 4, paddingHorizontal: 6, fontSize: 7.6, marginRight: 5, marginBottom: 5, borderRadius: 3, lineHeight: 1.35 },
+  language: { paddingVertical: 6, borderBottom: '0.6 solid #DBE4E5', fontSize: 8.1 },
 });
-function Entries({ entries }: { entries: Entry[] }) {
-  return <>{entries.filter(hasEntryContent).map(entry => <View key={entry.id} style={styles.entry}>
-    {(entry.title.trim() || entry.organisation.trim() || entry.period.trim()) && <View minPresenceAhead={30}>
-      {entry.title.trim() && <Text style={styles.entryTitle}>{entry.title.trim()}</Text>}
-      {(entry.organisation.trim() || entry.period.trim()) && <Text style={styles.entryMeta}>{[entry.organisation.trim(), entry.period.trim()].filter(Boolean).join(' · ')}</Text>}
-    </View>}
-    {entry.description.trim() && <Text orphans={3} widows={3}>{entry.description.trim()}</Text>}
+function Icon({ kind, color, size = 13 }: { kind: IconKind; color: string; size?: number }) {
+  return <Svg width={size} height={size} viewBox="0 0 24 24"><Path d={iconPaths[kind]} stroke={color} fill="none" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" /></Svg>;
+}
+function Paragraphs({ text, color }: { text: string; color: string }) {
+  const lines = text.trim().split('\n').filter(line => line.trim());
+  if (lines.length > 1 && lines.length <= 12 && lines.every(line => line.length < 400)) return <>{lines.map((line,i) => <View style={s.bullet} key={i}><Text style={[s.bulletMark,{color}]}>•</Text><Text style={s.bulletText} orphans={3} widows={3}>{line.replace(/^[•\-]\s*/, '')}</Text></View>)}</>;
+  return <Text orphans={3} widows={3}>{text.trim()}</Text>;
+}
+function Entries({ entries, accent, timeline }: { entries: Entry[]; accent: string; timeline: boolean }) {
+  return <>{entries.filter(hasEntryContent).map(entry => <View key={entry.id} style={timeline ? s.entry : { marginBottom: 11 }}>
+    {timeline && <View style={[s.dot,{backgroundColor:accent}]} />}
+    <View minPresenceAhead={35}>{entry.title.trim() && <Text style={s.entryTitle}>{entry.title.trim()}</Text>}{entry.organisation.trim() && <Text style={s.organisation}>{entry.organisation.trim()}</Text>}{entry.period.trim() && <Text style={[s.period,{color:accent}]}>{entry.period.trim()}</Text>}</View>
+    {entry.description.trim() && <Paragraphs text={entry.description} color={accent} />}
   </View>)}</>;
 }
 export function CVDocument({ data }: { data: CVData }) {
-  const classic = data.model === 'classico';
-  const modern = data.model === 'moderno';
-  const creative = data.model === 'criativo';
-  const first = data.model === 'primeiro';
-  const executive = data.model === 'executivo';
-  const minimal = data.model === 'minimalista';
+  const t = themes[data.model];
+  const classic = data.model === 'classico', modern = data.model === 'moderno', creative = data.model === 'criativo', first = data.model === 'primeiro', executive = data.model === 'executivo', minimal = data.model === 'minimalista';
   const split = usesSidebar(data);
-  const accent = creative ? '#BB5A48' : first ? '#69578C' : executive ? '#967238' : minimal ? '#363B40' : '#087F82';
-  const serif = executive || minimal;
-  function Section({ title, children, side = false }: { title: string; children: React.ReactNode; side?: boolean }) {
-    return <View style={styles.section}><Text style={[styles.sectionTitle, { color: side && classic ? '#A6DDD5' : accent }, executive || minimal ? { borderBottom: `0.6 solid ${executive ? '#C8B189' : '#CFD1D2'}`, paddingBottom: 6 } : {}]} minPresenceAhead={35}>{title}</Text>{children}</View>;
+  const studySide = split && (modern || executive);
+  const inlineProfile = classic && data.profile.trim().length > 0 && data.profile.trim().length < 520;
+  function Section({ title, kind, children, firstSide = false }: { title: string; kind: IconKind; children: React.ReactNode; firstSide?: boolean }) {
+    return <View style={[s.section,firstSide?{marginTop:0}:minimal?{marginTop:13}:{}]}><View style={[s.sectionHeading, { borderBottomColor: executive ? '#CDB68F' : t.accent + '55' },minimal?{marginBottom:8,paddingBottom:5}:{}]} minPresenceAhead={40}><Icon kind={kind} color={t.accent} /><Text style={[s.sectionTitle,{color:t.accent},executive || minimal ? {fontFamily:'Source Serif',fontSize:12.5,textTransform:'none',letterSpacing:0} : {}]}>{title}</Text></View>{children}</View>;
   }
-  const support = (side: boolean) => <>{data.skills.trim() && <Section title="Competências" side={side}><Text orphans={3} widows={3}>{data.skills.trim()}</Text></Section>}{data.languages.trim() && <Section title="Línguas" side={side}><Text orphans={3} widows={3}>{data.languages.trim()}</Text></Section>}</>;
-  const work = data.experiences.some(hasEntryContent) && <Section title="Experiência profissional"><Entries entries={data.experiences} /></Section>;
-  const study = data.education.some(hasEntryContent) && <Section title="Formação académica"><Entries entries={data.education} /></Section>;
-  return <Document title={`CV - ${data.name.trim()}`} author={data.name.trim()} language="pt-MZ">
-    <Page size="A4" style={[styles.page, split ? classic ? { paddingLeft: 207 } : { paddingRight: 202 } : {}, minimal ? { color: '#363B40' } : {}]} wrap>
-      {split && <View fixed style={{ position: 'absolute', top: 0, bottom: 0, width: 170, ...(classic ? { left: 0 } : { right: 0 }), backgroundColor: classic ? '#183B55' : creative ? '#FAEDE7' : first ? '#F0EDF6' : '#EAF5F2' }} />}
-      {(modern || first || creative) && <View fixed style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 8, backgroundColor: accent }} />}
-      {split && <View style={{ position: 'absolute', top: 38, ...(classic ? { left: 26 } : { right: 24 }), width: 120, fontSize: 8, lineHeight: 1.8, color: classic ? '#FFFFFF' : '#425365' }}>
-        {classic && <View style={{ width: 64, height: 64, border: '1 solid #6D929F', borderRadius: 32, marginBottom: 18, justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 24, color: '#FFFFFF' }}>{data.name.split(' ').filter(Boolean).map(n => n[0]).slice(0,2).join('')}</Text></View>}
-        {contactLine(data) && <Section title="Contacto" side><Text>{[data.city, data.phone, data.email, data.website].filter(Boolean).join('\n')}</Text></Section>}
-        {support(true)}
-      </View>}
-      <View style={[styles.header, executive ? { textAlign: 'center', borderBottomColor: '#B69862', borderBottomWidth: 2, paddingBottom: 24 } : creative ? { paddingTop: 15, paddingBottom: 24, borderBottomColor: '#BB5A48', borderBottomWidth: 3 } : minimal ? { borderBottomColor: '#363B40' } : first ? { padding: 24, backgroundColor: '#F0EDF6', borderBottomWidth: 0, borderRadius: 8 } : modern ? { padding: 22, backgroundColor: '#087F82', borderBottomWidth: 0 } : {}]}>
-        <Text style={[styles.name, { ...(serif ? { fontFamily: 'Source Serif', fontSize: 35 } : {}), color: modern ? '#FFFFFF' : creative || first ? accent : '#183B55' }]}>{data.name.trim()}</Text>
-        {data.role.trim() && <Text style={[styles.role, { color: modern ? '#D8F2EA' : accent }, executive ? { textTransform: 'uppercase', letterSpacing: 2, fontSize: 9 } : {}]}>{data.role.trim()}</Text>}
-        {!split && contactLine(data) && <Text style={styles.contact}>{contactLine(data)}</Text>}
-      </View>
-      {data.profile.trim() && <Section title="Perfil profissional"><Text orphans={3} widows={3}>{data.profile.trim()}</Text></Section>}
-      {first ? <>{study}{work}</> : <>{work}{study}</>}
-      {!split && support(false)}
-    </Page>
-  </Document>;
+  const study = data.education.some(hasEntryContent) && <Section title="Formação académica" kind="study"><Entries entries={data.education} accent={t.accent} timeline={!executive && !minimal} /></Section>;
+  const work = data.experiences.some(hasEntryContent) && <Section title="Experiência profissional" kind="work"><Entries entries={data.experiences} accent={t.accent} timeline={!executive && !minimal} /></Section>;
+  const skills = chips(data.skills);
+  const support = <>{data.skills.trim() && <Section title="Competências" kind="skills" firstSide={split && (classic || creative || first)}>{skills ? <View style={s.chipList}>{skills.map((skill,i) => <Text key={i} style={[s.chip,{backgroundColor: modern || classic ? t.accent : t.pale,color:modern || classic ? '#FFFFFF' : t.accent,border: `0.5 solid ${t.accent}44`}]}>{skill}</Text>)}</View> : <Text orphans={3} widows={3}>{data.skills.trim()}</Text>}</Section>}{studySide && study}{data.languages.trim() && <Section title="Línguas" kind="languages" firstSide={split && (classic || creative || first) && !data.skills.trim()}>{minimal ? <Text>{data.languages.trim().replaceAll('\n',' · ')}</Text> : data.languages.trim().split('\n').length <= 12 ? data.languages.trim().split('\n').map((line,i)=><Text key={i} style={s.language}>{line}</Text>) : <Text orphans={3} widows={3}>{data.languages.trim()}</Text>}</Section>}</>;
+  const portrait = data.photo && <Image src={data.photo} style={[s.portrait,classic || creative || first ? {borderRadius:45,border:`3 solid ${classic ? '#8AD8CC' : '#FFFFFF'}`,width:90,height:90} : executive ? {borderRadius:0,border:'2 solid #CDB68F',padding:3} : minimal ? {width:61,height:61,borderRadius:31} : {}]} />;
+  return <Document title={`CV - ${data.name.trim()}`} author={data.name.trim()} language="pt-MZ"><Page size="A4" style={[s.page,{color:t.ink},minimal?{fontSize:8.7,lineHeight:1.48}:{}]} wrap>
+    <View style={[s.header,classic || creative || first ? {backgroundColor:classic ? '#183B55' : t.pale,marginTop:-34,marginHorizontal:-34,padding:28,paddingHorizontal:34} : executive ? {borderTop:'4 solid #967238',paddingTop:20} : modern ? {borderBottom:'3 solid #087F82'} : {borderBottom:'1 solid #394550'}]}>
+      <View style={s.identity}>{(modern || first) && portrait && <View style={{marginRight:18}}>{portrait}</View>}<View style={{flex:1}}><Text style={[s.name,{color:classic?'#FFFFFF':creative?t.accent:t.ink},minimal || executive ? {fontFamily:'Source Serif',fontSize:34} : {}]}>{data.name.trim()}</Text>{data.role.trim() && <Text style={[s.role,{color:classic?'#8AD8CC':t.accent},executive?{textTransform:'uppercase',fontSize:9,letterSpacing:1.6}:{}]}>{data.role.trim()}</Text>}{inlineProfile && <Text style={[s.summary,{color:'#E0EDF0',fontSize:8.5}]}>{data.profile.trim()}</Text>}</View>{!(modern || first) && portrait && <View style={{marginLeft:20}}>{portrait}</View>}</View>
+    </View>
+    {contacts(data).length > 0 && <View style={[s.contactBar,classic?{backgroundColor:'#102B3D',marginHorizontal:-34,paddingHorizontal:34}:creative?{backgroundColor:'#FFFFFF',borderBottom:'2 solid #BB5343'}:executive?{backgroundColor:t.pale}:minimal?{backgroundColor:'#FFFFFF',paddingHorizontal:0}:{}]}>{contacts(data).map(item=><View key={item.key} style={s.contact}><Icon kind={item.kind} color={classic?'#8AD8CC':t.accent} size={10}/><Text style={[s.contactText,{color:classic?'#E0EDF0':t.ink}]}>{item.text}</Text></View>)}</View>}
+    {!inlineProfile && data.profile.trim() && <Section title="Perfil profissional" kind="profile"><Text orphans={3} widows={3}>{data.profile.trim()}</Text></Section>}
+    {split ? <View style={{flexDirection:'row'}}><View style={{width:'63%'}}>{first?<>{study}{work}</>:<>{work}{!studySide&&study}</>}</View><View style={{width:'33%',marginLeft:'4%',...(classic || creative || first ? {backgroundColor:t.pale,paddingHorizontal:12,paddingTop:14,paddingBottom:15,marginTop:5,borderRadius:first?8:0}: {})}}>{support}</View></View> : <>{first?<>{study}{work}</>:<>{work}{study}</>}{support}</>}
+  </Page></Document>;
 }
-export async function createPDFBlob(data: CVData): Promise<Blob> {
-  prepareFonts();
-  return pdf(<CVDocument data={data} />).toBlob();
-}
+export async function createPDFBlob(data: CVData): Promise<Blob> { prepareFonts(); return pdf(<CVDocument data={data} />).toBlob(); }

@@ -1,6 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { blank, emptyCV, isModel, readDraft, canExport, pdfFilename, MAX_ENTRIES, usesSidebar } from '../src/lib/cv.ts';
+import { blank, emptyCV, isModel, readDraft, canExport, pdfFilename, MAX_ENTRIES, usesSidebar, normalisePhoto } from '../src/lib/cv.ts';
+import { readFileSync } from 'node:fs';
+
+test('prepared JPEG portraits survive draft migration and unsafe photo sources are rejected', () => {
+  const jpeg = `data:image/jpeg;base64,${readFileSync(new URL('../public/images/demo-portrait-woman.jpg', import.meta.url)).toString('base64')}`;
+  assert.equal(normalisePhoto(jpeg), jpeg);
+  assert.equal(readDraft(JSON.stringify({name:'Celina',photo:jpeg})).photo, jpeg);
+  assert.equal(readDraft(JSON.stringify({name:'Celina'})).photo, '');
+  for (const value of ['https://external.test/photo.jpg','file:///secret.jpg','data:image/svg+xml,<svg/>','data:image/jpeg;base64,AAAA','data:image/jpeg;base64,/9j/'+'A'.repeat(170000),null]) assert.equal(normalisePhoto(value),'');
+});
 
 test('long text and many line breaks cannot overflow a fixed sidebar', () => {
   assert.equal(usesSidebar({ ...emptyCV(), model: 'classico', skills: 'Organização\nExcel' }), true);

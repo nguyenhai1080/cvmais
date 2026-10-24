@@ -6,14 +6,14 @@ export const modelLabels: Record<Model, string> = {
 export type Entry = { id: string; title: string; organisation: string; period: string; description: string };
 export type CVData = {
   name: string; role: string; email: string; phone: string; city: string; website: string;
-  profile: string; skills: string; languages: string;
+  profile: string; skills: string; languages: string; photo: string;
   experiences: Entry[]; education: Entry[]; model: Model;
 };
 export const DRAFT_KEY = 'cvmais-draft-v2';
 export const MAX_ENTRIES = 8;
 export const blank: CVData = {
   name: '', role: '', email: '', phone: '', city: '', website: '', profile: '', skills: '', languages: '',
-  experiences: [], education: [], model: 'classico',
+  experiences: [], education: [], model: 'classico', photo: '',
 };
 export function emptyCV(): CVData { return { ...blank, experiences: [], education: [] }; }
 export function isModel(value: unknown): value is Model {
@@ -46,7 +46,15 @@ export function normaliseCV(value: unknown): CVData {
   result.experiences = readEntries(saved.experiences, saved.experience, 'work');
   result.education = readEntries(saved.education, saved.education, 'study');
   if (isModel(saved.model)) result.model = saved.model;
+  result.photo = normalisePhoto(saved.photo);
   return result;
+}
+export function normalisePhoto(value: unknown): string {
+  if (typeof value !== 'string' || value.length > 160_000 || !/^data:image\/jpeg;base64,\/9j\/[A-Za-z0-9+/]*={0,2}$/.test(value)) return '';
+  try {
+    const bytes = atob(value.slice('data:image/jpeg;base64,'.length));
+    return bytes.charCodeAt(bytes.length - 2) === 255 && bytes.charCodeAt(bytes.length - 1) === 217 ? value : '';
+  } catch { return ''; }
 }
 export function readDraft(raw: string | null): CVData {
   try { return normaliseCV(raw ? JSON.parse(raw) : null); } catch { return emptyCV(); }
@@ -65,9 +73,10 @@ export function contactLine(data: CVData): string {
 }
 /** Keep compact sidebars on the first page; long content reflows into the main column. */
 export function usesSidebar(data: CVData): boolean {
-  if (!['classico', 'moderno', 'criativo'].includes(data.model)) return false;
-  const lines = [data.city, data.phone, data.email, data.website, data.skills, data.languages]
+  if (data.model === 'minimalista') return false;
+  const study = ['moderno', 'executivo'].includes(data.model) ? data.education.flatMap(e => [e.title,e.organisation,e.period,e.description]) : [];
+  const lines = [data.skills, data.languages, ...study]
     .filter(Boolean).flatMap(value => value.split('\n'))
     .reduce((sum, line) => sum + Math.max(1, Math.ceil(line.length / 20)), 0);
-  return lines <= 32;
+  return lines <= 31;
 }

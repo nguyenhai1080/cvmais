@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 const base = process.env.TEST_ORIGIN || 'http://localhost:3001';
 const suffix = randomUUID();
 async function request(path, method = 'GET', body, cookie, origin = base) {
@@ -16,18 +17,24 @@ const cookie = a.cookie;
 assert.equal((await request('cvs','POST',{data:{profile:'x'.repeat(513_000)}},cookie)).status,413);
 const b = await request('register','POST',{email:`qa-b-${suffix}@example.test`,password});
 assert.equal(b.status, 201);
-const cv = await request('cvs','POST',{title:'Validação · CV privado',data:{name:'Pessoa de teste',profile:'Apenas conteúdo fictício para validação.'}},cookie);
+const photo = `data:image/jpeg;base64,${readFileSync(new URL('../public/images/demo-portrait-woman.jpg', import.meta.url)).toString('base64')}`;
+const cv = await request('cvs','POST',{title:'Validação · CV privado',data:{name:'Pessoa de teste',profile:'Apenas conteúdo fictício para validação.',photo}},cookie);
 assert.equal(cv.status,201);
+assert.equal(cv.value.data.photo,photo);
 assert.equal((await request(`cvs/${cv.value.id}`,'GET',undefined,b.cookie)).status,404);
 assert.equal((await request(`cvs/${cv.value.id}`,'PUT',{...cv.value,deleted:false},b.cookie)).status,404);
-const update = await request(`cvs/${cv.value.id}`,'PUT',{...cv.value,data:{...cv.value.data,role:'Perfil de teste'},deleted:false},cookie);
+const oldClientData = {...cv.value.data,role:'Perfil de teste'};
+delete oldClientData.photo;
+const update = await request(`cvs/${cv.value.id}`,'PUT',{...cv.value,data:oldClientData,deleted:false},cookie);
 assert.equal(update.status,200); assert.equal(update.value.revision,2);
+assert.equal(update.value.data.photo,photo);
 assert.equal((await request(`cvs/${cv.value.id}`,'PUT',{...cv.value,deleted:false},cookie)).status,409);
 assert.match(update.cache,/no-store/);
 // New session represents a second device; original account data remains available.
 const second = await request('login','POST',{email:`qa-${suffix}@example.test`,password});
 assert.equal(second.status,200);
 assert.equal((await request(`cvs/${cv.value.id}`,'GET',undefined,second.cookie)).value.data.role,'Perfil de teste');
+assert.equal((await request(`cvs/${cv.value.id}`,'GET',undefined,second.cookie)).value.data.photo,photo);
 const trash = await request(`cvs/${cv.value.id}`,'PUT',{...update.value,deleted:true},cookie); assert.ok(trash.value.deleted);
 const restored = await request(`cvs/${cv.value.id}`,'PUT',{...trash.value,deleted:false},cookie); assert.equal(restored.value.deleted,null);
 const reset = await request('recover','POST',{email:`qa-${suffix}@example.test`,password:`New-${password}`,recovery:a.value.recovery});

@@ -8,8 +8,11 @@ for directory in ['work/template-pdfs', 'work/pdf-qa']:
         files = [p for p in files if p.stem in ['classico','moderno','minimalista','criativo','executivo','primeiro','long-support'] or p.stem.startswith('long-')]
     for path in files:
         reader = PdfReader(path)
+        if directory.endswith('template-pdfs'):
+            xobjects = reader.pages[0]['/Resources'].get('/XObject', {})
+            assert any(obj.get_object().get('/Subtype') == '/Image' for obj in xobjects.values()), (path, 'missing portrait')
         text = ' '.join('\n'.join(p.extract_text() for p in reader.pages).split())
-        assert 'FORMAÇÃO ACADÉMICA' in text, path
+        assert 'FORMAÇÃO ACADÉMICA' in text.upper(), path
         assert 'Moçambique' in text, path
         assert 'O teu nome' not in text, path
         if not path.stem.startswith('long-'):

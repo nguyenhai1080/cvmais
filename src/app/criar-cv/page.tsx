@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Header from '@/components/header';
 import { useCVStorage } from '@/lib/use-cv-storage';
 import EditorPreview from '@/components/editor-preview';
+import PhotoPicker from '@/components/photo-picker';
 import { MAX_ENTRIES, isModel, normaliseCV, canExport, pdfFilename,
   models, modelLabels, type CVData, type Entry } from '@/lib/cv';
 
@@ -127,7 +128,7 @@ export default function Editor() {
         <form className="editor-form v2-form" onSubmit={e => { e.preventDefault(); save(); }}>
           <fieldset disabled={!ready || exporting}>
             <section className="editor-section" id="dados"><div className="editor-section-title"><span>01</span><div><h2>Os teus dados</h2><p>Como te apresentas e como podem contactar-te.</p></div></div>
-              <div className="contact-fields">{fields.map(f => <label key={f.key} htmlFor={`cv-${f.key}`}>{f.label}<input id={`cv-${f.key}`}
+              <PhotoPicker photo={data.photo} onChange={photo => change({ ...data, photo })} /><div className="contact-fields">{fields.map(f => <label key={f.key} htmlFor={`cv-${f.key}`}>{f.label}<input id={`cv-${f.key}`}
                 type={f.key === 'email' ? 'email' : f.key === 'phone' ? 'tel' : 'text'} autoComplete={f.complete}
                 value={data[f.key]} onChange={e => update(f.key, e.target.value)} placeholder={f.placeholder} maxLength={150} /></label>)}</div>
             </section>

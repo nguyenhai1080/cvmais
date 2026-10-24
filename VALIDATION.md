@@ -18,3 +18,7 @@ Practical limits: no email verification/delivery, permanent account erasure or s
 ## Production completion
 
 DGC version 3 runs application commit `c088f60`. HTTPS checks and the API ownership/session suite pass. A fictional account and CV saved on version 2 were retrieved with a fresh login after deploying version 3, preserving the revision and full content. Database health reports ready. The public gallery and enlarged template preview were checked on DGC and captured as screenshots. No changes were made to GST.
+
+## Portrait and richer layout revision
+
+Ten unit/storage tests pass, including real prepared JPEG round-tripping and rejection of SVG, external/file URLs, malformed and oversized image values. Local API checks include portrait save/read from a second session and preservation when an older client omits the photo field. Browser checks cover crop/zoom, prepared-image backup, draft reload and actual PDF download with an embedded portrait. Six fictional portrait examples remain one-page A4 documents; all long-CV and long-support fixtures preserve content and pass bounds/font checks.

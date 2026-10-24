@@ -19,3 +19,11 @@ The previous small cards differed mainly in colour and showed sparse HTML. The o
 Navigation retains #183B55 and #079C91. These choices are our synthesis, not evidence of better hiring results or verified ATS compatibility. No recruiter endorsement or employment guarantee is claimed. All sample content is fictional.
 
 Templates work without photos or invented proficiency bars. Long sidebar content reflows into the main column. PDF content remains selectable, paginated as A4 and rendered locally with embedded fonts.
+
+## Visual follow-up: portrait and composition
+
+The user requested closer study of Novorésumé and FlowCV. We inspected the actual Creative, Modern and Executive preview images on Novorésumé, rather than relying on their category descriptions. The useful mechanisms were prominent portraits, full-width identity headers, compact contact strips with icons, timeline markers, readable heading sizes and short skill labels. FlowCV explicitly supports photo layouts and optional portrait removal.
+
+The revised CVMais renderer uses those mechanisms in original brand layouts. Maputo has a dark masthead and circular portrait; Índico uses a portrait on the left and a timeline; Coral has a warm identity block and pale support panel; Prestígio uses editorial typography with a framed portrait; Horizonte places education first with a circular photo; Essencial keeps a compact single-column structure. Icons are vector geometry and skills are textual labels, without invented proficiency scores.
+
+All six gallery previews include clearly labelled fictional portraits. Two portraits were prepared from the previously generated CVMais assets using the actual browser photo picker. No reference-site candidate photographs or template images are copied into the application. Gallery papers are shown in full instead of clipping the lower sections.
