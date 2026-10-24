@@ -2,7 +2,7 @@
 
 Canonical source: `D:\Projects\CVMais`. All CVs used in checks are fictional.
 
-- Nine unit/storage tests pass: migration, validation, bounds, PDF readiness, safe filenames, long-sidebar fallback and persisted account lifecycle.
+- Ten unit/storage tests pass: migration, validation, bounds, PDF readiness, safe filenames, long-sidebar fallback, safe photo round-trip and persisted account lifecycle.
 - Storage tests verify password derivation, hashed recovery/session tokens, ownership, stale revision rejection, trash/restore, database reopen persistence, reset revocation, single-use recovery, logout and persisted rate limits.
 - Local HTTP checks passed: same-origin protection, private/no-store responses, session cookies, rejection of unauthorised/other-account access, second-session save/read, conflicts, trash/restore, recovery and logout.
 - Production compilation and TypeScript pass.
@@ -22,3 +22,5 @@ DGC version 3 runs application commit `c088f60`. HTTPS checks and the API owners
 ## Portrait and richer layout revision
 
 Ten unit/storage tests pass, including real prepared JPEG round-tripping and rejection of SVG, external/file URLs, malformed and oversized image values. Local API checks include portrait save/read from a second session and preservation when an older client omits the photo field. Browser checks cover crop/zoom, prepared-image backup, draft reload and actual PDF download with an embedded portrait. Six fictional portrait examples remain one-page A4 documents; all long-CV and long-support fixtures preserve content and pass bounds/font checks.
+
+DGC version 4 runs application commit `b62e5d1`. The production API suite including photo round-trip and legacy-client preservation passes. The pre-existing persistence probe survives another redeployment. Health reports ready. All six new gallery images and the enlarged Coral preview load on the live site; the mobile gallery has no horizontal overflow. Production build succeeds with two workers, avoiding excessive local build concurrency.

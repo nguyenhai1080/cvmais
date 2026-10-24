@@ -26,6 +26,8 @@ Final prompt:
 
 The CV overlay is live HTML rather than baked into the image. Gallery previews come from the six actual PDF layouts and use fictional content.
 
+Gallery portraits are browser-prepared crops of the existing generated candidate and community assets, saved as `demo-portrait-woman.jpg` and `demo-portrait-man.jpg`. They illustrate optional photographs and do not represent customers. Six layouts use different portrait placement, identity headers, contact icons, timelines, typography and support panels. Preview and PDF share design tokens; uploaded photos are optional and remain part of the CV draft or private account record.
+
 Hero prompt: Create a production website photograph based on the attached CVMais UI mockup, using ONLY the hero photography as visual reference. Wide 16:9 photograph. Fictional young adult Black Mozambican woman with long braided hair, teal blazer over white top, seated behind a silver laptop, smiling thoughtfully upward to her left, chin resting on one hand holding a pen. Bright pale mint office, daylight, blurred plant on right. Woman centre-right with face near 60% width and negative space on left 40%. No text, UI, CV, buttons or marks.
 
 Community prompt: Photorealistic editorial career website image, portrait 4:5. Fictional young adult Black Mozambican man, short natural afro hair, dark rectangular glasses, light blue denim overshirt over white T-shirt, seated smiling and working on silver laptop at a desk in bright contemporary Maputo office, soft daylight, blurred leafy green plant on left and pale mint wall. Framed chest-up with laptop entering bottom right. Natural skin texture, warm optimistic expression. Palette white, teal, pale mint. No text, logos, UI or watermark.
