@@ -7,12 +7,12 @@ The required owner is DGC, email `nguyenhai1080@gmail.com`. The exposed connecto
 - Live URL: https://cvmais-dgc.n1.tinhgon.xyz
 - Project ID: `cmvlbkah40mef0i5fzrjkbvcd`
 - Management page: https://v2.tinhgon.xyz/projects/cmvlbkah40mef0i5fzrjkbvcd
-- State: online, version 4, deployed 24 October 2026 at 12:35 (platform display).
-- Application commit: `b62e5d1` (portrait-led CV layouts and optional local photo cropping).
+- State: online, version 8 before the authentication-email release (24 October 2026).
+- Application commit: `111e7d4` before the authentication-email release.
 - Source: `https://github.com/nguyenhai1080/cvmais.git`, default branch `main`, repository root.
 - Runtime: 0.3 CPU, 512 MB RAM, application port 3000.
 - Automatic GitHub deployment: off, as shown in the DGC project overview. Pushes do not deploy by themselves.
-- Custom domain: not connected. `cvmais.co.mz` still requires DNS/domain setup.
+- Custom domain: not connected. cvmais.win is configured for email sending only; website DNS and cvmais.co.mz are not attached.
 - SQLite database: `/data/cvmais.sqlite`, with `/data` declared as persistent storage. DATABASE_PATH and APP_ORIGIN are configured in the DGC project. Guest drafts and PDF generation remain in the browser.
 
 Live HTTPS checks pass for the homepage and database-backed health endpoint. The gallery shows all six new templates and enlarged previews. Production API checks pass for credentials, sessions, CSRF protection, ownership, another-device session, revision conflicts, trash/restore, recovery and logout.
@@ -21,7 +21,7 @@ Version 4 also passes production portrait save/read and old-client photo preserv
 
 A fictional account and CV were saved on version 2. After deploying version 3, a fresh login retrieved the same CV, revision and content successfully, verifying actual persistence through redeployment. Test credentials are kept only in ignored local work files and are not included in source archives. The old GST project remains untouched.
 
-Account passwords use salted scrypt; session and recovery tokens are hashed. Recovery uses a code shown at registration/reset; email verification/delivery is not configured. Permanent erasure and scheduled off-server backups remain future work. The container includes `scripts/backup-db.mjs` for a consistent manual backup. Persistent storage does not replace backups.
+Account passwords use salted scrypt; session and recovery tokens are hashed. Permanent CV/account erasure is live. Encrypted daily B2 backups are live and a real remote restore has passed. The authentication-email release adds optional verification and email reset; code recovery remains available. See OPERATIONS-SETUP.md for activation and limits. The container includes `scripts/backup-db.mjs` for a consistent manual backup. Persistent storage does not replace backups.
 
 For updates, use the DGC management page above while signed in as the confirmed owner. Use connector deployment tools only after `whoami.email` reports the DGC address. Do not reuse the GST project ID below.
 

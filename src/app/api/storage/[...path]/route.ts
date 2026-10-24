@@ -1,6 +1,7 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, after } from 'next/server';
 import { store, StoreError } from '@/lib/server/store';
 import { normaliseCV } from '@/lib/cv';
+import { mailEnabled, sendTokenEmail, type MailPurpose } from '@/lib/server/mail';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -47,6 +48,27 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
       if (request.headers.get('sec-fetch-site') === 'cross-site') throw new StoreError('Pedido inválido.', 403);
     }
     const reply = (value: unknown, status = 200, setCookie?: string) => Response.json(value, { status, headers: { ...headers, ...(setCookie ? { 'Set-Cookie': setCookie } : {}) } });
+    const queueEmail = (email: string, purpose: MailPurpose, value: string) => after(async () => {
+      try { db.emailToken(value, purpose); await sendTokenEmail(email, purpose, value); }
+      catch { console.error('Authentication email was not delivered; request a new link. No email address, token or provider response logged.'); }
+    });
+    if (path.length === 1 && path[0] === 'email-status' && method === 'GET') return reply({ enabled: mailEnabled(), verified: user ? db.emailVerified(user.id) : false });
+    if (path.length === 1 && ['request-reset','verify-email','reset-email'].includes(path[0]) && method === 'POST') {
+      db.limit('email-global', 60, 900_000);
+      const input = await body(request);
+      if (path[0] === 'request-reset') {
+        if (!mailEnabled()) throw new StoreError('A recuperação por email ainda não está disponível. Usa o teu código de recuperação.', 503);
+        const email = credential(input.email, 'email');
+        db.limit(`email-reset:${email}`, 3);
+        const reset = db.requestEmailReset(email);
+        if (reset) queueEmail(reset.email, 'reset', reset.token);
+        // Queue delivery after the response; existence cannot be inferred from provider latency.
+        return reply({ ok: true, message: 'Se existir uma conta com este email, receberás uma ligação. Verifica também o spam. Usa a mensagem mais recente.' });
+      }
+      if (typeof input.token !== 'string') throw new StoreError('A ligação é inválida ou expirou.');
+      if (path[0] === 'verify-email') { db.verifyEmail(input.token); return reply({ ok: true }); }
+      return reply({ recovery: await db.resetByEmail(input.token, credential(input.password, 'password')) }, 200, sessionCookie('', true));
+    }
     if (path.length === 1 && path[0] === 'session' && method === 'GET') return reply({ user });
     if (path.length === 1 && path[0] === 'logout' && method === 'POST') { db.logout(token); return reply({ ok: true }, 200, sessionCookie('', true)); }
     if (path.length === 1 && ['register', 'login', 'recover'].includes(path[0]) && method === 'POST') {
@@ -61,9 +83,16 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
         return reply({ recovery: await db.recover(email, input.recovery, password) }, 200, sessionCookie('', true));
       }
       const result = path[0] === 'register' ? await db.register(email, password) : { user: await db.login(email, password) };
+      if (path[0] === 'register' && mailEnabled()) queueEmail(email, 'verify', db.issueEmailToken(result.user.id, 'verify'));
       return reply(result, path[0] === 'register' ? 201 : 200, sessionCookie(db.session(result.user.id)));
     }
     if (!user) throw new StoreError('Entra na tua conta para continuar.', 401);
+    if (path.length === 1 && path[0] === 'request-verification' && method === 'POST') {
+      if (!mailEnabled()) throw new StoreError('A confirmação por email ainda não está disponível.', 503);
+      db.limit(`email-verify:${user.id}`, 3);
+      if (!db.emailVerified(user.id)) queueEmail(user.email, 'verify', db.issueEmailToken(user.id, 'verify'));
+      return reply({ ok: true });
+    }
     if (method === 'DELETE' && ((path.length === 1 && path[0] === 'account') || (path.length === 2 && path[0] === 'cvs' && /^[a-f0-9-]{36}$/.test(path[1])))) {
       db.limit('erase-global', 60, 60_000);
       db.limit(`erase:${user.id}`, 5);

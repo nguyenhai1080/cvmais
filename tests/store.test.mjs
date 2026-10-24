@@ -80,3 +80,35 @@ test('permanent erasure requires trash, exact confirmation and current revision;
     assert.equal(db.cv(b.user.id, other.id).title, 'Manter');
   } finally { db.db.close(); rmSync(directory, { recursive: true, force: true }); }
 });
+
+test('email verification/reset links are hashed, expiring, purpose-bound and single-use; recovery revokes prior links', async () => {
+  const directory = mkdtempSync(join(tmpdir(), 'cvmais-email-'));
+  const db = new Store(join(directory, 'test.sqlite'));
+  try {
+    const a = await db.register('email@example.test', 'a-long-test-password');
+    const session = db.session(a.user.id);
+    assert.equal(db.emailVerified(a.user.id), false);
+    const verification = db.issueEmailToken(a.user.id, 'verify');
+    assert.equal(db.db.prepare('SELECT token FROM email_tokens').get().token, digest(verification));
+    assert.throws(() => db.emailToken(verification, 'reset'), { status:400 });
+    db.verifyEmail(verification); assert.equal(db.emailVerified(a.user.id), true);
+    assert.throws(() => db.verifyEmail(verification), { status:400 });
+    const old = db.requestEmailReset(a.user.email);
+    assert.equal(db.requestEmailReset('unknown@example.test'), null);
+    const reset = db.requestEmailReset(a.user.email);
+    await assert.rejects(db.resetByEmail(old.token, 'new-long-test-password'), { status:400 });
+    const recovery = await db.resetByEmail(reset.token, 'new-long-test-password');
+    assert.equal(db.user(session), null); assert.notEqual(recovery, a.recovery);
+    await assert.rejects(db.resetByEmail(reset.token, 'another-long-password'), { status:400 });
+    assert.equal((await db.login(a.user.email, 'new-long-test-password')).id, a.user.id);
+    const expires = db.issueEmailToken(a.user.id, 'reset');
+    db.db.prepare('UPDATE email_tokens SET expires=0').run();
+    await assert.rejects(db.resetByEmail(expires, 'another-long-password'), { status:400 });
+    const beforeRecovery = db.issueEmailToken(a.user.id, 'reset');
+    await db.recover(a.user.email, recovery, 'recovered-long-password');
+    await assert.rejects(db.resetByEmail(beforeRecovery, 'another-long-password'), { status:400 });
+    db.issueEmailToken(a.user.id, 'verify'); db.eraseAccount(a.user.id);
+    assert.equal(db.db.prepare('SELECT count(*) AS n FROM email_tokens').get().n, 0);
+    assert.equal(db.db.prepare('SELECT count(*) AS n FROM verified_emails').get().n, 0);
+  } finally { db.db.close(); rmSync(directory, { recursive: true, force: true }); }
+});

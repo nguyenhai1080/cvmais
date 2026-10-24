@@ -22,6 +22,9 @@ export class Store {
       CREATE TABLE IF NOT EXISTS cvs (id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, title TEXT NOT NULL, data TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 1, updated INTEGER NOT NULL, deleted INTEGER);
       CREATE INDEX IF NOT EXISTS cvs_owner ON cvs(user_id);
       CREATE TABLE IF NOT EXISTS attempts (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS verified_emails (user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, verified INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS email_tokens (token TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, purpose TEXT NOT NULL CHECK(purpose IN ('verify','reset')), expires INTEGER NOT NULL);
+      CREATE INDEX IF NOT EXISTS email_token_owner ON email_tokens(user_id,purpose);
       PRAGMA user_version=1;`);
   }
   limit(key: string, max = 10, window = 900_000) {
@@ -81,6 +84,7 @@ export class Store {
       const updated = this.db.prepare('UPDATE users SET password=?,recovery=? WHERE id=? AND recovery=?').run(encoded, digest(next), user.id, user.recovery);
       if (!updated.changes) throw new StoreError('O código já foi utilizado. Usa o código de recuperação mais recente.', 401);
       this.db.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);
+      this.db.prepare('DELETE FROM email_tokens WHERE user_id=?').run(user.id);
       this.db.exec('COMMIT');
     } catch (error) { this.db.exec('ROLLBACK'); throw error; }
     return next;
@@ -120,6 +124,51 @@ export class Store {
     // Foreign keys remove private CVs and every session atomically with the user.
     const result = this.db.prepare('DELETE FROM users WHERE id=?').run(user);
     if (!result.changes) throw new StoreError('Conta não encontrada.', 404);
+  }
+  emailVerified(user: string) { return Boolean(this.db.prepare('SELECT 1 FROM verified_emails WHERE user_id=?').get(user)); }
+  issueEmailToken(user: string, purpose: 'verify' | 'reset') {
+    const token = randomBytes(32).toString('hex');
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      this.db.prepare('DELETE FROM email_tokens WHERE expires<? OR (user_id=? AND purpose=?)').run(Date.now(), user, purpose);
+      this.db.prepare('INSERT INTO email_tokens VALUES (?,?,?,?)').run(digest(token), user, purpose, Date.now() + (purpose === 'reset' ? 30 : 1440) * 60_000);
+      this.db.exec('COMMIT');
+    } catch (error) { this.db.exec('ROLLBACK'); throw error; }
+    return token;
+  }
+  emailToken(token: string, purpose: 'verify' | 'reset') {
+    if (!/^[a-f0-9]{64}$/.test(token)) throw new StoreError('A ligação é inválida ou expirou. Pede uma nova ligação.');
+    const row = this.db.prepare('SELECT users.id,users.email FROM email_tokens JOIN users ON users.id=email_tokens.user_id WHERE token=? AND purpose=? AND expires>?').get(digest(token), purpose, Date.now()) as { id: string; email: string } | undefined;
+    if (!row) throw new StoreError('A ligação é inválida ou expirou. Pede uma nova ligação.');
+    return row;
+  }
+  requestEmailReset(email: string) {
+    const user = this.db.prepare('SELECT id,email FROM users WHERE email=?').get(email) as { id: string; email: string } | undefined;
+    return user ? { ...user, token: this.issueEmailToken(user.id, 'reset') } : null;
+  }
+  verifyEmail(token: string) {
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      const user = this.emailToken(token, 'verify');
+      this.db.prepare('INSERT OR REPLACE INTO verified_emails VALUES (?,?)').run(user.id, Date.now());
+      this.db.prepare('DELETE FROM email_tokens WHERE token=?').run(digest(token));
+      this.db.exec('COMMIT');
+    } catch (error) { this.db.exec('ROLLBACK'); throw error; }
+  }
+  async resetByEmail(token: string, password: string) {
+    this.emailToken(token, 'reset');
+    const encoded = await this.password(password);
+    const recovery = randomBytes(24).toString('hex');
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      const user = this.emailToken(token, 'reset');
+      this.db.prepare('UPDATE users SET password=?,recovery=? WHERE id=?').run(encoded, digest(recovery), user.id);
+      this.db.prepare('INSERT OR REPLACE INTO verified_emails VALUES (?,?)').run(user.id, Date.now());
+      this.db.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);
+      this.db.prepare('DELETE FROM email_tokens WHERE user_id=?').run(user.id);
+      this.db.exec('COMMIT');
+    } catch (error) { this.db.exec('ROLLBACK'); throw error; }
+    return recovery;
   }
 }
 let singleton: Store | undefined;
