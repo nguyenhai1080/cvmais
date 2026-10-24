@@ -10,6 +10,7 @@ type Item = Omit<CloudCV, 'data'>;
 
 export default function MyCVs() {
   const [user, setUser] = useState<Account | null>(null);
+  const [operations, setOperations] = useState(false);
   const [items, setItems] = useState<Item[]>([]);
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -26,9 +27,9 @@ export default function MyCVs() {
     async function load() {
       setErased(new URLSearchParams(window.location.search).get('conta-eliminada') === '1');
       try {
-        const session = await api<{ user: Account | null }>('session');
+        const session = await api<{ user: Account | null; operations?: boolean }>('session');
         if (stopped) return;
-        setUser(session.user);
+        setUser(session.user); setOperations(Boolean(session.operations));
         if (session.user) await refresh();
         try { setGuest(Boolean(localStorage.getItem(DRAFT_KEY) || sessionStorage.getItem('cvmais-draft'))); } catch { /* Optional guest draft. */ }
       } catch (e) { if (!stopped) setError(errorMessage(e)); }
@@ -71,6 +72,6 @@ export default function MyCVs() {
       {trash && <p>Os CVs no lixo podem ser restaurados ou eliminados definitivamente. A eliminação definitiva exige a tua palavra-passe e não pode ser desfeita.</p>}
       <div className="cv-library">{items.filter(i => Boolean(i.deleted) === trash).map(item => <article className="cv-library-card" key={item.id}><div className="cv-card-paper" aria-hidden="true"><span>CV</span><i /><i /><i /><i /></div><div className="cv-card-content">{rename === item.id ? <form onSubmit={e => { e.preventDefault(); void action(() => modify(item, 'rename')); }}><label>Nome do CV<input value={title} onChange={e => setTitle(e.target.value)} required maxLength={100} autoFocus /></label><button className="text-link" disabled={busy}>Guardar nome</button><button className="text-link" type="button" onClick={() => setRename('')}>Cancelar</button></form> : <h3>{item.title}</h3>}<p>Actualizado em {new Date(item.updated).toLocaleString('pt-MZ')}</p><div className="cv-card-actions">{trash ? <><button className="button outline small" disabled={busy} onClick={() => void action(() => modify(item, 'restore'))}>Restaurar CV</button><EraseData user={user} cv={item} onErased={async () => { setItems(current => current.filter(cv => cv.id !== item.id)); await action(refresh); }} /></> : <><a className="button small" href={`/criar-cv?id=${item.id}`}>Abrir CV →</a><button disabled={busy} onClick={() => { setRename(item.id); setTitle(item.title); }}>Mudar nome</button><button disabled={busy} onClick={() => void action(() => modify(item, 'copy'))}>Duplicar</button><button disabled={busy} onClick={() => void action(() => modify(item, 'trash'))}>Mover para o lixo</button></>}</div></div></article>)}</div>
       {!items.some(i => Boolean(i.deleted) === trash) && <div className="library-empty"><h3>{trash ? 'O lixo está vazio.' : 'Um novo capítulo começa com o teu CV.'}</h3><p>{trash ? 'Os CVs que moveres para aqui poderão ser restaurados.' : 'Cria um CV ou copia o rascunho deste dispositivo para começar.'}</p></div>}
-      <section className="account-data"><h2>Conta e dados</h2><EmailVerification /><p>Controla os dados que guardaste no CVMais. Podes eliminar a conta e todos os seus CVs. Guarda primeiro as cópias de que precisas no editor de cada CV.</p><EraseData user={user} /></section>
+      <section className="account-data"><h2>Conta e dados</h2><EmailVerification />{operations && <p><a className="text-link" href="/operacoes">Estado das cópias de segurança →</a></p>}<p>Controla os dados que guardaste no CVMais. Podes eliminar a conta e todos os seus CVs. Guarda primeiro as cópias de que precisas no editor de cada CV.</p><EraseData user={user} /></section>
     </>}<p className="library-privacy"><a className="text-link" href="/privacidade">Onde são guardados os meus dados?</a> · O PDF é sempre criado no teu dispositivo.</p></main></>;
 }

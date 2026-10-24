@@ -23,7 +23,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/backup-db.mjs ./scripts/backup-db.mjs
-COPY --from=builder --chown=nextjs:nodejs /app/scripts/backup-core.mjs /app/scripts/backup-offsite.mjs /app/scripts/backup-worker.mjs /app/scripts/restore-backup.mjs /app/scripts/serve.mjs ./scripts/
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/backup-core.mjs /app/scripts/backup-offsite.mjs /app/scripts/backup-worker.mjs /app/scripts/backup-health.mjs /app/scripts/backup-alerts.mjs /app/scripts/backup-monitor.mjs /app/scripts/restore-backup.mjs /app/scripts/serve.mjs ./scripts/
 USER nextjs
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s CMD node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"

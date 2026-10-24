@@ -1,3 +1,4 @@
+import { backupHealth } from '../../../../../scripts/backup-health.mjs';
 import { NextRequest, after } from 'next/server';
 import { allowedOrigin } from '@/lib/server/origins';
 import { store, StoreError } from '@/lib/server/store';
@@ -69,7 +70,12 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
       if (path[0] === 'verify-email') { db.verifyEmail(input.token); return reply({ ok: true }); }
       return reply({ recovery: await db.resetByEmail(input.token, credential(input.password, 'password')) }, 200, sessionCookie('', true));
     }
-    if (path.length === 1 && path[0] === 'session' && method === 'GET') return reply({ user });
+    const operations = Boolean(user && process.env.OPERATIONS_EMAIL && user.email === process.env.OPERATIONS_EMAIL.trim().toLowerCase() && db.emailVerified(user.id));
+    if (path.length === 1 && path[0] === 'operations' && method === 'GET') {
+      if (!operations) throw new StoreError('Entra com a conta de operação e confirma o teu email para consultar este painel.', 403);
+      return reply(await backupHealth());
+    }
+    if (path.length === 1 && path[0] === 'session' && method === 'GET') return reply({ user, operations });
     if (path.length === 1 && path[0] === 'logout' && method === 'POST') { db.logout(token); return reply({ ok: true }, 200, sessionCookie('', true)); }
     if (path.length === 1 && ['register', 'login', 'recover'].includes(path[0]) && method === 'POST') {
       // Global and per-email limits are persisted, so restart cannot reset them.
