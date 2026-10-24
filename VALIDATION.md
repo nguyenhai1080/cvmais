@@ -72,3 +72,5 @@ DGC v11 / source f8c29ab: live backup probe HTTP 200 (coarse response only), DB 
 - Checklist increments and resets accurately. Email copy reports success in the page; browser tool clipboard is separate, so its returned clipboard content is not treated as verification.
 - HTTP checks: hub and four articles 200, correct canonical URLs, public indexing allowed, unknown slug 404, sitemap has six URLs including homepage, new hero and DB health pass.
 - No changes to PDF rendering, auth, storage schema, backup or email transport. Real-device acceptance remains pending.
+
+DGC v12 live: all content HTTP checks and original account/CV persistence pass. Primary/legacy authenticated save/read and portrait round-trip pass. Live selector confirms twelve industries and stage-specific preview; no owner CV was edited during UI validation. Proof: cvmais-hero-v12.png and cvmais-samples-v12.png in delivery outputs.
