@@ -62,3 +62,9 @@ Live https://cvmais.win: original refreshed hero and editor sample selector with
 Source 11a646b. Verified signed-in browser owner nguyenhai1080@gmail.com, existing DGC project cmvlbkah40mef0i5fzrjkbvcd; connector still GST, not used for mutations. Manual deployment completed at 100%, v13 online. No environment or SQL schema changes.
 
 Live checks pass: Portuguese interface and CV defaults, explicit English interface/CV selectors, matching document language and no horizontal overflow. Restored both choices to Portuguese after UI inspection. Original account/CV fixture remains unchanged after deployment. Primary/legacy authenticated save/read preserves both portrait and English CV language. DB health and backup health return 200; public guides/canonical/sitemap checks pass. Screenshot: cvmais-language-editor-v13.png.
+
+## DGC v14 — 25 October 2026
+
+Source 04cee9b. Existing DGC project cmvlbkah40mef0i5fzrjkbvcd, browser owner nguyenhai1080@gmail.com confirmed; connector still GST and not used to mutate. Manual redeploy completed, 100%, v14 online. No schema, environment, credential or PDF-renderer changes.
+
+Live Portuguese review dialog shows the selected Portuguese CV language and actionable fields; clicking the profile field link focuses cv-profile. No owner content was edited. Proof: cvmais-review-v14.png. DB and backup health HTTP 200; guide/canonical/sitemap checks, original persistence fixture and cross-origin portrait/English-language CV save/read tests all pass.
