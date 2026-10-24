@@ -30,6 +30,6 @@ Updated 24 October 2026. This records delivered work and the next launch priorit
 - No durable email outbox; failed delivery requires a new user request. No external backup failure alerts yet.
 - Backups expire after about 30 days; restoration must reconcile subsequent erasure requests.
 
-## Current release: backup operations
+## Delivered in DGC v11: backup operations
 
-Implemented: last successful upload and worker heartbeat, stale/failure classification, verified-operator detail page, public 200/503 probe, independent five-minute alert process, persistent incident deduplication and recovery notification. User approved messages to nguyenhai1080@gmail.com. Production activation and healthy-probe check follow local validation. Whole-host uptime monitoring remains external and unconfigured.
+Implemented: last successful upload and worker heartbeat, stale/failure classification, verified-operator detail page, public 200/503 probe, independent five-minute alert process, persistent incident deduplication and recovery notification. User approved messages to nguyenhai1080@gmail.com. Production active: healthy public probe, restricted detail endpoint, monitor startup log and original CV persistence verified. Whole-host uptime monitoring remains external and unconfigured.

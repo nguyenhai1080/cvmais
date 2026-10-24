@@ -8,8 +8,8 @@ The required owner is DGC, email `nguyenhai1080@gmail.com`. The exposed connecto
 - Legacy URL: https://cvmais-dgc.n1.tinhgon.xyz
 - Project ID: `cmvlbkah40mef0i5fzrjkbvcd`
 - Management page: https://v2.tinhgon.xyz/projects/cmvlbkah40mef0i5fzrjkbvcd
-- State: online, version 10, deployed and checked 24 October 2026.
-- Application commit: `482826c` (custom domain, draft migration and canonical metadata).
+- State: online, version 11, deployed and checked 24 October 2026.
+- Application commit: `f8c29ab` (backup operations and persistent incident/recovery alerts).
 - Source: `https://github.com/nguyenhai1080/cvmais.git`, default branch `main`, repository root.
 - Runtime: 0.3 CPU, 512 MB RAM, application port 3000.
 - Automatic GitHub deployment: off, as shown in the DGC project overview. Pushes do not deploy by themselves.
@@ -46,3 +46,5 @@ Historical record only. Do not redeploy this GST project. Use the active DGC pro
 Version 9: production health and all authentication pages return HTTP 200. `/api/storage/email-status` confirms enabled=true. The original version-2 account/CV fixture still passes fresh-login persistence checks. Live account UI offers email reset and recovery-code fallback. Resend reports the owner test email Delivered; the unused original key was revoked before replacement. Daily encrypted B2 backups remain enabled.
 
 Version 10: both custom domains pass HTTPS; www preserves path/query when redirecting to cvmais.win. APP_ORIGIN=https://cvmais.win, APP_ALLOWED_ORIGINS=https://cvmais-dgc.n1.tinhgon.xyz. Actual HTTP checks passed both-origin login, CV create/read/update across origins, original persistence fixture and safe removal of only the new fictional test CV. Canonical homepage, sitemap, robots and private-path noindex headers verified. Existing guest drafts stay on the old origin; no automatic redirect or upload moves them. The old origin displays migration guidance and guest JSON import supports review/undo. Mobile migration guide has no horizontal overflow at a 390px viewport (375px content width with scrollbar).
+
+Version 11: /api/health/backup returns HTTP 200 with only {status:ok,service:cvmais-backup}; this confirms a valid recent backup receipt and a current worker heartbeat. The application DB health remains 200, anonymous /api/storage/operations returns 403, and /operacoes has noindex headers. The original persistence fixture still passes. Runtime logs confirm the independent backup alert monitor started. DGC OPERATIONS_EMAIL=nguyenhai1080@gmail.com and BACKUP_ALERTS_ENABLED=true; no real incident was induced and no new alert delivery is claimed. The configured owner must sign in/register normally and verify their email to view the private operations page. Whole-host/container outage monitoring still requires an external service.
