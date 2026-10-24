@@ -1,0 +1,7 @@
+'use client';
+import { t as ui, useUILanguage } from '@/lib/ui-language';
+import Link from 'next/link';
+import Header from '@/components/header';
+import { guides } from '@/lib/guides';
+import { ArrowRight } from 'lucide-react';
+export default function Guides(){const {translate:ui}=useUILanguage();return <><Header/><main id="conteudo" className="guide-hub container"><span className="eyebrow">{ui("O TEU PRÓXIMO PASSO")}</span><h1>{ui("Prepara a candidatura.")}<br/><em>{ui("Mostra o teu percurso.")}</em></h1><p className="guide-lead">{ui("Do primeiro CV ao email de candidatura: orientações práticas para avançares com clareza, ao teu ritmo.")}</p><div className="guide-grid">{guides.map((g,i)=><Link className={`guide-card guide-tone-${i}`} href={`/orientacoes/${g.slug}`} key={g.slug}><div className="guide-art" aria-hidden="true"><span>0{i+1}</span><div className="guide-paper"><b/><i/><i/><i/><strong/><i/><i/></div></div><div className="guide-card-copy"><span className="eyebrow">{ui(g.category)}</span><h2>{ui(g.title)}</h2><p>{ui(g.description)}</p><span className="text-link">{ui("Ler orientação ")}<ArrowRight size={18}/></span></div></Link>)}</div><div className="guide-bottom"><p>{ui("Já sabes por onde começar? Escolhe um modelo e conta a tua história.")}</p><Link className="button" href="/criar-cv">{ui("Criar o meu CV ")}<ArrowRight size={18}/></Link></div><Link className="text-link" href="/">{ui("Voltar ao início")}</Link></main></>}

@@ -1,13 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import Header from '@/components/header';
 import { guides } from '@/lib/guides';
 import { SITE_ORIGIN } from '@/lib/site';
-import GuideTools from '@/components/guide-tools';
-import { ArrowRight } from 'lucide-react';
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams(){ return guides.map(({slug})=>({slug})); }
 export const dynamicParams = false;
 export async function generateMetadata({params}: Props): Promise<Metadata>{ const {slug}=await params; const g=guides.find(g=>g.slug===slug); if(!g)return {}; return {title: `${g.title} | CVMais`, description:g.description, alternates:{canonical:`${SITE_ORIGIN}/orientacoes/${slug}`},openGraph:{title:g.title,description:g.description,url:`${SITE_ORIGIN}/orientacoes/${slug}`,locale:'pt_MZ',type:'article'}}; }
-export default async function GuidePage({params}: Props){const {slug}=await params;const g=guides.find(g=>g.slug===slug);if(!g)notFound();return <><Header/><main id="conteudo" className="guide-page container"><nav className="guide-breadcrumb" aria-label="Localização"><Link href="/">Início</Link><span>/</span><Link href="/orientacoes">Orientações</Link></nav><header className="guide-heading"><span className="eyebrow">{g.category}</span><h1>{g.title}</h1><p className="guide-lead">{g.lead}</p></header><div className="guide-layout"><article className="guide-prose">{g.sections.map((s,i)=><section key={s.title}><span className="guide-step">0{i+1}</span><h2>{s.title}</h2><p>{s.text}</p>{s.example&&<div className="guide-example"><strong>{s.label}</strong><p>{s.example}</p></div>}</section>)}<GuideTools kind={slug}/><aside className="guide-source"><strong>Leitura complementar</strong><p><a href={g.source.url} target="_blank" rel="noopener noreferrer">{g.source.title} ↗</a></p><small>Recurso internacional. Segue sempre as instruções da organização a que te candidatas.</small></aside></article><aside className="guide-side"><span className="eyebrow">PASSA À PRÁTICA</span><h2>O teu percurso merece uma boa apresentação.</h2><p>Abre o editor e aplica estas ideias ao teu CV. Revê os teus dados antes de enviar.</p><Link className="button" href={`/criar-cv?modelo=${g.model}`}>Abrir o editor <ArrowRight size={17}/></Link><small>Se já tens um rascunho neste dispositivo, podes continuar a editá-lo.</small></aside></div><section className="guide-related"><span className="eyebrow">CONTINUA A PREPARAR-TE</span><h2>O próximo detalhe faz a diferença.</h2><div>{guides.filter(x=>x.slug!==slug).map(x=><Link href={`/orientacoes/${x.slug}`} key={x.slug}><h3>{x.title}</h3><p>{x.description}</p><ArrowRight size={20}/></Link>)}</div></section><Link className="text-link" href="/orientacoes">Ver todas as orientações</Link></main></>}
+import GuideArticle from '@/components/guide-article';
+export default async function GuidePage({params}: Props){const {slug}=await params;const g=guides.find(g=>g.slug===slug);if(!g)notFound();return <GuideArticle guide={g}/>;}

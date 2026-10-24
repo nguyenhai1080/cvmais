@@ -24,6 +24,9 @@ async function main() {
     await writeFile(path.join(directory, `${model}.pdf`), buffer);
     process.stdout.write(`${model}: ${buffer.length} bytes\n`);
   }
+  const english: CVData = {...sample,cvLanguage:'en',role:'Operations assistant',profile:'I support administrative operations, organise documents and follow up requests. I value clear communication and collaboration.',experiences:[{...sample.experiences[0],title:'Operations assistant',organisation:'Example organisation',period:'2022 - present',description:'Organised documents and supported daily activities.\nFollowed up supplier requests and prepared reports.'}],education:[{...sample.education[0],title:'Degree in Management',organisation:'Example institution',description:'Final project on small business management.'}],skills:'Microsoft Excel, Document organisation, Teamwork',languages:'Portuguese - fluent\nEnglish - intermediate'};
+  for(const model of models)await writeFile(path.join(directory, `en-${model}.pdf`),await renderToBuffer(<CVDocument data={{...english,model}}/>));
+  await writeFile(path.join(directory,'en-long.pdf'),await renderToBuffer(<CVDocument data={{...english,experiences:[{...english.experiences[0],description:('Organised documents, followed up requests and coordinated administrative activities with the team. ').repeat(45)+' FINAL ENGLISH CONTENT.'}]}}/>));
   const paragraph = 'Organização e coordenação de processos administrativos, comunicação com fornecedores e preparação de relatórios de gestão. Atenção ao detalhe, planeamento e acompanhamento das actividades da equipa. ';
   const long = { ...sample, model: 'classico' as const, experiences: [
     { ...sample.experiences[0], description: paragraph.repeat(17) + ' FIM DA PRIMEIRA EXPERIÊNCIA.' },

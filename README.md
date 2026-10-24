@@ -67,3 +67,5 @@ The daily worker records heartbeat/attempt/result separately from the last succe
 External setup, isolated Down/Up notification test and free-plan limits are recorded in EXTERNAL-MONITORING.md. The first owner account pilot and technical checks passed; real Android/iPhone and wider Mozambican usability feedback remain in PILOT.md.
 
 Career guidance and in-editor examples: see CONTENT.md. Public hub: /orientacoes. Samples are original pt-MZ text; preview, append or confirm replacement, then adapt to real experience.
+
+Languages: Portuguese is the default. Header switches the interface; editor independently selects Portuguese or English CV headings/PDF/examples. User-written content is preserved. See LANGUAGES.md.

@@ -45,3 +45,10 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 - In-editor sample library for twelve industry groups and three experience levels; optional grammatical form, preview, append, confirmed field replacement and guarded undo. No new personal-data fields or external content API.
 - Original homepage CV preview with close-up illustrative portrait and more complete two-column content.
 - See CONTENT.md and VALIDATION.md. Real-device pilot remains outstanding.
+
+## Portuguese and English, 25 October 2026
+
+- Portuguese default; optional English interface with browser preference and responsive header selector.
+- Independent per-CV Portuguese/English choice, language-specific headings in preview/PDF and suggested examples.
+- Choice persists in local drafts, JSON copies and account sync; legacy CVs default to Portuguese and old clients preserve existing choices.
+- User-written content is retained verbatim. See LANGUAGES.md for scope and delivery validation.

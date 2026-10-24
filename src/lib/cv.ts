@@ -5,6 +5,7 @@ export const modelLabels: Record<Model, string> = {
 };
 export type Entry = { id: string; title: string; organisation: string; period: string; description: string };
 export type CVData = {
+  cvLanguage: 'pt' | 'en';
   name: string; role: string; email: string; phone: string; city: string; website: string;
   profile: string; skills: string; languages: string; photo: string;
   experiences: Entry[]; education: Entry[]; model: Model;
@@ -12,7 +13,7 @@ export type CVData = {
 export const DRAFT_KEY = 'cvmais-draft-v2';
 export const MAX_ENTRIES = 8;
 export const blank: CVData = {
-  name: '', role: '', email: '', phone: '', city: '', website: '', profile: '', skills: '', languages: '',
+  cvLanguage:'pt', name: '', role: '', email: '', phone: '', city: '', website: '', profile: '', skills: '', languages: '',
   experiences: [], education: [], model: 'classico', photo: '',
 };
 export function emptyCV(): CVData { return { ...blank, experiences: [], education: [] }; }
@@ -40,6 +41,7 @@ export function normaliseCV(value: unknown): CVData {
   const result = emptyCV();
   if (!value || typeof value !== 'object' || Array.isArray(value)) return result;
   const saved = value as Record<string, unknown>;
+  result.cvLanguage = saved.cvLanguage === 'en' ? 'en' : 'pt';
   for (const key of ['name', 'role', 'email', 'phone', 'city', 'website', 'profile', 'skills', 'languages'] as const) {
     result[key] = text(saved[key], ['profile', 'skills', 'languages'].includes(key) ? 4000 : 150);
   }

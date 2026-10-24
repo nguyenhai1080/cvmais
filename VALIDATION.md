@@ -74,3 +74,11 @@ DGC v11 / source f8c29ab: live backup probe HTTP 200 (coarse response only), DB 
 - No changes to PDF rendering, auth, storage schema, backup or email transport. Real-device acceptance remains pending.
 
 DGC v12 live: all content HTTP checks and original account/CV persistence pass. Primary/legacy authenticated save/read and portrait round-trip pass. Live selector confirms twelve industries and stage-specific preview; no owner CV was edited during UI validation. Proof: cvmais-hero-v12.png and cvmais-samples-v12.png in delivery outputs.
+
+## Independent interface/CV languages, 25 October 2026
+
+31 automated tests pass, including Portuguese defaults and invalid/legacy migration, unchanged personal text, English sample coverage, field limits and navigation translation meanings. TypeScript and production build pass. Local storage/auth HTTP suite also verifies English CV language across sessions and preserves it when an older client omits it on update.
+
+Six short English PDF styles plus a two-page English document and all existing Portuguese short/long fixtures pass text/font/character-bound checks. English PDFs declare /Lang en, preserve accented names and contain the correct headings. Modern English and second long English pages rendered to PNG and visually inspected. Actual browser-downloaded PDF has English headings and metadata while retaining the original Portuguese user text, as intended.
+
+Local browser: UI English with CV Portuguese, then CV English with UI Portuguese; entered profile unchanged; CV choice and interface preference survive reload independently. English template category filtering works. Desktop 1440px, tablet 820px and mobile 390px inspected without horizontal overflow. Photo, account, guidance and privacy controls localised. Email example content is English in English UI; no actual email was sent. No console errors observed.

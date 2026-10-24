@@ -1,8 +1,9 @@
 'use client';
+import { t as ui, useUILanguage } from '@/lib/ui-language';
 import { useEffect, useRef, useState } from 'react';
 import { Camera, X } from 'lucide-react';
 import { normalisePhoto } from '@/lib/cv';
-export default function PhotoPicker({ photo, onChange }: { photo: string; onChange: (photo: string) => void }) {
+export default function PhotoPicker({ photo, onChange }: { photo: string; onChange: (photo: string) => void }) {const {translate:ui}=useUILanguage();
   const [source, setSource] = useState('');
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [error, setError] = useState('');
@@ -39,13 +40,13 @@ export default function PhotoPicker({ photo, onChange }: { photo: string; onChan
       onChange(result); setSource(''); setImage(null); setError('');
     } catch { setError('Não foi possível preparar a fotografia. Tenta outra imagem.'); }
   }
-  return <div className="photo-picker"><div className="photo-picker-heading"><div className="photo-avatar">{photo ? <img src={photo} alt="A tua fotografia no CV" /> : <Camera size={26} />}</div><div><h3>Fotografia (opcional)</h3><p>Adiciona um retrato e ajusta o enquadramento. O teu CV também funciona sem fotografia.</p><label className="photo-file-button">{photo ? 'Alterar fotografia' : 'Adicionar fotografia'}<input type="file" accept="image/jpeg,image/png,image/webp" aria-label="Escolher fotografia" onChange={e => {
+  return <div className="photo-picker"><div className="photo-picker-heading"><div className="photo-avatar">{photo ? <img src={photo} alt={ui("A tua fotografia no CV")} /> : <Camera size={26} />}</div><div><h3>{ui("Fotografia (opcional)")}</h3><p>{ui("Adiciona um retrato e ajusta o enquadramento. O teu CV também funciona sem fotografia.")}</p><label className="photo-file-button">{photo ? ui("Alterar fotografia") : ui("Adicionar fotografia")}<input type="file" accept="image/jpeg,image/png,image/webp" aria-label={ui("Escolher fotografia")} onChange={e => {
       const file = e.target.files?.[0]; e.target.value = ''; if (!file) return;
       setError(''); setImage(null); setSource('');
       if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 8_000_000) { setError('Escolhe JPG, PNG ou WebP até 8 MB.'); return; }
       setZoom(1.5); setX(50); setY(25); setSource(URL.createObjectURL(file));
-    }} /></label>{photo && <button className="photo-remove" type="button" onClick={() => onChange('')}><X size={13} /> Remover</button>}</div></div>
-    {source && <div className="photo-crop"><canvas ref={canvas} width={256} height={256} aria-label="Pré-visualização do enquadramento da fotografia" /><div><label>Aproximar<input type="range" min="1" max="3" step="0.05" value={zoom} onChange={e => setZoom(Number(e.target.value))} /></label><label>Posição horizontal<input type="range" min="0" max="100" value={x} onChange={e => setX(Number(e.target.value))} /></label><label>Posição vertical<input type="range" min="0" max="100" value={y} onChange={e => setY(Number(e.target.value))} /></label><div><button className="button small" type="button" disabled={!image} onClick={apply}>Usar fotografia</button><button className="text-link" type="button" onClick={() => { setSource(''); setImage(null); }}>Cancelar</button></div></div></div>}
-    {error && <p className="save-error" role="alert">{error}</p>}<small>A imagem é recortada e reduzida no teu dispositivo. Só a versão preparada é incluída no CV.</small>
+    }} /></label>{photo && <button className="photo-remove" type="button" onClick={() => onChange('')}><X size={13} />{ui(" Remover")}</button>}</div></div>
+    {source && <div className="photo-crop"><canvas ref={canvas} width={256} height={256} aria-label={ui("Pré-visualização do enquadramento da fotografia")} /><div><label>{ui("Aproximar")}<input type="range" min="1" max="3" step="0.05" value={zoom} onChange={e => setZoom(Number(e.target.value))} /></label><label>{ui("Posição horizontal")}<input type="range" min="0" max="100" value={x} onChange={e => setX(Number(e.target.value))} /></label><label>{ui("Posição vertical")}<input type="range" min="0" max="100" value={y} onChange={e => setY(Number(e.target.value))} /></label><div><button className="button small" type="button" disabled={!image} onClick={apply}>{ui("Usar fotografia")}</button><button className="text-link" type="button" onClick={() => { setSource(''); setImage(null); }}>{ui("Cancelar")}</button></div></div></div>}
+    {error && <p className="save-error" role="alert">{ui(error)}</p>}<small>{ui("A imagem é recortada e reduzida no teu dispositivo. Só a versão preparada é incluída no CV.")}</small>
   </div>;
 }

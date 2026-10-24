@@ -130,10 +130,10 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
         if (!Number.isSafeInteger(input.revision) || Number(input.revision) < 1) throw new StoreError('Versão do CV inválida.');
         if (typeof input.deleted !== 'boolean' || typeof input.data !== 'object' || !input.data || Array.isArray(input.data)) throw new StoreError('Conteúdo do CV inválido.');
         const current = db.cv(user.id, path[1]);
-        // Older open editor tabs do not know the optional photo field. Preserve it
-        // unless the client explicitly submits a replacement or an empty string.
+        // Older editor tabs may omit photo or CV language. Preserve stored values
+        // unless the client explicitly submits the field.
         const value = input.data as Record<string, unknown>;
-        const data = normaliseCV({ ...value, photo: Object.hasOwn(value, 'photo') ? value.photo : current.data.photo });
+        const data = normaliseCV({ ...value, cvLanguage: Object.hasOwn(value, 'cvLanguage') ? value.cvLanguage : current.data.cvLanguage, photo: Object.hasOwn(value, 'photo') ? value.photo : current.data.photo });
         return reply(db.update(user.id, path[1], Number(input.revision), title(input.title), data, input.deleted));
       }
     }
