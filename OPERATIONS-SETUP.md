@@ -1,19 +1,19 @@
 # Services to configure before a public launch
 
-Status: application account/CV erasure is implemented. Email delivery/verification and scheduled encrypted off-server backups are not active. No Resend or Backblaze credentials have been supplied. Do not claim those integrations are ready merely because accounts or keys exist.
+Status: application account/CV erasure is implemented. Email delivery/verification and scheduled encrypted off-server backups are not active. The approved B2 bucket-scoped preset key and encryption key are saved in DGC; no Resend sending key is configured. Do not claim those integrations are ready merely because accounts or keys exist.
 
 ## Actual service setup, 24 October 2026
 
 - Owner has registered and signed in to both services.
-- Resend domain: `soltech.co.mz`, ID `d6b90bcc-5764-42bf-90e0-9262867d646d`. Added for sending only; DNS verification is pending. Receiving remains off.
-- Authoritative DNS: `dns1.registar.co.mz`, `dns2.registar.co.mz`. Registrar/DNS-panel access is still needed to add the records below.
-- B2 bucket: `cvmais-dgc-backups`, ID `30b5e9b191056cc3a8160910`, Private, SSE-B2 encryption enabled, endpoint `s3.eu-central-003.backblazeb2.com`, region `eu-central-003`. No files have been uploaded. Current bucket lifecycle is Keep all versions; bounded retention must be configured before scheduled production use.
+- Resend domain: `cvmais.win`, ID `cc34e471-6454-4adc-972d-324451aa2e46`. DNS verification is pending; receiving remains off. The unused `soltech.co.mz` entry was removed after explicit owner confirmation. The future `cvmais.co.mz` domain is not configured.
+- Authoritative DNS for cvmais.win: `doug.ns.cloudflare.com`, `tegan.ns.cloudflare.com`, confirmed through both public resolvers 1.1.1.1 and 8.8.8.8. Cloudflare dashboard sign-in is still needed. The local resolver initially returned a stale NXDOMAIN result.
+- B2 bucket: `cvmais-dgc-backups`, ID `30b5e9b191056cc3a8160910`, Private, SSE-B2 encryption enabled, endpoint `s3.eu-central-003.backblazeb2.com`, region `eu-central-003`. Lifecycle now applies to prefix `cvmais/`: hide after 29 days, delete one day after hiding (approximately 30 days total, subject to the provider processing schedule). A real upload/download/restore check remains pending activation.
 
 Required Resend DNS records shown by the live console (public values, not secrets):
 
-| Type | Host within soltech.co.mz | Value |
+| Type | Host within cvmais.win | Value |
 | --- | --- | --- |
-| TXT | `resend._domainkey` | `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC43PK52NBQ3c8VlAFWM0vDTKNw+1TRBqx/3h1cwJ7gYNOw4rkRCFCcvbXa4BAmMTYUGLmeTuPxz9wDLi0KQ4zlMF8DCm0UktaZq7L3dVblrJa4vit05ETUvB1HcK1sIYf6HJiOPMIVm4+rTWJMJhM3y0DY8q7FjP2uBysLNRIDXwIDAQAB` |
+| TXT | `resend._domainkey` | `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDPs573xPYLhSdFei6R/rSP7cyu3dkHMvdVb9/b5fczw5ZF6d1JTk3szpx7tqAtLDBu4nFIKmk93n5LaD7ZzXNtpWEu56llBovbe8r4lYnIcTAfkFB8Skfael6zU2aaOXNwAsDrButtmq0ldOpkJ6Yqb5+NU+PvPI9tmAV4rmrc5QIDAQAB` |
 | CNAME | `rsend` | `rsend-apne1.forge.rmta.net` |
 | CNAME | `send` | `send.forge.rmta.net` |
 
@@ -23,7 +23,7 @@ Use automatic/default TTL. Inspect any existing records before changing them. Do
 
 `scripts/backup-offsite.mjs` makes a consistent SQLite snapshot, checks integrity, encrypts with AES-256-GCM before uploading through the B2 Native API and verifies the upload receipt. Plain temporary snapshots and local upload artifacts are removed after each attempt. An application key restricted to this exact bucket is required; no master account key is accepted. Credentials and CV contents are never logged.
 
-Docker starts the optional backup worker through `scripts/serve.mjs`. Only `BACKUP_ENABLED=true` plus all required values enables it. It starts after one minute, checks hourly, uploads once per UTC day, persists successful status in `/data/backups/offsite-status.json`, and retries failures hourly. Failure messages go to runtime logs; external alert delivery is not implemented. There has been no live upload or scheduled-backup activation yet.
+Docker starts the optional backup worker through `scripts/serve.mjs`. Only `BACKUP_ENABLED=true` plus all required values enables it. It starts after one minute, checks hourly, uploads once per UTC day, persists successful status in `/data/backups/offsite-status.json`, and retries failures hourly. Failure messages go to runtime logs; external alert delivery is not implemented. The owner-approved configuration is saved with BACKUP_ENABLED=true and takes effect on the next deployment. Do not claim live backup success until a remote file and isolated restore have been verified.
 
 Required private server settings: `B2_KEY_ID`, `B2_APPLICATION_KEY`, `BACKUP_ENCRYPTION_KEY` (64 hex characters / 32 random bytes). Non-secret setting: `B2_BUCKET_ID=30b5e9b191056cc3a8160910`. Keep an owner-controlled copy of the encryption key separately before enabling backups. Use a bucket-scoped write-only key, optionally restricted to prefix `cvmais/`. Set a deliberate B2 lifecycle policy before enabling scheduling; the worker does not delete remote objects itself.
 
@@ -49,3 +49,5 @@ Current official references (checked 24 October 2026): https://resend.com/pricin
 Current manual command: `node scripts/backup-db.mjs` with DATABASE_PATH and optional BACKUP_DIR. The command checks snapshot integrity; it does not schedule, encrypt or upload anything.
 
 Official references: https://www.backblaze.com/docs/cloud-storage-create-and-manage-buckets, https://www.backblaze.com/docs/cloud-storage-application-keys, https://www.backblaze.com/cloud-storage/pricing.
+
+The B2 web-console preset called Write Only also includes deleteFiles and several bucket-write capabilities. This was disclosed to the owner, who explicitly approved using that preset within the single bucket and cvmais/ prefix. Do not describe this key as having only writeFiles. The uploader itself never deletes remote files or changes bucket settings. An owner recovery copy of the encryption key is kept only in ignored local work storage, never in Git or source archives.
