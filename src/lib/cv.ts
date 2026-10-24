@@ -1,7 +1,7 @@
-export const models = ['classico', 'moderno', 'minimalista', 'criativo', 'executivo'] as const;
+export const models = ['classico', 'moderno', 'minimalista', 'criativo', 'executivo', 'primeiro'] as const;
 export type Model = (typeof models)[number];
 export const modelLabels: Record<Model, string> = {
-  classico: 'Clássico', moderno: 'Moderno', minimalista: 'Minimalista', criativo: 'Criativo', executivo: 'Executivo',
+  classico: 'Maputo · Clássico', moderno: 'Índico · Moderno', minimalista: 'Essencial · Minimalista', criativo: 'Coral · Criativo', executivo: 'Prestígio · Executivo', primeiro: 'Horizonte · Primeiro emprego',
 };
 export type Entry = { id: string; title: string; organisation: string; period: string; description: string };
 export type CVData = {
@@ -62,4 +62,12 @@ export function pdfFilename(name: string): string {
 }
 export function contactLine(data: CVData): string {
   return [data.city, data.phone, data.email, data.website].map(v => v.trim()).filter(Boolean).join(' · ');
+}
+/** Keep compact sidebars on the first page; long content reflows into the main column. */
+export function usesSidebar(data: CVData): boolean {
+  if (!['classico', 'moderno', 'criativo'].includes(data.model)) return false;
+  const lines = [data.city, data.phone, data.email, data.website, data.skills, data.languages]
+    .filter(Boolean).flatMap(value => value.split('\n'))
+    .reduce((sum, line) => sum + Math.max(1, Math.ceil(line.length / 20)), 0);
+  return lines <= 32;
 }

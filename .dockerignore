@@ -5,3 +5,6 @@ node_modules
 .env*
 *.tsbuildinfo
 work
+
+data/
+*.sqlite*

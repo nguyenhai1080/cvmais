@@ -30,6 +30,10 @@ async function main() {
     { ...sample.experiences[0], id: 'work-2', title: 'Estágio profissional', period: '2020 - 2022', description: paragraph.repeat(17) + ' FIM DA SEGUNDA EXPERIÊNCIA.' },
   ] };
   await writeFile(path.join(directory, 'long-cv.pdf'), await renderToBuffer(<CVDocument data={long} />));
+  for (const model of models) {
+    await writeFile(path.join(directory, `long-${model}.pdf`), await renderToBuffer(<CVDocument data={{ ...long, model }} />));
+  }
+  await writeFile(path.join(directory, 'long-support.pdf'), await renderToBuffer(<CVDocument data={{ ...sample, skills: Array.from({ length: 60 }, (_, i) => `Competência ${i + 1} com descrição de demonstração.`).join('\n') + '\nFIM DAS COMPETÊNCIAS.' }} />));
   await writeFile(path.join(directory, 'sample.json'), JSON.stringify(sample, null, 2));
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

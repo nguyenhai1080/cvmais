@@ -1,57 +1,47 @@
 # CVMais
 
-Responsive Next.js App Router UI for `cvmais.co.mz`, written in Portuguese for Mozambique (`pt-MZ`).
+Next.js application in Portuguese for Mozambique. Canonical source: `D:\Projects\CVMais`.
+Live DGC site: https://cvmais-dgc.n1.tinhgon.xyz. Source: https://github.com/nguyenhai1080/cvmais.git.
 
-Live DGC deployment: https://cvmais-dgc.n1.tinhgon.xyz. Hosting/account details are in `DEPLOYMENT.md`.
+## Development
 
-## Run locally
+Node.js 22.16 or later. Run `npm ci`, then `npm run dev`.
+Development uses ignored `data/cvmais.sqlite`. Production requires DATABASE_PATH and APP_ORIGIN; see `.env.example`.
+Checks: `npm test`, `npm run typecheck`, `npm run build`.
 
-Requires Node.js 22 or later.
+## Features
 
-```sh
-npm ci
-npm run dev
-```
+- Responsive landing page based on the approved mockup, illustrative candidate photography, benefits, community placeholder and practical guidance.
+- Six original templates: Maputo, Índico, Essencial, Coral, Prestígio and Horizonte. Gallery previews come from actual PDFs. Filters and enlarged previews help selection.
+- Structured editor: contacts, profile, repeatable experience/education, reorder, undo, skills, languages, live preview, JSON backup and direct browser PDF download.
+- Guests keep one localStorage draft in the current browser. No automatic upload occurs on sign-in. Earlier local/session drafts migrate when available.
+- `/conta`: register, sign in and reset access with a one-time recovery code. Email verification/delivery is not configured. Users must save the displayed recovery code themselves.
+- `/meus-cvs`: private account documents, create, explicitly copy a guest draft, JSON import, duplicate, rename, trash and restore. Limit: 100 documents including trash.
+- Account CVs autosave to the server database and can be opened on another signed-in device. Revision checks prevent silent overwrites. Pending changes attempt a local backup scoped to the user and document, recoverable explicitly.
+- `/privacidade`: actual storage, pending local copies, recovery and retention. Permanent document/account erasure is not implemented; trash is reversible.
+- `/api/health` checks database availability without exposing records.
+- All sample CVs are fictional. No invented customers, counts or testimonials.
 
-Visit http://localhost:3000. Checks: `npm test`, `npm run typecheck` and `npm run build`.
+## Production storage and access
 
-## Included
+Set DATABASE_PATH to `/data/cvmais.sqlite`, declare `/data` as persistent storage in Vibehost, and set APP_ORIGIN to the exact HTTPS application origin. Update APP_ORIGIN when connecting a custom domain. Never put the database in public files or Git.
 
-- Homepage: candidate image, HTML CV preview, responsive menu, CTAs, four benefits, five templates, community placeholder, practical guidance and footer, following the user-supplied mockup.
-- `/criar-cv`: structured local CV editor with contact details, repeatable experience/education entries, ordering, undo removal, five styles, live preview and direct PDF download.
-- Drafts are saved automatically to this browser's local storage; the original session-only draft is migrated when available.
-- PDF generation is loaded on demand and runs in the visitor's browser. Noto Sans regular/bold fonts are served locally and embedded in the PDF; Portuguese accents and selectable text are preserved.
-- `/api/health`: JSON health endpoint.
-- No invented user counts, endorsements, testimonials or customer claims. The candidate is an AI-generated illustration. Example CV content is labelled fictional.
+SQLite uses WAL and foreign keys on the DGC server. Passwords use salted scrypt. Session/recovery tokens are stored hashed. Session cookies are HttpOnly, SameSite=Lax, Secure in production and expire in 30 days. Writes require the configured Origin. Queries enforce ownership; persisted limits protect authentication and saves.
 
-## Prepare for Vibehost
+CV text is not end-to-end encrypted. Administrators with server access can access it for maintenance. Unsynced local copies can remain after sign-out; shared-device users should use separate browser profiles. PDFs and downloaded JSON files stay on users' devices.
 
-The app is prepared for container deployment using Next.js standalone output. The Docker image runs as an unprivileged user on `0.0.0.0:3000` and includes `/api/health` monitoring.
+This deployment uses one application container. Do not scale to independent SQLite replicas; adopt a suitable shared database service before horizontal scaling.
 
-```sh
-docker build -t cvmais .
-docker run --rm -p 3000:3000 cvmais
-```
+Docker builds Next.js standalone output, runs as UID 1001 and serves port 3000. Mount a named volume at `/data` and supply APP_ORIGIN. Production cookies require HTTPS.
 
-Repository: `https://github.com/nguyenhai1080/cvmais.git`, branch `main`, repository root. The Dockerfile is the production entry point for Vibehost. The required hosting account is DGC (`nguyenhai1080@gmail.com`); verify the connected account before deployment. The earlier GST deployment is not the intended destination. No application secrets or persistent volumes are required for this version. The intended custom domain is `cvmais.co.mz`.
+Run `node scripts/backup-db.mjs` in the container to make a consistent SQLite backup under `/data/backups` (or BACKUP_DIR). Backups contain private CVs and credential hashes: control access and keep an encrypted off-server copy. Scheduled off-server backups are not configured. Persistent storage protects redeploys; it does not replace backups.
 
-## Scope and integration points
+## PDF and API validation
 
-- Community is explicitly shown as being in preparation; there is no fabricated external group or registration.
-- The editor does not include authentication, server-side CV storage, payment or a job board. PDF rendering is entirely local; CV data is not sent to a PDF API.
-- Drafts remain on the current device/browser until its data is cleared. There is no cross-device persistence. The editor reports browser storage failures and can still export a PDF.
-- Long CVs wrap across A4 pages automatically. Review the downloaded file before sending it.
-- Empty sections are omitted from the PDF. Add a name and at least one content section to enable download. Each experience/education section supports up to eight entries.
-- Draft restoration validates supported fields and lengths; a damaged draft does not prevent selecting a gallery model.
-- Google Fonts is a cosmetic external dependency with system font fallbacks. The candidate image is served locally.
-- `metadataBase` is the intended domain, not a claim that the domain is deployed.
+- `npm run qa:pdf`: six short A4 samples, long CVs for all layouts and a long-skills fixture under ignored `work/pdf-qa/`.
+- `npx tsx scripts/render-template-previews.tsx`: six fictional PDFs under ignored `work/template-pdfs/`.
+- `scripts/check-pdfs.py`: Python with pypdf/pdfplumber verifies accents, content, embedded fonts and page bounds. Render with Poppler for visual review.
+- Rasterise the template PDFs with Poppler into `public/template-previews/{model}.png` after changing the PDF designs.
+- `node scripts/check-storage-api.mjs`: HTTP integration tests against TEST_ORIGIN (default localhost:3001). Creates isolated synthetic accounts; use a test database. Covers CSRF, sessions, ownership, conflicts, second-device sessions, trash, recovery and logout.
 
-## PDF QA
-
-Run `npm run qa:pdf` to render five fictional one-page samples and a three-page long-content fixture under ignored `work/pdf-qa/`. Verify extracted text, embedded fonts and page bounds, then render pages with Poppler for visual review. These fixtures are developer checks and are not displayed as customer CVs.
-
-Noto Sans font files and their OFL licence are in `public/fonts/`.
-
-## Design handoff
-
-See `DESIGN.md` for tokens, image provenance and reference limitations.
+Noto Sans and Source Serif fonts and open font licences are under `public/fonts/`. Research sources and rationale are in TEMPLATE-RESEARCH.md. Deployment details are in DEPLOYMENT.md.

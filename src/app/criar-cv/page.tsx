@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Download, Save, ArrowLeft, Plus, Trash2, ArrowUp, ArrowDown, ShieldCheck, Eye, PenLine } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/header';
+import { useCVStorage } from '@/lib/use-cv-storage';
 import EditorPreview from '@/components/editor-preview';
-import { DRAFT_KEY, MAX_ENTRIES, emptyCV, isModel, readDraft, normaliseCV, canExport, pdfFilename,
+import { MAX_ENTRIES, isModel, normaliseCV, canExport, pdfFilename,
   models, modelLabels, type CVData, type Entry } from '@/lib/cv';
 
 type EntryKind = 'experiences' | 'education';
@@ -19,68 +20,12 @@ const fields = [
 ] as const;
 
 export default function Editor() {
-  const [data, setData] = useState<CVData>(emptyCV);
-  const [ready, setReady] = useState(false);
-  const [status, setStatus] = useState('');
-  const [saveError, setSaveError] = useState(false);
+  const { data, ready, status, saveError, cloud, pending, restorePending, change: storeChange, save } = useCVStorage();
   const [pdfError, setPdfError] = useState('');
   const [exporting, setExporting] = useState(false);
   const [view, setView] = useState<'edit' | 'preview'>('edit');
   const [removed, setRemoved] = useState<{ kind: EntryKind; entry: Entry; index: number } | null>(null);
-  const dirty = useRef(false);
-  const latest = useRef(data);
-
-  useEffect(() => {
-    let restored = emptyCV();
-    let saved: string | null = null;
-    try { saved = localStorage.getItem(DRAFT_KEY); } catch { /* Editing and export remain available. */ }
-    if (!saved) { try { saved = sessionStorage.getItem('cvmais-draft'); } catch { /* Old sessions are optional. */ } }
-    if (saved) restored = readDraft(saved);
-    const selected = new URLSearchParams(window.location.search).get('modelo');
-    if (isModel(selected)) restored.model = selected;
-    latest.current = restored;
-    setData(restored);
-    setReady(true);
-    setStatus(saved ? 'Rascunho recuperado. As alterações são guardadas neste dispositivo.' : 'O teu rascunho será guardado neste dispositivo.');
-  }, []);
-
-  useEffect(() => {
-    if (!ready || !dirty.current) return;
-    const timer = setTimeout(() => {
-      try {
-        localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
-        dirty.current = false;
-        setSaveError(false);
-        setStatus('Rascunho guardado neste dispositivo.');
-      } catch {
-        setSaveError(true);
-        setStatus('Não foi possível guardar neste navegador. Mantém esta página aberta ou descarrega o PDF.');
-      }
-    }, 700);
-    return () => clearTimeout(timer);
-  }, [data, ready]);
-
-  useEffect(() => {
-    const flush = () => {
-      if (!dirty.current) return;
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(latest.current));
-      dirty.current = false;
-    };
-    const warn = (event: BeforeUnloadEvent) => { try { flush(); } catch { event.preventDefault(); } };
-    window.addEventListener('beforeunload', warn);
-    return () => {
-      window.removeEventListener('beforeunload', warn);
-      try { flush(); } catch { /* Browser storage failure was already reported in the editor. */ }
-    };
-  }, []);
-
-  function change(next: CVData) {
-    latest.current = next;
-    dirty.current = true;
-    setData(next);
-    setStatus('A guardar alterações…');
-    setPdfError('');
-  }
+  function change(next: CVData) { storeChange(next); setPdfError(''); }
   function update(key: Exclude<keyof CVData, 'experiences' | 'education'>, value: string) {
     if (key === 'model') {
       if (isModel(value)) {
@@ -91,17 +36,6 @@ export default function Editor() {
       }
     }
     else change({ ...data, [key]: value });
-  }
-  function save() {
-    try {
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
-      dirty.current = false;
-      setSaveError(false);
-      setStatus('Rascunho guardado neste dispositivo.');
-    } catch {
-      setSaveError(true);
-      setStatus('Não foi possível guardar neste navegador. Podes descarregar o PDF.');
-    }
   }
   function addEntry(kind: EntryKind) {
     if (data[kind].length >= MAX_ENTRIES) return;
@@ -173,7 +107,13 @@ export default function Editor() {
           <button className="button" disabled={!ready || !canExport(data) || exporting} onClick={exportPDF}><Download size={18} /> {exporting ? 'A preparar PDF…' : 'Descarregar PDF'}</button></div>
       </div>
       <div className="editor-feedback"><p className={saveError ? 'saved-status save-error' : 'saved-status'} role="status">{status}</p>
-        <span><ShieldCheck size={14} /> Os teus dados ficam no teu dispositivo.</span></div>
+        <span><ShieldCheck size={14} /> {cloud ? 'CV privado na tua conta.' : 'Os teus dados ficam no teu dispositivo.'}</span></div>
+      {!ready && saveError && <p><a className="text-link" href="/conta">Entrar na conta</a> · <a className="text-link" href="/meus-cvs">Os meus CVs</a></p>}
+      {pending && <div className="undo-entry"><p>Encontrámos alterações neste dispositivo que podem não ter sido sincronizadas. A versão da conta está aberta.</p><button onClick={restorePending}>Recuperar alterações deste dispositivo</button></div>}
+      <div className="storage-actions"><a className="text-link" href="/meus-cvs">{cloud ? '← Os meus CVs' : 'Guardar numa conta / Os meus CVs →'}</a><button type="button" className="text-link" disabled={!ready} onClick={() => {
+        const url = URL.createObjectURL(new Blob([JSON.stringify({ format: 'cvmais-backup-v1', data }, null, 2)], { type: 'application/json' }));
+        const a = document.createElement('a'); a.href = url; a.download = 'cvmais-copia-seguranca.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }}>Descarregar cópia de segurança</button></div>
       {pdfError && <p className="pdf-error" role="alert">{pdfError}</p>}
       {exporting && <p role="status" className="export-status">A preparar o teu PDF com texto seleccionável e fontes incluídas…</p>}
       {removed && <div className="undo-entry" role="status">Item removido. <button type="button" disabled={data[removed.kind].length >= MAX_ENTRIES} onClick={() => {
@@ -200,7 +140,7 @@ export default function Editor() {
               <label htmlFor="cv-languages">Línguas<textarea id="cv-languages" value={data.languages} maxLength={4000} onChange={e => update('languages', e.target.value)} placeholder="Ex.: Português - fluente; Inglês - intermédio; Changana - língua materna" /></label>
             </section>
             <div className="editor-form-bottom"><button className="button" type="submit"><Save size={17} /> Guardar rascunho</button>
-              <p>Guardado apenas neste navegador. O PDF também é criado no teu dispositivo. Limpar os dados do navegador pode apagar o rascunho.</p></div>
+              <p>{cloud ? 'As alterações são guardadas na tua conta. O PDF é criado no teu dispositivo.' : 'Guardado apenas neste navegador. Limpar os dados do navegador pode apagar o rascunho. Cria uma conta para sincronizar.'}</p></div>
           </fieldset>
         </form>
         <div className="editor-preview"><div className="preview-controls"><div><span className="eyebrow">O TEU CV</span><h2>Escolhe o teu estilo.</h2></div>

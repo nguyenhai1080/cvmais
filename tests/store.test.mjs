@@ -1,0 +1,50 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { Store, digest } from '../src/lib/server/store.ts';
+
+test('accounts, credentials, ownership, conflict detection, trash and recovery persist correctly', async () => {
+  const directory = mkdtempSync(join(tmpdir(), 'cvmais-test-'));
+  const path = join(directory, 'test.sqlite');
+  let db = new Store(path);
+  try {
+    const a = await db.register('a@example.test', 'a-long-test-password');
+    const b = await db.register('b@example.test', 'b-long-test-password');
+    assert.equal((await db.login('a@example.test', 'a-long-test-password')).id, a.user.id);
+    await assert.rejects(db.login('a@example.test', 'wrong-password'), { status: 401 });
+    await assert.rejects(db.login('unknown@example.test', 'wrong-password'), { status: 401 });
+    const raw = db.db.prepare('SELECT password,recovery FROM users WHERE id=?').get(a.user.id);
+    assert.notEqual(raw.password, 'a-long-test-password');
+    assert.equal(raw.recovery, digest(a.recovery));
+    const token = db.session(a.user.id);
+    assert.equal(db.user(token).id, a.user.id);
+    assert.equal(db.db.prepare('SELECT token FROM sessions').get().token, digest(token));
+    const cv = db.create(a.user.id, 'CV Administração', { name: 'José', profile: 'Organização e gestão' });
+    assert.equal(db.list(b.user.id).length, 0);
+    assert.throws(() => db.cv(b.user.id, cv.id), { status: 404 });
+    assert.throws(() => db.update(b.user.id, cv.id, 1, 'attack', {}, false), { status: 404 });
+    const edited = db.update(a.user.id, cv.id, 1, 'CV revisto', { name: 'José', profile: 'Revisto' }, false);
+    assert.equal(edited.revision, 2);
+    assert.throws(() => db.update(a.user.id, cv.id, 1, 'stale', {}, false), { status: 409 });
+    const trashed = db.update(a.user.id, cv.id, 2, edited.title, edited.data, true);
+    assert.ok(trashed.deleted);
+    const restored = db.update(a.user.id, cv.id, 3, edited.title, edited.data, false);
+    assert.equal(restored.deleted, null);
+    db.db.close(); db = new Store(path);
+    assert.equal(db.cv(a.user.id, cv.id).data.profile, 'Revisto');
+    assert.equal(db.user(token).id, a.user.id);
+    await assert.rejects(db.recover('a@example.test', 'wrong-code', 'new-long-test-password'), { status: 401 });
+    const nextRecovery = await db.recover('a@example.test', a.recovery, 'new-long-test-password');
+    assert.equal(db.user(token), null);
+    await assert.rejects(db.login('a@example.test', 'a-long-test-password'), { status: 401 });
+    await assert.rejects(db.recover('a@example.test', a.recovery, 'other-long-password'), { status: 401 });
+    assert.notEqual(nextRecovery, a.recovery);
+    assert.equal((await db.login('a@example.test', 'new-long-test-password')).id, a.user.id);
+    const newToken = db.session(a.user.id); db.logout(newToken); assert.equal(db.user(newToken), null);
+    db.limit('test-limit', 1); assert.throws(() => db.limit('test-limit', 1), { status: 429 });
+    db.db.close(); db = new Store(path);
+    assert.throws(() => db.limit('test-limit', 1), { status: 429 });
+  } finally { db.db.close(); rmSync(directory, { recursive: true, force: true }); }
+});

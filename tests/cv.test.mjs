@@ -1,6 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { blank, emptyCV, isModel, readDraft, canExport, pdfFilename, MAX_ENTRIES } from '../src/lib/cv.ts';
+import { blank, emptyCV, isModel, readDraft, canExport, pdfFilename, MAX_ENTRIES, usesSidebar } from '../src/lib/cv.ts';
+
+test('long text and many line breaks cannot overflow a fixed sidebar', () => {
+  assert.equal(usesSidebar({ ...emptyCV(), model: 'classico', skills: 'Organização\nExcel' }), true);
+  assert.equal(usesSidebar({ ...emptyCV(), model: 'classico', skills: '\n'.repeat(50) }), false);
+  assert.equal(usesSidebar({ ...emptyCV(), model: 'criativo', languages: 'x'.repeat(4000) }), false);
+  assert.equal(usesSidebar({ ...emptyCV(), model: 'minimalista' }), false);
+});
 
 test('invalid saved data safely starts a blank draft', () => {
   for (const raw of [null, '', '{bad json', 'null', '123', '[]', '"text"']) assert.deepEqual(readDraft(raw), blank);
