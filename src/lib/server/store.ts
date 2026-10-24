@@ -113,7 +113,8 @@ export class Store {
     if (!cv.deleted) throw new StoreError('Move primeiro este CV para o lixo.', 409);
     if (cv.revision !== revision) throw new StoreError('Este CV foi alterado. Actualiza a lista antes de eliminar.', 409);
     if (confirmation !== cv.title) throw new StoreError('Escreve o nome completo do CV para confirmar.');
-    this.db.prepare('DELETE FROM cvs WHERE id=? AND user_id=? AND revision=? AND deleted IS NOT NULL').run(id, user, revision);
+    const result = this.db.prepare('DELETE FROM cvs WHERE id=? AND user_id=? AND revision=? AND deleted IS NOT NULL').run(id, user, revision);
+    if (!result.changes) throw new StoreError('Este CV foi alterado. Actualiza a lista antes de eliminar.', 409);
   }
   eraseAccount(user: string) {
     // Foreign keys remove private CVs and every session atomically with the user.
