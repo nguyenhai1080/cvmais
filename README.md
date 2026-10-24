@@ -38,6 +38,8 @@ Run `node scripts/backup-db.mjs` in the container to make a consistent SQLite ba
 
 The backup command verifies SQLite integrity before reporting success and restricts snapshot file permissions on Linux. Registration guidance for the proposed external email and backup services is in OPERATIONS-SETUP.md. They are not connected yet. Earlier backups may contain erased records; restoration must reconcile subsequent erasure requests before reopening the service.
 
+An optional B2 uploader and daily scheduler are prepared but disabled. They encrypt snapshots with AES-256-GCM before upload and require a bucket-scoped key and a separate encryption key. Offline tests cover restored SQLite content, corruption/wrong-key rejection, no overwrite, trusted service endpoints, upload receipts, restart-safe daily status and retry after failure. No real off-server backup has been verified yet. The DGC B2 bucket is private and the Resend sender domain `soltech.co.mz` awaits DNS verification; see OPERATIONS-SETUP.md for exact setup state.
+
 ## PDF and API validation
 
 - `npm run qa:pdf`: six short A4 samples, long CVs for all layouts and a long-skills fixture under ignored `work/pdf-qa/`.
