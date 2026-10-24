@@ -8,6 +8,8 @@ import { useCVStorage } from '@/lib/use-cv-storage';
 import EditorPreview from '@/components/editor-preview';
 import GuestBackupImport from '@/components/guest-backup-import';
 import PhotoPicker from '@/components/photo-picker';
+import ContentSamples from '@/components/content-samples';
+import type { SampleFilters, SampleKind } from '@/lib/content-samples';
 import { MAX_ENTRIES, isModel, normaliseCV, canExport, pdfFilename,
   models, modelLabels, type CVData, type Entry } from '@/lib/cv';
 
@@ -23,6 +25,7 @@ const fields = [
 
 export default function Editor() {
   const { data, ready, status, saveError, cloud, pending, restorePending, change: storeChange, save } = useCVStorage();
+  const [sampleFilters, setSampleFilters] = useState<SampleFilters>({sector:'administracao',level:'first',voice:'neutral'});
   const [pdfError, setPdfError] = useState('');
   const [exporting, setExporting] = useState(false);
   const [view, setView] = useState<'edit' | 'preview'>('edit');
@@ -78,6 +81,8 @@ export default function Editor() {
     } finally { setExporting(false); }
   }
 
+  function samples(kind: SampleKind, value: string, onApply: (value:string)=>void, key?: string) { return <ContentSamples key={key} kind={kind} value={value} onApply={onApply} filters={sampleFilters} onFilters={setSampleFilters}/>; }
+
   function entriesSection(kind: EntryKind) {
     const work = kind === 'experiences';
     const noun = work ? 'experiência' : 'formação';
@@ -95,6 +100,7 @@ export default function Editor() {
         <label>{work ? 'Organização' : 'Instituição'}<input value={entry.organisation} maxLength={150} onChange={e => editEntry(kind, entry.id, 'organisation', e.target.value)} placeholder={work ? 'Nome da organização' : 'Nome da instituição'} /></label>
         <label>Período<input value={entry.period} maxLength={100} onChange={e => editEntry(kind, entry.id, 'period', e.target.value)} placeholder="Ex.: 2022 - 2025 ou 2023 - actual" /></label>
         <label>{work ? 'Responsabilidades e resultados' : 'Informação adicional (opcional)'}<textarea value={entry.description} maxLength={4000} onChange={e => editEntry(kind, entry.id, 'description', e.target.value)} placeholder={work ? 'Descreve o que fizeste e os resultados que alcançaste.' : 'Área de especialização, projectos ou distinções relevantes.'} /></label>
+        {samples(work ? 'experience' : 'education', entry.description, text => editEntry(kind, entry.id, 'description', text), entry.id)}
       </div>)}
       <button className="add-entry" type="button" onClick={() => addEntry(kind)} disabled={data[kind].length >= MAX_ENTRIES}><Plus size={17} /> Adicionar {noun}</button>
       {data[kind].length >= MAX_ENTRIES && <p className="editor-help">Podes incluir até {MAX_ENTRIES} itens nesta secção.</p>}
@@ -133,14 +139,18 @@ export default function Editor() {
               <PhotoPicker photo={data.photo} onChange={photo => change({ ...data, photo })} /><div className="contact-fields">{fields.map(f => <label key={f.key} htmlFor={`cv-${f.key}`}>{f.label}<input id={`cv-${f.key}`}
                 type={f.key === 'email' ? 'email' : f.key === 'phone' ? 'tel' : 'text'} autoComplete={f.complete}
                 value={data[f.key]} onChange={e => update(f.key, e.target.value)} placeholder={f.placeholder} maxLength={150} /></label>)}</div>
+              {samples('role',data.role,text=>update('role',text))}
             </section>
             <section className="editor-section" id="perfil"><div className="editor-section-title"><span>02</span><div><h2>Perfil profissional</h2><p>Uma apresentação curta sobre o teu percurso e objectivo.</p></div></div>
               <label htmlFor="cv-profile">O teu perfil<textarea id="cv-profile" value={data.profile} maxLength={4000} onChange={e => update('profile', e.target.value)} placeholder="Resume a tua experiência, pontos fortes e o que procuras no próximo desafio." /></label>
+              {samples('profile',data.profile,text=>update('profile',text))}
             </section>
             {entriesSection('experiences')}{entriesSection('education')}
             <section className="editor-section" id="competencias"><div className="editor-section-title"><span>05</span><div><h2>Competências e línguas</h2><p>Destaca o que podes trazer para a oportunidade.</p></div></div>
               <label htmlFor="cv-skills">Competências<textarea id="cv-skills" value={data.skills} maxLength={4000} onChange={e => update('skills', e.target.value)} placeholder="Ex.: Organização de documentos, Microsoft Excel, atendimento ao cliente" /></label>
+              {samples('skills',data.skills,text=>update('skills',text))}
               <label htmlFor="cv-languages">Línguas<textarea id="cv-languages" value={data.languages} maxLength={4000} onChange={e => update('languages', e.target.value)} placeholder="Ex.: Português - fluente; Inglês - intermédio; Changana - língua materna" /></label>
+              {samples('languages',data.languages,text=>update('languages',text))}
             </section>
             <div className="editor-form-bottom"><button className="button" type="submit"><Save size={17} /> Guardar rascunho</button>
               <p>{cloud ? 'As alterações são guardadas na tua conta. O PDF é criado no teu dispositivo.' : 'Guardado apenas neste navegador. Limpar os dados do navegador pode apagar o rascunho. Cria uma conta para sincronizar.'}</p></div>

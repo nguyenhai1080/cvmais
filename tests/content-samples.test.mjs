@@ -1,0 +1,6 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {getSamples,sectors} from '../src/lib/content-samples.ts';
+test('sample coverage and field limits across industry, seniority and grammar',()=>{for(const sector of sectors)for(const level of ['first','experienced','lead'])for(const voice of ['neutral','feminine','masculine'])for(const kind of ['role','profile','experience','education','skills','languages']){const samples=getSamples(kind,{sector:sector.id,level,voice});assert.ok(samples.length>=2);for(const s of samples){assert.ok(s.title&&s.text);assert.ok(s.text.length<=(kind==='role'?150:4000));assert.doesNotMatch(s.text,/undefined|NaN/);}}});
+test('first-job examples use actual projects rather than invented employment',()=>{for(const s of sectors){const f={sector:s.id,level:'first',voice:'neutral'};for(const sample of getSamples('experience',f)){assert.match(sample.text,/projecto|actividade|Actividade/);assert.doesNotMatch(sample.text,/\b20\d\d\b|\d+%/);}}});
+test('grammar selection does not change industry skills or responsibilities',()=>{for(const s of sectors)for(const kind of ['skills','experience']){const f={sector:s.id,level:'experienced',voice:'neutral'};assert.deepEqual(getSamples(kind,f),getSamples(kind,{...f,voice:'feminine'}));assert.deepEqual(getSamples(kind,f),getSamples(kind,{...f,voice:'masculine'}));}});

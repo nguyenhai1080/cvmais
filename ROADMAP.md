@@ -1,6 +1,6 @@
 # CVMais delivery roadmap
 
-Updated 24 October 2026. This records delivered work and the next launch priorities; unimplemented items must not be presented as live features.
+Updated 25 October 2026. This records delivered work and the next launch priorities; unimplemented items must not be presented as live features.
 
 ## Delivered
 
@@ -26,7 +26,7 @@ Updated 24 October 2026. This records delivered work and the next launch priorit
 ## Next launch priorities
 
 1. Wider real-device pilot: actual Android/iPhone devices and consenting Mozambican Portuguese speakers. Gather device-specific and wording feedback. The initial owner pilot and emulated viewport tests do not replace this.
-2. Content: expand pt-MZ career guidance with original useful examples; community remains clearly in preparation until a real workflow and moderation rules exist.
+2. Community: remains clearly in preparation until a real workflow and moderation rules exist. Continue improving guidance and examples from actual user feedback.
 3. Later domain cvmais.co.mz: attach only after acquisition/DNS access; repeat origin/cookie/local-draft migration checks.
 
 ## Current limits
@@ -38,3 +38,10 @@ Updated 24 October 2026. This records delivered work and the next launch priorit
 ## Delivered in DGC v11: backup operations
 
 Implemented: last successful upload and worker heartbeat, stale/failure classification, verified-operator detail page, public 200/503 probe, independent five-minute alert process, persistent incident deduplication and recovery notification. User approved messages to nguyenhai1080@gmail.com. Production active: healthy public probe, restricted detail endpoint, monitor startup log and original CV persistence verified. Whole-host monitoring is now supplied separately by StatusCake; see EXTERNAL-MONITORING.md.
+
+## Step 9 and requested visual/editor improvements, 25 October 2026
+
+- Four original pt-MZ application guides, local email-copy tools and temporary six-point checklist; homepage/header links and sitemap.
+- In-editor sample library for twelve industry groups and three experience levels; optional grammatical form, preview, append, confirmed field replacement and guarded undo. No new personal-data fields or external content API.
+- Original homepage CV preview with close-up illustrative portrait and more complete two-column content.
+- See CONTENT.md and VALIDATION.md. Real-device pilot remains outstanding.

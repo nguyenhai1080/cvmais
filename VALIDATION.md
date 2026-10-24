@@ -63,3 +63,12 @@ DGC v11 / source f8c29ab: live backup probe HTTP 200 (coarse response only), DB 
 - Local account/storage/erasure HTTP suite and all 24 automated tests pass; live primary/legacy two-session save/read/update preserves portrait/content and original persistence fixture; fictional test CV removed.
 - Owner reported real registration, email verification, password reset and sign-in successful, with no significant difficulty. Real verification/reset Resend Delivered receipts recorded in PILOT.md. No owner credentials/tokens collected.
 - Actual Android/iPhone and wider Mozambican usability acceptance remain pending; viewport emulation is not a real-device result.
+
+## Guidance, content samples and hero refresh, 25 October 2026
+
+- Production build, TypeScript and 27 automated tests pass. Sample tests cover every sector/stage/grammatical form, field size limits, first-job project framing and equivalent skills/tasks across grammatical gender.
+- Local browser: profile append, guarded replacement/cancel, exact undo, experience-description insertion and draft persistence after reload passed; pre-existing synthetic draft content restored. Editor samples fit 390px without horizontal overflow.
+- Hub/article/home inspected at mobile/desktop/tablet widths. Homepage/header fit 900px. Refreshed hero document fully contains its footer (desktop client/scroll height both 510px; mobile both 225px).
+- Checklist increments and resets accurately. Email copy reports success in the page; browser tool clipboard is separate, so its returned clipboard content is not treated as verification.
+- HTTP checks: hub and four articles 200, correct canonical URLs, public indexing allowed, unknown slug 404, sitemap has six URLs including homepage, new hero and DB health pass.
+- No changes to PDF rendering, auth, storage schema, backup or email transport. Real-device acceptance remains pending.
