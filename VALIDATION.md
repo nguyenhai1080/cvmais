@@ -53,3 +53,13 @@ DGC v10 / source 482826c: live checks pass HTTPS on primary/legacy, www path/que
 24 tests pass, including stale/future/missing status, retained successful receipt after failure, persisted incident deduplication, failed alert/recovery retry, independent detection of a stopped worker and secret-free alert content. Production build passes. Local HTTP tests verify anonymous/unverified operator/verified normal account denied, verified configured operator allowed, status details contain no upload IDs, public probe is coarse and backup failure leaves normal DB health HTTP 200. Mobile operations page has equal client and scroll width at 375px content width.
 
 DGC v11 / source f8c29ab: live backup probe HTTP 200 (coarse response only), DB health HTTP 200, anonymous operations detail request HTTP 403 without detail fields, private page noindex, original account/CV persistence passed. Runtime log confirms the independent five-minute alert monitor enabled. No actual outage was induced; incident/recovery delivery transitions were exercised with a mocked provider. Previous authorized real Resend sender test remains the actual transport-delivery evidence.
+
+## Steps 7-8 follow-up, 24 October 2026
+
+- StatusCake production monitors 8040391/8040392/8040393: successful external responses, interval 300 seconds, Default Contact Group 381072 sends only to nguyenhai1080@gmail.com; repeat alerts disabled.
+- Separate simulation 8040394 returned intentional HTTP 404, then healthy HTTP 200; provider history records Down and Up email messages Sent at 11:28 and 11:30 UTC. Simulation paused after recovery. Real endpoints stayed HTTP 200 throughout.
+- Fresh six-style short/long PDF generation passed accents/content/fonts/page bounds; long modern/minimalist PNG pages visually inspected.
+- Isolated emulated-mobile browser: photo chooser/crop/zoom, long experience, reload persistence, model change and two-page portrait PDF download passed; end marker/accents/photo verified from downloaded PDF. Equal document client/scroll width at 375px.
+- Local account/storage/erasure HTTP suite and all 24 automated tests pass; live primary/legacy two-session save/read/update preserves portrait/content and original persistence fixture; fictional test CV removed.
+- Owner reported real registration, email verification, password reset and sign-in successful, with no significant difficulty. Real verification/reset Resend Delivered receipts recorded in PILOT.md. No owner credentials/tokens collected.
+- Actual Android/iPhone and wider Mozambican usability acceptance remain pending; viewport emulation is not a real-device result.

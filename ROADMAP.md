@@ -17,19 +17,24 @@ Updated 24 October 2026. This records delivered work and the next launch priorit
 - Homepage canonical/share metadata, sitemap/robots and noindex headers on private/editor/auth routes.
 - Verified HTTPS, original account/CV persistence, both-origin login and saves, guest import/undo and mobile migration guide.
 
+## Delivered: steps 7 and initial 8, 24 October 2026
+
+- External StatusCake monitoring is active on the homepage, application/DB health and backup health, every five minutes, with alerts to the owner's email. Isolated Down/Up simulation messages were recorded Sent; simulation is paused. No production outage was induced. See EXTERNAL-MONITORING.md for test IDs, notification routing and free-plan limits.
+- First owner-controlled account pilot completed: owner registered, confirmed email, received recovery mail, personally changed password and signed in. Feedback: no significant difficulty. Verification and reset messages have real Resend Delivered receipts.
+- Technical pilot passed: six PDF styles with short/long data, rendered pagination review, emulated mobile photo/crop/edit/reload/model switch, actual browser portrait PDF export, cloud portrait/content round-trip and 24 automated tests. See PILOT.md for evidence and remaining acceptance work.
+
 ## Next launch priorities
 
-1. Complete independent external uptime monitoring for whole-host/container outages. The current release adds verified-operator backup status, a coarse public probe and owner-approved Resend incident/recovery alerts checked by an independent in-container process.
-2. Real user pilot: owner-controlled accounts test verification/reset from received links, mobile editing, portrait import and long PDF. Gather real feedback; do not invent testimonials or user counts.
-3. Content: expand pt-MZ career guidance with original useful examples; community remains clearly in preparation until a real workflow and moderation rules exist.
-4. Later domain cvmais.co.mz: attach only after acquisition/DNS access; repeat origin/cookie/local-draft migration checks.
+1. Wider real-device pilot: actual Android/iPhone devices and consenting Mozambican Portuguese speakers. Gather device-specific and wording feedback. The initial owner pilot and emulated viewport tests do not replace this.
+2. Content: expand pt-MZ career guidance with original useful examples; community remains clearly in preparation until a real workflow and moderation rules exist.
+3. Later domain cvmais.co.mz: attach only after acquisition/DNS access; repeat origin/cookie/local-draft migration checks.
 
 ## Current limits
 
 - Single application container with persistent SQLite. Do not horizontally scale independent SQLite replicas.
-- No durable email outbox; failed delivery requires a new user request. No external backup failure alerts yet.
+- No durable authentication-email outbox; failed delivery requires a new user request. Backup incident/recovery email alerts and independent StatusCake monitoring are active. External checks run every five minutes; provider confirmation/delivery can add delay.
 - Backups expire after about 30 days; restoration must reconcile subsequent erasure requests.
 
 ## Delivered in DGC v11: backup operations
 
-Implemented: last successful upload and worker heartbeat, stale/failure classification, verified-operator detail page, public 200/503 probe, independent five-minute alert process, persistent incident deduplication and recovery notification. User approved messages to nguyenhai1080@gmail.com. Production active: healthy public probe, restricted detail endpoint, monitor startup log and original CV persistence verified. Whole-host uptime monitoring remains external and unconfigured.
+Implemented: last successful upload and worker heartbeat, stale/failure classification, verified-operator detail page, public 200/503 probe, independent five-minute alert process, persistent incident deduplication and recovery notification. User approved messages to nguyenhai1080@gmail.com. Production active: healthy public probe, restricted detail endpoint, monitor startup log and original CV persistence verified. Whole-host monitoring is now supplied separately by StatusCake; see EXTERNAL-MONITORING.md.
