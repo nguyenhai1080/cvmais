@@ -14,7 +14,7 @@ async function body(request: Request) {
   while (true) {
     const { done, value } = await reader.read(); if (done) break;
     size += value.length;
-    if (size > 180_000) { await reader.cancel(); throw new StoreError('Conteúdo demasiado grande.', 413); }
+    if (size > 512_000) { await reader.cancel(); throw new StoreError('Conteúdo demasiado grande.', 413); }
     chunks.push(value);
   }
   try { const value = JSON.parse(Buffer.concat(chunks).toString('utf8')); if (!value || typeof value !== 'object' || Array.isArray(value)) throw 0; return value as Record<string, unknown>; }

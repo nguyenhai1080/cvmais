@@ -13,6 +13,7 @@ assert.equal((await request('register','POST',{email:`qa-${suffix}@example.test`
 const a = await request('register','POST',{email:`qa-${suffix}@example.test`,password});
 assert.equal(a.status, 201); assert.ok(a.value.recovery); assert.match(a.rawCookie,/HttpOnly/); assert.match(a.rawCookie,/SameSite=Lax/);
 const cookie = a.cookie;
+assert.equal((await request('cvs','POST',{data:{profile:'x'.repeat(513_000)}},cookie)).status,413);
 const b = await request('register','POST',{email:`qa-b-${suffix}@example.test`,password});
 assert.equal(b.status, 201);
 const cv = await request('cvs','POST',{title:'Validação · CV privado',data:{name:'Pessoa de teste',profile:'Apenas conteúdo fictício para validação.'}},cookie);

@@ -53,7 +53,7 @@ export default function MyCVs() {
       <input ref={file} type="file" accept="application/json,.json" className="visually-hidden" aria-label="Ficheiro de cópia de segurança" onChange={e => {
         const selected = e.target.files?.[0]; e.target.value = ''; if (!selected) return;
         void action(async () => {
-          if (selected.size > 180_000) throw new Error('O ficheiro é demasiado grande.');
+          if (selected.size > 512_000) throw new Error('O ficheiro é demasiado grande.');
           const value = JSON.parse(await selected.text());
           if (value?.format !== 'cvmais-backup-v1' || !value.data || typeof value.data !== 'object' || Array.isArray(value.data)) throw new Error('Selecciona uma cópia de segurança CVMais válida.');
           await create(normaliseCV(value.data), 'CV importado');
