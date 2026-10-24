@@ -56,3 +56,9 @@ Version 11: /api/health/backup returns HTTP 200 with only {status:ok,service:cvm
 Source c436702. Browser profile confirmed nguyenhai1080@gmail.com; connector remained GST and was not used for deployment. Pushed main, manually redeployed the existing DGC project cmvlbkah40mef0i5fzrjkbvcd. Platform reports v12 online, 100%.
 
 Live https://cvmais.win: original refreshed hero and editor sample selector with twelve industries confirmed visually. Four guide routes/canonical URLs, sitemap six entries, unknown-guide 404 and DB health pass. Original persistence fixture and cross-origin portrait/CV save/read tests pass; created test CV removed by the established test script. No environment, database schema or credentials changed.
+
+## DGC v13 — 25 October 2026
+
+Source 11a646b. Verified signed-in browser owner nguyenhai1080@gmail.com, existing DGC project cmvlbkah40mef0i5fzrjkbvcd; connector still GST, not used for mutations. Manual deployment completed at 100%, v13 online. No environment or SQL schema changes.
+
+Live checks pass: Portuguese interface and CV defaults, explicit English interface/CV selectors, matching document language and no horizontal overflow. Restored both choices to Portuguese after UI inspection. Original account/CV fixture remains unchanged after deployment. Primary/legacy authenticated save/read preserves both portrait and English CV language. DB health and backup health return 200; public guides/canonical/sitemap checks pass. Screenshot: cvmais-language-editor-v13.png.
