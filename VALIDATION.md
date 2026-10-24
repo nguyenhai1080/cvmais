@@ -14,3 +14,7 @@ Canonical source: `D:\Projects\CVMais`. All CVs used in checks are fictional.
 The connector still identifies GST. Hosting mutations use the browser profile independently verified as DGC (`nguyenhai1080@gmail.com`). Persistent `/data`, DATABASE_PATH and APP_ORIGIN are configured on DGC project `cmvlbkah40mef0i5fzrjkbvcd`. Deployment and production persistence checks are recorded in DEPLOYMENT.md after completion.
 
 Practical limits: no email verification/delivery, permanent account erasure or scheduled off-server backups. Recovery codes and reversible trash are described accurately in the UI. SQLite is intended for one container; horizontal scaling needs shared storage architecture.
+
+## Production completion
+
+DGC version 3 runs application commit `c088f60`. HTTPS checks and the API ownership/session suite pass. A fictional account and CV saved on version 2 were retrieved with a fresh login after deploying version 3, preserving the revision and full content. Database health reports ready. The public gallery and enlarged template preview were checked on DGC and captured as screenshots. No changes were made to GST.
