@@ -1,7 +1,7 @@
-export const models = ['classico', 'moderno', 'minimalista', 'criativo', 'executivo', 'primeiro'] as const;
+export const models = ['classico', 'moderno', 'minimalista', 'criativo', 'executivo', 'primeiro', 'tecnico', 'saude', 'engenharia', 'servico'] as const;
 export type Model = (typeof models)[number];
 export const modelLabels: Record<Model, string> = {
-  classico: 'Maputo · Clássico', moderno: 'Índico · Moderno', minimalista: 'Essencial · Minimalista', criativo: 'Coral · Criativo', executivo: 'Prestígio · Executivo', primeiro: 'Horizonte · Primeiro emprego',
+  classico: 'Maputo · Clássico', moderno: 'Índico · Moderno', minimalista: 'Essencial · Minimalista', criativo: 'Coral · Criativo', executivo: 'Prestígio · Executivo', primeiro: 'Horizonte · Primeiro emprego', tecnico:'Código · Tecnologia', saude:'Vital · Saúde e educação', engenharia:'Estrutura · Engenharia', servico:'Acolher · Serviços',
 };
 export type Entry = { id: string; title: string; organisation: string; period: string; description: string };
 export type CVData = {
@@ -75,7 +75,8 @@ export function contactLine(data: CVData): string {
 }
 /** Keep compact sidebars on the first page; long content reflows into the main column. */
 export function usesSidebar(data: CVData): boolean {
-  if (data.model === 'minimalista') return false;
+  if (['minimalista','tecnico','engenharia'].includes(data.model)) return false;
+  if (['saude','servico'].includes(data.model) && !data.skills.trim() && !data.languages.trim()) return false;
   const study = ['moderno', 'executivo'].includes(data.model) ? data.education.flatMap(e => [e.title,e.organisation,e.period,e.description]) : [];
   const lines = [data.skills, data.languages, ...study]
     .filter(Boolean).flatMap(value => value.split('\n'))

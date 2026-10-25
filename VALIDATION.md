@@ -92,3 +92,13 @@ DGC v13 verified live: initial UI pt and CV pt; selecting English produces html 
 Isolated local UI at port 3004: empty CV review gives actionable name/content/contact reminders with export still disabled; inserting a profile marker opens review before download; explicit download-anyway creates the PDF without changing the original text. Reviewing an experience marker focuses its specific description. With these points resolved, direct download works without a dialog. At 390px, English review fits without horizontal overflow, correctly labels one item and the Portuguese CV language, switches from preview to editing when selecting a field and closes with Escape. Downloaded QA files contain only fictional data. No production user data was modified during these tests. PDF rendering itself is unchanged.
 
 DGC v14 live: Portuguese review dialog and exact profile-field focus confirmed without changing the guest content. Portuguese defaults remain. Account/CV persistence, cross-origin portrait and English CV language, DB health and backup health all pass. Screenshot saved as cvmais-review-v14.png. Real-device acceptance remains pending.
+
+## Industry templates, 25 October 2026
+
+Ten fictional portrait gallery PDFs fit one page. Four new designs have Portuguese/English short fixtures, long fixtures and long portrait fixtures. PDF checks cover accents, end markers, embedded fonts, selectable text and page bounds; no-photo fixtures are also covered. New portrait layouts and a long service-page render visually inspected.
+
+Local browser: New filter returns four distinct models; New + Engineering returns Estrutura; incompatible creative/engineering filters show a reset action returning all ten. Technology selection opens Código with the technology example picker, without replacing existing draft text. Switching all four new models preserves the authored profile. Physical-device acceptance remains pending.
+
+Final checks: 47 PDFs across portrait gallery samples and Portuguese/English short/long fixtures passed content, accent, font and bounds checks. All ten gallery samples are one page. Mobile gallery has no horizontal overflow; enlarged Vital preview opens/closes, hospitality selection opens Acolher with hotelaria example context, and an empty supporting column collapses. Actual browser export of Acolher in English succeeds. Primary industry ordering is tested so service defaults to hospitality instead of generic administration.
+
+The final automated suite passes 38 tests; TypeScript and production build pass. No changes to authentication, credentials or database schema.

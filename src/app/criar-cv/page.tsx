@@ -1,7 +1,7 @@
 'use client';
 import { t as ui, useUILanguage } from '@/lib/ui-language';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Download, Save, ArrowLeft, Plus, Trash2, ArrowUp, ArrowDown, ShieldCheck, Eye, PenLine } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/header';
@@ -11,6 +11,7 @@ import GuestBackupImport from '@/components/guest-backup-import';
 import PhotoPicker from '@/components/photo-picker';
 import CVExportReview from '@/components/cv-export-review';
 import ContentSamples from '@/components/content-samples';
+import { sectors } from '@/lib/content-samples';
 import type { SampleFilters, SampleKind } from '@/lib/content-samples';
 import { MAX_ENTRIES, isModel, normaliseCV, canExport, pdfFilename,
   models, modelLabels, type CVData, type Entry } from '@/lib/cv';
@@ -28,6 +29,7 @@ const fields = [
 export default function Editor() {const {translate:ui}=useUILanguage();
   const { data, ready, status, saveError, cloud, pending, restorePending, change: storeChange, save } = useCVStorage();
   const [sampleFilters, setSampleFilters] = useState<SampleFilters>({sector:'administracao',level:'first',voice:'neutral'});
+  useEffect(()=>{const area=new URLSearchParams(window.location.search).get('area');const sector=area==='engenharia'?'construcao':area;if(sectors.some(item=>item.id===sector))setSampleFilters(current=>({...current,sector:sector!}));},[]);
   const [pdfError, setPdfError] = useState('');
   const [exporting, setExporting] = useState(false);
   const [view, setView] = useState<'edit' | 'preview'>('edit');

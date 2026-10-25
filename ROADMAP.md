@@ -59,3 +59,9 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 - Explicit field links focus the exact input, including from mobile preview; shows the selected CV language.
 - Users can continue downloading after reading optional reminders. Name/content prerequisites remain the existing export requirements. No grading, automatic rewriting, external analysis or new stored data.
 - Portuguese and English controls; wider actual Android/iPhone pilot still pending.
+
+## Industry template collection, 25 October 2026
+
+- Four original designs added: Código (technology), Vital (health/education), Estrutura (engineering/operations), Acolher (hospitality/service). Ten designs total.
+- Twelve professional-area suggestions, combined style/area filters, New collection, empty-state reset and contextual example-area handoff. Suggestions do not restrict which model a user can choose.
+- Actual PDF-generated illustrative previews; all designs retain optional photos, Portuguese default and independent English CV headings. See TEMPLATE-RESEARCH.md.

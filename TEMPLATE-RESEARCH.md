@@ -1,29 +1,33 @@
-# CV template research — 24 October 2026
+# Industry template collection
 
-Primary galleries reviewed for layout variety, not copied assets:
+25 October 2026. This collection adds four original, editable CVMais designs. It does not copy third-party artwork, layouts, private CVs or claims about hiring outcomes.
 
-- https://flowcv.com/resume-templates — simple, modern, creative, compact and first-job categories, with layouts chosen for career stage and content.
-- https://novoresume.com/resume-templates — distinct minimalist, modern, executive and student designs, typography and section emphasis.
-- https://resume.io/resume-templates — professional, modern, creative and simple categories.
-- https://github.com/adobe-fonts/source-serif — open font family for editorial and executive headings, included with its OFL licence.
+## References reviewed
 
-The previous small cards differed mainly in colour and showed sparse HTML. The original CVMais collection now uses larger three-column desktop cards, two-column mobile cards, filters, enlarged previews and fuller fictional examples. Preview images come from our own PDF renderer.
+- FlowCV: https://flowcv.com/resume-templates — visual research on simple, modern, photo, compact and first-job families; separation of style choices from the candidate's actual content.
+- Novoresume: https://novoresume.com/resume-templates — research on technical, professional and creative families and clear section hierarchy.
 
-- Maputo: dark navy sidebar, monogram and clear professional hierarchy.
-- Índico: ocean teal name panel and mint sidebar on the right.
-- Essencial: single column, serif name, restrained dark rules.
-- Coral: terracotta identity and peach sidebar for creative roles.
-- Prestígio: centred serif name, tracked role and gold section rules.
-- Horizonte: lavender identity card, education before experience.
+These are design references, not Mozambique hiring regulations or evidence that any CVMais template passes a particular ATS. CVMais keeps photos optional, uses selectable PDF text and preserves all authored content when changing a design.
 
-Navigation retains #183B55 and #079C91. These choices are our synthesis, not evidence of better hiring results or verified ATS compatibility. No recruiter endorsement or employment guarantee is claimed. All sample content is fictional.
+## Original additions
 
-Templates work without photos or invented proficiency bars. Long sidebar content reflows into the main column. PDF content remains selectable, paginated as A4 and rendered locally with embedded fonts.
+| Design | Visual direction | Suggested areas |
+| --- | --- | --- |
+| Código | Graphite header, cyan rule, one column, technical skills | Technology, digital communication |
+| Vital | Sage header, portrait on the left, education first, supporting column | Health, education, community projects |
+| Estrutura | Blue section bands, ochre top rule, compact single column | Engineering, maintenance, logistics, agriculture |
+| Acolher | Centred portrait, editorial typography, burgundy and warm cream, left supporting column | Hospitality, tourism, service, sales |
 
-## Visual follow-up: portrait and composition
+Existing Maputo, Índico, Essencial, Coral, Prestígio and Horizonte remain available. Industry associations are editorial suggestions; users can select any template. No design is restricted by gender or asserts professional qualifications.
 
-The user requested closer study of Novorésumé and FlowCV. We inspected the actual Creative, Modern and Executive preview images on Novorésumé, rather than relying on their category descriptions. The useful mechanisms were prominent portraits, full-width identity headers, compact contact strips with icons, timeline markers, readable heading sizes and short skill labels. FlowCV explicitly supports photo layouts and optional portrait removal.
+The gallery offers twelve professional-area filters, style filters and a New filter. Choosing a template can carry a suggested area into the example-text picker, without inserting fictional details or replacing CV content. Engineering maps to the existing construction/maintenance example group.
 
-The revised CVMais renderer uses those mechanisms in original brand layouts. Maputo has a dark masthead and circular portrait; Índico uses a portrait on the left and a timeline; Coral has a warm identity block and pale support panel; Prestígio uses editorial typography with a framed portrait; Horizonte places education first with a circular photo; Essencial keeps a compact single-column structure. Icons are vector geometry and skills are textual labels, without invented proficiency scores.
+Gallery illustrations are generated from the actual CVMais PDF renderer with fictional data and existing illustrative portraits. Default language remains Portuguese; the new designs also use the per-CV English headings and PDF language setting.
 
-All six gallery previews include clearly labelled fictional portraits. Two portraits were prepared from the previously generated CVMais assets using the actual browser photo picker. No reference-site candidate photographs or template images are copied into the application. Gallery papers are shown in full instead of clipping the lower sections.
+## Collection maintenance
+
+For future additions, require a distinct layout, a clear use case, an original fictional sample, optional-photo behaviour, short and long Portuguese/English PDF checks, visual inspection and a gallery thumbnail from the actual renderer. Gather real-device and user feedback before ranking templates by popularity. Do not invent popularity, testimonials or hiring rates.
+
+## Preserved provenance from the first collection
+
+The 24 October collection also reviewed https://resume.io/resume-templates. Editorial headings use the bundled Source Serif family, whose OFL licence is retained with the font files; source: https://github.com/adobe-fonts/source-serif. The existing two illustrative portraits were prepared from previously generated CVMais artwork using the application's photo picker. No reference-site candidate photographs or template images are included in this application. The new gallery continues to show complete paper previews instead of cropping away lower sections.

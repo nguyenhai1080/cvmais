@@ -6,6 +6,10 @@ export const themes: Record<Model, { accent: string; pale: string; ink: string }
   criativo: { accent: '#BB5343', pale: '#FBEDE7', ink: '#3E3637' },
   executivo: { accent: '#967238', pale: '#F5F1E9', ink: '#263743' },
   primeiro: { accent: '#6656A0', pale: '#F0EDF8', ink: '#303448' },
+  tecnico:{accent:'#146F82',pale:'#EAF3F6',ink:'#182E3E'},
+  saude:{accent:'#377561',pale:'#EAF4EE',ink:'#24483F'},
+  engenharia:{accent:'#2556A0',pale:'#EBF0F8',ink:'#24354A'},
+  servico:{accent:'#824253',pale:'#F9F0EE',ink:'#433039'},
 };
 export type IconKind = 'work' | 'study' | 'profile' | 'skills' | 'languages' | 'mail' | 'phone' | 'city' | 'website';
 export const iconPaths: Record<IconKind, string> = {

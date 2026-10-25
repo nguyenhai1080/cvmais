@@ -17,7 +17,7 @@ export default function EditorPreview({data}:{data:CVData}) {
     {data.photo&&<img className="cv3-portrait" src={data.photo} alt="Fotografia do candidato"/>}<div className="cv3-identity"><h2>{data.name.trim()||labels.name}</h2>{data.role.trim()&&<p className="cv3-role">{data.role.trim()}</p>}{inlineProfile&&<p className="cv3-intro">{data.profile.trim()}</p>}</div></header>
     {contacts(data).length>0&&<div className="cv3-contacts">{contacts(data).map(item=><span key={item.key}><Icon kind={item.kind}/><span>{item.text}</span></span>)}</div>}
     {!inlineProfile&&data.profile.trim()&&<Section title={labels.profile} kind="profile"><p>{data.profile.trim()}</p></Section>}
-    <div className={split?'cv3-columns':'cv3-single'}><div>{data.model==='primeiro'?<>{study}{work}</>:<>{work}{!studySide&&study}</>}{!split&&support}</div>{split&&<aside className="cv3-support">{support}</aside>}</div>
+    <div className={split?'cv3-columns':'cv3-single'}><div>{['primeiro','saude'].includes(data.model)?<>{study}{work}</>:<>{work}{!studySide&&study}</>}{!split&&support}</div>{split&&<aside className="cv3-support">{support}</aside>}</div>
     {!data.profile.trim()&&!work&&!study&&!data.skills.trim()&&!data.languages.trim()&&<p className="preview-empty">{labels.empty}</p>}
   </article>;
 }

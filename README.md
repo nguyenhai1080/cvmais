@@ -12,7 +12,7 @@ Checks: `npm test`, `npm run typecheck`, `npm run build`.
 ## Features
 
 - Responsive landing page based on the approved mockup, illustrative candidate photography, benefits, community placeholder and practical guidance.
-- Six original templates: Maputo, Índico, Essencial, Coral, Prestígio and Horizonte. Gallery previews come from actual PDFs. Filters and enlarged previews help selection.
+- Ten original templates: Maputo, Índico, Essencial, Coral, Prestígio, Horizonte, Código, Vital, Estrutura and Acolher. Twelve professional-area suggestions and a New collection filter. Gallery previews come from actual PDFs. Filters and enlarged previews help selection.
 - Structured editor: optional portrait upload with crop/zoom, contacts, profile, repeatable experience/education, reorder, undo, skills, languages, live preview, JSON backup and direct browser PDF download. Images are prepared as 256px JPEGs in the browser; raw files are not sent to an image service.
 - Guests keep one localStorage draft in the current browser. Guest JSON import shows a review, explicit replacement confirmation and undo. No automatic upload occurs on sign-in. Earlier local/session drafts migrate when available.
 - `/conta`: register, sign in and reset access with a one-time recovery code. Optional email confirmation and email password reset use expiring, hashed, single-use links. The recovery-code fallback remains available. Resend sends from cvmais.win.
@@ -42,8 +42,8 @@ Authentication mail requires MAIL_ENABLED=true, MAIL_FROM, RESEND_API_KEY and th
 
 ## PDF and API validation
 
-- `npm run qa:pdf`: six short A4 samples, long CVs for all layouts and a long-skills fixture under ignored `work/pdf-qa/`.
-- `npx tsx scripts/render-template-previews.tsx`: six fictional PDFs under ignored `work/template-pdfs/`.
+- `npm run qa:pdf`: ten short A4 samples in Portuguese and English, long CVs for all layouts and a long-skills fixture under ignored `work/pdf-qa/`.
+- `npx tsx scripts/render-template-previews.tsx`: ten fictional PDFs under ignored `work/template-pdfs/`.
 - `scripts/check-pdfs.py`: Python with pypdf/pdfplumber verifies accents, content, embedded fonts and page bounds. Render with Poppler for visual review.
 - Rasterise the template PDFs with Poppler into `public/template-previews/{model}.png` after changing the PDF designs.
 - `node scripts/check-storage-api.mjs`: HTTP integration tests against TEST_ORIGIN (default localhost:3001). Creates isolated synthetic accounts; use a test database. Covers CSRF, sessions, ownership, conflicts, second-device sessions, trash, recovery and logout.
