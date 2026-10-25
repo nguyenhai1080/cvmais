@@ -86,3 +86,9 @@ Live /modelos: all twelve industry filters return exactly six specialised editio
 Source 12510b5. Browser profile visibly confirmed nguyenhai1080@gmail.com before deployment of existing DGC project cmvlbkah40mef0i5fzrjkbvcd. Manual deployment completed at 100%, v17 online. No environment, schema, credential or PDF-renderer changes.
 
 Live library: enfermagem and nurse with health return six models. The first-job style narrows the set to Cuidar · Formação. Enlarged preview links retain context; opening the editor and following its return link restores all three filters. New blank CV retains Portuguese default. DB and backup health, seven-entry sitemap/guides, original account/CV persistence and primary/legacy authenticated photo/English/model round-trip checks pass. Proof: cvmais-template-search-v17.png.
+
+## DGC v18 — 25 October 2026
+
+Source bb6bf7d. Fresh browser profile verified nguyenhai1080@gmail.com, existing DGC project cmvlbkah40mef0i5fzrjkbvcd. Manual deployment completed at 100%, v18 online. No schema, environment, credential or PDF-renderer changes.
+
+Live browser: telecom returns 14 choices, communication remains 8, telecomunications shows the approximate-results notice. English topic chips display Telecommunications/Software development/Data and analytics on the first result; clicking Telecommunications returns the same 14. Portuguese preference restored. DB/backup health, sitemap/guides, original account/CV persistence and authenticated primary/legacy portrait/English/specialised-model round-trip checks pass. Proof: cvmais-telecom-tags-v18.png. Search vocabulary, references and maintenance documented in SEARCH.md.

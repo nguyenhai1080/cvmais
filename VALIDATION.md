@@ -125,3 +125,5 @@ Live DGC v17 verified: profession search in both languages, combined style/indus
 ## Controlled template tags — 25 October 2026
 
 45 automated tests, typecheck and production build passed. Added registry/assignment coverage for every tag and model, 12 industry keyword probes, telecom PT/EN/abbreviation/skill equivalence, top-layout ranking, marketing exclusion, multi-word query, exact short acronyms, bounded typo fallback and unknown-term empty results. Local UI confirms telecom 14 results (12 initially, 14 after loading more), typo notice, clicking tag starts a canonical-label search, translated English chips and no horizontal overflow at emulated 390px (375px content). Portuguese restored. No renderer, credential, schema or environment changes.
+
+Live DGC v18 confirmed: telecom 14 results; communication 8; bounded typo notice; English chips and clickable canonical topic return 14. Portuguese restored. Account/CV persistence and both-origin photo/English/model regression pass; DB and backup health HTTP 200. Screenshot: cvmais-telecom-tags-v18.png.
