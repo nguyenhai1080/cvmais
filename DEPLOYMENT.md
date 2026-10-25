@@ -74,3 +74,9 @@ Live Portuguese review dialog shows the selected Portuguese CV language and acti
 Source 94ed35f. Verified DGC browser account nguyenhai1080@gmail.com and existing project cmvlbkah40mef0i5fzrjkbvcd; connector remains GST and was not used for mutation. Manual deploy completed at 100%, v15 online.
 
 Live gallery: New filter shows Código, Vital, Estrutura and Acolher; all four PNGs load and validate, and New + Engineering returns Estrutura. Total collection now ten models. Account/CV persistence and primary/legacy authenticated save/read retain the new servico model, English CV language and portrait; original fixture unchanged. DB/backup health HTTP 200; public guidance and canonical/sitemap checks pass. No schema, credential or environment changes. Proof: cvmais-industry-templates-v15.png.
+
+## DGC v16 — 25 October 2026
+
+Source 946b970. Fresh browser profile confirmed nguyenhai1080@gmail.com and existing DGC project cmvlbkah40mef0i5fzrjkbvcd. Manual deployment completed at 100%, v16 online. No environment, credential or database schema changes.
+
+Live /modelos: all twelve industry filters return exactly six specialised editions. All 72 new PNGs pass HTTP and PNG-signature checks. The complete library retains ten general models (82 choices). Original persistence fixture survives redeployment; authenticated primary/legacy save/read round-trip preserves saude--formacao, portrait and English CV language. The newly created fictional cross-origin test CV was removed by the established regression script. Guide metadata, seven-entry sitemap, unknown-guide 404 and DB/backup health checks pass. Proof: cvmais-six-per-industry-v16.png.
