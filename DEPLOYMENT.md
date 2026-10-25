@@ -98,3 +98,9 @@ Live browser: telecom returns 14 choices, communication remains 8, telecomunicat
 Source b6127a6. Fresh browser profile confirmed DGC nguyenhai1080@gmail.com before manual deployment of existing project cmvlbkah40mef0i5fzrjkbvcd. Platform reports 100%, v19 online. No environment, credential, schema or PDF-renderer changes.
 
 Live browser: tel offers Telecomunicações (14); keyboard selection opens the canonical tag query. Choosing Saúde then offers a 14-result recovery action; activating it clears area/style and retains Telecomunicações. Search telecom shows the inline counted suggestion and 14 actual results. Original account/CV persistence, primary/legacy photo/English/model round-trip, sitemap/guides and DB/backup health all pass. Proof: cvmais-search-suggestions-v19.png.
+
+## DGC v20 — interview guidance
+
+Source ff735d7. Browser profile confirmed DGC nguyenhai1080@gmail.com before manual deployment of existing project cmvlbkah40mef0i5fzrjkbvcd. Platform reports v20 online, 100%, deployment timestamp 2026-10-26 00:02. No schema, environment, credential or PDF-renderer changes.
+
+Live checks confirm all five guide links on the homepage, five guide cards in /orientacoes, the new interview article, labelled fictional examples, temporary STAR practice fields/checklist and direct editor CTA. HTTP checks pass guide canonicals, unknown-guide 404 and eight-entry sitemap; DB/backup health and original account/CV persistence pass. Established primary/legacy authenticated photo/English/specialised-model round-trip passes. The local browser additionally confirmed copied notes, translation without rewriting notes, and clearing after reload and navigating away/back. Proof: cvmais-five-guides-v20.png.
