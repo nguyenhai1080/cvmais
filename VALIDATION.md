@@ -104,3 +104,13 @@ Final checks: 47 PDFs across portrait gallery samples and Portuguese/English sho
 The final automated suite passes 38 tests; TypeScript and production build pass. No changes to authentication, credentials or database schema.
 
 DGC v15 live verification: four new complete gallery previews and industry filtering confirmed visually; HTTP PNG signatures valid. New servico style round-trips across authenticated sessions/origins with English language and photo. Original persisted account/CV fixture unchanged. DB and backup probes healthy. All 47 PDF fixtures were regenerated with the final renderer and passed. Proof saved in cvmais-industry-templates-v15.png.
+
+## 72 industry editions — 25 October 2026
+
+- 40 automated tests passed, including twelve industries with exactly six distinct layout families each, unique persistent IDs and preservation of authored content/CV language for all 72.
+- Typecheck and production build passed. Standalone /modelos adds the seventh public sitemap URL.
+- 335 generated PDF checks passed: all 82 gallery examples, all 82 Portuguese short, all 82 English short, all 82 Portuguese long and additional long/photo fixtures. Checked selectable text, fonts, accents, page bounds and end markers. English document language retained.
+- Generated 72 new PNG thumbnails from the real renderer. Browser filter sweep confirmed six results for every industry; loading more expands 12 to 24 cards.
+- Local browser switched through all six health editions without changing profile text or independent English CV language. Reload retained the selected model; direct PDF download succeeded.
+- This is six structural families adapted to twelve professions, with distinct sample content and palettes. Physical-device acceptance remains pending.
+- Storage API regression passed locally (isolated DB, email and backups disabled), covering ownership, cross-device saves, conflicts, recovery and erasure guards. Library and editor have no horizontal overflow at a 390px emulated viewport; editor contains all 82 options. English interface translates specialised edition labels; authored text remains unchanged.

@@ -31,3 +31,28 @@ For future additions, require a distinct layout, a clear use case, an original f
 ## Preserved provenance from the first collection
 
 The 24 October collection also reviewed https://resume.io/resume-templates. Editorial headings use the bundled Source Serif family, whose OFL licence is retained with the font files; source: https://github.com/adobe-fonts/source-serif. The existing two illustrative portraits were prepared from previously generated CVMais artwork using the application's photo picker. No reference-site candidate photographs or template images are included in this application. The new gallery continues to show complete paper previews instead of cropping away lower sections.
+
+## Twelve industry collections — 25 October 2026
+
+The library now provides 72 specialised editions: twelve industry collections with six persistent model IDs each. Ten general designs remain available separately (82 choices in total). This is six tested structural families adapted for twelve industries, not 72 unrelated layout systems.
+
+| Industry | Collection | Editions |
+| --- | --- | --- |
+| Administration | Agenda | 6 |
+| Accounting and finance | Saldo | 6 |
+| Information technology | Byte | 6 |
+| Health and care | Cuidar | 6 |
+| Education and training | Saber | 6 |
+| Engineering and construction | Projecto | 6 |
+| Logistics and warehouse | Rota | 6 |
+| Sales and customer service | Conexão | 6 |
+| Hospitality and tourism | Estadia | 6 |
+| Communication and marketing | Expressão | 6 |
+| Agriculture | Terra | 6 |
+| NGOs and community projects | Impacto | 6 |
+
+Every collection includes Linha (single column), Percurso (timeline), Presença (strong masthead), Editorial (centred portrait and left support), Formação (education first and right support), and Estrutura (compact technical section bands). Original industry profiles, tasks, skills, fictional education and palettes accompany each collection. Photos are optional; existing illustrative portraits are reused. Changing a model never inserts demonstration data into an author's CV.
+
+Research continues from the official FlowCV and Novoresume template galleries above. Role-text research also consulted the UK National Careers Service profiles for [admin assistant](https://nationalcareers.service.gov.uk/job-profiles/admin-assistant) and [warehouse worker](https://nationalcareers.service.gov.uk/job-profiles/warehouse-worker). These help identify common responsibilities; UK qualifications and regulatory requirements were not carried into Mozambique examples. Original examples do not assert professional licences or invented achievements. No source-site template art, portraits or CV text was copied.
+
+The standalone /modelos library supports shareable industry links, six results per industry, twelve initially visible results in the complete collection, and explicit loading of more. The editor groups 82 options by industry and preserves model identity through local, portable and account storage. Portuguese remains the default; English interface and independent English CV language remain available.

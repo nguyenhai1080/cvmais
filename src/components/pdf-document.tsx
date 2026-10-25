@@ -1,3 +1,4 @@
+import { designModel } from '../lib/industry-catalogue';
 import { labelsForCV } from '../lib/cv-language';
 import React from 'react';
 import { Document, Page, Text, View, Image, Svg, Path, Font, StyleSheet, pdf } from '@react-pdf/renderer';
@@ -53,10 +54,11 @@ function Entries({ entries, accent, timeline, compact=false }: { entries: Entry[
   </View>)}</>;
 }
 export function CVDocument({ data }: { data: CVData }) {
+  const family=designModel(data.model);
   const labels = labelsForCV(data);
   const t = themes[data.model];
-  const classic = data.model === 'classico', modern = data.model === 'moderno', creative = data.model === 'criativo', first = data.model === 'primeiro', executive = data.model === 'executivo', minimal = data.model === 'minimalista';
-  const tech=data.model==='tecnico', health=data.model==='saude', engineering=data.model==='engenharia', service=data.model==='servico';
+  const classic = family === 'classico', modern = family === 'moderno', creative = family === 'criativo', first = family === 'primeiro', executive = family === 'executivo', minimal = family === 'minimalista';
+  const tech=family==='tecnico', health=family==='saude', engineering=family==='engenharia', service=family==='servico';
   const educationFirst=first||health;const portraitFirst=modern||first||health||service;
   const split = usesSidebar(data);
   const studySide = split && (modern || executive);

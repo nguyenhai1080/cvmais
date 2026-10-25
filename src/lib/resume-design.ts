@@ -1,5 +1,7 @@
+import { industryModels, industryVariant } from './industry-catalogue.ts';
 import type { CVData, Model } from './cv';
 export const themes: Record<Model, { accent: string; pale: string; ink: string }> = {
+  ...Object.fromEntries(industryModels.map(id=>{const {industry}=industryVariant(id)!;return [id,{accent:industry.accent,pale:industry.pale,ink:'#263D49'}];})),
   classico: { accent: '#087F82', pale: '#E9F3F2', ink: '#183B55' },
   moderno: { accent: '#087F82', pale: '#ECF7F4', ink: '#193C43' },
   minimalista: { accent: '#394550', pale: '#F1F3F3', ink: '#23303B' },
@@ -10,7 +12,7 @@ export const themes: Record<Model, { accent: string; pale: string; ink: string }
   saude:{accent:'#377561',pale:'#EAF4EE',ink:'#24483F'},
   engenharia:{accent:'#2556A0',pale:'#EBF0F8',ink:'#24354A'},
   servico:{accent:'#824253',pale:'#F9F0EE',ink:'#433039'},
-};
+} as Record<Model,{accent:string;pale:string;ink:string}>;
 export type IconKind = 'work' | 'study' | 'profile' | 'skills' | 'languages' | 'mail' | 'phone' | 'city' | 'website';
 export const iconPaths: Record<IconKind, string> = {
   work: 'M4 7h16v13H4z M9 7V4h6v3 M4 12h16 M10 12v3h4v-3',

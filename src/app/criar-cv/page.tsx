@@ -11,6 +11,7 @@ import GuestBackupImport from '@/components/guest-backup-import';
 import PhotoPicker from '@/components/photo-picker';
 import CVExportReview from '@/components/cv-export-review';
 import ContentSamples from '@/components/content-samples';
+import { templates, templateAreas, templateMatchesArea } from '@/lib/templates';
 import { sectors } from '@/lib/content-samples';
 import type { SampleFilters, SampleKind } from '@/lib/content-samples';
 import { MAX_ENTRIES, isModel, normaliseCV, canExport, pdfFilename,
@@ -114,7 +115,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
 
   return <div className="editor-page editor-v2"><Header />
     <main className="container">
-      <div className="editor-top"><div><Link className="text-link" href="/#modelos"><ArrowLeft size={16} />{ui(" Voltar aos modelos")}</Link>
+      <div className="editor-top"><div><Link className="text-link" href="/modelos"><ArrowLeft size={16} />{ui(" Voltar aos modelos")}</Link>
         <h1>{ui("O teu percurso, nas tuas palavras.")}</h1><p>{ui("Personaliza o teu CV e descarrega um PDF pronto para enviar.")}</p></div>
         <div className="editor-top-actions"><button className="button outline" disabled={!ready || exporting} onClick={save}><Save size={17} />{ui(" Guardar")}</button>
           <CVExportReview data={data} ready={ready} exporting={exporting} onDownload={exportPDF} onEdit={id=>{setView('edit');requestAnimationFrame(()=>{const field=document.getElementById(id);field?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});field?.focus({preventScroll:true});});}}/></div>
@@ -163,7 +164,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
         </form>
         <div className="editor-preview"><div className="preview-controls"><div><span className="eyebrow">{ui("O TEU CV")}</span><h2>{ui("Escolhe o teu estilo.")}</h2></div>
           <label htmlFor="cv-model">{ui("Modelo")}<select id="cv-model" value={data.model} disabled={!ready || exporting} onChange={e => update('model', e.target.value)}>
-            {models.map(model => <option key={model} value={model}>{ui(modelLabels[model])}</option>)}
+            <optgroup label={ui('Modelos gerais')}>{templates.filter(t=>templateMatchesArea(t.id,'gerais')).map(t=><option key={t.id} value={t.id}>{ui(t.name)}</option>)}</optgroup>{templateAreas.map(area=><optgroup key={area.id} label={ui(area.label)}>{templates.filter(t=>templateMatchesArea(t.id,area.id)).map(t=><option key={t.id} value={t.id}>{ui(t.name)}</option>)}</optgroup>)}
           </select></label></div>
           <EditorPreview data={data} />
           <p className="editor-notice">{ui("Pré-visualização do conteúdo. O PDF é paginado em A4; secções vazias ficam de fora. Revê o ficheiro antes de enviar.")}</p>

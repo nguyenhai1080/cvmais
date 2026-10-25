@@ -5,7 +5,7 @@ import pdfplumber
 for directory in ['work/template-pdfs', 'work/pdf-qa']:
     files = list(Path(directory).glob('*.pdf'))
     if directory.endswith('pdf-qa'):
-        files = [p for p in files if p.stem in ['classico','moderno','minimalista','criativo','executivo','primeiro','tecnico','saude','engenharia','servico','long-support'] or p.stem.startswith(('long-', 'en-'))]
+        files = [p for p in files if p.stem in ['classico','moderno','minimalista','criativo','executivo','primeiro','tecnico','saude','engenharia','servico','long-support'] or p.stem.startswith(('long-', 'en-')) or '--' in p.stem]
     for path in files:
         reader = PdfReader(path)
         if directory.endswith('template-pdfs'):

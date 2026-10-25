@@ -1,10 +1,11 @@
-import { emptyCV, type Model, type CVData } from './cv.ts';
+import { industryModels, industryVariant } from './industry-catalogue.ts';
+import { emptyCV, type Model, type LegacyModel, type CVData } from './cv.ts';
 export type TemplateCategory = 'Profissional' | 'Criativo' | 'Primeiro emprego';
-export const newTemplateIds:Model[]=['tecnico','saude','engenharia','servico'];
+export const newTemplateIds:Model[]=industryModels;
 export const templateAreas=[{id:'administracao',label:'Administração'},{id:'contabilidade',label:'Contabilidade e finanças'},{id:'tecnologia',label:'Tecnologias de informação'},{id:'saude',label:'Saúde e cuidados'},{id:'educacao',label:'Educação e formação'},{id:'engenharia',label:'Engenharia e construção'},{id:'logistica',label:'Logística e armazém'},{id:'vendas',label:'Vendas e atendimento'},{id:'hotelaria',label:'Hotelaria e turismo'},{id:'comunicacao',label:'Comunicação e marketing'},{id:'agricultura',label:'Agricultura'},{id:'projectos',label:'ONG e projectos comunitários'}] as const;
 export type TemplateArea=(typeof templateAreas)[number]['id'];
-const areas:Record<Model,TemplateArea[]>={classico:['administracao','logistica','vendas'],moderno:['administracao','tecnologia','projectos'],minimalista:['contabilidade','engenharia','educacao'],criativo:['comunicacao'],executivo:['contabilidade','administracao','projectos'],primeiro:['educacao','tecnologia','vendas'],tecnico:['tecnologia','comunicacao'],saude:['saude','educacao','projectos'],engenharia:['engenharia','logistica','agricultura'],servico:['hotelaria','vendas','administracao']};
-export const templates: { id: Model; name: string; category: TemplateCategory; description: string; colour: string; detail: string }[] = [
+const areas:Record<LegacyModel,TemplateArea[]>={classico:['administracao','logistica','vendas'],moderno:['administracao','tecnologia','projectos'],minimalista:['contabilidade','engenharia','educacao'],criativo:['comunicacao'],executivo:['contabilidade','administracao','projectos'],primeiro:['educacao','tecnologia','vendas'],tecnico:['tecnologia','comunicacao'],saude:['saude','educacao','projectos'],engenharia:['engenharia','logistica','agricultura'],servico:['hotelaria','vendas','administracao']};
+const generalTemplates: { id: Model; name: string; category: TemplateCategory; description: string; colour: string; detail: string }[] = [
   { id: 'classico', name: 'Maputo', category: 'Profissional', description: 'Uma apresentação com presença.', colour: '#183B55', detail: 'Retrato circular · Cabeçalho azul profundo' },
   { id: 'moderno', name: 'Índico', category: 'Profissional', description: 'O teu percurso, com clareza e ritmo.', colour: '#087f82', detail: 'Fotografia · Percurso em linha do tempo' },
   { id: 'minimalista', name: 'Essencial', category: 'Profissional', description: 'A tua experiência fala por si.', colour: '#363b40', detail: 'Uma coluna · Tipografia editorial' },
@@ -16,10 +17,15 @@ export const templates: { id: Model; name: string; category: TemplateCategory; d
   {id:'engenharia',name:'Estrutura',category:'Profissional',description:'Um percurso técnico com estrutura e precisão.',colour:'#2556A0',detail:'Uma coluna · Secções em faixas · Azul e ocre'},
   {id:'servico',name:'Acolher',category:'Profissional',description:'Uma apresentação próxima, com elegância.',colour:'#824253',detail:'Retrato centrado · Tipografia editorial · Coluna de apoio à esquerda'},
 ];
-export function templateMatchesArea(model:Model,area:string){return area==='all'||areas[model].includes(area as TemplateArea);}
-export function areasForTemplate(model:Model){return areas[model].map(id=>templateAreas.find(area=>area.id===id)!);}
+export const templates=[...generalTemplates,...industryModels.map(id=>{const {industry,layout}=industryVariant(id)!;return {id,name:`${industry.brand} · ${layout.label}`,category:(layout.id==='editorial'?'Criativo':layout.id==='formacao'?'Primeiro emprego':'Profissional') as TemplateCategory,description:`${industry.label} · ${layout.label}`,colour:industry.accent,detail:layout.description};})];
+export function templateMatchesArea(model:Model,area:string){if(area==='all')return true;const variant=industryVariant(model);if(area==='gerais')return !variant;return variant?.industry.id===area;}
+export function areasForTemplate(model:Model){const variant=industryVariant(model);return variant?[templateAreas.find(area=>area.id===variant.industry.id)!]:areas[model as LegacyModel].map(id=>templateAreas.find(area=>area.id===id)!);}
+export function templatePortrait(model:Model):'man'|'woman'{const variant=industryVariant(model);return variant?(industryModels.indexOf(model as typeof industryModels[number])%2===0?'woman':'man'):['executivo','primeiro','tecnico','engenharia'].includes(model)?'man':'woman';}
 /** Fictional demonstration content; never a customer or testimonial. */
 export function templateSample(model: Model): CVData {
+  const variant=industryVariant(model);
+  if(variant){const {industry}=variant;const male=templatePortrait(model)==='man';return {...emptyCV(),model,name:male?'João Matusse':'Celina Macamo',role:industry.role,email:male?'joao@exemplo.com':'celina@exemplo.com',phone:'+258 84 000 0000',city:'Maputo, Moçambique',website:'linkedin.com/in/exemplo',profile:industry.profile,experiences:[{id:'demo-work-1',title:industry.role,organisation:'Organização de exemplo · Maputo',period:'2022 — actual',description:industry.tasks.join('\n')},{id:'demo-work-2',title:'Apoio à equipa',organisation:'Empresa de demonstração · Matola',period:'2020 — 2022',description:'Organização de materiais e informação.\nColaboração no acompanhamento das actividades.'}],education:[{id:'demo-study',title:industry.course,organisation:'Instituição de exemplo · Maputo',period:'2017 — 2020',description:'Projecto de exemplo e actividades práticas de formação.'}],skills:industry.skills.join('\n'),languages:'Português · Fluente\nInglês · Intermédio'};}
+
   const sample: CVData = { ...emptyCV(), model,
     name: 'Celina Macamo', role: 'Gestora de operações', city: 'Maputo, Moçambique',
     email: 'celina@exemplo.com', phone: '+258 84 000 0000', website: 'linkedin.com/in/exemplo',

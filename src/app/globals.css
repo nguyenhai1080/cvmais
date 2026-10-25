@@ -80,3 +80,9 @@
 .cv3-tecnico .cv3-section,.cv3-engenharia .cv3-section{margin-top:12px}.cv3-tecnico .cv3-section h3,.cv3-engenharia .cv3-section h3{margin-bottom:7px}.cv3-tecnico .cv3-entry,.cv3-engenharia .cv3-entry{padding-bottom:8px}.cv3-tecnico .cv3-languages,.cv3-engenharia .cv3-languages{line-height:1.8}
 
 .cv3-engenharia .cv3-section{margin-top:10px}.resume-v3.cv3-engenharia .cv3-section h3{padding:5px}.template-catalogue.new-collection{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:1050px){.template-catalogue.new-collection{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.template-catalogue.new-collection{grid-template-columns:1fr}}
+
+.template-pagination{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin:35px 0 0;font-size:13px;color:#526b7c}.template-caption h3{overflow-wrap:anywhere}.preview-controls select{max-height:350px}
+
+.model-library .template-collection{padding-top:45px}.template-library-link{text-align:center;margin-top:28px;font-size:13px;color:#06786f;font-weight:700}.template-library-link a{display:inline-flex;gap:8px;align-items:center;text-decoration:underline;text-underline-offset:4px}.model-library .template-library-link{display:none}
+
+.model-library .collection-heading h1{font-size:clamp(32px,4vw,46px);line-height:1.16;letter-spacing:-1.4px;margin:0}.model-library .collection-heading h1 em{color:#079c91;font-style:normal}

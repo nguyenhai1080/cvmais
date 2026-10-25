@@ -65,3 +65,10 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 - Four original designs added: Código (technology), Vital (health/education), Estrutura (engineering/operations), Acolher (hospitality/service). Ten designs total.
 - Twelve professional-area suggestions, combined style/area filters, New collection, empty-state reset and contextual example-area handoff. Suggestions do not restrict which model a user can choose.
 - Actual PDF-generated illustrative previews; all designs retain optional photos, Portuguese default and independent English CV headings. See TEMPLATE-RESEARCH.md.
+
+## Expanded industry library — 25 October 2026
+
+- Completed 12 industry collections × six layout families = 72 specialised editions, with ten general designs retained (82 choices).
+- Original industry sample content, palettes, actual PDF thumbnails, grouped editor selection and standalone /modelos library with shareable industry filters and pagination.
+- All model IDs round-trip through normalisation without rewriting authored content or CV language. Photos remain optional.
+- Real-device and target-market pilot feedback remains pending; no popularity or hiring-performance claims are made.

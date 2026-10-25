@@ -1,3 +1,4 @@
+import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
 export const uiEnglish: Record<string,string> = {
   "Pedido recebido. Verifica o email e o spam.": "Request received. Check your email and spam folder.",
@@ -822,3 +823,9 @@ export const uiEnglish: Record<string,string> = {
   "Retrato centrado · Tipografia editorial · Coluna de apoio à esquerda": "Centred portrait · Editorial typography · Left support column",
   "Novos": "New"
 };
+
+for(const layout of layoutEditions)uiEnglish[layout.description]=layout.enDescription;
+for(const id of industryModels){const {industry,layout}=industryVariant(id)!;uiEnglish[`${industry.brand} · ${layout.label}`]=`${industry.brand} · ${layout.en}`;uiEnglish[`${industry.label} · ${layout.label}`]=`${uiEnglish[industry.label]||industry.label} · ${layout.en}`;}
+Object.assign(uiEnglish,{'Modelos gerais':'General templates','A mostrar':'Showing','Mostrar mais modelos':'Show more templates','Cada área tem seis edições especializadas. Escolhe um estilo e adapta o conteúdo ao teu percurso.':'Each professional area has six specialised editions. Choose a style and adapt the content to your background.'});
+
+uiEnglish['Abrir a biblioteca de modelos']='Open the template library';
