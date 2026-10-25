@@ -78,3 +78,9 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 - Local profession/name/industry search across all 82 choices, with common Portuguese/English keywords and accent-insensitive matching; combines with industry and style filters.
 - Library links preserve search, industry and style across reload and editor return. Return destinations are restricted to the local /modelos route.
 - Empty results offer a complete filter reset. Search and clearing controls are translated and work on a narrow viewport. Portuguese remains the default.
+
+## Controlled search tags — 25 October 2026
+
+- 33 bilingual topic tags, 333 curated assignments across 82 template editions, aliases and role/skill abbreviations; see SEARCH.md.
+- Weighted name/tag matching, whole-word short acronyms, bounded one-edit fallback only after no strict results, explicit approximate notice, visible clickable topic chips.
+- Telecom is covered by technical/IT tags and remains distinct from communication/marketing. Filters and editor return context remain intact.

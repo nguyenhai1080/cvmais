@@ -831,3 +831,5 @@ Object.assign(uiEnglish,{'Modelos gerais':'General templates','A mostrar':'Showi
 uiEnglish['Abrir a biblioteca de modelos']='Open the template library';
 
 Object.assign(uiEnglish,{'Procurar modelos':'Search templates','Ex.: enfermagem, programador, hotelaria…':'E.g. nursing, developer, hospitality…','Limpar pesquisa':'Clear search','Pesquisa por profissão, área ou nome do modelo, em português ou inglês.':'Search by profession, field or template name, in Portuguese or English.'});
+
+Object.assign(uiEnglish,{'Pesquisa por profissão, especialidade, competência ou nome do modelo, em português ou inglês.':'Search by profession, specialism, skill or template name, in Portuguese or English.','Resultados aproximados para a tua pesquisa.':'Approximate matches for your search.','Especialidades sugeridas':'Suggested specialisms','Procurar por':'Search for'});

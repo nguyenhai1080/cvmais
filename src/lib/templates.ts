@@ -1,3 +1,4 @@
+import { tagIdsForTemplate } from './template-taxonomy.ts';
 import { industryModels, industryVariant } from './industry-catalogue.ts';
 import { emptyCV, type Model, type LegacyModel, type CVData } from './cv.ts';
 export type TemplateCategory = 'Profissional' | 'Criativo' | 'Primeiro emprego';
@@ -17,7 +18,7 @@ const generalTemplates: { id: Model; name: string; category: TemplateCategory; d
   {id:'engenharia',name:'Estrutura',category:'Profissional',description:'Um percurso técnico com estrutura e precisão.',colour:'#2556A0',detail:'Uma coluna · Secções em faixas · Azul e ocre'},
   {id:'servico',name:'Acolher',category:'Profissional',description:'Uma apresentação próxima, com elegância.',colour:'#824253',detail:'Retrato centrado · Tipografia editorial · Coluna de apoio à esquerda'},
 ];
-export const templates=[...generalTemplates,...industryModels.map(id=>{const {industry,layout}=industryVariant(id)!;return {id,name:`${industry.brand} · ${layout.label}`,category:(layout.id==='editorial'?'Criativo':layout.id==='formacao'?'Primeiro emprego':'Profissional') as TemplateCategory,description:`${industry.label} · ${layout.label}`,colour:industry.accent,detail:layout.description};})];
+export const templates=[...generalTemplates,...industryModels.map(id=>{const {industry,layout}=industryVariant(id)!;return {id,name:`${industry.brand} · ${layout.label}`,category:(layout.id==='editorial'?'Criativo':layout.id==='formacao'?'Primeiro emprego':'Profissional') as TemplateCategory,description:`${industry.label} · ${layout.label}`,colour:industry.accent,detail:layout.description};})].map(template=>({...template,tagIds:tagIdsForTemplate(template.id)}));
 export function templateMatchesArea(model:Model,area:string){if(area==='all')return true;const variant=industryVariant(model);if(area==='gerais')return !variant;return variant?.industry.id===area;}
 export function areasForTemplate(model:Model){const variant=industryVariant(model);return variant?[templateAreas.find(area=>area.id===variant.industry.id)!]:areas[model as LegacyModel].map(id=>templateAreas.find(area=>area.id===id)!);}
 export function templatePortrait(model:Model):'man'|'woman'{const variant=industryVariant(model);return variant?(industryModels.indexOf(model as typeof industryModels[number])%2===0?'woman':'man'):['executivo','primeiro','tecnico','engenharia'].includes(model)?'man':'woman';}
