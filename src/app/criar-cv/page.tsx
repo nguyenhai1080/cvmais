@@ -12,6 +12,7 @@ import PhotoPicker from '@/components/photo-picker';
 import CVExportReview from '@/components/cv-export-review';
 import ContentSamples from '@/components/content-samples';
 import { templates, templateAreas, templateMatchesArea } from '@/lib/templates';
+import { safeTemplateReturn } from '@/lib/template-discovery';
 import { sectors } from '@/lib/content-samples';
 import type { SampleFilters, SampleKind } from '@/lib/content-samples';
 import { MAX_ENTRIES, isModel, normaliseCV, canExport, pdfFilename,
@@ -31,6 +32,8 @@ export default function Editor() {const {translate:ui}=useUILanguage();
   const { data, ready, status, saveError, cloud, pending, restorePending, change: storeChange, save } = useCVStorage();
   const [sampleFilters, setSampleFilters] = useState<SampleFilters>({sector:'administracao',level:'first',voice:'neutral'});
   useEffect(()=>{const area=new URLSearchParams(window.location.search).get('area');const sector=area==='engenharia'?'construcao':area;if(sectors.some(item=>item.id===sector))setSampleFilters(current=>({...current,sector:sector!}));},[]);
+  const [libraryHref,setLibraryHref]=useState('/modelos');
+  useEffect(()=>{setLibraryHref(safeTemplateReturn(new URLSearchParams(window.location.search).get('biblioteca')));},[]);
   const [pdfError, setPdfError] = useState('');
   const [exporting, setExporting] = useState(false);
   const [view, setView] = useState<'edit' | 'preview'>('edit');
@@ -115,7 +118,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
 
   return <div className="editor-page editor-v2"><Header />
     <main className="container">
-      <div className="editor-top"><div><Link className="text-link" href="/modelos"><ArrowLeft size={16} />{ui(" Voltar aos modelos")}</Link>
+      <div className="editor-top"><div><Link className="text-link" href={libraryHref}><ArrowLeft size={16} />{ui(" Voltar aos modelos")}</Link>
         <h1>{ui("O teu percurso, nas tuas palavras.")}</h1><p>{ui("Personaliza o teu CV e descarrega um PDF pronto para enviar.")}</p></div>
         <div className="editor-top-actions"><button className="button outline" disabled={!ready || exporting} onClick={save}><Save size={17} />{ui(" Guardar")}</button>
           <CVExportReview data={data} ready={ready} exporting={exporting} onDownload={exportPDF} onEdit={id=>{setView('edit');requestAnimationFrame(()=>{const field=document.getElementById(id);field?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});field?.focus({preventScroll:true});});}}/></div>

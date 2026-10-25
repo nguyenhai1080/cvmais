@@ -829,3 +829,5 @@ for(const id of industryModels){const {industry,layout}=industryVariant(id)!;uiE
 Object.assign(uiEnglish,{'Modelos gerais':'General templates','A mostrar':'Showing','Mostrar mais modelos':'Show more templates','Cada área tem seis edições especializadas. Escolhe um estilo e adapta o conteúdo ao teu percurso.':'Each professional area has six specialised editions. Choose a style and adapt the content to your background.'});
 
 uiEnglish['Abrir a biblioteca de modelos']='Open the template library';
+
+Object.assign(uiEnglish,{'Procurar modelos':'Search templates','Ex.: enfermagem, programador, hotelaria…':'E.g. nursing, developer, hospitality…','Limpar pesquisa':'Clear search','Pesquisa por profissão, área ou nome do modelo, em português ou inglês.':'Search by profession, field or template name, in Portuguese or English.'});

@@ -72,3 +72,9 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 - Original industry sample content, palettes, actual PDF thumbnails, grouped editor selection and standalone /modelos library with shareable industry filters and pagination.
 - All model IDs round-trip through normalisation without rewriting authored content or CV language. Photos remain optional.
 - Real-device and target-market pilot feedback remains pending; no popularity or hiring-performance claims are made.
+
+## Template discovery and return navigation — 25 October 2026
+
+- Local profession/name/industry search across all 82 choices, with common Portuguese/English keywords and accent-insensitive matching; combines with industry and style filters.
+- Library links preserve search, industry and style across reload and editor return. Return destinations are restricted to the local /modelos route.
+- Empty results offer a complete filter reset. Search and clearing controls are translated and work on a narrow viewport. Portuguese remains the default.
