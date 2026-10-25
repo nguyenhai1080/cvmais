@@ -68,3 +68,9 @@ Live checks pass: Portuguese interface and CV defaults, explicit English interfa
 Source 04cee9b. Existing DGC project cmvlbkah40mef0i5fzrjkbvcd, browser owner nguyenhai1080@gmail.com confirmed; connector still GST and not used to mutate. Manual redeploy completed, 100%, v14 online. No schema, environment, credential or PDF-renderer changes.
 
 Live Portuguese review dialog shows the selected Portuguese CV language and actionable fields; clicking the profile field link focuses cv-profile. No owner content was edited. Proof: cvmais-review-v14.png. DB and backup health HTTP 200; guide/canonical/sitemap checks, original persistence fixture and cross-origin portrait/English-language CV save/read tests all pass.
+
+## DGC v15 — 25 October 2026
+
+Source 94ed35f. Verified DGC browser account nguyenhai1080@gmail.com and existing project cmvlbkah40mef0i5fzrjkbvcd; connector remains GST and was not used for mutation. Manual deploy completed at 100%, v15 online.
+
+Live gallery: New filter shows Código, Vital, Estrutura and Acolher; all four PNGs load and validate, and New + Engineering returns Estrutura. Total collection now ten models. Account/CV persistence and primary/legacy authenticated save/read retain the new servico model, English CV language and portrait; original fixture unchanged. DB/backup health HTTP 200; public guidance and canonical/sitemap checks pass. No schema, credential or environment changes. Proof: cvmais-industry-templates-v15.png.
