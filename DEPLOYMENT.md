@@ -80,3 +80,9 @@ Live gallery: New filter shows Código, Vital, Estrutura and Acolher; all four P
 Source 946b970. Fresh browser profile confirmed nguyenhai1080@gmail.com and existing DGC project cmvlbkah40mef0i5fzrjkbvcd. Manual deployment completed at 100%, v16 online. No environment, credential or database schema changes.
 
 Live /modelos: all twelve industry filters return exactly six specialised editions. All 72 new PNGs pass HTTP and PNG-signature checks. The complete library retains ten general models (82 choices). Original persistence fixture survives redeployment; authenticated primary/legacy save/read round-trip preserves saude--formacao, portrait and English CV language. The newly created fictional cross-origin test CV was removed by the established regression script. Guide metadata, seven-entry sitemap, unknown-guide 404 and DB/backup health checks pass. Proof: cvmais-six-per-industry-v16.png.
+
+## DGC v17 — 25 October 2026
+
+Source 12510b5. Browser profile visibly confirmed nguyenhai1080@gmail.com before deployment of existing DGC project cmvlbkah40mef0i5fzrjkbvcd. Manual deployment completed at 100%, v17 online. No environment, schema, credential or PDF-renderer changes.
+
+Live library: enfermagem and nurse with health return six models. The first-job style narrows the set to Cuidar · Formação. Enlarged preview links retain context; opening the editor and following its return link restores all three filters. New blank CV retains Portuguese default. DB and backup health, seven-entry sitemap/guides, original account/CV persistence and primary/legacy authenticated photo/English/model round-trip checks pass. Proof: cvmais-template-search-v17.png.
