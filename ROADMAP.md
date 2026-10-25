@@ -4,7 +4,7 @@ Updated 25 October 2026. This records delivered work and the next launch priorit
 
 ## Delivered
 
-1. Responsive pt-MZ homepage, approved imagery, six distinct portrait-capable CV templates, honest illustrative gallery.
+1. Responsive pt-MZ homepage, approved imagery, 82 selectable CV editions (72 industry editions across six layout families and ten general templates), honest illustrative gallery.
 2. Editor, crop/zoom photo, browser-generated A4 PDF, guest local draft and JSON export; private account library, SQLite autosave, revisions and recovery codes.
 3. Permanent account/CV erasure with password confirmation, session revocation and matching local-copy cleanup.
 4. Resend cvmais.win verified sender, optional email confirmation and expiring single-use password reset; approved owner delivery test reported Delivered. Encrypted daily B2 backup plus real download/restore verification.
@@ -22,6 +22,18 @@ Updated 25 October 2026. This records delivered work and the next launch priorit
 - External StatusCake monitoring is active on the homepage, application/DB health and backup health, every five minutes, with alerts to the owner's email. Isolated Down/Up simulation messages were recorded Sent; simulation is paused. No production outage was induced. See EXTERNAL-MONITORING.md for test IDs, notification routing and free-plan limits.
 - First owner-controlled account pilot completed: owner registered, confirmed email, received recovery mail, personally changed password and signed in. Feedback: no significant difficulty. Verification and reset messages have real Resend Delivered receipts.
 - Technical pilot passed: six PDF styles with short/long data, rendered pagination review, emulated mobile photo/crop/edit/reload/model switch, actual browser portrait PDF export, cloud portrait/content round-trip and 24 automated tests. See PILOT.md for evidence and remaining acceptance work.
+
+## Application guidance — delivered, including interview preparation
+
+All five topics are available on the homepage and /orientacoes, each linking directly to the CV editor:
+
+1. First CV: use real education, projects and volunteering.
+2. Tailoring the CV to a vacancy: match real evidence to requirements.
+3. Application email: illustrative message with local copy controls.
+4. Pre-send checklist: temporary interactive review.
+5. Interview preparation: before/during/after, original labelled STAR examples, first-job introduction, difficult questions, online connection backup plan, employer questions and follow-up. Includes temporary STAR practice notes, local copying and a preparation checklist.
+
+Portuguese for Mozambique is the default; English is available. Examples are explicitly illustrative. No guarantee of employment, invented achievements, recording or external analysis. Practice notes are memory-only and disappear on navigation/reload; users can explicitly copy them to keep them.
 
 ## Next launch priorities
 

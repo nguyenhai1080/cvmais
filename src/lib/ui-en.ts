@@ -1,3 +1,4 @@
+import { interviewTranslationPairs } from './interview-guide.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
 export const uiEnglish: Record<string,string> = {
@@ -835,3 +836,6 @@ Object.assign(uiEnglish,{'Procurar modelos':'Search templates','Ex.: enfermagem,
 Object.assign(uiEnglish,{'Pesquisa por profissão, especialidade, competência ou nome do modelo, em português ou inglês.':'Search by profession, specialism, skill or template name, in Portuguese or English.','Resultados aproximados para a tua pesquisa.':'Approximate matches for your search.','Especialidades sugeridas':'Suggested specialisms','Procurar por':'Search for'});
 
 Object.assign(uiEnglish,{'Especialidades relacionadas':'Related specialisms','Explorar especialidades':'Explore specialisms','A tua pesquisa tem resultados noutras áreas ou estilos. Podes manter o texto e retirar os filtros.':'Your search has results in other fields or styles. Keep your search text and remove the filters.','Ver modelos sem filtros':'View templates without filters','Experimenta outra profissão, especialidade ou sigla, em português ou inglês.':'Try another profession, specialism or abbreviation, in Portuguese or English.'});
+
+for(const [pt,en] of interviewTranslationPairs)uiEnglish[pt]=en;
+uiEnglish['Do primeiro CV à entrevista: orientações práticas para avançares com clareza, ao teu ritmo.']='From your first CV to the interview: practical guidance to move forward clearly, at your own pace.';
