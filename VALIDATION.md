@@ -131,3 +131,5 @@ Live DGC v18 confirmed: telecom 14 results; communication 8; bounded typo notice
 ## Inline search assistance — 25 October 2026
 
 47 tests and production build passed. New tests cover prefix/alias/typo suggestions, PT/EN labels, counts matching actual search, exact acronym safety, selected-filter exclusions and global recovery counts. Local browser: tel suggests Telecomunicações (14); selecting the suggestion then Saúde produces a clear filter-conflict explanation; View templates without filters restores 14 results and retains Telecomunicações. No schema, environment, credentials, template artwork or PDF-renderer changes.
+
+Live v19: counted prefix suggestion, keyboard activation and explicit filter recovery all passed; query retained with 14 results after removing conflicting health filter. Existing CV data survives deployment; DB/backup health HTTP 200. Screenshot: cvmais-search-suggestions-v19.png.
