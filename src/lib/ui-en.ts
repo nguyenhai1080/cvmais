@@ -839,3 +839,5 @@ Object.assign(uiEnglish,{'Especialidades relacionadas':'Related specialisms','Ex
 
 for(const [pt,en] of interviewTranslationPairs)uiEnglish[pt]=en;
 uiEnglish['Do primeiro CV à entrevista: orientações práticas para avançares com clareza, ao teu ritmo.']='From your first CV to the interview: practical guidance to move forward clearly, at your own pace.';
+
+Object.assign(uiEnglish,{'SELECÇÃO CVMAIS':'THE CVMAIS SELECTION','12 estilos para o teu próximo passo.':'12 styles for your next step.','Explorar todos os modelos':'Explore all templates','Cada área tem nove edições especializadas. Escolhe um estilo e adapta o conteúdo ao teu percurso.':'Each professional area has nine specialised editions. Choose a style and adapt the content to your background.'});

@@ -58,7 +58,7 @@ export function tagIdsForTemplate(model:string):string[] {
  const variant=industryVariant(model);
  const ids=variant?[...(sectorTags[variant.industry.id]||[])]:[...(generalTags[model]||[])];
  if(variant?.layout.id==='formacao')ids.push('first-job');
- if(variant?.layout.id==='presenca')ids.push('leadership');
+ if(['presenca','direccao'].includes(variant?.layout.id||''))ids.push('leadership');
  return [...new Set(ids)];
 }
 export const templateTagById=new Map(templateTags.map(tag=>[tag.id,tag]));

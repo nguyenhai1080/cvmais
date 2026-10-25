@@ -139,3 +139,11 @@ Live v19: counted prefix suggestion, keyboard activation and explicit filter rec
 47 existing automated regression tests, typecheck and production build passed. Local HTTP validation checks all five guide routes/canonicals, unknown-guide 404, eight sitemap entries, DB health and all five homepage guidance links. Browser checks: original labelled STAR examples and editor CTA; temporary notes and checklist selection survive PT-to-EN UI change; explicit copying reports success; reload clears notes/checks. At an emulated 390px width, document content is 375px with no horizontal overflow. Portuguese restored after inspection. No PDF-renderer/schema/environment/credential changes. Wider physical-device/native-speaker pilot remains outstanding.
 
 Live DGC v20: all five guide cards and homepage links present, new interview article and editor CTA verified; eight-entry sitemap/canonicals/404, account/CV continuity, cross-origin portrait/English/model round-trip and DB/backup health pass. Local navigation away/back also clears temporary practice notes. Proof: cvmais-five-guides-v20.png. Physical-device/Mozambican native-speaker acceptance remains pending.
+
+## 118 templates and twelve-design homepage — 26 October 2026
+
+48 automated tests, typecheck and production build passed. Coverage verifies 118 persistent model IDs, nine distinct families per industry, twelve unique homepage selections covering all industries and all nine families, stable legacy portrait choices, multilingual search/tag counts and preservation of authored CV content.
+
+479 PDF-file checks passed, including 36 new gallery demos and Portuguese short, English short and long fixtures for every added model. Checked selectable text, accents, fonts, page boundaries and end markers. 36 new PNGs generated from actual PDFs. Local visual review covered creative, executive and technical additions. Actual browser download of tecnologia--digital retained selectable name/profile and English document language.
+
+Local browser: homepage exactly 12 cards, no load-more control, English showcase heading; library total 118, technology 9, responsive 390px content 375px without horizontal overflow. Choosing the new Digital edition retained the existing fictional profile and English CV language. Portuguese UI restored. No schema, credentials, environment or renderer geometry changed.

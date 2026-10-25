@@ -1,6 +1,6 @@
 # Template search and tagging
 
-Updated 25 October 2026. CVMais has 82 template editions, 33 controlled topic tags and 333 template/tag associations. Tags indicate editorial layout suitability; they do not claim that the illustrative candidate has those qualifications.
+Updated 25 October 2026. CVMais has 118 template editions, 33 controlled topic tags and 477 template/tag associations. Tags indicate editorial layout suitability; they do not claim that the illustrative candidate has those qualifications.
 
 ## Research and approach
 
@@ -22,10 +22,10 @@ Telecommunications is separate from communications/marketing. Telecom, telecoms,
 
 | Query (all areas/styles) | Expected behaviour |
 | --- | --- |
-| telecom / telecommunications / telecomunicações | 14 technical/IT choices, preferred technical layouts first |
+| telecom / telecommunications / telecomunicações | 20 technical/IT choices, preferred technical layouts first |
 | telecom engineer / engenheiro de telecomunicações | Same curated telecom designs |
 | 5G / fibra óptica | Same telecom topic coverage |
-| communication | 8 communications-related choices; no wholesale telecom expansion |
+| communication | 11 communications-related choices; no wholesale telecom expansion |
 | IT / HR | Whole-word acronym matches to suitable assigned topics |
 | telecomunications | One-edit fallback, explicitly marked approximate |
 | unknown unrelated word | Honest empty state with reset controls |
@@ -41,3 +41,6 @@ The implementation is local and deterministic. It adds no DB tables, search tele
 Search now offers up to five inline topic buttons with actual result counts under the current filters, including three-character prefixes, aliases and bounded typo handling. Portuguese and English labels match the interface. Empty search offers clearly labelled editorial starting topics, without popularity claims. Buttons remain standard keyboard-accessible controls rather than an ARIA combobox.
 
 If the current search has zero results but the same text finds models outside the selected area/style, the empty state explains the conflict and offers View templates without filters with its true total. Only explicit user action clears area/style; the query is retained. Unknown terms with no global matches show a wording hint and the existing full reset. No new storage, tracking or external search service.
+
+
+The homepage is an explicit twelve-design editorial showcase; its topic chips link to full-library searches. All 118 records are searchable in /modelos. Counts and suggestions automatically follow the expanded catalogue; telecom now covers 20 suitable designs. The New filter identifies the 36 additions in this release.

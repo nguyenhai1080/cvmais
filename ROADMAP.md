@@ -4,7 +4,7 @@ Updated 25 October 2026. This records delivered work and the next launch priorit
 
 ## Delivered
 
-1. Responsive pt-MZ homepage, approved imagery, 82 selectable CV editions (72 industry editions across six layout families and ten general templates), honest illustrative gallery.
+1. Responsive pt-MZ homepage, approved imagery, 118 selectable CV editions (108 industry editions across nine layout families and ten general templates), honest illustrative gallery.
 2. Editor, crop/zoom photo, browser-generated A4 PDF, guest local draft and JSON export; private account library, SQLite autosave, revisions and recovery codes.
 3. Permanent account/CV erasure with password confirmation, session revocation and matching local-copy cleanup.
 4. Resend cvmais.win verified sender, optional email confirmation and expiring single-use password reset; approved owner delivery test reported Delivered. Encrypted daily B2 backup plus real download/restore verification.
@@ -101,3 +101,10 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 
 - Inline bilingual topic suggestions include truthful filtered result counts and support partial tag names.
 - Zero-result filter conflicts offer an explicit way to remove industry/style filters while keeping the typed query.
+
+
+## Expanded library and homepage selection — 26 October 2026
+
+- 118 models total: 108 industry editions (twelve industries × nine structural families) and ten general templates. Added Expressivo, Direcção and Digital editions, based on the existing creative, executive and technical layout systems.
+- Homepage now shows exactly twelve editorial selections, one per industry and covering all nine structural families. A clear link opens the complete library; search, filters and loading more are reserved for /modelos. Homepage topic links open the library rather than changing the curated twelve.
+- 36 new PDF-generated previews; existing model IDs and portrait choices retained. Optional photos, independent PT/EN CV language and authored content remain intact.

@@ -6,6 +6,9 @@ export const layoutEditions = [
  {id:'editorial',label:'Editorial',en:'Editorial',base:'servico',description:'Retrato centrado e coluna de apoio à esquerda.',enDescription:'Centred portrait and a left support column.'},
  {id:'formacao',label:'Formação',en:'Education',base:'saude',description:'Formação primeiro, com informação de apoio ao lado.',enDescription:'Education first, with supporting information alongside.'},
  {id:'estrutura',label:'Estrutura',en:'Structured',base:'engenharia',description:'Uma coluna compacta e títulos em faixas.',enDescription:'One compact column and banded section headings.'},
+ {id:'expressivo',label:'Expressivo',en:'Expressive',base:'criativo',description:'Retrato circular, cabeçalho suave e apontamentos de cor.',enDescription:'Circular portrait, a soft masthead and colour accents.'},
+ {id:'direccao',label:'Direcção',en:'Executive',base:'executivo',description:'Tipografia serifada, regra dourada e percurso em duas colunas.',enDescription:'Serif typography, a gold rule and a two-column career history.'},
+ {id:'digital',label:'Digital',en:'Digital',base:'tecnico',description:'Cabeçalho grafite, detalhe ciano e conteúdo numa coluna.',enDescription:'Graphite masthead, cyan detailing and single-column content.'},
 ] as const;
 export const industryEditions = [
  {id:'administracao',label:'Administração',brand:'Agenda',accent:'#245871',pale:'#EDF4F7',role:'Assistente de administração',course:'Formação em Gestão Administrativa',profile:'Apoio as operações administrativas com organização documental, acompanhamento de pedidos e preparação de reuniões. Valorizo a informação clara e a colaboração entre equipas.',tasks:['Organização de documentos e arquivo','Preparação de agendas e reuniões','Acompanhamento de pedidos internos'],skills:['Gestão documental','Microsoft Excel','Organização de agendas','Atendimento','Comunicação']},

@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import {discoverTemplates, readTemplateFilters, templateLibraryHref, templateEditorHref, safeTemplateReturn, defaultTemplateFilters} from '../src/lib/template-discovery.ts';
 
 test('discovery finds professions in Portuguese and English without accents and combines filters',()=>{
-  for(const query of ['enfermagem','nurse','saúde','saude']) assert.equal(discoverTemplates({area:'saude',style:'Todos',query}).length,6,query);
-  for(const query of ['programador','developer','software']) assert.equal(discoverTemplates({area:'tecnologia',style:'Todos',query}).length,6,query);
-  assert.equal(discoverTemplates({area:'hotelaria',style:'Criativo',query:'receptionist'}).length,1);
+  for(const query of ['enfermagem','nurse','saúde','saude']) assert.equal(discoverTemplates({area:'saude',style:'Todos',query}).length,9,query);
+  for(const query of ['programador','developer','software']) assert.equal(discoverTemplates({area:'tecnologia',style:'Todos',query}).length,9,query);
+  assert.equal(discoverTemplates({area:'hotelaria',style:'Criativo',query:'receptionist'}).length,2);
   assert.equal(discoverTemplates({area:'tecnologia',style:'Todos',query:'Byte timeline'}).length,1);
   assert.equal(discoverTemplates({...defaultTemplateFilters,query:'xyz-inexistent'}).length,0);
-  assert.equal(discoverTemplates(defaultTemplateFilters).length,82);
+  assert.equal(discoverTemplates(defaultTemplateFilters).length,118);
 });
 test('template library URLs retain selection and search through editor and sanitise foreign return targets',()=>{
   const filters={area:'saude',style:'Primeiro emprego',query:'enfermagem'};
@@ -32,7 +32,7 @@ test('all templates expose curated multilingual tags and every tag is assigned',
  assert.equal(new Set(templateTags.map(t=>t.id)).size,templateTags.length);
  for(const t of templates){assert.ok(t.tagIds.length>=2,t.id);assert.equal(new Set(t.tagIds).size,t.tagIds.length);for(const id of t.tagIds)assert.ok(templateTagById.has(id),id);}
  for(const tag of templateTags){assert.ok(tag.pt&&tag.en&&tag.aliases.length);assert.ok(templates.some(t=>t.tagIds.includes(tag.id)),tag.id);}
- for(const [area,query] of Object.entries({administracao:'human resources',contabilidade:'auditor',tecnologia:'telecom',saude:'nursing',educacao:'teacher',engenharia:'AutoCAD',logistica:'supply chain',vendas:'customer service',hotelaria:'receptionist',comunicacao:'public relations',agricultura:'agronomy',projectos:'NGO'}))assert.equal(discoverTemplates({area,style:'Todos',query}).length,6,area);
+ for(const [area,query] of Object.entries({administracao:'human resources',contabilidade:'auditor',tecnologia:'telecom',saude:'nursing',educacao:'teacher',engenharia:'AutoCAD',logistica:'supply chain',vendas:'customer service',hotelaria:'receptionist',comunicacao:'public relations',agricultura:'agronomy',projectos:'NGO'}))assert.equal(discoverTemplates({area,style:'Todos',query}).length,9,area);
 });
 test('telecom equivalents find suitable engineering/IT designs without conflating marketing',()=>{
  const expected=search('telecom').map(t=>t.id);
@@ -61,7 +61,7 @@ import {templateTagSuggestions,resultsOutsideTemplateFilters} from '../src/lib/t
 test('tag suggestions support prefixes, aliases and languages with truthful filtered counts',()=>{
  const base={...defaultTemplateFilters,query:'tel'};
  const telecom=templateTagSuggestions(base,'en').find(s=>s.id==='telecom');
- assert.ok(telecom);assert.equal(telecom.label,'Telecommunications');assert.equal(telecom.count,14);
+ assert.ok(telecom);assert.equal(telecom.label,'Telecommunications');assert.equal(telecom.count,20);
  for(const locale of ['pt','en'])for(const query of ['tel','RF','nurse','telecomunications',''])for(const s of templateTagSuggestions({...defaultTemplateFilters,query},locale))assert.equal(s.count,discoverTemplates({...defaultTemplateFilters,query:s.label}).length);
  assert.equal(templateTagSuggestions({...base,area:'saude'},'en').length,0);
  assert.equal(templateTagSuggestions({...base,query:'unknownxyz'},'pt').length,0);
@@ -70,8 +70,8 @@ test('tag suggestions support prefixes, aliases and languages with truthful filt
 });
 test('empty-state recovery offers real results outside facets while retaining search text',()=>{
  const blocked={area:'saude',style:'Todos',query:'telecom'};
- assert.equal(discoverTemplates(blocked).length,0);assert.equal(resultsOutsideTemplateFilters(blocked),14);
- const recovered={...blocked,area:'all',style:'Todos'};assert.equal(recovered.query,'telecom');assert.equal(discoverTemplates(recovered).length,14);
+ assert.equal(discoverTemplates(blocked).length,0);assert.equal(resultsOutsideTemplateFilters(blocked),20);
+ const recovered={...blocked,area:'all',style:'Todos'};assert.equal(recovered.query,'telecom');assert.equal(discoverTemplates(recovered).length,20);
  assert.equal(resultsOutsideTemplateFilters({...blocked,query:'unknownxyz'}),0);
  assert.equal(resultsOutsideTemplateFilters(defaultTemplateFilters),0);
 });

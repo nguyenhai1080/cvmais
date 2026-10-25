@@ -1,8 +1,8 @@
 import { tagIdsForTemplate } from './template-taxonomy.ts';
-import { industryModels, industryVariant } from './industry-catalogue.ts';
+import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 import { emptyCV, type Model, type LegacyModel, type CVData } from './cv.ts';
 export type TemplateCategory = 'Profissional' | 'Criativo' | 'Primeiro emprego';
-export const newTemplateIds:Model[]=industryModels;
+export const newTemplateIds:Model[]=industryModels.filter(id=>['expressivo','direccao','digital'].includes(industryVariant(id)!.layout.id));
 export const templateAreas=[{id:'administracao',label:'Administração'},{id:'contabilidade',label:'Contabilidade e finanças'},{id:'tecnologia',label:'Tecnologias de informação'},{id:'saude',label:'Saúde e cuidados'},{id:'educacao',label:'Educação e formação'},{id:'engenharia',label:'Engenharia e construção'},{id:'logistica',label:'Logística e armazém'},{id:'vendas',label:'Vendas e atendimento'},{id:'hotelaria',label:'Hotelaria e turismo'},{id:'comunicacao',label:'Comunicação e marketing'},{id:'agricultura',label:'Agricultura'},{id:'projectos',label:'ONG e projectos comunitários'}] as const;
 export type TemplateArea=(typeof templateAreas)[number]['id'];
 const areas:Record<LegacyModel,TemplateArea[]>={classico:['administracao','logistica','vendas'],moderno:['administracao','tecnologia','projectos'],minimalista:['contabilidade','engenharia','educacao'],criativo:['comunicacao'],executivo:['contabilidade','administracao','projectos'],primeiro:['educacao','tecnologia','vendas'],tecnico:['tecnologia','comunicacao'],saude:['saude','educacao','projectos'],engenharia:['engenharia','logistica','agricultura'],servico:['hotelaria','vendas','administracao']};
@@ -18,10 +18,10 @@ const generalTemplates: { id: Model; name: string; category: TemplateCategory; d
   {id:'engenharia',name:'Estrutura',category:'Profissional',description:'Um percurso técnico com estrutura e precisão.',colour:'#2556A0',detail:'Uma coluna · Secções em faixas · Azul e ocre'},
   {id:'servico',name:'Acolher',category:'Profissional',description:'Uma apresentação próxima, com elegância.',colour:'#824253',detail:'Retrato centrado · Tipografia editorial · Coluna de apoio à esquerda'},
 ];
-export const templates=[...generalTemplates,...industryModels.map(id=>{const {industry,layout}=industryVariant(id)!;return {id,name:`${industry.brand} · ${layout.label}`,category:(layout.id==='editorial'?'Criativo':layout.id==='formacao'?'Primeiro emprego':'Profissional') as TemplateCategory,description:`${industry.label} · ${layout.label}`,colour:industry.accent,detail:layout.description};})].map(template=>({...template,tagIds:tagIdsForTemplate(template.id)}));
+export const templates=[...generalTemplates,...industryModels.map(id=>{const {industry,layout}=industryVariant(id)!;return {id,name:`${industry.brand} · ${layout.label}`,category:(['editorial','expressivo'].includes(layout.id)?'Criativo':layout.id==='formacao'?'Primeiro emprego':'Profissional') as TemplateCategory,description:`${industry.label} · ${layout.label}`,colour:industry.accent,detail:layout.description};})].map(template=>({...template,tagIds:tagIdsForTemplate(template.id)}));
 export function templateMatchesArea(model:Model,area:string){if(area==='all')return true;const variant=industryVariant(model);if(area==='gerais')return !variant;return variant?.industry.id===area;}
 export function areasForTemplate(model:Model){const variant=industryVariant(model);return variant?[templateAreas.find(area=>area.id===variant.industry.id)!]:areas[model as LegacyModel].map(id=>templateAreas.find(area=>area.id===id)!);}
-export function templatePortrait(model:Model):'man'|'woman'{const variant=industryVariant(model);return variant?(industryModels.indexOf(model as typeof industryModels[number])%2===0?'woman':'man'):['executivo','primeiro','tecnico','engenharia'].includes(model)?'man':'woman';}
+export function templatePortrait(model:Model):'man'|'woman'{const variant=industryVariant(model);return variant?(layoutEditions.findIndex(layout=>layout.id===variant.layout.id)%2===0?'woman':'man'):['executivo','primeiro','tecnico','engenharia'].includes(model)?'man':'woman';}
 /** Fictional demonstration content; never a customer or testimonial. */
 export function templateSample(model: Model): CVData {
   const variant=industryVariant(model);
@@ -51,3 +51,13 @@ export function templateSample(model: Model): CVData {
   if (model === 'executivo') return { ...sample, name: 'Daniel Mondlane', email: 'daniel@exemplo.com', experiences: sample.experiences.map((entry,i) => ({ ...entry, title: i === 0 ? 'Director de operações' : 'Coordenador de operações' })), role: 'Director de operações', profile: 'Liderança de operações com foco em equipas, qualidade e sustentabilidade do negócio. Experiência no planeamento estratégico e na execução de iniciativas que melhoram a organização e o serviço ao cliente.' };
   return sample;
 }
+
+// Editorial showcase: one collection per industry, all nine layout families represented.
+// These are design selections, not popularity or hiring-performance rankings.
+export const featuredTemplateIds:readonly Model[]=[
+ 'administracao--presenca','contabilidade--direccao','tecnologia--digital',
+ 'saude--formacao','educacao--percurso','engenharia--estrutura',
+ 'logistica--linha','vendas--expressivo','hotelaria--editorial',
+ 'comunicacao--expressivo','agricultura--direccao','projectos--presenca',
+];
+export const featuredTemplates=featuredTemplateIds.map(id=>templates.find(template=>template.id===id)!);
