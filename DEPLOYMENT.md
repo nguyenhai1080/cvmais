@@ -104,3 +104,9 @@ Live browser: tel offers Telecomunicações (14); keyboard selection opens the c
 Source ff735d7. Browser profile confirmed DGC nguyenhai1080@gmail.com before manual deployment of existing project cmvlbkah40mef0i5fzrjkbvcd. Platform reports v20 online, 100%, deployment timestamp 2026-10-26 00:02. No schema, environment, credential or PDF-renderer changes.
 
 Live checks confirm all five guide links on the homepage, five guide cards in /orientacoes, the new interview article, labelled fictional examples, temporary STAR practice fields/checklist and direct editor CTA. HTTP checks pass guide canonicals, unknown-guide 404 and eight-entry sitemap; DB/backup health and original account/CV persistence pass. Established primary/legacy authenticated photo/English/specialised-model round-trip passes. The local browser additionally confirmed copied notes, translation without rewriting notes, and clearing after reload and navigating away/back. Proof: cvmais-five-guides-v20.png.
+
+## DGC v21 — 26 October 2026
+
+Source 9a51ca6. Fresh browser profile confirmed DGC nguyenhai1080@gmail.com before manual deployment of existing project cmvlbkah40mef0i5fzrjkbvcd. Platform reports v21 online, 100%. No schema, environment or credential changes.
+
+Live checks: homepage exactly twelve editorial cards and no load-more control, full library 118, engineering filter nine; all 36 new PNG assets pass HTTP/PNG checks, all twelve homepage images load. Authenticated primary/legacy save/read preserves new tecnologia--digital ID, portrait and English CV language; original account/CV fixture survives redeployment. Five guides, eight-entry sitemap, canonical/404, DB and backup health pass. Proof: cvmais-twelve-featured-v21.png. New catalogue search counts follow the expanded registry (telecom 20). The underlying renderer geometry remains the existing tested nine-family system.
