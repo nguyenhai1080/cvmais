@@ -35,3 +35,9 @@ Telecommunications is separate from communications/marketing. Telecom, telecoms,
 Edit src/lib/template-taxonomy.ts to add a concept, its aliases and curated assignments. Avoid making every concept interchangeable or tagging every template with every profession. Give each new concept a PT and EN label, test its intended matches and excluded neighbours, and inspect the top results and mobile chips. A new role does not require duplicating a layout. The current dictionary is intentionally finite; future new terms need editorial review.
 
 The implementation is local and deterministic. It adds no DB tables, search telemetry, tracking, credentials, paid services or changes to PDF output. Existing URLs, combined filters and editor-return context remain supported. Actual target-market and physical-device pilot feedback is still pending.
+
+## Inline suggestions and filter recovery — 25 October 2026
+
+Search now offers up to five inline topic buttons with actual result counts under the current filters, including three-character prefixes, aliases and bounded typo handling. Portuguese and English labels match the interface. Empty search offers clearly labelled editorial starting topics, without popularity claims. Buttons remain standard keyboard-accessible controls rather than an ARIA combobox.
+
+If the current search has zero results but the same text finds models outside the selected area/style, the empty state explains the conflict and offers View templates without filters with its true total. Only explicit user action clears area/style; the query is retained. Unknown terms with no global matches show a wording hint and the existing full reset. No new storage, tracking or external search service.

@@ -81,3 +81,22 @@ export function visibleTemplateTags(model:Model,query:string):TemplateTag[]{
  const template=templates.find(t=>t.id===model)!;const terms=queryTokens(query);
  return template.tagIds.map((id,index)=>({tag:templateTagById.get(id)!,score:tagMatch(id,terms,true),index})).sort((a,b)=>b.score-a.score||a.index-b.index).slice(0,3).map(item=>item.tag);
 }
+/** Inline suggestions use real result counts under the current explicit filters. */
+export function templateTagSuggestions(filters:TemplateFilters,locale:'pt'|'en'){
+ const terms=queryTokens(filters.query);
+ const starters=['telecom','nursing','accounting','logistics','first-job'];
+ if(filters.query.trim()&&(!terms.length||terms.some(term=>term.length<2)))return [];
+ const candidates=templateTags.map((tag,index)=>{
+   if([tag.pt,tag.en].some(label=>fold(label)===fold(filters.query.trim())))return {tag,index,score:0};
+   if(!filters.query.trim())return {tag,index,score:starters.includes(tag.id)?100-starters.indexOf(tag.id):0};
+   const words=tagWords.get(tag.id)!;
+   let score=0;
+   for(const term of terms){const match=words.has(term)?3:term.length>=3&&[...words].some(word=>word.startsWith(term))?2:wordMatch(term,words,true);if(!match)return {tag,index,score:0};score+=match;}
+   return {tag,index,score};
+ }).filter(item=>item.score>0).sort((a,b)=>b.score-a.score||a.index-b.index);
+ return candidates.map(({tag})=>{const label=locale==='en'?tag.en:tag.pt;return {id:tag.id,label,count:discoverTemplates({...filters,query:label}).length};}).filter(item=>item.count>0).slice(0,5);
+}
+export function resultsOutsideTemplateFilters(filters:TemplateFilters){
+ if(!filters.query.trim()||(filters.area==='all'&&filters.style==='Todos'))return 0;
+ return discoverTemplates({...filters,area:'all',style:'Todos'}).length;
+}

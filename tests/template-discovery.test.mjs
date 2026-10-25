@@ -56,3 +56,22 @@ test('short abbreviations match whole words and one-edit fallback never broadens
  assert.equal(search('thisworddoesnotexist').length,0);
  assert.ok(search('project manager').some(t=>t.tagIds.includes('project-management')));
 });
+
+import {templateTagSuggestions,resultsOutsideTemplateFilters} from '../src/lib/template-discovery.ts';
+test('tag suggestions support prefixes, aliases and languages with truthful filtered counts',()=>{
+ const base={...defaultTemplateFilters,query:'tel'};
+ const telecom=templateTagSuggestions(base,'en').find(s=>s.id==='telecom');
+ assert.ok(telecom);assert.equal(telecom.label,'Telecommunications');assert.equal(telecom.count,14);
+ for(const locale of ['pt','en'])for(const query of ['tel','RF','nurse','telecomunications',''])for(const s of templateTagSuggestions({...defaultTemplateFilters,query},locale))assert.equal(s.count,discoverTemplates({...defaultTemplateFilters,query:s.label}).length);
+ assert.equal(templateTagSuggestions({...base,area:'saude'},'en').length,0);
+ assert.equal(templateTagSuggestions({...base,query:'unknownxyz'},'pt').length,0);
+ assert.ok(templateTagSuggestions({...base,query:'IT'},'en').every(s=>s.id==='it-support'));
+ assert.ok(!templateTagSuggestions({...base,query:'Telecommunications'},'en').some(s=>s.id==='telecom'));
+});
+test('empty-state recovery offers real results outside facets while retaining search text',()=>{
+ const blocked={area:'saude',style:'Todos',query:'telecom'};
+ assert.equal(discoverTemplates(blocked).length,0);assert.equal(resultsOutsideTemplateFilters(blocked),14);
+ const recovered={...blocked,area:'all',style:'Todos'};assert.equal(recovered.query,'telecom');assert.equal(discoverTemplates(recovered).length,14);
+ assert.equal(resultsOutsideTemplateFilters({...blocked,query:'unknownxyz'}),0);
+ assert.equal(resultsOutsideTemplateFilters(defaultTemplateFilters),0);
+});

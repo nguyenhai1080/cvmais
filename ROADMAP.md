@@ -84,3 +84,8 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 - 33 bilingual topic tags, 333 curated assignments across 82 template editions, aliases and role/skill abbreviations; see SEARCH.md.
 - Weighted name/tag matching, whole-word short acronyms, bounded one-edit fallback only after no strict results, explicit approximate notice, visible clickable topic chips.
 - Telecom is covered by technical/IT tags and remains distinct from communication/marketing. Filters and editor return context remain intact.
+
+## Search suggestions and filter recovery — 25 October 2026
+
+- Inline bilingual topic suggestions include truthful filtered result counts and support partial tag names.
+- Zero-result filter conflicts offer an explicit way to remove industry/style filters while keeping the typed query.
