@@ -854,3 +854,14 @@ Object.assign(uiEnglish,{
  'O CVMais é operado pela Soltech LDA, responsável pelo tratamento dos dados do serviço.':'CVMais is operated by Soltech LDA, responsible for processing service data.',
  'Ainda não adicionaste formação. Se estás a começar, considera incluir a escola, um curso ou formação relevante. Podes descarregar sem esta secção.':'You have not added education. If you are starting out, consider including school, a course or relevant training. You can download without this section.'
 });
+
+Object.assign(uiEnglish,{
+ "Mudar para cvmais.co.mz · CVMais": "Move to cvmais.co.mz · CVMais",
+ "Confirma que o editor indica que as alterações foram guardadas. Em cvmais.co.mz, entra com o mesmo email e palavra-passe e abre «Os meus CVs». Não precisas de criar outra conta. As sessões de início de sessão são próprias de cada endereço.": "Make sure the editor confirms that your changes are saved. At cvmais.co.mz, sign in with the same email and password and open My CVs. You do not need another account. Each address has its own sign-in sessions.",
+ "editor em cvmais.co.mz": "editor at cvmais.co.mz",
+ "Confirma o conteúdo e a fotografia. O rascunho anterior continua no endereço antigo; o novo passa a ficar neste navegador em cvmais.co.mz.": "Check the content and photo. The previous draft stays at the old address; the new one is saved in this browser at cvmais.co.mz.",
+ "Continuar em cvmais.co.mz →": "Continue at cvmais.co.mz →",
+ "O CVMais já está em cvmais.co.mz.": "CVMais is now at cvmais.co.mz.",
+ "Abrir cvmais.co.mz ↗": "Open cvmais.co.mz ↗",
+});
+Object.assign(uiEnglish,{' ou no ':' or in the ','Abre «Mais opções e cópias de segurança» e selecciona «Descarregar cópia de segurança». Guarda o ficheiro JSON num local privado.':'Open “More options and backups” and choose “Download backup”. Keep the JSON file private.',' e, em «Mais opções e cópias de segurança», selecciona «Importar cópia de segurança». Revê o nome do CV antes de confirmar.':' and, under “More options and backups”, choose “Import backup”. Review the CV name before confirming.'});

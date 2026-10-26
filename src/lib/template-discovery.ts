@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from './site.ts';
 import { templates, templateAreas, templateMatchesArea, areasForTemplate, newTemplateIds } from './templates.ts';
 import { industryVariant } from './industry-catalogue.ts';
 import { uiEnglish } from './ui-en.ts';
@@ -49,8 +50,8 @@ export function templateLibraryHref(filters: TemplateFilters) {
 }
 export function safeTemplateReturn(value: string | null) {
   if (!value || !value.startsWith('/modelos')) return '/modelos';
-  const url = new URL(value, 'https://cvmais.win');
-  if (url.origin !== 'https://cvmais.win' || url.pathname !== '/modelos') return '/modelos';
+  const url = new URL(value, SITE_ORIGIN);
+  if (url.origin !== SITE_ORIGIN || url.pathname !== '/modelos') return '/modelos';
   return templateLibraryHref(readTemplateFilters(url.searchParams));
 }
 export function templateEditorHref(model: Model, filters: TemplateFilters) {

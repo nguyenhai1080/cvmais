@@ -117,3 +117,7 @@ Owner confirmed operator Soltech LDA and public contact admin@soltech.co.mz. Add
 Web preview fonts now use locally subsetted Latin/extended-Latin WOFF2 (169,760 bytes versus 1,678,384 bytes full TTF; approximately 90% smaller for these four faces). Modified faces renamed CVMaisSans/CVMaisSerif; original OFL notices retained. Full TTFs remain unchanged for PDF export, loaded only when exporting. This is not a claim of a 90% reduction in total page traffic; interface Google fonts and other resources remain.
 
 Next: physical-device/slow-network pilot and native PT-MZ review, then durable email delivery retries. Domain purchase/migration, revenue model, authentic social proof and community operations remain owner/business decisions; no changes to domain/DNS or made-up endorsements.
+
+## Official domain — 26 October 2026
+
+Migration to cvmais.co.mz: official metadata and public redirects, explicit preservation of old guest drafts/auth/API, transfer guide for both earlier origins. Existing accounts/database unchanged. Keep cvmais.win active for old guest copies; no whole-site forced redirect that prevents export. Current mail sender remains verified on cvmais.win while links point to the new APP_ORIGIN. Acceptance requires TLS, public/WWW redirect, canonical/sitemap, origin-scoped account round-trip, DB/backup health and external monitor destination checks.
