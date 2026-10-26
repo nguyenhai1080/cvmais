@@ -1,7 +1,7 @@
 # CVMais
 
 Next.js application in Portuguese for Mozambique. Canonical source: `D:\Projects\CVMais`.
-Primary site: https://cvmais.win. Legacy DGC address: https://cvmais-dgc.n1.tinhgon.xyz. Source: https://github.com/nguyenhai1080/cvmais.git.
+Primary site: https://cvmais.co.mz. Previous domain: https://cvmais.win. Legacy DGC address: https://cvmais-dgc.n1.tinhgon.xyz. Source: https://github.com/nguyenhai1080/cvmais.git.
 
 ## Development
 
@@ -54,7 +54,7 @@ The photo revision adds full-width identity blocks, contact icons, experience ti
 
 ## Custom domain and migration
 
-cvmais.win is the primary public address; www redirects to the root with its path. Both A records point to 103.138.88.28, DNS-only in Cloudflare, with Vibehost HTTPS. APP_ORIGIN must be https://cvmais.win so new authentication emails use the new address. APP_ALLOWED_ORIGINS keeps the legacy DGC address working during transition. Account data stays in the same SQLite database; cookies and guest localStorage are isolated by origin. The legacy address shows a migration notice and /mudar-endereco explains JSON export/import. No automatic redirect moves or uploads guest drafts. Homepage canonical/Open Graph and sitemap use cvmais.win; private/editor/auth paths carry X-Robots-Tag noindex, nofollow and are excluded from robots. See ROADMAP.md for remaining launch work.
+cvmais.co.mz is the official public address. Registar apex A points to DGC 103.138.88.28 with TTL 300; existing www CNAME resolves through the apex. Both names have Vibehost HTTPS, and www redirects to the root while preserving paths. APP_ORIGIN is https://cvmais.co.mz; APP_ALLOWED_ORIGINS retains cvmais.win and the legacy DGC origin. Account data stays in the same SQLite database; cookies and guest drafts are origin scoped. Public old URLs redirect; old editor/auth/API and /mudar-endereco remain available for export/import and pending saves. Canonical/Open Graph, sitemap and robots use the official domain. The currently verified Resend sender remains on cvmais.win; account links use the official origin. DNS caches that retained the former 14400-second record can temporarily continue resolving the initial 8.8.8.8 address; never bypass browser certificate warnings. See DEPLOYMENT.md for verified results.
 
 ## Backup operations
 

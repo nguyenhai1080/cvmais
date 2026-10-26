@@ -6,9 +6,9 @@ Prepared/configured 24 October 2026 in the owner's StatusCake account, email ngu
 
 | Name | URL | Test ID | Interval |
 | --- | --- | --- | --- |
-| CVMais - Aplicação e base de dados | https://cvmais.win/api/health | 8040391 | 300 seconds |
-| CVMais - Cópias de segurança | https://cvmais.win/api/health/backup | 8040392 | 300 seconds |
-| CVMais - Página inicial | https://cvmais.win/ | 8040393 | 300 seconds |
+| CVMais - Aplicação e base de dados | https://cvmais.co.mz/api/health | 8040391 | 300 seconds |
+| CVMais - Cópias de segurança | https://cvmais.co.mz/api/health/backup | 8040392 | 300 seconds |
+| CVMais - Página inicial | https://cvmais.co.mz/ | 8040393 | 300 seconds |
 
 Notification group: Default Contact Group, ID 381072. The group contains only nguyenhai1080@gmail.com, zero SMS recipients, and repeat alerts are disabled. The application monitor uses the default two confirmation servers. Public probes use no authentication, cookies, private headers, CV data or server secrets. No StatusCake API credential was created or copied.
 
@@ -31,3 +31,10 @@ A fourth test, ID 8040394, is named CVMais - TESTE SIMULADO de alerta - sem inci
 Completed: StatusCake history shows Down email Sent at 2026-10-24 11:28 UTC and Up email Sent at 11:30 UTC, both to nguyenhai1080@gmail.com. The simulation now targets the healthy /api/health URL and is paused. The dashboard shows three active production monitors and one paused simulation; all three production monitors have successful measured responses. Sent is the provider status and is not an independent inbox-delivery receipt.
 
 Official plan reference checked on setup date: https://www.statuscake.com/pricing/ (Free: small businesses allowed, 10 monitors, five-minute checks). This is the setup used; future plan changes should be checked in the provider account before enabling paid features.
+
+
+## Official domain migration — 26 October 2026
+
+The three existing production test URLs were updated through StatusCake to https://cvmais.co.mz (homepage, /api/health, /api/health/backup); each Save Now returned "Your test has been updated" and the new URL. Original IDs, five-minute interval, contact group and unpaused setting preserved. Simulation remains paused. No new API key or recipient created. Test history spans the old and new URL and must not be represented as a long uptime history solely for cvmais.co.mz.
+
+StatusCake application test 8040391 shows an HTTP 200 execution at 26 October 2026 13:05:06 UTC (Sydney), after its URL was saved as https://cvmais.co.mz/api/health. Earlier rows precede the migration and must not be treated as new-domain evidence.
