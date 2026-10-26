@@ -841,3 +841,16 @@ for(const [pt,en] of interviewTranslationPairs)uiEnglish[pt]=en;
 uiEnglish['Do primeiro CV à entrevista: orientações práticas para avançares com clareza, ao teu ritmo.']='From your first CV to the interview: practical guidance to move forward clearly, at your own pace.';
 
 Object.assign(uiEnglish,{'SELECÇÃO CVMAIS':'THE CVMAIS SELECTION','12 estilos para o teu próximo passo.':'12 styles for your next step.','Explorar todos os modelos':'Explore all templates','Cada área tem nove edições especializadas. Escolhe um estilo e adapta o conteúdo ao teu percurso.':'Each professional area has nine specialised editions. Choose a style and adapt the content to your background.'});
+Object.assign(uiEnglish,{
+ 'Mudar modelo':'Change template','Escolher modelo':'Choose a template','Modelo actual':'Current template',
+ 'Muda o estilo sem substituir o texto, a fotografia ou o idioma do teu CV.':'Change the style without replacing your CV text, photo or language.',
+ 'Mais opções e cópias de segurança':'More options and backups','Gratuito':'Free',
+ 'Sobre e contacto':'About and contact','Termos de utilização':'Terms of use',
+ 'Orientações práticas para preparar a tua candidatura.':'Practical guidance to prepare your application.',
+ '12 escolhas para o teu próximo passo.':'12 selections for your next step.',
+ 'Explorar versões por área':'Explore industry editions',
+ '10 modelos gerais e 108 versões por área, com nove famílias de composição partilhadas. As versões adaptam as cores e os exemplos à profissão; não são 118 composições diferentes.':'10 general templates and 108 industry editions using nine shared layout families. Editions adapt colours and examples to the profession; these are not 118 different layouts.',
+ 'Responsável e contacto':'Operator and contact',
+ 'O CVMais é operado pela Soltech LDA, responsável pelo tratamento dos dados do serviço.':'CVMais is operated by Soltech LDA, responsible for processing service data.',
+ 'Ainda não adicionaste formação. Se estás a começar, considera incluir a escola, um curso ou formação relevante. Podes descarregar sem esta secção.':'You have not added education. If you are starting out, consider including school, a course or relevant training. You can download without this section.'
+});

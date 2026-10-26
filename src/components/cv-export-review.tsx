@@ -4,7 +4,7 @@ import { Download, ListChecks, X, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { useUILanguage } from '@/lib/ui-language';
 import { canExport, type CVData } from '@/lib/cv';
 import { reviewCV } from '@/lib/cv-review';
-const explanations={placeholder:'Pode haver texto de exemplo entre parênteses rectos. Confirma se deve ficar no teu CV.',email:'O formato do email parece incompleto. Confirma o endereço antes de enviar.',contact:'Ainda não indicaste email nem telemóvel. Considera adicionar um contacto para receber respostas.',name:'Adiciona o teu nome para identificar o CV.',content:'Adiciona pelo menos uma secção sobre o teu percurso.'};
+const explanations={education:'Ainda não adicionaste formação. Se estás a começar, considera incluir a escola, um curso ou formação relevante. Podes descarregar sem esta secção.',placeholder:'Pode haver texto de exemplo entre parênteses rectos. Confirma se deve ficar no teu CV.',email:'O formato do email parece incompleto. Confirma o endereço antes de enviar.',contact:'Ainda não indicaste email nem telemóvel. Considera adicionar um contacto para receber respostas.',name:'Adiciona o teu nome para identificar o CV.',content:'Adiciona pelo menos uma secção sobre o teu percurso.'};
 export default function CVExportReview({data,ready,exporting,onDownload,onEdit}:{data:CVData;ready:boolean;exporting:boolean;onDownload:()=>Promise<void>;onEdit:(id:string)=>void}){
  const {translate:ui}=useUILanguage();const dialog=useRef<HTMLDialogElement>(null);const heading=useId();const issues=reviewCV(data);
  function open(){dialog.current?.showModal();}

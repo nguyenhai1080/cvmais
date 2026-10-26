@@ -1,5 +1,5 @@
 import { hasEntryContent, type CVData } from './cv.ts';
-export type ReviewIssue = { kind:'placeholder'|'email'|'contact'|'name'|'content'; target:string; label:string; entry?:number; detail?:string };
+export type ReviewIssue = { kind:'placeholder'|'email'|'contact'|'name'|'content'|'education'; target:string; label:string; entry?:number; detail?:string };
 // Possible template markers only. This is not a claim about accuracy or hiring outcomes.
 export function hasSampleMarker(text:string):boolean{return /\[[^\]\n]{1,100}\]/u.test(text);}
 export function reviewCV(data:CVData):ReviewIssue[]{
@@ -11,5 +11,6 @@ export function reviewCV(data:CVData):ReviewIssue[]{
  if(!data.profile.trim()&&!data.skills.trim()&&!data.languages.trim()&&!data.experiences.some(hasEntryContent)&&!data.education.some(hasEntryContent))issues.push({kind:'content',target:'cv-profile',label:'Perfil profissional'});
  if(data.email.trim()&&!hasSampleMarker(data.email)&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim()))issues.push({kind:'email',target:'cv-email',label:'Email'});
  if(!data.email.trim()&&!data.phone.trim())issues.push({kind:'contact',target:'cv-email',label:'Email / Telemóvel'});
+ if(!data.education.some(entry=>entry.title.trim()||entry.organisation.trim()))issues.push({kind:'education',target:'formacao',label:'Formação académica'});
  return issues;
 }

@@ -108,3 +108,12 @@ Implemented: last successful upload and worker heartbeat, stale/failure classifi
 - 118 models total: 108 industry editions (twelve industries × nine structural families) and ten general templates. Added Expressivo, Direcção and Digital editions, based on the existing creative, executive and technical layout systems.
 - Homepage now shows exactly twelve editorial selections, one per industry and covering all nine structural families. A clear link opens the complete library; search, filters and loading more are reserved for /modelos. Homepage topic links open the library rather than changing the curated twelve.
 - 36 new PDF-generated previews; existing model IDs and portrait choices retained. Optional photos, independent PT/EN CV language and authored content remain intact.
+## Review remediation — 26 October 2026
+
+Implemented locally for release: image-based editor template chooser (industry first, nine cards per industry or ten general options); non-blocking education reminder with a direct section focus; backup tools in a secondary disclosure; explicit accessible names for sample selects; clearer free-feature navigation and removal of the unfinished community menu entry. Homepage card indices removed; catalogue explains 10 general templates plus 108 industry editions sharing nine layout families, rather than claiming 118 independent layouts.
+
+Owner confirmed operator Soltech LDA and public contact admin@soltech.co.mz. Added bilingual /sobre and /termos and operator/contact in /privacidade. No address, registration number, partnership or user counts invented. Current features remain free; no billing or new paid promise introduced.
+
+Web preview fonts now use locally subsetted Latin/extended-Latin WOFF2 (169,760 bytes versus 1,678,384 bytes full TTF; approximately 90% smaller for these four faces). Modified faces renamed CVMaisSans/CVMaisSerif; original OFL notices retained. Full TTFs remain unchanged for PDF export, loaded only when exporting. This is not a claim of a 90% reduction in total page traffic; interface Google fonts and other resources remain.
+
+Next: physical-device/slow-network pilot and native PT-MZ review, then durable email delivery retries. Domain purchase/migration, revenue model, authentic social proof and community operations remain owner/business decisions; no changes to domain/DNS or made-up endorsements.

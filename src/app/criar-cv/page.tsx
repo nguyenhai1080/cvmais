@@ -11,7 +11,7 @@ import GuestBackupImport from '@/components/guest-backup-import';
 import PhotoPicker from '@/components/photo-picker';
 import CVExportReview from '@/components/cv-export-review';
 import ContentSamples from '@/components/content-samples';
-import { templates, templateAreas, templateMatchesArea } from '@/lib/templates';
+import EditorTemplatePicker from '@/components/editor-template-picker';
 import { safeTemplateReturn } from '@/lib/template-discovery';
 import { sectors } from '@/lib/content-samples';
 import type { SampleFilters, SampleKind } from '@/lib/content-samples';
@@ -95,7 +95,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
   function entriesSection(kind: EntryKind) {
     const work = kind === 'experiences';
     const noun = work ? 'experiência' : 'formação';
-    return <section className="editor-section" id={work ? 'experiencia' : 'formacao'}>
+    return <section className="editor-section" id={work ? 'experiencia' : 'formacao'} tabIndex={-1}>
       <div className="editor-section-title"><span>{work ? '03' : '04'}</span><div><h2>{work ? ui("Experiência profissional") : ui("Formação académica")}</h2>
         <p>{work ? ui("Inclui trabalho, estágios ou voluntariado relevantes.") : ui("Adiciona os teus cursos e qualificações.")}</p></div></div>
       {data[kind].length === 0 && <div className="entry-empty">{work ? ui("Ainda sem experiência? Podes começar pela formação e competências.") : ui("Adiciona uma formação quando estiveres pronto.")}</div>}
@@ -127,11 +127,11 @@ export default function Editor() {const {translate:ui}=useUILanguage();
         <span><ShieldCheck size={14} /> {cloud ? ui("CV privado na tua conta.") : ui("Os teus dados ficam no teu dispositivo.")}</span></div>
       {!ready && saveError && <p><a className="text-link" href="/conta">{ui("Entrar na conta")}</a> · <a className="text-link" href="/meus-cvs">{ui("Os meus CVs")}</a></p>}
       {pending && <div className="undo-entry"><p>{ui("Encontrámos alterações neste dispositivo que podem não ter sido sincronizadas. A versão da conta está aberta.")}</p><button onClick={restorePending}>{ui("Recuperar alterações deste dispositivo")}</button></div>}
-      <div className="storage-actions"><a className="text-link" href="/meus-cvs">{cloud ? ui("← Os meus CVs") : ui("Guardar numa conta / Os meus CVs →")}</a><button type="button" className="text-link" disabled={!ready} onClick={() => {
+      <details className="editor-tools"><summary>{ui("Mais opções e cópias de segurança")}</summary><div className="storage-actions"><a className="text-link" href="/meus-cvs">{cloud ? ui("← Os meus CVs") : ui("Guardar numa conta / Os meus CVs →")}</a><button type="button" className="text-link" disabled={!ready} onClick={() => {
         const url = URL.createObjectURL(new Blob([JSON.stringify({ format: 'cvmais-backup-v1', data }, null, 2)], { type: 'application/json' }));
         const a = document.createElement('a'); a.href = url; a.download = 'cvmais-copia-seguranca.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
       }}>{ui("Descarregar cópia de segurança")}</button></div>
-      {!cloud && <GuestBackupImport disabled={!ready || exporting} current={data} onImport={change} />}
+      {!cloud && <GuestBackupImport disabled={!ready || exporting} current={data} onImport={change} />}</details>
       {pdfError && <p className="pdf-error" role="alert">{ui(pdfError)}</p>}
       {exporting && <p role="status" className="export-status">{ui("A preparar o teu PDF com texto seleccionável e fontes incluídas…")}</p>}
       {removed && <div className="undo-entry" role="status">{ui("Item removido. ")}<button type="button" disabled={data[removed.kind].length >= MAX_ENTRIES} onClick={() => {
@@ -166,9 +166,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
           </fieldset>
         </form>
         <div className="editor-preview"><div className="preview-controls"><div><span className="eyebrow">{ui("O TEU CV")}</span><h2>{ui("Escolhe o teu estilo.")}</h2></div>
-          <label htmlFor="cv-model">{ui("Modelo")}<select id="cv-model" value={data.model} disabled={!ready || exporting} onChange={e => update('model', e.target.value)}>
-            <optgroup label={ui('Modelos gerais')}>{templates.filter(t=>templateMatchesArea(t.id,'gerais')).map(t=><option key={t.id} value={t.id}>{ui(t.name)}</option>)}</optgroup>{templateAreas.map(area=><optgroup key={area.id} label={ui(area.label)}>{templates.filter(t=>templateMatchesArea(t.id,area.id)).map(t=><option key={t.id} value={t.id}>{ui(t.name)}</option>)}</optgroup>)}
-          </select></label></div>
+          <EditorTemplatePicker model={data.model} disabled={!ready || exporting} onChange={model=>update('model',model)} /></div>
           <EditorPreview data={data} />
           <p className="editor-notice">{ui("Pré-visualização do conteúdo. O PDF é paginado em A4; secções vazias ficam de fora. Revê o ficheiro antes de enviar.")}</p>
           {!canExport(data) && <p className="export-hint">{ui("Adiciona o teu nome e pelo menos uma secção para descarregar o PDF.")}</p>}
