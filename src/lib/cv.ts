@@ -1,12 +1,13 @@
+import { signatureDesigns, signatureModels, type SignatureModel } from './signature-designs.ts';
 import { industryModels, industryVariant, designModel, type IndustryModel } from './industry-catalogue.ts';
 export const legacyModels = ['classico', 'moderno', 'minimalista', 'criativo', 'executivo', 'primeiro', 'tecnico', 'saude', 'engenharia', 'servico'] as const;
 export type LegacyModel = (typeof legacyModels)[number];
-export type Model = LegacyModel | IndustryModel;
-export const models:readonly Model[]=[...legacyModels,...industryModels];
+export type Model = LegacyModel | IndustryModel | SignatureModel;
+export const models:readonly Model[]=[...legacyModels,...signatureModels,...industryModels];
 const legacyLabels: Record<LegacyModel, string> = {
   classico: 'Maputo · Clássico', moderno: 'Índico · Moderno', minimalista: 'Essencial · Minimalista', criativo: 'Coral · Criativo', executivo: 'Prestígio · Executivo', primeiro: 'Horizonte · Primeiro emprego', tecnico:'Código · Tecnologia', saude:'Vital · Saúde e educação', engenharia:'Estrutura · Engenharia', servico:'Acolher · Serviços',
 };
-export const modelLabels:Record<Model,string>={...legacyLabels,...Object.fromEntries(industryModels.map(id=>{const v=industryVariant(id)!;return [id,`${v.industry.brand} · ${v.layout.label}`];}))} as Record<Model,string>;
+export const modelLabels:Record<Model,string>={...legacyLabels,...Object.fromEntries(signatureDesigns.map(design=>[design.id,design.name])),...Object.fromEntries(industryModels.map(id=>{const v=industryVariant(id)!;return [id,`${v.industry.brand} · ${v.layout.label}`];}))} as Record<Model,string>;
 export type Entry = { id: string; title: string; organisation: string; period: string; description: string };
 export type CVData = {
   cvLanguage: 'pt' | 'en';
@@ -80,7 +81,7 @@ export function contactLine(data: CVData): string {
 /** Keep compact sidebars on the first page; long content reflows into the main column. */
 export function usesSidebar(data: CVData): boolean {
   const family=designModel(data.model);
-  if (['minimalista','tecnico','engenharia'].includes(family)) return false;
+  if ([...signatureModels,'minimalista','tecnico','engenharia'].includes(family)) return false;
   if (['saude','servico'].includes(family) && !data.skills.trim() && !data.languages.trim()) return false;
   const study = ['moderno', 'executivo'].includes(family) ? data.education.flatMap(e => [e.title,e.organisation,e.period,e.description]) : [];
   const lines = [data.skills, data.languages, ...study]

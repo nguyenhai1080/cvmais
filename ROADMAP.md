@@ -121,3 +121,11 @@ Next: physical-device/slow-network pilot and native PT-MZ review, then durable e
 ## Official domain — 26 October 2026
 
 Migration to cvmais.co.mz: official metadata and public redirects, explicit preservation of old guest drafts/auth/API, transfer guide for both earlier origins. Existing accounts/database unchanged. Keep cvmais.win active for old guest copies; no whole-site forced redirect that prevents export. Current mail sender remains verified on cvmais.win while links point to the new APP_ORIGIN. Acceptance requires TLS, public/WWW redirect, canonical/sitemap, origin-scoped account round-trip, DB/backup health and external monitor destination checks.
+
+## Original compositions and industry letters — 27 October 2026
+
+Prepared for release: public catalogue now fourteen designs, homepage twelve distinct compositions including four new lead designs. Atlas has a full dark left contact/skills rail; Aurora balances education and experience across equal columns with a shared support footer; Fólio uses an oversized serif masthead, rectangular portrait and date gutter; Vértice introduces a skills matrix above career chronology and compact languages in the contact strip. New layouts have matching HTML preview and actual PDF renderers; long/narrow supporting content returns to a full-width flow. Existing 118 IDs remain valid; 108 industry variants are excluded from new public discovery instead of being counted as independent designs.
+
+Added sixth guide /orientacoes/cartas-por-area: twelve industries × first-job/experienced examples, Portuguese default and optional English, three field-specific tips per industry in PT/EN, explicit adaptation placeholders, editor links and temporary editing/copying. Filter/language changes do not replace authored draft text; loading a different sample requires confirmation if a draft exists. No external analysis, email sending, personal-data collection, new schema or credentials.
+
+Next release action: verify DGC access, deploy and complete live browser checks. At preparation, connector still identifies GST despite owner reconnect attempt; native Computer Use helper is unavailable. Do not mark as live until an actual DGC deployment succeeds.

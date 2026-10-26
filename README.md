@@ -12,7 +12,7 @@ Checks: `npm test`, `npm run typecheck`, `npm run build`.
 ## Features
 
 - Responsive landing page based on the approved mockup, illustrative candidate photography, benefits, community placeholder and practical guidance.
-- 118 selectable editions: 108 industry editions (12 industries × nine layout families), plus the ten general templates Maputo, Índico, Essencial, Coral, Prestígio, Horizonte, Código, Vital, Estrutura and Acolher. Homepage with twelve editorially selected designs; dedicated /modelos library, industry/style filters, pagination and grouped editor selection. Gallery previews come from actual PDFs. Filters and enlarged previews help selection.
+- Public catalogue: fourteen selected designs, led by Atlas (dark side rail), Aurora (balanced columns), Fólio (editorial masthead/date gutter) and Vértice (skills-first technical layout). Homepage shows twelve designs. Industry is a suitability filter, not a way to count recolourings as new designs. The 108 older industry editions remain recognised for existing saved CVs but are not advertised as independent new templates.
 - Structured editor: optional portrait upload with crop/zoom, contacts, profile, repeatable experience/education, reorder, undo, skills, languages, live preview, JSON backup and direct browser PDF download. Images are prepared as 256px JPEGs in the browser; raw files are not sent to an image service.
 - Guests keep one localStorage draft in the current browser. Guest JSON import shows a review, explicit replacement confirmation and undo. No automatic upload occurs on sign-in. Earlier local/session drafts migrate when available.
 - `/conta`: register, sign in and reset access with a one-time recovery code. Optional email confirmation and email password reset use expiring, hashed, single-use links. The recovery-code fallback remains available. Resend sends from cvmais.win.
@@ -69,3 +69,8 @@ External setup, isolated Down/Up notification test and free-plan limits are reco
 Career guidance and in-editor examples: see CONTENT.md. Public hub: /orientacoes. Samples are original pt-MZ text; preview, append or confirm replacement, then adapt to real experience.
 
 Languages: Portuguese is the default. Header switches the interface; editor independently selects Portuguese or English CV headings/PDF/examples. User-written content is preserved. See LANGUAGES.md.
+
+
+## Industry cover letters
+
+Sixth guide /orientacoes/cartas-por-area offers twelve professional fields, first-job/experienced examples and independently selectable Portuguese (default) or English letter language. Each field has three original application tips in both UI languages. All examples are illustrative with explicit placeholders. User-edited text stays in component memory only, is never posted to a server, survives filter/UI-language changes verbatim and requires explicit confirmation before replacement. Copy before reload/navigation. The application does not send letters or invent employment/results.

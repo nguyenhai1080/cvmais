@@ -1,3 +1,4 @@
+import { signatureDesign } from './signature-designs.ts';
 import { designModel, industryVariant } from './industry-catalogue.ts';
 
 export type TemplateTag = { id: string; pt: string; en: string; aliases: string[]; preferred?: string[] };
@@ -55,6 +56,7 @@ const generalTags: Record<string,string[]> = {
  engenharia:['engineering','construction','electrical','maintenance','logistics','telecom','networks'],servico:['hospitality','tourism','food-service','customer-service','sales'],
 };
 export function tagIdsForTemplate(model:string):string[] {
+ const signature=signatureDesign(model);if(signature)return [...signature.tags];
  const variant=industryVariant(model);
  const ids=variant?[...(sectorTags[variant.industry.id]||[])]:[...(generalTags[model]||[])];
  if(variant?.layout.id==='formacao')ids.push('first-job');

@@ -1,6 +1,6 @@
 # Template search and tagging
 
-Updated 25 October 2026. CVMais has 118 template editions, 33 controlled topic tags and 477 template/tag associations. Tags indicate editorial layout suitability; they do not claim that the illustrative candidate has those qualifications.
+Updated 27 October 2026. Public search indexes fourteen selected designs, using 33 controlled topic tags. Older industry variants remain in the persistence registry for existing CVs and are excluded from public search and new selection. Industry filters recommend suitable designs through explicit memberships; designs are counted once. Tags express editorial suitability, never candidate qualifications.
 
 ## Research and approach
 
@@ -44,3 +44,8 @@ If the current search has zero results but the same text finds models outside th
 
 
 The homepage is an explicit twelve-design editorial showcase; its topic chips link to full-library searches. All 118 records are searchable in /modelos. Counts and suggestions automatically follow the expanded catalogue; telecom now covers 20 suitable designs. The New filter identifies the 36 additions in this release.
+
+
+## Composition catalogue revision
+
+Added Atlas, Aurora, Fólio and Vértice with original structures and explicit profession tags. Public totals and suggestion counts now follow the fourteen-design index. For example telecom currently matches three technical designs; this lower count removes repeated industry recolourings without removing synonyms. Legacy IDs and saved CVs remain valid. Historical counts below describe the earlier catalogue.

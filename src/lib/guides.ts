@@ -1,3 +1,4 @@
+import { letterGuide } from './letter-guide.ts';
 import { interviewGuide } from './interview-guide.ts';
 export type Guide = { slug: string; category: string; title: string; description: string; lead: string; model: string; sections: { title: string; text: string; example?: string; label?: string }[]; source: { title: string; url: string } };
 export const guides: Guide[] = [
@@ -28,6 +29,7 @@ export const guides: Guide[] = [
     { title: 'Confirma o anúncio uma última vez', text: 'Verifica a referência, o destinatário, o prazo e os documentos pedidos. Envia apenas os dados necessários para a candidatura. Não acrescentes documentos pessoais só porque um exemplo os mencionou.' },
   ], source: { title: 'Erasmus University · Rever o CV e a candidatura', url: 'https://www.eur.nl/en/eshcc/your-next-step/advance-your-career/tips-cv-and-cover-letter' } },
   interviewGuide,
+  letterGuide,
 ];
 export const applicationEmail = {
   subject: 'Candidatura a [função] · [referência, se indicada] · [teu nome]',

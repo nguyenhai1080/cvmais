@@ -1,3 +1,5 @@
+import SignaturePreview from './signature-preview';
+import { signatureDesign } from '../lib/signature-designs';
 import { designModel } from '../lib/industry-catalogue';
 import { labelsForCV } from '../lib/cv-language';
 import type { CSSProperties, ReactNode } from 'react';
@@ -8,6 +10,7 @@ function Section({title,kind,children}:{title:string;kind:IconKind;children:Reac
 function Description({text}:{text:string}) { const lines=text.trim().split('\n').filter(line=>line.trim()); return lines.length>1&&lines.length<=12&&lines.every(line=>line.length<400)?<ul className="cv3-bullets">{lines.map((line,i)=><li key={i}>{line.replace(/^[•\-]\s*/,'')}</li>)}</ul>:<p className="cv3-description">{text.trim()}</p>; }
 function Entries({entries}:{entries:Entry[]}) { return <>{entries.filter(hasEntryContent).map(e=><div className="cv3-entry" key={e.id}>{e.title.trim()&&<h4>{e.title.trim()}</h4>}{e.organisation.trim()&&<p className="cv3-org">{e.organisation.trim()}</p>}{e.period.trim()&&<p className="cv3-period">{e.period.trim()}</p>}{e.description.trim()&&<Description text={e.description}/>}</div>)}</>; }
 export default function EditorPreview({data}:{data:CVData}) {
+  if(signatureDesign(data.model))return <SignaturePreview data={data}/>;
   const family=designModel(data.model);
   const labels=labelsForCV(data);
   const t=themes[data.model], split=usesSidebar(data), studySide=split&&['moderno','executivo'].includes(family), inlineProfile=family==='classico'&&data.profile.trim().length>0&&data.profile.trim().length<520;

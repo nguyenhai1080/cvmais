@@ -1,5 +1,5 @@
 import { SITE_ORIGIN } from './site.ts';
-import { templates, templateAreas, templateMatchesArea, areasForTemplate, newTemplateIds } from './templates.ts';
+import { catalogueTemplates as templates, templateAreas, templateMatchesArea, areasForTemplate, newTemplateIds } from './templates.ts';
 import { industryVariant } from './industry-catalogue.ts';
 import { uiEnglish } from './ui-en.ts';
 import type { Model } from './cv.ts';

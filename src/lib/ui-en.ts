@@ -1,3 +1,4 @@
+import { letterTranslationPairs } from './letter-guide.ts';
 import { interviewTranslationPairs } from './interview-guide.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
@@ -865,3 +866,19 @@ Object.assign(uiEnglish,{
  "Abrir cvmais.co.mz ↗": "Open cvmais.co.mz ↗",
 });
 Object.assign(uiEnglish,{' ou no ':' or in the ','Abre «Mais opções e cópias de segurança» e selecciona «Descarregar cópia de segurança». Guarda o ficheiro JSON num local privado.':'Open “More options and backups” and choose “Download backup”. Keep the JSON file private.',' e, em «Mais opções e cópias de segurança», selecciona «Importar cópia de segurança». Revê o nome do CV antes de confirmar.':' and, under “More options and backups”, choose “Import backup”. Review the CV name before confirming.'});
+Object.assign(uiEnglish,{
+ 'Uma identidade forte, com espaço para o teu percurso.':'A strong identity with room for your career.',
+ 'Faixa lateral escura · Retrato editorial · Secções numeradas':'Dark side rail · Editorial portrait · Numbered sections',
+ 'Formação e experiência, lado a lado.':'Education and experience, side by side.',
+ 'Duas colunas equilibradas · Cabeçalho aberto · Competências no rodapé':'Balanced columns · Open masthead · Skills at the foot',
+ 'Uma apresentação editorial que deixa o conteúdo respirar.':'An editorial presentation that gives your content room.',
+ 'Nome em grande escala · Retrato rectangular · Secções com margem editorial':'Large-scale name · Rectangular portrait · Editorial section margins',
+ 'Competências à vista. Experiência com estrutura.':'Skills in view. Experience with structure.',
+ 'Cabeçalho grafite · Competências primeiro · Datas numa coluna própria':'Graphite masthead · Skills first · A dedicated date column',
+ 'A área sugere composições adequadas. Cada modelo aparece uma só vez, sem contar mudanças de cor como novos desenhos.':'Your field suggests suitable layouts. Each template appears once; colour changes are not counted as new designs.',
+ '14 composições: quatro novos desenhos e dez modelos essenciais. As versões antigas por área continuam disponíveis nos CVs já guardados.':'14 compositions: four new designs and ten essential templates. Earlier industry editions remain available in saved CVs.',
+ 'Explorar os modelos':'Explore templates',
+ 'O teu modelo anterior foi mantido. Podes continuar a usá-lo ou escolher uma nova composição sem perder conteúdo.':'Your earlier template has been preserved. Keep using it or choose a new composition without losing content.'
+});
+
+for(const [pt,en] of letterTranslationPairs)uiEnglish[pt]=en;
