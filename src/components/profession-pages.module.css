@@ -1,0 +1,39 @@
+.hub{padding:40px 0 64px;border-top:1px solid #e2e8e6}
+.hub h2{font-size:clamp(24px,3vw,34px);margin:10px 0}
+.hub p{max-width:780px;color:#556873;line-height:1.75}
+.hubGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:14px;margin-top:24px}
+.hubLink{border:1px solid #d6e3df;padding:19px 20px;border-radius:11px;display:flex;flex-direction:column;gap:8px;background:#fff}
+.hubLink:hover,.hubLink:focus-visible{border-color:#079c91;background:#effaf6}
+.hubLink strong{font-size:16px}
+.hubLink span{font-size:13px;color:#526772}
+.breadcrumbs{font-size:13px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;color:#50636d;margin:25px 0 10px}
+.breadcrumbs a{text-decoration:underline;text-underline-offset:4px}
+.page{padding-bottom:80px}
+.intro{max-width:850px;padding:18px 0 25px}
+.intro h1{font-size:clamp(30px,4vw,46px);line-height:1.2;letter-spacing:-1.2px;margin:10px 0 18px}
+.intro p{font-size:16px;line-height:1.8;color:#3d5662}
+.badge{font-size:12px;color:#06786f;font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;align-items:center}
+.secondaryAction{display:inline-flex;padding:13px 18px;border:1px solid #b9ceca;border-radius:7px;font-weight:700}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,320px);gap:36px;align-items:start}
+.content h2{font-size:clamp(22px,2.4vw,29px);margin:25px 0 12px;letter-spacing:-.5px}
+.content h3{font-size:18px;margin:18px 0 6px}
+.content p,.content li{color:#3c5561;line-height:1.85}
+.content ul{padding-left:22px}
+.example{background:#f1f7f4;border-left:4px solid #079c91;padding:18px 20px;border-radius:4px;margin:14px 0 6px}
+.example p{white-space:pre-line}
+.example small{display:block;color:#53636a;margin-top:12px}
+.faq{margin:28px 0}
+.faq details{border-bottom:1px solid #d7e3df;padding:12px 0}
+.faq summary{font-weight:700;cursor:pointer}
+.faq details p{padding:10px 0}
+.side{border:1px solid #dbe6e2;border-radius:13px;padding:22px;position:sticky;top:22px}
+.side h2{font-size:20px;margin:8px 0 10px}
+.side p{font-size:14px;line-height:1.75;color:#526671;margin-bottom:17px}
+.side .button{width:100%;text-align:center}
+.related{padding-top:20px}
+.relatedList{display:flex;flex-wrap:wrap;gap:10px;padding-top:12px}
+.relatedList a{border:1px solid #d1e1dd;padding:10px 14px;border-radius:8px;font-weight:600}
+.relatedList a:hover{background:#effaf6}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.side{position:static}}
+@media(max-width:600px){.hub{padding-bottom:38px}.intro{padding-top:8px}.actions .button,.secondaryAction{width:100%;justify-content:center}}

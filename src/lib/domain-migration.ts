@@ -6,7 +6,7 @@ export function publicDomainRedirect(host:string,pathname:string,search:string,m
  if(!['GET','HEAD'].includes(method))return null;
  const officialWWW=host===`www.${new URL(SITE_ORIGIN).host}`;
  if(!officialWWW&&!previousHosts.includes(host))return null;
- if(!officialWWW&&!publicPaths.has(pathname)&&!pathname.startsWith('/orientacoes/'))return null;
+ if(!officialWWW&&!publicPaths.has(pathname)&&!pathname.startsWith('/orientacoes/')&&!pathname.startsWith('/modelos/para/'))return null;
  const target=new URL(SITE_ORIGIN);target.pathname=pathname;target.search=search;
  return target.href;
 }

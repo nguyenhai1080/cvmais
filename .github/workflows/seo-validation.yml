@@ -67,4 +67,14 @@ jobs:
             curl --fail --silent --show-error -D "$RUNNER_TEMP/$route.headers" -o /dev/null "http://127.0.0.1:3100/$route"
             grep -Eiq '^x-robots-tag:.*noindex' "$RUNNER_TEMP/$route.headers"
           done
+          for slug in motorista vendedor estudante administrativo enfermeiro; do
+            curl --fail --silent --show-error -D "$RUNNER_TEMP/$slug.headers" \
+              -o "$RUNNER_TEMP/$slug.html" "http://127.0.0.1:3100/modelos/para/$slug"
+            grep -Fq 'BreadcrumbList' "$RUNNER_TEMP/$slug.html"
+            grep -Fq "https://cvmais.co.mz/modelos/para/$slug" "$RUNNER_TEMP/$slug.html"
+            grep -Fq "https://cvmais.co.mz/modelos/para/$slug" "$RUNNER_TEMP/sitemap.xml"
+            if grep -Eiq '^x-robots-tag:.*noindex' "$RUNNER_TEMP/$slug.headers"; then
+              echo "Unexpected noindex for $slug"; exit 1
+            fi
+          done
           echo "SEO HTTP smoke checks passed"
