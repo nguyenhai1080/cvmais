@@ -1,6 +1,6 @@
 'use client';
 import {useMemo,useState} from 'react';
-import {analyticsSummary,type MetricRow,type MetricWindow} from '@/lib/analytics-report';
+import {analyticsSummary,chartAxisTick,type MetricRow,type MetricWindow} from '@/lib/analytics-report';
 import styles from './analytics-dashboard.module.css';
 
 const labels:Record<string,{pt:string;en:string}>={
@@ -34,9 +34,17 @@ export default function AnalyticsDashboard({rows,locale}:{rows:MetricRow[];local
    <div className={styles.columns}>
     <section className={styles.panel} aria-label={en?'Daily event trend':'Tendência diária de eventos'}>
       <h3>{en?'Events over time':'Evolução dos eventos'}</h3>
-      <div className={styles.legend}><span><i className={styles.views}/> {en?'Page views':'Visualizações'}</span><span><i className={styles.pdf}/> {en?'PDF initiations':'Inícios de PDF'}</span></div>
-      <div className={styles.scroll}><div className={styles.chart} role="img" aria-label={en?'Daily page views and PDF initiation counts':'Visualizações e inícios de transferência de PDF por dia'}>
-        {data.daily.map(d=><div key={d.day} className={styles.barGroup} title={d.day+': '+d.views+' views; '+d.pdf+' PDFs'}><div className={styles.barPair}><div className={styles.viewBar} style={{height:(d.views/max*100)+'%'}}/><div className={styles.pdfBar} style={{height:(d.pdf/max*100)+'%'}}/></div><span>{d.day.slice(5)}</span></div>)}
+      <div className={styles.legend}><span><i className={styles.views}/> {en?'Page views':'Visualizações'}</span><span><i className={styles.pdf}/> {en?'PDF initiations':'Inícios de PDF'}</span><span><i className={styles.activityKey}/> {en?'Day with activity':'Dia com actividade'}</span></div>
+      <div className={styles.scroll}><div className={styles.chart} style={{minWidth:days===7?'420px':days===30?'630px':'1000px'}} role="img" aria-label={en?'Daily page views and PDF initiation counts. Open the daily table for exact values.':'Visualizações e inícios de transferência de PDF por dia. Abre a tabela diária para os valores exactos.'}>
+        {data.daily.map((d,i)=>{
+         const active=d.views>0||d.pdf>0||d.builder>0;
+         return <div key={d.day} className={active?`${styles.barGroup} ${styles.activeDay}`:styles.barGroup}
+           title={d.day+': '+d.views+' '+(en?'views':'visualizações')+'; '+d.pdf+' PDF; '+d.builder+' '+(en?'builder starts':'aberturas do editor')}>
+           <div className={styles.barPair}><div className={styles.viewBar} style={{height:(d.views/max*100)+'%'}}/><div className={styles.pdfBar} style={{height:(d.pdf/max*100)+'%'}}/></div>
+           <span className={styles.axisLabel}>{chartAxisTick(i,days)?d.day.slice(5) : '\u00a0'}</span>
+           {active?<i className={styles.activityDot} aria-hidden="true"/>:<i className={styles.noActivityDot} aria-hidden="true"/>}
+          </div>;
+        })}
       </div></div>
       <details className={styles.details}><summary>{en?'Daily table':'Tabela diária'}</summary><div className={styles.tableScroll}><table><thead><tr><th>{en?'Day':'Dia'}</th><th>{en?'Views':'Vistas'}</th><th>{en?'Builder':'Editor'}</th><th>PDF</th></tr></thead><tbody>{data.daily.map(d=><tr key={d.day}><td>{d.day}</td><td>{d.views}</td><td>{d.builder}</td><td>{d.pdf}</td></tr>)}</tbody></table></div></details>
     </section>

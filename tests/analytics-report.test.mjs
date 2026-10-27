@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {analyticsSummary,dailySeries,maputoDay} from '../src/lib/analytics-report.ts';
+import {analyticsSummary,dailySeries,maputoDay,chartAxisTick} from '../src/lib/analytics-report.ts';
 
 const now=new Date('2026-10-27T11:00:00Z');
 const rows=[
@@ -38,4 +38,15 @@ test('empty periods retain zero values, no divide by zero',()=>{
  assert.equal(result.totals.page_view,0);
  assert.equal(result.totals.cv_pdf_exported,0);
  assert.deepEqual(result.topPages,[]);
+});
+
+test('sparse chart ticks for 30 and 90 days keep endpoints and all daily bars',()=>{
+ const expected={7:[0,1,2,3,4,5,6],30:[0,5,10,15,20,25,29],90:[0,15,30,45,60,75,89]};
+ for(const [daysText,ticks] of Object.entries(expected)){
+  const days=Number(daysText);
+  assert.deepEqual(Array.from({length:days},(_,i)=>i).filter(i=>chartAxisTick(i,days)),ticks);
+ }
+ assert.equal(chartAxisTick(-1,30),false);
+ assert.equal(chartAxisTick(30,30),false);
+ assert.equal(chartAxisTick(2.5,30),false);
 });

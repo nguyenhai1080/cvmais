@@ -27,3 +27,11 @@ export function analyticsSummary(rows:MetricRow[],days:MetricWindow,now=new Date
  const topPages=[...pages].map(([page,count])=>({page,count})).sort((a,b)=>b.count-a.count||a.page.localeCompare(b.page));
  return {totals,sources,topPages,daily:dailySeries(chosen,days,now)};
 }
+
+// Axis labels are deliberately sparse so 30/90-day charts remain legible.
+// The daily data and bars are never downsampled.
+export function chartAxisTick(index:number,days:MetricWindow):boolean {
+ if(!Number.isInteger(index)||index<0||index>=days)return false;
+ const interval=days===7?1:days===30?5:15;
+ return index===0||index===days-1||index%interval===0;
+}
