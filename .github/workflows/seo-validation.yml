@@ -28,6 +28,8 @@ jobs:
           cache: npm
       - name: Install exact dependencies
         run: npm ci
+      - name: Validate production audit script syntax
+        run: node --check scripts/check-seo-production.mjs
       - name: Unit tests
         run: npm test
       - name: TypeScript typecheck
