@@ -170,3 +170,5 @@ Additional server-rendered markup checks pass for all four designs in PT/EN with
 ## Post-deployment acceptance — 27 October 2026
 
 Owner-confirmed SEO deployment includes the composition/industry-letter features. Current main c20a293 passes 61 tests. Production SEO audit 15/15 passes. Live checks: fourteen catalogue designs, twelve home cards, six guide cards, seventeen sitemap entries, all four PDF-generated previews match local SHA-256, official TLS/redirects, private noindex, original persistence, DB/backup health, synthetic account cross-origin saves through Atlas/Aurora/Fólio/Vértice with photo/English/profile/education preserved. Cleaned up only the newly created test document. Browser-interaction and real-phone acceptance are not claimed; next pilot checklist updated in PILOT.md.
+
+After the owner’s concurrent analytics merge b5bf559, rebased the documentation-only acceptance commit without discarding that work. Latest full suite: 66/66 passed. This does not claim browser or live acceptance of the separate analytics change.

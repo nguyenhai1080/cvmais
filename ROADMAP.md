@@ -13,7 +13,7 @@ Updated 27 October 2026. Current status verified against the official site; date
 
 - The owner confirmed deploying the SEO work. Production also contains the original compositions and industry-letter release that was previously awaiting deployment. No duplicate redeployment was performed.
 - Official domain https://cvmais.co.mz and www redirect work with normal TLS validation. Library fourteen designs, homepage twelve, six guidance topics, industry letters for twelve fields in PT/EN, five additional profession pages, sitemap seventeen URLs.
-- Public SEO audit 15/15 passes; current main automated suite 61/61 passes. Four gallery assets match the validated local PDF previews byte-for-byte. A synthetic saved CV changed through all four new models and retained photo, English language, authored profile and education when read from the previous origin. Original persistence fixture unchanged; DB and backup health pass.
+- Public SEO audit 15/15 passes; current main automated suite 66/66 passes (including the owner’s subsequently merged analytics work). Four gallery assets match the validated local PDF previews byte-for-byte. A synthetic saved CV changed through all four new models and retained photo, English language, authored profile and education when read from the previous origin. Original persistence fixture unchanged; DB and backup health pass.
 - Interactive browser, physical-phone/slow-network and Mozambican native-speaker acceptance remain pending. HTTP/API checks do not replace these.
 
 ### Next priorities
