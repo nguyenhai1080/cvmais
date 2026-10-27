@@ -176,6 +176,6 @@ After the owner’s concurrent analytics merge b5bf559, rebased the documentatio
 
 ## Optional recovery and immediate registration — 27 October 2026
 
-- 73/73 tests pass, including no-code registration, verified-only email reset, optional code hash/persistence/rotation/revocation, legacy codes and the session-revocation race during password verification.
+- 76/76 tests pass after merging the latest SEO changes, including no-code registration, verified-only email reset, optional code hash/persistence/rotation/revocation, legacy codes and the session-revocation race during password verification.
 - Isolated production-build HTTP checks: registration creates usable session and no recovery response; security requires authentication; code changes require password and exact allowed origin; used code disabled; all prior sessions revoked; private CVs/photo/language remain intact. Newly created HTTP fixtures cleaned up.
 - Browser: local account opens My CVs without a gate; Account security is collapsed until requested; PT/EN optional-code controls and email status are readable and labelled. No real user's credentials changed. SMS excluded by owner choice.
