@@ -17,3 +17,9 @@
 - Verify /operacoes after operator login and email verification. Check window changes, charts, sources and page ranking.
 - Confirm /api/storage/operations rejects unauthenticated requests and daily counters remain unchanged on deploy.
 - Existing SEO checks for 17 sitemap URLs and private noindex continue to run.
+
+## v2.1 chart axis readability
+- The 7-day chart labels every day. The 30-day chart labels every 5th day and the last day. The 90-day chart labels every 15th day and the last day.
+- All daily bars remain present (no data resampling). Active days are highlighted with a subtle background and a dot, including zero-page-view days that have builder activity.
+- Date and exact page-view/PDF/builder values remain available via native hover titles and the accessible Daily Table.
+- Narrow screens scroll the chart horizontally; report windows and existing metrics remain unchanged.
