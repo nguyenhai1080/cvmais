@@ -8,7 +8,7 @@ export default function InviteFriends() {
   const {locale,translate:ui} = useUILanguage();
   const [status,setStatus] = useState('');
   const channel = officialChannelURL(WHATSAPP_CHANNEL_URL);
-  return <section className="invite-friends" aria-labelledby="invite-friends-title">
+  return <section id="sharing" className="invite-friends" aria-labelledby="invite-friends-title">
     <div className="invite-heading"><Users aria-hidden="true" size={25}/><div><h3 id="invite-friends-title">{ui('Um bom começo merece ser partilhado.')}</h3><p>{ui('Convida alguém que esteja a preparar o seu próximo passo.')}</p></div></div>
     {channel && <p><a className="button small" href={channel} target="_blank" rel="noopener noreferrer">{ui('Seguir o canal CVMais no WhatsApp')}<ArrowUpRight size={17}/></a></p>}
     <details><summary>{ui('Ver a mensagem de convite')}</summary><p className="invite-message">{invitation(locale)}</p></details>
