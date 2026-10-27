@@ -1,0 +1,27 @@
+name: CVMais v27 GA4 public audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/check-ga4-production.mjs
+      - .github/workflows/production-ga4-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-ga4:
+    name: Read-only GA4 production verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+      - name: Check the audit script
+        run: node --check scripts/check-ga4-production.mjs
+      - name: Inspect public HTML and deployed JavaScript
+        run: node scripts/check-ga4-production.mjs
