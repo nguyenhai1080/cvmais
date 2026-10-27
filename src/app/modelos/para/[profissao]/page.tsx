@@ -61,6 +61,15 @@ export default async function ProfessionLandingPage({params}:Props){
             {p.questions.map(q=><details key={q.q}><summary>{q.q}</summary><p>{q.a}</p></details>)}
           </section>
           <p>Antes de enviar a candidatura, confirma o anúncio, revê as datas e abre o PDF final. O CVMais ajuda a organizar o documento, mas não envia candidaturas nem garante emprego.</p>
+          <section className={styles.nextStep} aria-labelledby={'proximo-'+p.slug}>
+            <span className="eyebrow">DO EXEMPLO AO TEU CURRÍCULO</span>
+            <h2 id={'proximo-'+p.slug}>Agora prepara o teu CV de {p.name.toLowerCase()}</h2>
+            <p>Abre o modelo gratuito, substitui os exemplos fictícios pelos teus dados verdadeiros e revê o PDF antes de o enviares. Não é necessário pagar para começar.</p>
+            <div className={styles.actions}>
+              <Link className="button" href={editor}>Criar o meu CV grátis</Link>
+              <Link className={styles.secondaryAction} href="/orientacoes/antes-de-enviar">Ver o guia de revisão do PDF</Link>
+            </div>
+          </section>
           <section className={styles.related}><h2>Outros modelos e orientações</h2>
             <div className={styles.relatedList}>
               {professions.filter(other=>other.slug!==p.slug).map(other=>
