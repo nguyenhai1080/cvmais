@@ -134,5 +134,6 @@ const summary = [
 if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
 console.log(`\n${passed}/${checks.length} checks passed.\n`);
 // On main pushes, report the pending manual deployment without marking CI red.
-// Manually launched workflow runs are strict post-deployment acceptance checks.
-if (failed && process.env.GITHUB_EVENT_NAME === 'workflow_dispatch') process.exitCode = 1;
+// Manual and scheduled runs are strict acceptance checks; push runs report only.
+// This audit measures technical availability, NOT Google Search Console indexing.
+if (failed && ['workflow_dispatch', 'schedule'].includes(process.env.GITHUB_EVENT_NAME || '')) process.exitCode = 1;
