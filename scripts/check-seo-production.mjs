@@ -81,6 +81,42 @@ for (const path of ['/conta', '/criar-cv', '/meus-cvs']) {
   });
 }
 
+
+const professionSlugs = ['motorista', 'vendedor', 'estudante', 'administrativo', 'enfermeiro'];
+inspect('Sitemap: 17 public URLs including 5 professions', sitemap, (r, body) => {
+  if (r.status !== 200) return `HTTP ${r.status}`;
+  const entries = [...body.matchAll(/<loc>/g)].length;
+  if (entries !== 17) return `Expected 17 URLs, found ${entries}`;
+  for (const slug of professionSlugs) {
+    if (!body.includes(`${origin}/modelos/para/${slug}`)) return `Missing ${slug} in sitemap`;
+  }
+  return '';
+});
+
+inspect('Library: internal links to profession guides', models, (r, body) => {
+  if (r.status !== 200) return `HTTP ${r.status}`;
+  for (const slug of professionSlugs) {
+    if (!body.includes(`/modelos/para/${slug}`)) return `Missing internal link: ${slug}`;
+  }
+  return '';
+});
+
+for (const slug of professionSlugs) {
+  const path = `/modelos/para/${slug}`;
+  const url = origin + path;
+  const result = await request(path);
+  inspect(`Profession page: ${slug}`, result, (response, body) => {
+    if (response.status !== 200) return `HTTP ${response.status}`;
+    if (response.url !== url) return `Unexpected final URL: ${response.url}`;
+    if (!body.includes('<h1')) return 'No heading H1';
+    if (!body.includes(`rel="canonical" href="${url}"`)) return 'Missing expected canonical';
+    if (!body.includes('BreadcrumbList')) return 'Missing breadcrumb structured data';
+    if (!body.includes('/criar-cv?')) return 'Missing editor CTA';
+    if (/\\bnoindex\\b/i.test(response.headers.get('x-robots-tag') || '')) return 'Unexpected noindex header';
+    return '';
+  });
+}
+
 const passed = checks.filter((c) => c.passed).length;
 const failed = checks.length - passed;
 const summary = [
