@@ -39,9 +39,9 @@ export class Store {
     this.db.prepare(`INSERT INTO anonymous_metrics(day,event,page,source,count) VALUES (?,?,?,?,1)
       ON CONFLICT(day,event,page,source) DO UPDATE SET count=count+1`).run(day,payload.event,payload.page,payload.source);
   }
-  anonymousMetricSummary(days=30) {
+  anonymousMetricSummary(days=90) {
     const start=new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Maputo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(Date.now()-(days-1)*86400_000));
-    return this.db.prepare('SELECT day,event,page,source,count FROM anonymous_metrics WHERE day>=? ORDER BY day DESC,event,page,source LIMIT 2000').all(start);
+    return this.db.prepare('SELECT day,event,page,source,count FROM anonymous_metrics WHERE day>=? ORDER BY day DESC,event,page,source LIMIT 50000').all(start);
   }
   limit(key: string, max = 10, window = 900_000) {
     const now = Date.now();
