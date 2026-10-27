@@ -31,7 +31,13 @@ const fields = [
 
 export default function Editor() {const {translate:ui}=useUILanguage();
   const { data, ready, status, saveError, cloud, pending, restorePending, change: storeChange, save } = useCVStorage();
-  useEffect(()=>{if(ready)trackConversion('cv_builder_started');},[ready]);
+  useEffect(()=>{
+    if(!ready)return;
+    trackConversion('cv_builder_started');
+    // Count selection after the editor loads, not during a navigation that may abort a beacon.
+    const params=new URLSearchParams(window.location.search);
+    if(!params.has('id') && isModel(params.get('modelo')))trackConversion('cv_template_selected');
+  },[ready]);
   const [sampleFilters, setSampleFilters] = useState<SampleFilters>({sector:'administracao',level:'first',voice:'neutral'});
   useEffect(()=>{const area=new URLSearchParams(window.location.search).get('area');const sector=area==='engenharia'?'construcao':area;if(sectors.some(item=>item.id===sector))setSampleFilters(current=>({...current,sector:sector!}));},[]);
   const [libraryHref,setLibraryHref]=useState('/modelos');
@@ -169,7 +175,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
           </fieldset>
         </form>
         <div className="editor-preview"><div className="preview-controls"><div><span className="eyebrow">{ui("O TEU CV")}</span><h2>{ui("Escolhe o teu estilo.")}</h2></div>
-          <EditorTemplatePicker model={data.model} disabled={!ready || exporting} onChange={model=>update('model',model)} /></div>
+          <EditorTemplatePicker model={data.model} disabled={!ready || exporting} onChange={model=>{update('model',model);trackConversion('cv_template_selected');}} /></div>
           <EditorPreview data={data} />
           <p className="editor-notice">{ui("Pré-visualização do conteúdo. O PDF é paginado em A4; secções vazias ficam de fora. Revê o ficheiro antes de enviar.")}</p>
           {!canExport(data) && <p className="export-hint">{ui("Adiciona o teu nome e pelo menos uma secção para descarregar o PDF.")}</p>}

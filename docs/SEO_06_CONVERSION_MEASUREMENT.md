@@ -2,7 +2,7 @@
 
 ## Events
 - page_view: sanitized known public routes and generic editor path, no query strings
-- cv_template_selected: click the model link in the library or preview
+- cv_template_selected: selected model present once the editor loads, or an explicit model change inside the editor
 - cv_builder_started: editor initial data loaded
 - cv_pdf_exported: PDF blob created and programmatic download initiated (not confirmation of completed browser file save)
 
@@ -10,7 +10,7 @@
 - No GA4 ID, no tracking and no consent banner by default.
 - Load Google Analytics script only after explicit opt-in. Reject leaves analytics off. Preferences can be changed in /privacidade.
 - No CV contents, filenames, email, phone, name, document IDs, query strings or personal text passed as event parameters. Third-party provider may process standard network/device data after opt-in.
-- Withdraw stops future tracking and attempts to remove first-party GA cookies. Previously collected analytics events cannot be retroactively retracted by the website.
+- Withdraw (including from another tab) stops future tracking and attempts to remove first-party GA cookies. Previously collected analytics events cannot be retroactively retracted by the website.
 - GA4 Enhanced Measurement/history navigation features must be reviewed to avoid unfiltered pageview URLs or duplicate tracking.
 
 ## Deployment steps

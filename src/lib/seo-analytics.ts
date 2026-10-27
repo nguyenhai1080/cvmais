@@ -47,7 +47,7 @@ function safeReferrer(): string {
     return url.origin + '/';
   } catch { return ''; }
 }
-function disableTracking() {
+export function revokeAnalyticsSession() {
   if (!MEASUREMENT_ID || typeof window === 'undefined') return;
   (window as unknown as Record<string, unknown>)['ga-disable-' + MEASUREMENT_ID] = true;
   for (const pair of document.cookie.split(';')) {
@@ -63,7 +63,7 @@ export function chooseAnalyticsConsent(choice: AnalyticsConsent): void {
   if (typeof window === 'undefined') return;
   temporaryChoice = choice;
   try { window.localStorage.setItem(CONSENT_KEY, choice); } catch { /* In-memory for this tab. */ }
-  if (choice === 'declined') disableTracking();
+  if (choice === 'declined') revokeAnalyticsSession();
   window.dispatchEvent(new Event(CONSENT_CHANGED));
 }
 export function startAnalytics(): boolean {

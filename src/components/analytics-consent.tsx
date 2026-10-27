@@ -6,7 +6,7 @@ import {useUILanguage} from '@/lib/ui-language';
 import {
   CONSENT_KEY, CONSENT_CHANGED, OPEN_PREFERENCES,
   chooseAnalyticsConsent, getAnalyticsConsent, isAnalyticsConfigured,
-  trackAnalyticsPage, type AnalyticsConsent,
+  trackAnalyticsPage, revokeAnalyticsSession, type AnalyticsConsent,
 } from '@/lib/seo-analytics';
 import styles from './analytics-consent.module.css';
 
@@ -19,7 +19,11 @@ export default function AnalyticsConsentManager(){
     setChoice(getAnalyticsConsent());
     const sync=()=>setChoice(getAnalyticsConsent());
     const storage=(event:StorageEvent)=>{
-      if(event.key===CONSENT_KEY)setChoice(getAnalyticsConsent());
+      if(event.key===CONSENT_KEY){
+        const next=getAnalyticsConsent();
+        if(next!=='accepted')revokeAnalyticsSession();
+        setChoice(next);
+      }
     };
     const open=()=>setIsEditing(true);
     window.addEventListener(CONSENT_CHANGED,sync);
@@ -33,6 +37,7 @@ export default function AnalyticsConsentManager(){
   },[]);
   useEffect(()=>{
     if(choice==='accepted')trackAnalyticsPage(pathname||'/');
+    else if(choice==='declined')revokeAnalyticsSession();
   },[choice,pathname]);
 
   if(!isAnalyticsConfigured()||choice===undefined||(choice!==null&&!isEditing))return null;
