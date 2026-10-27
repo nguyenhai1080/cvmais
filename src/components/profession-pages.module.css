@@ -37,3 +37,14 @@
 .relatedList a:hover{background:#effaf6}
 @media(max-width:800px){.grid{grid-template-columns:1fr}.side{position:static}}
 @media(max-width:600px){.hub{padding-bottom:38px}.intro{padding-top:8px}.actions .button,.secondaryAction{width:100%;justify-content:center}}
+
+/* Internal discovery and contextual next steps without intrusive overlays. */
+.hubAction{margin-top:auto;font-size:12px!important;font-weight:700;color:#086c65!important}
+.nextStep{background:#f1f7f4;padding:24px 26px;border-radius:13px;border:1px solid #d2e6dc;margin:36px 0}
+.nextStep h2{margin:10px 0 12px}
+.nextStep .actions{margin-top:14px}
+.guideBridge{background:#f1f7f4;border-left:4px solid #0a887e;padding:20px 23px;margin:26px 0;border-radius:8px}
+.guideBridge h2{margin:0 0 10px}
+.guideBridge p{line-height:1.7}
+.guideBridge a{display:inline-flex;gap:6px;align-items:center;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:600px){.nextStep{padding:18px}.nextStep .secondaryAction{width:100%}}
