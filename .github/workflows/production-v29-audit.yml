@@ -1,0 +1,21 @@
+name: CVMais v29 dashboard acceptance
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/check-v29-production.mjs
+      - .github/workflows/production-v29-audit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-public:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+      - run: node --check scripts/check-v29-production.mjs
+      - run: node scripts/check-v29-production.mjs
