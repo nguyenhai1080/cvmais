@@ -1,0 +1,25 @@
+name: CVMais production SEO audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/production-seo-audit.yml
+      - scripts/check-seo-production.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  production-seo:
+    name: Inspect official CVMais domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+      - name: Audit public SEO headers, HTML, sitemap and structured data
+        run: node scripts/check-seo-production.mjs
