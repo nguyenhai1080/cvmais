@@ -6,6 +6,7 @@ import { Download, Save, ArrowLeft, Plus, Trash2, ArrowUp, ArrowDown, ShieldChec
 import Link from 'next/link';
 import Header from '@/components/header';
 import { useCVStorage } from '@/lib/use-cv-storage';
+import { trackConversion } from '@/lib/seo-analytics';
 import EditorPreview from '@/components/editor-preview';
 import GuestBackupImport from '@/components/guest-backup-import';
 import PhotoPicker from '@/components/photo-picker';
@@ -30,6 +31,7 @@ const fields = [
 
 export default function Editor() {const {translate:ui}=useUILanguage();
   const { data, ready, status, saveError, cloud, pending, restorePending, change: storeChange, save } = useCVStorage();
+  useEffect(()=>{if(ready)trackConversion('cv_builder_started');},[ready]);
   const [sampleFilters, setSampleFilters] = useState<SampleFilters>({sector:'administracao',level:'first',voice:'neutral'});
   useEffect(()=>{const area=new URLSearchParams(window.location.search).get('area');const sector=area==='engenharia'?'construcao':area;if(sectors.some(item=>item.id===sector))setSampleFilters(current=>({...current,sector:sector!}));},[]);
   const [libraryHref,setLibraryHref]=useState('/modelos');
@@ -83,6 +85,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
       anchor.download = pdfFilename(data.name);
       document.body.appendChild(anchor);
       anchor.click();
+      trackConversion('cv_pdf_exported');
       anchor.remove();
       setTimeout(() => URL.revokeObjectURL(url), 60_000);
     } catch {
