@@ -1,0 +1,11 @@
+.notice{position:fixed;bottom:16px;left:16px;right:16px;z-index:2000;max-width:680px;margin:auto;padding:18px 20px;background:#fff;color:#203d44;border:1px solid #bdd6d0;border-radius:12px;box-shadow:0 8px 30px #172e3830;display:grid;gap:12px}
+.notice strong{font-size:16px}
+.notice p{font-size:14px;line-height:1.6;margin:0}
+.notice a{text-decoration:underline;text-underline-offset:3px}
+.actions{display:flex;flex-wrap:wrap;gap:9px}
+.actions button,.preferenceButton{cursor:pointer;font:inherit;font-size:14px;font-weight:700;padding:10px 15px;border-radius:7px;border:1px solid #9cbdb7;background:#fff;color:#173c3a}
+.actions button:first-child{background:#086d65;border-color:#086d65;color:#fff}
+.actions button:focus-visible,.preferenceButton:focus-visible{outline:3px solid #5bcabb;outline-offset:3px}
+.preference{border:1px solid #d6e5e0;padding:15px;border-radius:9px;margin:14px 0;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.preference p{margin:0;flex:1;font-size:14px}
+@media(max-width:500px){.notice{left:8px;right:8px;bottom:8px;padding:14px}.actions button{flex:1}}
