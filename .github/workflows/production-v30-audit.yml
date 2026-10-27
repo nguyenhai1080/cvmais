@@ -1,10 +1,10 @@
-name: CVMais v29 dashboard acceptance
+name: CVMais v30 chart production audit
 on:
   push:
     branches: [main]
     paths:
-      - scripts/check-v29-production.mjs
-      - .github/workflows/production-v29-audit.yml
+      - scripts/check-v30-production.mjs
+      - .github/workflows/production-v30-audit.yml
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,5 +17,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22.16.0'
-      - run: node --check scripts/check-v29-production.mjs
-      - run: node scripts/check-v29-production.mjs
+      - run: node --check scripts/check-v30-production.mjs
+      - run: node scripts/check-v30-production.mjs
