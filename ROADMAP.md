@@ -1,13 +1,27 @@
 # CVMais delivery roadmap
 
-Updated 25 October 2026. This records delivered work and the next launch priorities; unimplemented items must not be presented as live features.
+Updated 27 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
 
 ## Delivered
 
-1. Responsive pt-MZ homepage, approved imagery, 118 selectable CV editions (108 industry editions across nine layout families and ten general templates), honest illustrative gallery.
+1. Responsive pt-MZ homepage, approved imagery, fourteen public designs including Atlas/Aurora/Fólio/Vértice, twelve homepage selections; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs.
 2. Editor, crop/zoom photo, browser-generated A4 PDF, guest local draft and JSON export; private account library, SQLite autosave, revisions and recovery codes.
 3. Permanent account/CV erasure with password confirmation, session revocation and matching local-copy cleanup.
 4. Resend cvmais.win verified sender, optional email confirmation and expiring single-use password reset; approved owner delivery test reported Delivered. Encrypted daily B2 backup plus real download/restore verification.
+
+## Current acceptance — 27 October 2026
+
+- The owner confirmed deploying the SEO work. Production also contains the original compositions and industry-letter release that was previously awaiting deployment. No duplicate redeployment was performed.
+- Official domain https://cvmais.co.mz and www redirect work with normal TLS validation. Library fourteen designs, homepage twelve, six guidance topics, industry letters for twelve fields in PT/EN, five additional profession pages, sitemap seventeen URLs.
+- Public SEO audit 15/15 passes; current main automated suite 61/61 passes. Four gallery assets match the validated local PDF previews byte-for-byte. A synthetic saved CV changed through all four new models and retained photo, English language, authored profile and education when read from the previous origin. Original persistence fixture unchanged; DB and backup health pass.
+- Interactive browser, physical-phone/slow-network and Mozambican native-speaker acceptance remain pending. HTTP/API checks do not replace these.
+
+### Next priorities
+
+1. Actual Android/iPhone pilot: guest editing/reload, choosing a new design, photo, PDF PT/EN and industry-letter editing/copying.
+2. Fix issues from that pilot and obtain feedback from consenting Mozambican users, including first-job and experienced applicants.
+3. Durable retry/outbox for account emails, with token-expiry and duplicate-delivery handling.
+4. Extend original designs/content only where user feedback shows a gap; community workflow and revenue model need an owner decision.
 
 ## Delivered in DGC v10: public domain and continuity
 

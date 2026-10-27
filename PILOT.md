@@ -1,6 +1,23 @@
 # CVMais pilot and launch acceptance
 
-Updated 24 October 2026. Production application: DGC v11, source f8c29ab. Distinguish technical QA from real-user acceptance; no testers or feedback are invented.
+Updated 27 October 2026. Current production: https://cvmais.co.mz, fourteen public designs and six guides. Distinguish technical QA from real-user acceptance; no testers or feedback are invented. Earlier dated evidence below describes historical releases.
+
+## Current phone pilot — ready, awaiting real-device feedback
+
+Use the official domain in the phone browser. Record phone/browser, Wi-Fi or mobile data, pass/fail and the step where anything became unclear. Do not send CV contents or credentials as feedback.
+
+1. On a fresh browser, confirm Portuguese is the initial interface and CV language. Open a model from the homepage and confirm there are twelve editorial selections; the complete library has fourteen designs.
+2. Make a fictional guest draft, add education and at least one work/project entry; change to Atlas, Aurora, Fólio and Vértice. Check the preview changes composition while your text remains.
+3. Add an optional photo, adjust it, reload and check that the draft/photo remain.
+4. Open Rever CV with no education and confirm the non-blocking reminder points to Formação académica. Add a course and recheck.
+5. Download/open a Portuguese PDF. Then select English CV language and download again: headings should change, authored text should not. Inspect the final page of long content. Note whether download opened in a new tab, Downloads or Files.
+6. Export a private JSON backup via Mais opções e cópias de segurança. Import on the intended browser and review before replacement; verify the text/photo/model/language.
+7. At /orientacoes/cartas-por-area choose a field, background and letter language; load an example, edit it, change filters and confirm the draft is retained. Loading a different example must ask before replacement. Copy and paste into a notes app to check it. Copy before leaving: this letter draft is temporary.
+8. Repeat opening the editor and downloading on ordinary mobile data. Record noticeable delays or failed downloads; do not clear browser data that contains a draft.
+
+Optional account follow-up: use the same account from two devices and verify saved changes/revision handling. The owner enters their own credentials. Stop wider rollout if real content is lost, PDF text is missing or account access is incorrect.
+
+Status: not started on a physical phone by the agent; no invented completion or target-market feedback.
 
 ## Technical regression completed
 
