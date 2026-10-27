@@ -3,6 +3,22 @@ import { interviewTranslationPairs } from './interview-guide.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
 export const uiEnglish: Record<string,string> = {
+  "Ir para o conteúdo": "Skip to content",
+  "Ver modelos": "View templates",
+  " Sem conta obrigatória": " No account required",
+  "ANTES DE COMEÇAR": "BEFORE YOU START",
+  "As tuas perguntas, respondidas.": "Your questions, answered.",
+  "O essencial para começares com confiança.": "The essentials to get started with confidence.",
+  "Preciso de criar uma conta?": "Do I need an account?",
+  "Não. Podes criar e descarregar o teu CV sem conta. O rascunho fica neste navegador; uma conta permite guardar e continuar noutro dispositivo.": "No. You can create and download your CV without an account. Your draft stays in this browser; an account lets you save and continue on another device.",
+  "O PDF tem marca de água?": "Does the PDF have a watermark?",
+  "Não. O PDF é gratuito e sem marca de água. Revê o conteúdo antes de enviar a tua candidatura.": "No. The PDF is free and has no watermark. Review the content before sending your application.",
+  "Onde ficam os meus dados?": "Where is my data stored?",
+  "Sem conta, o rascunho fica neste navegador. Os CVs que guardares na conta ficam na base de dados do CVMais. O PDF é criado no teu dispositivo.": "Without an account, your draft stays in this browser. CVs saved to your account are stored in the CVMais database. PDFs are created on your device.",
+  "Consultar a privacidade": "Read about privacy",
+  "Ajuda alguém a dar o próximo passo.": "Help someone take their next step.",
+  "Conheces alguém a preparar uma candidatura? Partilha uma ferramenta que pode ajudar.": "Know someone preparing an application? Share a tool that could help.",
+
   "Um bom começo merece ser partilhado.": "A good start is worth sharing.",
   "Convida alguém que esteja a preparar o seu próximo passo.": "Invite someone preparing for their next step.",
   "Seguir o canal CVMais no WhatsApp": "Follow the CVMais WhatsApp channel",
