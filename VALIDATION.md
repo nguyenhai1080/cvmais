@@ -179,3 +179,10 @@ After the owner’s concurrent analytics merge b5bf559, rebased the documentatio
 - 76/76 tests pass after merging the latest SEO changes, including no-code registration, verified-only email reset, optional code hash/persistence/rotation/revocation, legacy codes and the session-revocation race during password verification.
 - Isolated production-build HTTP checks: registration creates usable session and no recovery response; security requires authentication; code changes require password and exact allowed origin; used code disabled; all prior sessions revoked; private CVs/photo/language remain intact. Newly created HTTP fixtures cleaned up.
 - Browser: local account opens My CVs without a gate; Account security is collapsed until requested; PT/EN optional-code controls and email status are readable and labelled. No real user's credentials changed. SMS excluded by owner choice.
+
+
+## DGC v32 — simplified account access (27 October 2026)
+
+Deployed source ade2cc3 through the signed-in DGC browser, visibly confirmed nguyenhai1080@gmail.com and project cmvlbkah40mef0i5fzrjkbvcd. Connector still identifies GST and was not used for mutations. Vibehost initially applied its recent-deployment cooldown; waited, then v32 became Online. No resources, schema, secrets or existing recovery codes were migrated.
+
+Official-site acceptance: new privacy/access policy present; established synthetic account signs in; authenticated security endpoint exposes only enabled/disabled status, never code/hash; Resend remains enabled; original CV revision/model/content preserved; application and backup health HTTP 200. No production code rotated, password changed or authentication email sent during acceptance. Public SEO audit 15/15 passes. Local suite 76/76, typecheck/build and HTTP storage regression pass. PT/EN account security inspected locally. Physical Android pilot still pending.

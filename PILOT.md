@@ -39,12 +39,12 @@ The viewport test emulates a mobile browser size; it does not substitute for an 
 
 Use the owner-controlled address nguyenhai1080@gmail.com. The owner enters passwords and completes password changes themselves; passwords must not be sent in chat or recorded in this report.
 
-1. Open https://cvmais.win/conta and register or sign in. Preserve the recovery code privately.
+1. Open https://cvmais.co.mz/conta and register or sign in. Registration should continue directly without a code acknowledgement. Optional code controls are inside Account security.
 2. Open the verification email, check the hostname is cvmais.win, and select Confirmar email. In Os meus CVs, confirm Email confirmado.
 3. Reopen the same verification link; it must be rejected as already used. Request another link only when necessary.
 4. Sign out, select Esqueci-me da palavra-passe, and request recovery. Open the newest email and personally enter/submit a new password.
 5. Confirm the old sessions no longer access the account. Sign in with the new password; confirm previous CVs remain.
-6. Check the old reset link cannot be reused. Store the new recovery code privately.
+6. Check the old reset link cannot be reused. Sign in normally without a new-code gate; create a replacement only if desired in Account security.
 7. Open /operacoes with the verified owner account; verify it shows current backup status. A normal account must not see these details.
 
 Record only pass/fail and observations, never email-link tokens, passwords, recovery codes or CV contents. Sender transport was previously tested with a real Delivered receipt; the owner has now exercised registration, verification, received password reset and subsequent sign-in.
