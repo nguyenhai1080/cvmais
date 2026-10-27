@@ -73,7 +73,7 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
     const operations = Boolean(user && process.env.OPERATIONS_EMAIL && user.email === process.env.OPERATIONS_EMAIL.trim().toLowerCase() && db.emailVerified(user.id));
     if (path.length === 1 && path[0] === 'operations' && method === 'GET') {
       if (!operations) throw new StoreError('Entra com a conta de operação e confirma o teu email para consultar este painel.', 403);
-      return reply(await backupHealth());
+      return reply({backup:await backupHealth(),metrics:db.anonymousMetricSummary(30)});
     }
     if (path.length === 1 && path[0] === 'session' && method === 'GET') return reply({ user, operations });
     if (path.length === 1 && path[0] === 'logout' && method === 'POST') { db.logout(token); return reply({ ok: true }, 200, sessionCookie('', true)); }

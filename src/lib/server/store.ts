@@ -22,10 +22,26 @@ export class Store {
       CREATE TABLE IF NOT EXISTS cvs (id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, title TEXT NOT NULL, data TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 1, updated INTEGER NOT NULL, deleted INTEGER);
       CREATE INDEX IF NOT EXISTS cvs_owner ON cvs(user_id);
       CREATE TABLE IF NOT EXISTS attempts (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS anonymous_metrics (
+        day TEXT NOT NULL, event TEXT NOT NULL, page TEXT NOT NULL,
+        source TEXT NOT NULL, count INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY(day,event,page,source)
+      );
       CREATE TABLE IF NOT EXISTS verified_emails (user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, verified INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS email_tokens (token TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, purpose TEXT NOT NULL CHECK(purpose IN ('verify','reset')), expires INTEGER NOT NULL);
       CREATE INDEX IF NOT EXISTS email_token_owner ON email_tokens(user_id,purpose);
       PRAGMA user_version=1;`);
+  }
+  recordAnonymousMetric(payload: {event:string;page:string;source:string}) {
+    const day=new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Maputo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    this.db.prepare('DELETE FROM anonymous_metrics WHERE day < ?').run(
+      new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Maputo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(Date.now()-90*86400_000)));
+    this.db.prepare(`INSERT INTO anonymous_metrics(day,event,page,source,count) VALUES (?,?,?,?,1)
+      ON CONFLICT(day,event,page,source) DO UPDATE SET count=count+1`).run(day,payload.event,payload.page,payload.source);
+  }
+  anonymousMetricSummary(days=30) {
+    const start=new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Maputo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(Date.now()-(days-1)*86400_000));
+    return this.db.prepare('SELECT day,event,page,source,count FROM anonymous_metrics WHERE day>=? ORDER BY day DESC,event,page,source LIMIT 2000').all(start);
   }
   limit(key: string, max = 10, window = 900_000) {
     const now = Date.now();
