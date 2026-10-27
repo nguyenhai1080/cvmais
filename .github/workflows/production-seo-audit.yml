@@ -7,6 +7,9 @@ on:
       - .github/workflows/production-seo-audit.yml
       - scripts/check-seo-production.mjs
   workflow_dispatch:
+  # Monday 09:00 Africa/Maputo (UTC+2), weekly public SEO health check.
+  schedule:
+    - cron: '0 7 * * 1'
 
 permissions:
   contents: read
