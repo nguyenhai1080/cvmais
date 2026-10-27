@@ -1,0 +1,70 @@
+name: CVMais SEO validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feature/seo-cvmais-02]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    name: Test, typecheck and production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      APP_ORIGIN: https://cvmais.co.mz
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.16.0"
+          cache: npm
+      - name: Install exact dependencies
+        run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: TypeScript typecheck
+        run: npm run typecheck
+      - name: Next.js production build
+        run: npm run build
+      - name: Smoke test SEO routes and private noindex
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DATABASE_PATH="$RUNNER_TEMP/cvmais-seo-ci.sqlite"
+          npm run start -- --port 3100 > "$RUNNER_TEMP/cvmais-seo-server.log" 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+
+          ready=0
+          for i in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3100/ -o /dev/null; then ready=1; break; fi
+            sleep 2
+          done
+          if [ "$ready" -ne 1 ]; then cat "$RUNNER_TEMP/cvmais-seo-server.log"; exit 1; fi
+
+          curl --fail --silent --show-error http://127.0.0.1:3100/ -o "$RUNNER_TEMP/home.html"
+          curl --fail --silent --show-error http://127.0.0.1:3100/modelos -o "$RUNNER_TEMP/models.html"
+          curl --fail --silent --show-error http://127.0.0.1:3100/orientacoes/primeiro-cv -o "$RUNNER_TEMP/guide.html"
+          curl --fail --silent --show-error http://127.0.0.1:3100/sitemap.xml -o "$RUNNER_TEMP/sitemap.xml"
+          curl --fail --silent --show-error http://127.0.0.1:3100/robots.txt -o "$RUNNER_TEMP/robots.txt"
+
+          grep -Fq 'https://cvmais.co.mz' "$RUNNER_TEMP/home.html"
+          grep -Fq 'WebApplication' "$RUNNER_TEMP/home.html"
+          grep -Fq 'BreadcrumbList' "$RUNNER_TEMP/models.html"
+          grep -Fq 'Article' "$RUNNER_TEMP/guide.html"
+          grep -Fq 'https://cvmais.co.mz/modelos' "$RUNNER_TEMP/sitemap.xml"
+          grep -Fq 'https://cvmais.co.mz/sitemap.xml' "$RUNNER_TEMP/robots.txt"
+
+          for route in conta criar-cv meus-cvs; do
+            curl --fail --silent --show-error -D "$RUNNER_TEMP/$route.headers" -o /dev/null "http://127.0.0.1:3100/$route"
+            grep -Eiq '^x-robots-tag:.*noindex' "$RUNNER_TEMP/$route.headers"
+          done
+          echo "SEO HTTP smoke checks passed"
