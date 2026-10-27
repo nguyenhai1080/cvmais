@@ -21,7 +21,7 @@ test('accounts, credentials, ownership, conflict detection, trash and recovery p
     assert.equal(raw.recovery, digest(a.recovery));
     const token = db.session(a.user.id);
     assert.equal(db.user(token).id, a.user.id);
-    assert.equal(db.db.prepare('SELECT token FROM sessions').get().token, digest(token));
+    assert.equal(db.db.prepare('SELECT token FROM sessions WHERE token=?').get(digest(token)).token, digest(token));
     const cv = db.create(a.user.id, 'CV Administração', { name: 'José', profile: 'Organização e gestão' });
     assert.equal(db.list(b.user.id).length, 0);
     assert.throws(() => db.cv(b.user.id, cv.id), { status: 404 });

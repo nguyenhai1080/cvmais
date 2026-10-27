@@ -8,6 +8,12 @@ Owner chose email-only recovery (no SMS provider required). Registration starts 
 
 Validation: 76 automated tests after merging the latest SEO changes, typecheck, production build and isolated HTTP storage checks passed. PT/EN security UI inspected in browser; physical Android pilot still pending. Deployed in DGC v32: official policy/security API, existing CV persistence, email enabled and application/backup health verified; SEO 15/15 passes.
 
+## Community launch preparation — 27 October 2026
+
+WhatsApp friend invitations added to the homepage: PT/EN message preview, explicit recipient selection/send in WhatsApp, copy fallback, no contacts or CV data. Original channel avatar and promotional cover prepared with launch copy and a two-week editorial plan. Owner has not created the channel yet; no follow CTA is shown until an official owner-provided channel link is configured. No channel created and no invitations sent by the agent. Group discussion and moderation remain a later decision.
+
+Validation: 78/78 automated tests; typecheck/build pass; browser PT/EN invitation and clipboard success checked, 390px responsive layout has no horizontal overflow. A pre-existing test was corrected to select its own hashed session rather than an arbitrary session row.
+
 ## Delivered
 
 1. Responsive pt-MZ homepage, approved imagery, fourteen public designs including Atlas/Aurora/Fólio/Vértice, twelve homepage selections; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs.

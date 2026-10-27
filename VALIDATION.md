@@ -186,3 +186,8 @@ After the owner’s concurrent analytics merge b5bf559, rebased the documentatio
 Deployed source ade2cc3 through the signed-in DGC browser, visibly confirmed nguyenhai1080@gmail.com and project cmvlbkah40mef0i5fzrjkbvcd. Connector still identifies GST and was not used for mutations. Vibehost initially applied its recent-deployment cooldown; waited, then v32 became Online. No resources, schema, secrets or existing recovery codes were migrated.
 
 Official-site acceptance: new privacy/access policy present; established synthetic account signs in; authenticated security endpoint exposes only enabled/disabled status, never code/hash; Resend remains enabled; original CV revision/model/content preserved; application and backup health HTTP 200. No production code rotated, password changed or authentication email sent during acceptance. Public SEO audit 15/15 passes. Local suite 76/76, typecheck/build and HTTP storage regression pass. PT/EN account security inspected locally. Physical Android pilot still pending.
+
+
+## WhatsApp friend invitations — 27 October 2026
+
+78/78 tests, typecheck and production build pass. Public invitation URL uses wa.me with only the fixed public-site message; no recipient, session, CV fields or account IDs. PT/EN browser preview and copy status checked. At a simulated 390px viewport buttons stack and no horizontal overflow is present; this is not a physical Android test. Owner has no WhatsApp channel yet: no fabricated follow link, follower count or active-channel claim. Generated avatar/cover inspected and launch copy saved under brand/whatsapp. No external message sent.

@@ -3,6 +3,16 @@ import { interviewTranslationPairs } from './interview-guide.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
 export const uiEnglish: Record<string,string> = {
+  "Um bom começo merece ser partilhado.": "A good start is worth sharing.",
+  "Convida alguém que esteja a preparar o seu próximo passo.": "Invite someone preparing for their next step.",
+  "Seguir o canal CVMais no WhatsApp": "Follow the CVMais WhatsApp channel",
+  "Ver a mensagem de convite": "Preview the invitation",
+  "Convidar pelo WhatsApp": "Invite via WhatsApp",
+  "Copiar convite": "Copy invitation",
+  "O WhatsApp abre para escolheres a quem enviar. A mensagem só é enviada quando confirmas no WhatsApp. O CVMais não acede aos teus contactos nem inclui dados do teu CV.": "WhatsApp opens so you can choose who to send it to. The message is only sent when you confirm in WhatsApp. CVMais does not access your contacts or include any CV data.",
+  "Convite copiado. Podes partilhá-lo com quem quiseres.": "Invitation copied. Share it with whomever you choose.",
+  "Não foi possível copiar. Abre a mensagem de convite e copia o texto manualmente.": "Could not copy. Open the invitation preview and copy the text manually.",
+
   "Ligado como": "Signed in as",
   "Palavra-passe actualizada. Entra com a nova palavra-passe.": "Password updated. Sign in with your new password.",
   "Indica o email confirmado da tua conta. Se estiver confirmado, receberás uma ligação válida por 30 minutos.": "Enter your verified account email. If verified, you will receive a link valid for 30 minutes.",

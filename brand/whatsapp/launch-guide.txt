@@ -1,0 +1,43 @@
+CVMAIS WHATSAPP — LAUNCH KIT
+
+Recommended name: CVMais Moçambique
+Short positioning: CV · Candidaturas · Entrevistas
+Operator: Soltech LDA
+Website: https://cvmais.co.mz
+Support: admin@soltech.co.mz
+
+CHANNEL DESCRIPTION — PORTUGUESE MOZAMBIQUE
+Canal do CVMais para preparar o teu próximo passo em Moçambique. Dicas de CV, candidaturas e entrevistas, exemplos para adaptar e novidades da plataforma. Cria o teu CV grátis em cvmais.co.mz. Operado pela Soltech LDA.
+
+WELCOME POST — DRAFT, NOT PUBLISHED
+Bem-vindo ao CVMais Moçambique! 👋
+O teu próximo passo começa com uma boa preparação.
+Aqui vamos partilhar dicas para escrever o teu CV, adaptar uma candidatura e preparar uma entrevista. Os exemplos são ilustrativos: adapta-os sempre ao teu percurso real.
+Podes criar o teu CV grátis, em português ou inglês, e guardar em PDF sem marca de água: https://cvmais.co.mz
+Conheces alguém a preparar uma candidatura? Partilha o canal com essa pessoa.
+Apoio: admin@soltech.co.mz
+
+EDITORIAL PLAN — RECOMMENDED, NO AUTOMATION CREATED
+Three useful posts weekly. Start in Portuguese Mozambique; add English only when useful.
+Week 1 / Monday: Welcome and how to start a first CV. Link /orientacoes/primeiro-cv.
+Week 1 / Wednesday: Before/after a short professional profile, labelled as an illustrative example. Link /criar-cv.
+Week 1 / Friday: Interview preparation: choose one real example, explain situation/action/result. Link /orientacoes/preparar-entrevista.
+Week 2 / Monday: Adapt a CV to the actual job requirements. Link /orientacoes/adaptar-a-oportunidade.
+Week 2 / Wednesday: Choose an industry letter and personalise every placeholder. Link /orientacoes/cartas-por-area.
+Week 2 / Friday: Before sending: correct contact details, file name, PDF and instructions. Link /orientacoes/antes-de-enviar.
+
+PUBLISHING RULES — PROPOSED
+Keep posts useful and short; one clear next step. Label examples and generated portraits as illustrative. No invented testimonials, follower counts, salaries, partnerships or hiring promises. Link job opportunities only after checking the original employer source and date. Never request passwords, identification documents or CVs through public updates. Support goes to the operator email. Invite friends by personal choice, not automatic contact import.
+
+ANDROID SETUP
+WhatsApp > Updates/Actualizações > Channels/Canais > plus menu > Create channel/Criar canal (labels can vary by app version). Add recommended name, description and square avatar, then create the channel. Copy its public invitation link and send that link to the CVMais maintainer. WhatsApp documents channel name, description and icon; the landscape cover is promotional artwork for a launch update, website and other social surfaces, not a promised channel-cover field. No channel was created by the agent.
+Official instructions: https://faq.whatsapp.com/794229125227200/
+About channels: https://www.whatsapp.com/channels
+
+ASSETS
+cvmais-channel-avatar.png: square channel icon; keep the established website wordmark unchanged.
+cvmais-channel-cover.png: landscape launch illustration with fictional people; no real-user endorsement.
+Created using built-in ImageGen. Original files preserved. No QR code until the actual channel URL exists.
+
+WEBSITE STATUS
+Invite via WhatsApp opens an invitation containing only the public website address and general product information. The user selects recipients and confirms sending in WhatsApp. Copy invitation has a readable manual-copy fallback. No contact access, personal referral IDs, CV content or automated message dispatch. Following the channel remains hidden until an owner-provided official link is configured.
