@@ -8,6 +8,10 @@ Owner chose email-only recovery (no SMS provider required). Registration starts 
 
 Validation: 76 automated tests after merging the latest SEO changes, typecheck, production build and isolated HTTP storage checks passed. PT/EN security UI inspected in browser; physical Android pilot still pending. Deployed in DGC v32: official policy/security API, existing CV persistence, email enabled and application/backup health verified; SEO 15/15 passes.
 
+## Homepage refinement — DGC v34, 27 October 2026
+
+Live: Sharing replaces Gratuito in navigation; redundant payment band removed. Homepage has clearer create/view-template actions, earlier three-step explanation, twelve shorter design cards, compact guidance illustration, FAQ and dedicated Sharing area. Two main images total about 137 KB on desktop instead of 3.9 MB. PT/EN browser, simulated 390px navigation/overflow, 78 tests and production SEO 15/15 checked. Real-device Android feedback still pending.
+
 ## Community launch preparation — 27 October 2026
 
 Deployed in DGC v33; official invitation/assets/health and SEO 15/15 verified. WhatsApp friend invitations added to the homepage: PT/EN message preview, explicit recipient selection/send in WhatsApp, copy fallback, no contacts or CV data. Original channel avatar and promotional cover prepared with launch copy and a two-week editorial plan. Owner has not created the channel yet; no follow CTA is shown until an official owner-provided channel link is configured. No channel created and no invitations sent by the agent. Group discussion and moderation remain a later decision.

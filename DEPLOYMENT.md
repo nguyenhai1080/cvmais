@@ -160,3 +160,14 @@ Official-site acceptance: new privacy/access policy present; established synthet
 ## DGC v33 — WhatsApp invitations and channel launch kit (27 October 2026)
 
 Source a4bfccc deployed through the browser after visible DGC nguyenhai1080@gmail.com confirmation. V33 Online verified. Official homepage invitation and public-only wa.me URL checked; avatar and cover downloads match source SHA-256; application and backup health pass, public SEO 15/15. Browser preview works on official site. Local tests 78/78, typecheck/build pass and simulated 390px layout checked. No invitation sent, no contacts accessed, no WhatsApp channel created. Channel-follow CTA stays hidden until owner supplies its real official link. Launch kit ZIP includes the two original ImageGen images, launch guide and exact prompts.
+
+
+## DGC v34 — homepage usability and Sharing navigation (27 October 2026)
+
+Source 519d7ea includes aa999a4. Browser deployment used visibly confirmed DGC nguyenhai1080@gmail.com, project cmvlbkah40mef0i5fzrjkbvcd; v34 Online confirmed. Removed the pricing/payment band and replaced header/footer Gratuito with Sharing targeting /#sharing. Sharing is now its own area, with the existing explicit WhatsApp invitation and copy controls. No channel/follower claims or automated invitations.
+
+Homepage changes: sticky homepage header and skip link, hero View templates action, how-to before the catalogue, four-column desktop/two-column phone featured gallery with twelve designs and shorter captions, compact illustration/guidance block, three PT/EN FAQ accordions. Six existing guides and profession SEO links retained. Library filtering and existing saved models retained.
+
+Optimised source images: desktop hero 44,360 bytes (mobile 22,098), community image 92,320 bytes, replacing 3,874,825 bytes of PNG delivery for these two placements. About 96.5% reduction for these image resources; this is not a measured overall page-speed claim. Original images retained.
+
+Validation: production build/typecheck and existing 78 tests passed. Local browser checked PT/EN FAQ, twelve-card preview, mobile menu closes after Sharing, target appears below sticky header, no horizontal overflow at simulated 390px, responsive mobile hero source chosen. Official HTTP verification checks Sharing, removed band, 12 designs, 6 guides, image sizes and app/backup health. Production SEO 15/15 passes. Physical Android pilot remains pending.
