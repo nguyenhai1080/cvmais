@@ -9,7 +9,7 @@ const rows=[
  {day:'2026-10-27',event:'cv_builder_started',page:'/criar-cv',source:'none',count:2},
  {day:'2026-10-27',event:'cv_pdf_exported',page:'/criar-cv',source:'none',count:1},
  {day:'2026-10-20',event:'page_view',page:'/modelos/para/motorista',source:'direct',count:5},
- {day:'2026-08-01',event:'page_view',page:'/',source:'other',count:500},
+ {day:'2026-07-01',event:'page_view',page:'/',source:'other',count:500},
 ];
 test('Maputo day and daily continuity',()=>{
  assert.equal(maputoDay(new Date('2026-10-26T22:30:00Z')),'2026-10-27');
