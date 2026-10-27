@@ -12,8 +12,17 @@ const password = `Test-${randomUUID()}`;
 assert.equal((await request('cvs')).status, 401);
 assert.equal((await request('register','POST',{email:`qa-${suffix}@example.test`,password},null,'https://foreign.example')).status, 403);
 const a = await request('register','POST',{email:`qa-${suffix}@example.test`,password});
-assert.equal(a.status, 201); assert.ok(a.value.recovery); assert.match(a.rawCookie,/HttpOnly/); assert.match(a.rawCookie,/SameSite=Lax/);
+assert.equal(a.status, 201); assert.equal(Object.hasOwn(a.value,'recovery'),false); assert.match(a.rawCookie,/HttpOnly/); assert.match(a.rawCookie,/SameSite=Lax/);
 const cookie = a.cookie;
+assert.equal((await request('security')).status,401);
+assert.equal((await request('security','GET',undefined,cookie)).value.recoveryEnabled,false);
+assert.equal((await request('recovery-code','POST',{password,enabled:true})).status,401);
+assert.equal((await request('recovery-code','POST',{password,enabled:true},cookie,'https://foreign.example')).status,403);
+assert.equal((await request('recovery-code','POST',{password:'wrong-password',enabled:true},cookie)).status,401);
+const optional = await request('recovery-code','POST',{password,enabled:true},cookie);
+assert.equal(optional.status,200); assert.match(optional.value.recovery,/^[a-f0-9]{48}$/);
+assert.equal((await request('security','GET',undefined,cookie)).value.recoveryEnabled,true);
+
 assert.equal((await request('cvs','POST',{data:{profile:'x'.repeat(513_000)}},cookie)).status,413);
 const b = await request('register','POST',{email:`qa-b-${suffix}@example.test`,password});
 assert.equal(b.status, 201);
@@ -39,12 +48,14 @@ assert.equal((await request(`cvs/${cv.value.id}`,'GET',undefined,second.cookie))
 assert.equal((await request(`cvs/${cv.value.id}`,'GET',undefined,second.cookie)).value.data.photo,photo);
 const trash = await request(`cvs/${cv.value.id}`,'PUT',{...update.value,deleted:true},cookie); assert.ok(trash.value.deleted);
 const restored = await request(`cvs/${cv.value.id}`,'PUT',{...trash.value,deleted:false},cookie); assert.equal(restored.value.deleted,null);
-const reset = await request('recover','POST',{email:`qa-${suffix}@example.test`,password:`New-${password}`,recovery:a.value.recovery});
+const reset = await request('recover','POST',{email:`qa-${suffix}@example.test`,password:`New-${password}`,recovery:optional.value.recovery});
 assert.equal(reset.status,200);
 assert.equal((await request('cvs','GET',undefined,cookie)).status,401);
 assert.equal((await request('cvs','GET',undefined,second.cookie)).status,401);
 const login = await request('login','POST',{email:`qa-${suffix}@example.test`,password:`New-${password}`});
 assert.equal(login.status,200);
+assert.equal(Object.hasOwn(reset.value,'recovery'),false);
+assert.equal((await request('security','GET',undefined,login.cookie)).value.recoveryEnabled,false);
 await request('logout','POST',undefined,login.cookie);
 assert.equal((await request('cvs','GET',undefined,login.cookie)).status,401);
 console.log('PASS: CSRF, private cache, credentials, sessions, ownership, cross-device save, conflicts, trash/restore, recovery and logout.');
@@ -53,6 +64,7 @@ console.log('PASS: CSRF, private cache, credentials, sessions, ownership, cross-
 const cEmail = `qa-erase-${suffix}@example.test`;
 const c = await request('register','POST',{email:cEmail,password});
 assert.equal(c.status,201);
+const cCode = await request('recovery-code','POST',{password,enabled:true},c.cookie);
 const c2 = await request('login','POST',{email:cEmail,password});
 const disposable = await request('cvs','POST',{title:'CV descartável de teste',data:{name:'Exemplo fictício'}},c.cookie);
 const id = disposable.value.id;
@@ -72,8 +84,14 @@ const erased = await request('account','DELETE',{password,confirmation:cEmail},c
 assert.equal(erased.status,200); assert.match(erased.rawCookie,/Max-Age=0/);
 assert.equal((await request('cvs','GET',undefined,c2.cookie)).status,401);
 assert.equal((await request('login','POST',{email:cEmail,password})).status,401);
-assert.equal((await request('recover','POST',{email:cEmail,password,recovery:c.value.recovery})).status,401);
+assert.equal((await request('recover','POST',{email:cEmail,password,recovery:cCode.value.recovery})).status,401);
 assert.equal((await request('cvs','GET',undefined,b.cookie)).status,200);
 assert.equal((await request('account','DELETE',{password,confirmation:'wrong@example.test'},b.cookie)).status,400);
 assert.equal((await request('account','DELETE',{password:'incorrect-password',confirmation:b.value.user.email},b.cookie)).status,401);
 console.log('PASS: permanent erasure guards, password reauthentication, revision protection, revoked sessions and unrelated-account isolation.');
+
+// Clean up only fictional accounts created by this invocation.
+const cleanupA = await request('login','POST',{email:a.value.user.email,password:`New-${password}`});
+assert.equal((await request('account','DELETE',{password:`New-${password}`,confirmation:a.value.user.email},cleanupA.cookie)).status,200);
+assert.equal((await request('account','DELETE',{password,confirmation:b.value.user.email},b.cookie)).status,200);
+console.log('PASS: immediate registration, optional code authentication/CSRF guards, reset without forced code and test-fixture cleanup.');

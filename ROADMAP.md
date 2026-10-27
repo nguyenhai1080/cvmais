@@ -2,6 +2,12 @@
 
 Updated 27 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
 
+## Account access update — 27 October 2026
+
+Owner chose email-only recovery (no SMS provider required). Registration starts a session immediately without generating or acknowledging a recovery code. Verification and optional code controls are inside a collapsed Account security section in My CVs; no persistent verification banner. Password reset links are issued only for verified account emails. Optional codes can be created/replaced/disabled after current-password reauthentication. Existing codes remain valid; any password reset revokes sessions/tokens and disables the code without a forced replacement screen. No CV/schema migration.
+
+Validation: 73 automated tests, typecheck, production build and isolated HTTP storage checks passed. PT/EN security UI inspected in browser; physical Android pilot still pending. Deployment acceptance recorded separately below when complete.
+
 ## Delivered
 
 1. Responsive pt-MZ homepage, approved imagery, fourteen public designs including Atlas/Aurora/Fólio/Vértice, twelve homepage selections; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs.

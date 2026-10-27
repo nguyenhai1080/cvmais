@@ -61,14 +61,13 @@ export class Store {
   }
   async register(email: string, password: string) {
     const encoded = await this.password(password);
-    const recovery = randomBytes(24).toString('hex');
     const id = randomUUID();
-    try { this.db.prepare('INSERT INTO users VALUES (?,?,?,?,?)').run(id, email, encoded, digest(recovery), Date.now()); }
+    try { this.db.prepare('INSERT INTO users VALUES (?,?,?,?,?)').run(id, email, encoded, '', Date.now()); }
     catch (error) {
       if ((error as Error).message.includes('UNIQUE')) throw new StoreError('Não foi possível criar a conta com este email. Tenta entrar ou recuperar o acesso.', 409);
       throw error;
     }
-    return { user: { id, email }, recovery };
+    return { user: { id, email } };
   }
   async login(email: string, password: string) {
     const row = this.db.prepare('SELECT id,email,password FROM users WHERE email=?').get(email) as { id: string; email: string; password: string } | undefined;
@@ -92,18 +91,31 @@ export class Store {
   logout(token: string) { this.db.prepare('DELETE FROM sessions WHERE token=?').run(digest(token)); }
   async recover(email: string, recovery: string, password: string) {
     const user = this.db.prepare('SELECT id,recovery FROM users WHERE email=?').get(email) as { id: string; recovery: string } | undefined;
-    if (!user || !timingSafeEqual(Buffer.from(digest(recovery)), Buffer.from(user.recovery))) throw new StoreError('Email ou código de recuperação incorrectos.', 401);
+    if (!user || !user.recovery || !timingSafeEqual(Buffer.from(digest(recovery)), Buffer.from(user.recovery))) throw new StoreError('Email ou código de recuperação incorrectos.', 401);
     const encoded = await this.password(password);
-    const next = randomBytes(24).toString('hex');
+    // A used code is disabled; a replacement is optional in account security.
     this.db.exec('BEGIN IMMEDIATE');
     try {
-      const updated = this.db.prepare('UPDATE users SET password=?,recovery=? WHERE id=? AND recovery=?').run(encoded, digest(next), user.id, user.recovery);
+      const updated = this.db.prepare('UPDATE users SET password=?,recovery=? WHERE id=? AND recovery=?').run(encoded, '', user.id, user.recovery);
       if (!updated.changes) throw new StoreError('O código já foi utilizado. Usa o código de recuperação mais recente.', 401);
       this.db.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);
       this.db.prepare('DELETE FROM email_tokens WHERE user_id=?').run(user.id);
       this.db.exec('COMMIT');
     } catch (error) { this.db.exec('ROLLBACK'); throw error; }
-    return next;
+
+  }
+  recoveryEnabled(user: string) {
+    return Boolean((this.db.prepare('SELECT recovery FROM users WHERE id=?').get(user) as { recovery: string } | undefined)?.recovery);
+  }
+  async configureRecovery(token: string, password: string, enabled: boolean) {
+    const user = this.user(token);
+    if (!user) throw new StoreError('A sessão terminou. Entra novamente.', 401);
+    await this.login(user.email, password);
+    // Recheck after password hashing: reset/deletion may revoke this session meanwhile.
+    if (this.user(token)?.id !== user.id) throw new StoreError('A sessão terminou. Entra novamente.', 401);
+    const code = enabled ? randomBytes(24).toString('hex') : '';
+    this.db.prepare('UPDATE users SET recovery=? WHERE id=?').run(code ? digest(code) : '', user.id);
+    return code;
   }
   list(user: string) {
     return this.db.prepare('SELECT id,title,revision,updated,deleted FROM cvs WHERE user_id=? ORDER BY updated DESC LIMIT 100').all(user);
@@ -160,7 +172,7 @@ export class Store {
   }
   requestEmailReset(email: string) {
     const user = this.db.prepare('SELECT id,email FROM users WHERE email=?').get(email) as { id: string; email: string } | undefined;
-    return user ? { ...user, token: this.issueEmailToken(user.id, 'reset') } : null;
+    return user && this.emailVerified(user.id) ? { ...user, token: this.issueEmailToken(user.id, 'reset') } : null;
   }
   verifyEmail(token: string) {
     this.db.exec('BEGIN IMMEDIATE');
@@ -174,17 +186,16 @@ export class Store {
   async resetByEmail(token: string, password: string) {
     this.emailToken(token, 'reset');
     const encoded = await this.password(password);
-    const recovery = randomBytes(24).toString('hex');
     this.db.exec('BEGIN IMMEDIATE');
     try {
       const user = this.emailToken(token, 'reset');
-      this.db.prepare('UPDATE users SET password=?,recovery=? WHERE id=?').run(encoded, digest(recovery), user.id);
+      this.db.prepare('UPDATE users SET password=?,recovery=? WHERE id=?').run(encoded, '', user.id);
       this.db.prepare('INSERT OR REPLACE INTO verified_emails VALUES (?,?)').run(user.id, Date.now());
       this.db.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);
       this.db.prepare('DELETE FROM email_tokens WHERE user_id=?').run(user.id);
       this.db.exec('COMMIT');
     } catch (error) { this.db.exec('ROLLBACK'); throw error; }
-    return recovery;
+
   }
 }
 let singleton: Store | undefined;

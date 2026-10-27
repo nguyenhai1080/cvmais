@@ -64,11 +64,12 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
         const reset = db.requestEmailReset(email);
         if (reset) queueEmail(reset.email, 'reset', reset.token);
         // Queue delivery after the response; existence cannot be inferred from provider latency.
-        return reply({ ok: true, message: 'Se existir uma conta com este email, receberás uma ligação. Verifica também o spam. Usa a mensagem mais recente.' });
+        return reply({ ok: true, message: 'Se o email estiver confirmado numa conta, receberás uma ligação. Verifica também o spam. Usa a mensagem mais recente.' });
       }
       if (typeof input.token !== 'string') throw new StoreError('A ligação é inválida ou expirou.');
       if (path[0] === 'verify-email') { db.verifyEmail(input.token); return reply({ ok: true }); }
-      return reply({ recovery: await db.resetByEmail(input.token, credential(input.password, 'password')) }, 200, sessionCookie('', true));
+      await db.resetByEmail(input.token, credential(input.password, 'password'));
+      return reply({ ok: true }, 200, sessionCookie('', true));
     }
     const operations = Boolean(user && process.env.OPERATIONS_EMAIL && user.email === process.env.OPERATIONS_EMAIL.trim().toLowerCase() && db.emailVerified(user.id));
     if (path.length === 1 && path[0] === 'operations' && method === 'GET') {
@@ -86,13 +87,22 @@ async function handle(request: NextRequest, context: { params: Promise<{ path: s
       const password = credential(input.password, 'password');
       if (path[0] === 'recover') {
         if (typeof input.recovery !== 'string' || !/^[a-f0-9]{48}$/.test(input.recovery)) throw new StoreError('Indica o código de recuperação completo.');
-        return reply({ recovery: await db.recover(email, input.recovery, password) }, 200, sessionCookie('', true));
+        await db.recover(email, input.recovery, password);
+        return reply({ ok: true }, 200, sessionCookie('', true));
       }
       const result = path[0] === 'register' ? await db.register(email, password) : { user: await db.login(email, password) };
       if (path[0] === 'register' && mailEnabled()) queueEmail(email, 'verify', db.issueEmailToken(result.user.id, 'verify'));
       return reply(result, path[0] === 'register' ? 201 : 200, sessionCookie(db.session(result.user.id)));
     }
     if (!user) throw new StoreError('Entra na tua conta para continuar.', 401);
+    if (path.length === 1 && path[0] === 'security' && method === 'GET') return reply({ recoveryEnabled: db.recoveryEnabled(user.id) });
+    if (path.length === 1 && path[0] === 'recovery-code' && method === 'POST') {
+      db.limit(`security:${user.id}`, 5);
+      const input = await body(request);
+      if (typeof input.enabled !== 'boolean') throw new StoreError('Pedido inválido.');
+      const recovery = await db.configureRecovery(token, credential(input.password, 'password'), input.enabled);
+      return reply({ recovery, recoveryEnabled: Boolean(recovery) });
+    }
     if (path.length === 1 && path[0] === 'request-verification' && method === 'POST') {
       if (!mailEnabled()) throw new StoreError('A confirmação por email ainda não está disponível.', 503);
       db.limit(`email-verify:${user.id}`, 3);
