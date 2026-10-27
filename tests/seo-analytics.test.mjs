@@ -24,6 +24,10 @@ test('strict event allowlist',()=>{
  assert.equal(parseMetricPayload({event:'page_view',page:'/',source:'none'}),null);
  assert.equal(parseMetricPayload({event:'page_view',page:'/',source:'direct',email:'secret'}),null);
 });
+test('SPA navigation is counted as internal, not repeatedly attributed to Google',()=>{
+ const source=read('src/lib/seo-analytics.ts');
+ assert.match(source,/previousPage \? 'internal' : metricSource/);
+});
 test('PDF event only after initiating download',()=>{
  const source=read('src/app/criar-cv/page.tsx');
  assert.ok(source.indexOf('anchor.click();')<source.indexOf("trackConversion('cv_pdf_exported');"));

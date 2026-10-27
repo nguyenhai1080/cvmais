@@ -23,8 +23,8 @@ function send(payload:MetricPayload):void {
 export function trackAnalyticsPage(path:string):void {
   const page=metricPage(path);
   if (page===previousPage) return; // No duplicate mount/hydration events.
+  const source=previousPage ? 'internal' : metricSource(document.referrer,window.location.origin);
   previousPage=page;
-  const source=metricSource(document.referrer,window.location.origin);
   send({event:'page_view',page,source});
 }
 export function trackConversion(event:Exclude<MetricEvent,'page_view'>):void {
