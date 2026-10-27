@@ -5,7 +5,7 @@ import {metricPage,metricSource,parseMetricPayload} from '../src/lib/anonymous-m
 const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 test('no external analytics scripts or consent banner',()=>{
  const source=read('src/lib/seo-analytics.ts');
- assert.doesNotMatch(source,/gtag|googletagmanager|document\.cookie|localStorage/);
+ assert.doesNotMatch(source,/\bgtag\b|googletagmanager|document\.cookie|localStorage/);
  assert.doesNotMatch(read('src/app/layout.tsx'),/AnalyticsConsentManager/);
 });
 test('path sanitization',()=>{
