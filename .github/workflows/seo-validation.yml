@@ -1,0 +1,36 @@
+name: CVMais SEO validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feature/seo-cvmais-02]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    name: Test, typecheck and production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      APP_ORIGIN: https://cvmais.co.mz
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.16.0"
+          cache: npm
+      - name: Install exact dependencies
+        run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: TypeScript typecheck
+        run: npm run typecheck
+      - name: Next.js production build
+        run: npm run build
