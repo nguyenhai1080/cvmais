@@ -10,7 +10,7 @@ Validation: 76 automated tests after merging the latest SEO changes, typecheck, 
 
 ## Community launch preparation — 27 October 2026
 
-WhatsApp friend invitations added to the homepage: PT/EN message preview, explicit recipient selection/send in WhatsApp, copy fallback, no contacts or CV data. Original channel avatar and promotional cover prepared with launch copy and a two-week editorial plan. Owner has not created the channel yet; no follow CTA is shown until an official owner-provided channel link is configured. No channel created and no invitations sent by the agent. Group discussion and moderation remain a later decision.
+Deployed in DGC v33; official invitation/assets/health and SEO 15/15 verified. WhatsApp friend invitations added to the homepage: PT/EN message preview, explicit recipient selection/send in WhatsApp, copy fallback, no contacts or CV data. Original channel avatar and promotional cover prepared with launch copy and a two-week editorial plan. Owner has not created the channel yet; no follow CTA is shown until an official owner-provided channel link is configured. No channel created and no invitations sent by the agent. Group discussion and moderation remain a later decision.
 
 Validation: 78/78 automated tests; typecheck/build pass; browser PT/EN invitation and clipboard success checked, 390px responsive layout has no horizontal overflow. A pre-existing test was corrected to select its own hashed session rather than an arbitrary session row.
 

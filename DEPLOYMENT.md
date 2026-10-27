@@ -155,3 +155,8 @@ Existing synthetic account/old CV revision persist across official and previous 
 Deployed source ade2cc3 through the signed-in DGC browser, visibly confirmed nguyenhai1080@gmail.com and project cmvlbkah40mef0i5fzrjkbvcd. Connector still identifies GST and was not used for mutations. Vibehost initially applied its recent-deployment cooldown; waited, then v32 became Online. No resources, schema, secrets or existing recovery codes were migrated.
 
 Official-site acceptance: new privacy/access policy present; established synthetic account signs in; authenticated security endpoint exposes only enabled/disabled status, never code/hash; Resend remains enabled; original CV revision/model/content preserved; application and backup health HTTP 200. No production code rotated, password changed or authentication email sent during acceptance. Public SEO audit 15/15 passes. Local suite 76/76, typecheck/build and HTTP storage regression pass. PT/EN account security inspected locally. Physical Android pilot still pending.
+
+
+## DGC v33 — WhatsApp invitations and channel launch kit (27 October 2026)
+
+Source a4bfccc deployed through the browser after visible DGC nguyenhai1080@gmail.com confirmation. V33 Online verified. Official homepage invitation and public-only wa.me URL checked; avatar and cover downloads match source SHA-256; application and backup health pass, public SEO 15/15. Browser preview works on official site. Local tests 78/78, typecheck/build pass and simulated 390px layout checked. No invitation sent, no contacts accessed, no WhatsApp channel created. Channel-follow CTA stays hidden until owner supplies its real official link. Launch kit ZIP includes the two original ImageGen images, launch guide and exact prompts.

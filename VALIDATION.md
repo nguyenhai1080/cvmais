@@ -191,3 +191,8 @@ Official-site acceptance: new privacy/access policy present; established synthet
 ## WhatsApp friend invitations — 27 October 2026
 
 78/78 tests, typecheck and production build pass. Public invitation URL uses wa.me with only the fixed public-site message; no recipient, session, CV fields or account IDs. PT/EN browser preview and copy status checked. At a simulated 390px viewport buttons stack and no horizontal overflow is present; this is not a physical Android test. Owner has no WhatsApp channel yet: no fabricated follow link, follower count or active-channel claim. Generated avatar/cover inspected and launch copy saved under brand/whatsapp. No external message sent.
+
+
+## DGC v33 — WhatsApp invitations and channel launch kit (27 October 2026)
+
+Source a4bfccc deployed through the browser after visible DGC nguyenhai1080@gmail.com confirmation. V33 Online verified. Official homepage invitation and public-only wa.me URL checked; avatar and cover downloads match source SHA-256; application and backup health pass, public SEO 15/15. Browser preview works on official site. Local tests 78/78, typecheck/build pass and simulated 390px layout checked. No invitation sent, no contacts accessed, no WhatsApp channel created. Channel-follow CTA stays hidden until owner supplies its real official link. Launch kit ZIP includes the two original ImageGen images, launch guide and exact prompts.
