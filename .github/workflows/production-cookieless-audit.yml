@@ -1,0 +1,25 @@
+name: CVMais v28 cookieless production audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/check-cookieless-production.mjs
+      - .github/workflows/production-cookieless-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-cookieless:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+      - run: node --check scripts/check-cookieless-production.mjs
+      - name: Audit public v28 without creating analytics counters
+        run: node scripts/check-cookieless-production.mjs
