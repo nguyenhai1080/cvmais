@@ -1,5 +1,13 @@
 # Validation — 24 October 2026
 
+## Current acceptance — DGC v40, 28 October 2026
+
+Source `44b1ef4` adds 24 authored arrangements, taking the truthful catalogue from 26 to 50. Build and 95 automated tests pass. 216 PDF fixture cases were checked: 144 covering the new 24 compositions and 72 regression cases for the earlier 12 sector compositions. Cases cover short, no-photo, English, long work/education, long skills/languages and sparse content. Checks cover content/end-marker preservation, English headings, A4 boundaries, glyph overlaps and embedded fonts. The final 144 new cases also reject blank pages. All short new examples fit one page; synthetic long cases can take two or three pages, including sparse overflow pages, and no one-page guarantee is made. All 24 short previews and all new stress sheets visually reviewed.
+
+Local browser: all 50 library cards load, fictional Sistemas backup imports, English CV language remains independent of Portuguese UI, switch to Narrativa retains authored name/text/portrait, actual downloaded PDF has one page and expected English headings/content. Simulated 390px preview has equal 375px client/scroll widths and retains the portrait. This is browser simulation, not physical Android acceptance.
+
+DGC v40 Online confirmed. Public acceptance validates 50 designs, 36 byte-identical reviewed preview PNGs, 12 homepage selections, current SEO count, app/backup health and mail worker ready. Existing fictional persistence probe survives redeployment; SEO 15/15 passes. Live gallery confirms 50 cards, English telecom 8 results and translated new descriptions; Portuguese restored, live Sistemas preview inspected. Screenshot: work/cvmais-milestone-50-v40.png. No real CV content changed or real authentication email requested. Target 120 remains incomplete, 70 designs outstanding.
+
 ## Current acceptance — DGC v39, 28 October 2026
 
 Twelve new sector compositions (26 total): 92 automated tests and final production build pass. Six PDF cases per new model, 72 total: Portuguese portrait, no portrait, English titles, long career, long supporting text and sparse content. Checks retain user fields/end markers, validate A4 text bounds, reject heavily overlapping glyphs and require embedded fonts. All short samples fit one page; stress cases use two pages and retain final content. All twelve short layouts and stress pages inspected through Poppler-rendered contact sheets. Fixed collapsed entry headings, explicit body font sizing and narrow sales-sidebar dates before acceptance. Short previews come from the actual PDFs, not hand-drawn placeholder CVs.

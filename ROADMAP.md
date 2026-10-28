@@ -2,6 +2,14 @@
 
 Updated 28 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
 
+## Milestone 50 — 28 October 2026
+
+Implemented 24 additional authored CV compositions across twelve primary fields: **50/120**, with **70 remaining**. Administration/accounting now have five each; the other ten fields have four each. Each model has its own arrangement and matching HTML/PDF renderer; colours, portraits and industry aliases do not increase the count. Twelve homepage selections now cover all twelve fields. Historical saved model IDs remain supported.
+
+Validation: 95 tests and production build pass. 216 PDF fixture cases checked (144 new-design cases plus 72 earlier-sector regressions), covering PT/EN, photo/no-photo, sparse and long content. Short samples fit one A4 page; stress cases preserve all end markers over two or three pages. The 24 new short previews and all new stress contact sheets were visually reviewed. Isolated browser import, Sistemas-to-Narrativa switch, content/photo preservation, English CV in Portuguese UI and actual one-page PDF download pass. Simulated 390px preview has no horizontal overflow. Physical Android/native-speaker acceptance remains pending. Deployment and public acceptance are recorded in DEPLOYMENT.md and VALIDATION.md.
+
+Next design milestones: **74 → 98 → 120**, with independent content arrangement and PDF review for every composition. No automatic completion date is promised.
+
 ## Distinct template expansion — DGC v39, 28 October 2026
 
 The target remains **120 distinct, reviewed CV compositions** and is not complete. This batch adds twelve independently arranged sector designs to the existing fourteen, making **26**, with **94 still outstanding** after release. No recolours, industry tags or portrait changes are counted as new layouts. Detailed primary-sector allocation, acceptance criteria and milestones 50/74/98/120 are in TEMPLATE-EXPANSION.md.
@@ -38,7 +46,7 @@ Validation: 78/78 automated tests; typecheck/build pass; browser PT/EN invitatio
 
 ## Delivered
 
-1. Responsive pt-MZ homepage, approved imagery, twenty-six public compositions including twelve original sector layouts plus Atlas/Aurora/Fólio/Vértice, twelve homepage selections; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs. Target 120 remains open (94 outstanding).
+1. Responsive pt-MZ homepage, approved imagery, fifty public compositions, twelve homepage selections covering twelve primary fields; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs. Target 120 remains open (70 outstanding).
 2. Editor, crop/zoom photo, browser-generated A4 PDF, guest local draft and JSON export; private account library, SQLite autosave, revisions and recovery codes.
 3. Permanent account/CV erasure with password confirmation, session revocation and matching local-copy cleanup.
 4. Resend cvmais.win verified sender, optional email confirmation and expiring single-use password reset; approved owner delivery test reported Delivered. Encrypted daily B2 backup plus real download/restore verification.
