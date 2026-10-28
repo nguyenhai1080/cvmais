@@ -1,6 +1,12 @@
 # CVMais delivery roadmap
 
-Updated 27 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
+Updated 28 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
+
+## Reliability release — 28 October 2026 (production acceptance pending)
+
+Implemented the next independent roadmap step: encrypted durable authentication-email outbox, bounded retry/backoff, stable provider idempotency, token cancellation and a supervised background worker. The verified-operator panel shows non-sensitive queue counts and worker status. No additional message recipients, SMS service or marketing sends were added. Portuguese sharing navigation is now Partilhar; English remains Sharing.
+
+Final 89/89 tests, compiled build, local mocked HTTP restart/reset pilot and storage HTTP regression passed; browser PT/EN navigation checked. Final production deployment acceptance follows. Physical Android and Mozambican native-speaker acceptance are still pending. WhatsApp channel activation still requires the owner's actual channel link.
 
 ## Account access update — 27 October 2026
 
@@ -36,7 +42,7 @@ Validation: 78/78 automated tests; typecheck/build pass; browser PT/EN invitatio
 
 1. Actual Android/iPhone pilot: guest editing/reload, choosing a new design, photo, PDF PT/EN and industry-letter editing/copying.
 2. Fix issues from that pilot and obtain feedback from consenting Mozambican users, including first-job and experienced applicants.
-3. Durable retry/outbox for account emails, with token-expiry and duplicate-delivery handling.
+3. Observe the new email queue during the next owner-requested real verification/reset; simulated-provider retry acceptance is separate from inbox-delivery acceptance.
 4. Extend original designs/content only where user feedback shows a gap; community workflow and revenue model need an owner decision.
 
 ## Delivered in DGC v10: public domain and continuity
@@ -68,13 +74,13 @@ Portuguese for Mozambique is the default; English is available. Examples are exp
 ## Next launch priorities
 
 1. Wider real-device pilot: actual Android/iPhone devices and consenting Mozambican Portuguese speakers. Gather device-specific and wording feedback. The initial owner pilot and emulated viewport tests do not replace this.
-2. Community: remains clearly in preparation until a real workflow and moderation rules exist. Continue improving guidance and examples from actual user feedback.
-3. Later domain cvmais.co.mz: attach only after acquisition/DNS access; repeat origin/cookie/local-draft migration checks.
+2. WhatsApp: friend invitations are live; channel-follow activation waits for the owner-created channel link and moderation/administration decisions.
+3. Official domain cvmais.co.mz is already attached and verified; maintain exact-origin and old-draft migration protections.
 
 ## Current limits
 
 - Single application container with persistent SQLite. Do not horizontally scale independent SQLite replicas.
-- No durable authentication-email outbox; failed delivery requires a new user request. Backup incident/recovery email alerts and independent StatusCake monitoring are active. External checks run every five minutes; provider confirmation/delivery can add delay.
+- Authentication-email outbox is implemented; production acceptance is pending for this release. Permanent failures/exhausted retries still require a fresh user request after repair. Backup incident/recovery email alerts and independent StatusCake monitoring are active. External checks run every five minutes; provider confirmation/delivery can add delay.
 - Backups expire after about 30 days; restoration must reconcile subsequent erasure requests.
 
 ## Delivered in DGC v11: backup operations

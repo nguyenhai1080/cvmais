@@ -9,7 +9,8 @@
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
-    "qa:pdf": "tsx scripts/render-pdf-fixtures.tsx"
+    "qa:pdf": "tsx scripts/render-pdf-fixtures.tsx",
+    "qa:mail": "node scripts/check-auth-mail-api.mjs"
   },
   "dependencies": {
     "@react-pdf/renderer": "4.9.0",

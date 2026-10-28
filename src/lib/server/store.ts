@@ -1,3 +1,4 @@
+import { initialiseMailQueue,encryptedMail } from '../../../scripts/auth-mail-core.mjs';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, chmodSync } from 'node:fs';
 import { dirname } from 'node:path';
@@ -31,6 +32,7 @@ export class Store {
       CREATE TABLE IF NOT EXISTS email_tokens (token TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, purpose TEXT NOT NULL CHECK(purpose IN ('verify','reset')), expires INTEGER NOT NULL);
       CREATE INDEX IF NOT EXISTS email_token_owner ON email_tokens(user_id,purpose);
       PRAGMA user_version=1;`);
+    initialiseMailQueue(this.db);
   }
   recordAnonymousMetric(payload: {event:string;page:string;source:string}) {
     const day=new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Maputo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -59,11 +61,19 @@ export class Store {
     const actual = await scrypt(value, salt, 64) as Buffer;
     return timingSafeEqual(actual, Buffer.from(hash, 'hex'));
   }
-  async register(email: string, password: string) {
+  async register(email: string, password: string, sendVerification = false) {
     const encoded = await this.password(password);
     const id = randomUUID();
-    try { this.db.prepare('INSERT INTO users VALUES (?,?,?,?,?)').run(id, email, encoded, '', Date.now()); }
+    const token = sendVerification ? randomBytes(32).toString('hex') : '';
+    const payload = sendVerification ? encryptedMail(email,'verify',token) : '';
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      this.db.prepare('INSERT INTO users VALUES (?,?,?,?,?)').run(id, email, encoded, '', Date.now());
+      if (sendVerification) this.writeEmailToken(id,'verify',token,payload);
+      this.db.exec('COMMIT');
+    }
     catch (error) {
+      this.db.exec('ROLLBACK');
       if ((error as Error).message.includes('UNIQUE')) throw new StoreError('Não foi possível criar a conta com este email. Tenta entrar ou recuperar o acesso.', 409);
       throw error;
     }
@@ -154,14 +164,20 @@ export class Store {
     if (!result.changes) throw new StoreError('Conta não encontrada.', 404);
   }
   emailVerified(user: string) { return Boolean(this.db.prepare('SELECT 1 FROM verified_emails WHERE user_id=?').get(user)); }
-  issueEmailToken(user: string, purpose: 'verify' | 'reset') {
+  private writeEmailToken(user: string, purpose: 'verify' | 'reset', token: string, payload = '') {
+    const now=Date.now();
+    this.db.prepare('DELETE FROM email_tokens WHERE expires<? OR (user_id=? AND purpose=?)').run(now,user,purpose);
+    this.db.prepare('INSERT INTO email_tokens VALUES (?,?,?,?)').run(digest(token),user,purpose,now+(purpose==='reset'?30:1440)*60_000);
+    if(payload)this.db.prepare('INSERT INTO auth_mail_outbox(token,payload,next_attempt,created) VALUES (?,?,?,?)').run(digest(token),payload,now,now);
+  }
+  issueEmailToken(user: string, purpose: 'verify' | 'reset', queue = false) {
     const token = randomBytes(32).toString('hex');
+    const account = queue ? this.db.prepare('SELECT email FROM users WHERE id=?').get(user) as {email:string} | undefined : undefined;
+    if(queue&&!account)throw new StoreError('Conta não encontrada.',404);
+    const payload=queue ? encryptedMail(account!.email,purpose,token) : '';
     this.db.exec('BEGIN IMMEDIATE');
-    try {
-      this.db.prepare('DELETE FROM email_tokens WHERE expires<? OR (user_id=? AND purpose=?)').run(Date.now(), user, purpose);
-      this.db.prepare('INSERT INTO email_tokens VALUES (?,?,?,?)').run(digest(token), user, purpose, Date.now() + (purpose === 'reset' ? 30 : 1440) * 60_000);
-      this.db.exec('COMMIT');
-    } catch (error) { this.db.exec('ROLLBACK'); throw error; }
+    try { this.writeEmailToken(user,purpose,token,payload);this.db.exec('COMMIT'); }
+    catch (error) { this.db.exec('ROLLBACK'); throw error; }
     return token;
   }
   emailToken(token: string, purpose: 'verify' | 'reset') {
@@ -170,9 +186,9 @@ export class Store {
     if (!row) throw new StoreError('A ligação é inválida ou expirou. Pede uma nova ligação.');
     return row;
   }
-  requestEmailReset(email: string) {
+  requestEmailReset(email: string, queue = false) {
     const user = this.db.prepare('SELECT id,email FROM users WHERE email=?').get(email) as { id: string; email: string } | undefined;
-    return user && this.emailVerified(user.id) ? { ...user, token: this.issueEmailToken(user.id, 'reset') } : null;
+    return user && this.emailVerified(user.id) ? { ...user, token: this.issueEmailToken(user.id, 'reset',queue) } : null;
   }
   verifyEmail(token: string) {
     this.db.exec('BEGIN IMMEDIATE');

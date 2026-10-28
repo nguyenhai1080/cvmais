@@ -3,6 +3,8 @@ import { interviewTranslationPairs } from './interview-guide.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
 export const uiEnglish: Record<string,string> = {
+  "Para repetir o envio após falhas temporárias, guardamos uma cópia cifrada da mensagem e da ligação numa fila privada. A cópia é removida quando o fornecedor aceita a mensagem, quando a ligação é substituída ou utilizada, quando expira ou quando a conta é eliminada. Após esgotar as tentativas ou uma falha definitiva, o conteúdo cifrado é apagado. A aceitação pelo fornecedor não garante a entrega na caixa de entrada.": "To retry after temporary failures, we store an encrypted copy of the message and link in a private queue. It is removed when the provider accepts the message, when the link is replaced or used, when it expires or when the account is deleted. After all attempts are exhausted or a permanent failure occurs, the encrypted content is cleared. Provider acceptance does not guarantee inbox delivery.",
+  "Partilhar": "Sharing",
   "Ir para o conteúdo": "Skip to content",
   "Ver modelos": "View templates",
   " Sem conta obrigatória": " No account required",

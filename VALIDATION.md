@@ -207,3 +207,11 @@ Homepage changes: sticky homepage header and skip link, hero View templates acti
 Optimised source images: desktop hero 44,360 bytes (mobile 22,098), community image 92,320 bytes, replacing 3,874,825 bytes of PNG delivery for these two placements. About 96.5% reduction for these image resources; this is not a measured overall page-speed claim. Original images retained.
 
 Validation: production build/typecheck and existing 78 tests passed. Local browser checked PT/EN FAQ, twelve-card preview, mobile menu closes after Sharing, target appears below sticky header, no horizontal overflow at simulated 390px, responsive mobile hero source chosen. Official HTTP verification checks Sharing, removed band, 12 designs, 6 guides, image sizes and app/backup health. Production SEO 15/15 passes. Physical Android pilot remains pending.
+
+
+## Durable authentication email candidate — 28 October 2026
+
+- Final suite: 89/89 passes. New queue tests cover encrypted atomic registration, controlled-clock retries, restart with identical body/idempotency, independent leases, cancellation/expiry/erasure, corrupted ciphertext and key changes, bounded/permanent failures, worker heartbeat, in-flight replacement and accurate final-attempt status.
+- Production build and typecheck pass. `npm run qa:mail` passes against compiled HTTP routes and an independent worker after a server restart. Verification and reset complete with intercepted provider transport; existing CV data and session revocation are checked. All test mail calls are mocked, and the temporary fictional database/captures are cleaned up.
+- Existing local storage HTTP regression passes. Browser verified two English Sharing links become two Portuguese Partilhar links with no English Sharing links remaining in PT; the anchor still targets the invitation section.
+- No production email was requested by the agent for this candidate. Production deployment/worker acceptance is recorded separately after deployment. Current established production persistence fixture passed before deployment.
