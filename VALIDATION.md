@@ -1,5 +1,11 @@
 # Validation — 24 October 2026
 
+## Current acceptance — DGC v38, 28 October 2026
+
+Source e6760fa adds sticky mobile Edit/Preview/PDF controls, labelled section jump, 16px input text and 44px primary touch targets. Existing 89 tests and final production build pass. Isolated local synthetic editor pilot at 320px/390px verifies draft reload, Maputo-to-Atlas preservation, mobile review-to-education focus, independent EN CV titles and actual PT/EN browser PDF downloads (valid header/end markers). Desktop mobile controls are hidden. See PILOT.md for scope; no new all-layout PDF-render acceptance claimed.
+
+V38 Online visibly confirmed in DGC. Original account/CV persistence passes after redeploy, email remains enabled with ready worker heartbeat, app/backup health pass and SEO 15/15 passes. Official editor at 390px confirms sticky top 0, 16px input text, correct section focus and equal 375px content/scroll width. Screenshot saved as work/cvmais-mobile-editor-v38.png; temporary viewport reset afterward. The browser tool stalled during the first screenshot attempt, recovered, and final live proof was captured. No production CV content changed and no real authentication mail requested. Actual Android keyboard, download opening and memory behaviour still require the owner/device pilot.
+
 ## Current acceptance — DGC v37, 28 October 2026
 
 Source 34802ec includes the encrypted authentication-email outbox and Partilhar localization. 89/89 tests and production build pass. The compiled HTTP mock pilot passes registration, durable retry across restart, independent-worker processing, identical body/idempotency replay, verified-email reset, session revocation, private operator state, permanent failure and erasure. It deliberately supplies an invalid unused AUTH_MAIL_ENCRYPTION_KEY to prove mail uses the existing valid BACKUP_ENCRYPTION_KEY root. No external email was sent by these tests.

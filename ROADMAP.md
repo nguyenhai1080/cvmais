@@ -2,6 +2,10 @@
 
 Updated 28 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
 
+## Mobile editor usability — DGC v38, 28 October 2026
+
+Live: sticky mobile Edit/Preview/PDF toolbar, labelled section jump, 16px mobile input text and 44px primary touch controls. Uses the existing CV review/download flow; desktop actions remain unchanged. Simulated 320px/390px local checks cover retained draft, model switch, review-to-education focus and actual PT/EN PDF downloads. Official 390px editor confirms 16px fields, sticky toolbar at top, section focus and no horizontal overflow. Build and 89 tests pass; old account/CV persistence, mail worker, app/backup health and SEO 15/15 pass after deployment. Physical Android keyboard/file-manager acceptance remains pending; see PILOT.md.
+
 ## Reliability release — DGC v37, 28 October 2026
 
 Implemented the next independent roadmap step: encrypted durable authentication-email outbox, bounded retry/backoff, stable provider idempotency, token cancellation and a supervised background worker. The verified-operator panel shows non-sensitive queue counts and worker status. No additional message recipients, SMS service or marketing sends were added. Portuguese sharing navigation is now Partilhar; English remains Sharing.
