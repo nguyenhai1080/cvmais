@@ -4,7 +4,7 @@ import { mailEnabled, tokenMessage, tokenIdempotency, deliverBody, MailDeliveryE
 const MAX_ATTEMPTS=8;
 const GRACE=30_000;
 function encryptionKey() {
-  const value=process.env.AUTH_MAIL_ENCRYPTION_KEY || process.env.BACKUP_ENCRYPTION_KEY;
+  const value=process.env.BACKUP_ENCRYPTION_KEY;
   if (!/^[a-f0-9]{64}$/i.test(value || '')) throw new Error('Authentication mail encryption is not configured');
   return Buffer.from(hkdfSync('sha256',Buffer.from(value,'hex'),Buffer.from('cvmais'),Buffer.from('auth-mail-outbox-v1'),32));
 }

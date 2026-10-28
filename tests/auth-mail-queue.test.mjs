@@ -11,7 +11,7 @@ async function fixture(run) {
   const directory=mkdtempSync(join(tmpdir(),'cvmais-auth-queue-'));
   const keys=['AUTH_MAIL_ENCRYPTION_KEY','BACKUP_ENCRYPTION_KEY','MAIL_ENABLED','RESEND_API_KEY','MAIL_FROM','APP_ORIGIN'];
   const old=Object.fromEntries(keys.map(key=>[key,process.env[key]]));
-  Object.assign(process.env,{AUTH_MAIL_ENCRYPTION_KEY:'ab'.repeat(32),MAIL_ENABLED:'true',RESEND_API_KEY:'fictional-test-key',MAIL_FROM:'CVMais <sender@example.test>',APP_ORIGIN:'https://cvmais.example.test'});
+  Object.assign(process.env,{BACKUP_ENCRYPTION_KEY:'ab'.repeat(32),AUTH_MAIL_ENCRYPTION_KEY:'64_hex_characters_generated_privately',MAIL_ENABLED:'true',RESEND_API_KEY:'fictional-test-key',MAIL_FROM:'CVMais <sender@example.test>',APP_ORIGIN:'https://cvmais.example.test'});
   const realNow=Date.now;
   const context={db:new Store(join(directory,'db.sqlite')),path:join(directory,'db.sqlite'),time:realNow()};
   Date.now=()=>context.time;
@@ -37,7 +37,7 @@ test('registration atomically persists an encrypted verification job without ret
   const token=message.text.match(/#token=([a-f0-9]{64})/)[1];
   assert.equal(row.token,digest(token));assert.equal(c.db.emailToken(token,'verify').id,a.user.id);
   assert.ok(mailQueueStatus(c.db.db,c.time).lastAcceptedAt);
-  process.env.AUTH_MAIL_ENCRYPTION_KEY='invalid';
+  process.env.BACKUP_ENCRYPTION_KEY='invalid';
   await assert.rejects(c.db.register('failed@example.test','fictional-long-password',true));
   assert.equal(c.db.db.prepare('SELECT 1 FROM users WHERE email=?').get('failed@example.test'),undefined);
 }));
@@ -121,11 +121,11 @@ test('retries are bounded, permanent rejection stops immediately and failed payl
 test('ciphertext tampering/key changes fail closed; summaries contain no recipient, token or ciphertext',()=>fixture(async c=>{
   const a=await account(c.db);const token=c.db.issueEmailToken(a.user.id,'verify',true);
   const payload=c.db.db.prepare('SELECT payload FROM auth_mail_outbox').get().payload;
-  process.env.AUTH_MAIL_ENCRYPTION_KEY='cd'.repeat(32);
+  process.env.BACKUP_ENCRYPTION_KEY='cd'.repeat(32);
   assert.equal(await processAuthMail(c.db.db,{now:c.now,deliver:async()=>assert.fail('undecryptable email sent')}),'failed');
   const status=mailQueueStatus(c.db.db,c.time);const summary=JSON.stringify(status);
   assert.ok(!summary.includes(a.user.email));assert.ok(!summary.includes(token));assert.ok(!summary.includes(payload));
-  process.env.AUTH_MAIL_ENCRYPTION_KEY='ab'.repeat(32);
+  process.env.BACKUP_ENCRYPTION_KEY='ab'.repeat(32);
   c.db.issueEmailToken(a.user.id,'verify',true);
   const damaged=Buffer.from(c.db.db.prepare('SELECT payload FROM auth_mail_outbox').get().payload,'base64');
   damaged[40]^=1;c.db.db.prepare('UPDATE auth_mail_outbox SET payload=?').run(damaged.toString('base64'));c.time+=1000;

@@ -1,11 +1,12 @@
 // Isolated loopback QA only. Overrides mail configuration and intercepts all Resend calls.
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
-import {mkdtempSync,writeFileSync,readFileSync,rmSync,existsSync} from 'node:fs';
+import {mkdirSync,mkdtempSync,writeFileSync,readFileSync,rmSync,existsSync} from 'node:fs';
 import {resolve,join,dirname} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {DatabaseSync} from 'node:sqlite';
 const root=resolve('.');
+mkdirSync(resolve('work'),{recursive:true});
 const directory=mkdtempSync(join(resolve('work'),'auth-mail-qa-'));
 assert.equal(dirname(directory),resolve('work'));
 const database=join(directory,'qa.sqlite');
@@ -15,7 +16,7 @@ const origin='http://localhost:3005';
 const email='mail-queue-pilot@example.test';
 const password='Fictional-mail-queue-password';
 const env={...process.env,NODE_ENV:'production',DATABASE_PATH:database,APP_ORIGIN:'https://cvmais.example.test',APP_ALLOWED_ORIGINS:origin,
-  MAIL_ENABLED:'true',MAIL_FROM:'CVMais <sender@example.test>',RESEND_API_KEY:'fictional-test-key',AUTH_MAIL_ENCRYPTION_KEY:'ab'.repeat(32),
+  MAIL_ENABLED:'true',MAIL_FROM:'CVMais <sender@example.test>',RESEND_API_KEY:'fictional-test-key',AUTH_MAIL_ENCRYPTION_KEY:'64_hex_characters_generated_privately',BACKUP_ENCRYPTION_KEY:'ab'.repeat(32),
   BACKUP_ENABLED:'false',BACKUP_ALERTS_ENABLED:'false',OPERATIONS_EMAIL:email,QA_MAIL_MODE:modeFile,QA_MAIL_CAPTURE:capture,
   NODE_OPTIONS:'--import '+pathToFileURL(join(root,'tests/fixtures/auth-mail-mock.mjs')).href};
 let server,worker,db,cookie;
