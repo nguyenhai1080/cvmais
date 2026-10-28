@@ -1,5 +1,13 @@
 # Validation — 24 October 2026
 
+## Current acceptance — DGC v39, 28 October 2026
+
+Twelve new sector compositions (26 total): 92 automated tests and final production build pass. Six PDF cases per new model, 72 total: Portuguese portrait, no portrait, English titles, long career, long supporting text and sparse content. Checks retain user fields/end markers, validate A4 text bounds, reject heavily overlapping glyphs and require embedded fonts. All short samples fit one page; stress cases use two pages and retain final content. All twelve short layouts and stress pages inspected through Poppler-rendered contact sheets. Fixed collapsed entry headings, explicit body font sizing and narrow sales-sidebar dates before acceptance. Short previews come from the actual PDFs, not hand-drawn placeholder CVs.
+
+Isolated local browser: imported a fictional portrait CV, changed Prisma to Cuidado with text/photo retained, selected English CV titles independently of Portuguese prose, downloaded an actual one-page PDF and inspected its text. At a simulated 390px viewport, content/scroll width is 375px and preview scales to fit. This is not a physical Android test.
+
+DGC v39/application source 9f62ad2 Online confirmed under the visible DGC account. Read-only release script passes 26 distinct public compositions, twelve homepage selections, twelve served image SHA-256 matches, current SEO metadata count and application/backup/mail-worker health. Original account/CV persistence survived redeployment; SEO 15/15 passes. Live PT/EN gallery shows translated descriptions, telecom returns five suitable models including Circuito and Prumo, and Prisma opens with its actual PDF image. Screenshot: work/cvmais-sector-designs-v39.png. No production CV edited, database migration applied or real email sent. Target 120 is not complete; 94 remain. See TEMPLATE-EXPANSION.md for counting rules and allocation.
+
 ## Current acceptance — DGC v38, 28 October 2026
 
 Source e6760fa adds sticky mobile Edit/Preview/PDF controls, labelled section jump, 16px input text and 44px primary touch targets. Existing 89 tests and final production build pass. Isolated local synthetic editor pilot at 320px/390px verifies draft reload, Maputo-to-Atlas preservation, mobile review-to-education focus, independent EN CV titles and actual PT/EN browser PDF downloads (valid header/end markers). Desktop mobile controls are hidden. See PILOT.md for scope; no new all-layout PDF-render acceptance claimed.

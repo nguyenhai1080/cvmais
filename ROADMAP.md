@@ -2,13 +2,13 @@
 
 Updated 28 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
 
-## Distinct template expansion — 28 October 2026, deployment acceptance pending
+## Distinct template expansion — DGC v39, 28 October 2026
 
 The target remains **120 distinct, reviewed CV compositions** and is not complete. This batch adds twelve independently arranged sector designs to the existing fourteen, making **26**, with **94 still outstanding** after release. No recolours, industry tags or portrait changes are counted as new layouts. Detailed primary-sector allocation, acceptance criteria and milestones 50/74/98/120 are in TEMPLATE-EXPANSION.md.
 
 Implemented: Balanço, Circuito, Cuidado, Cátedra, Prumo, Travessia, Impulso, Estância, Prisma, Campo, Elo and Pauta. Each has matching editor/PDF structure, optional portrait, PT/EN titles, curated search tags and long-content stacking. Twelve actual PDF previews; homepage retains twelve distinct editorial selections, now including eight new sector layouts. Public counts and SEO descriptions derive from the catalogue.
 
-Validation: 92 tests and build pass; 72 PDF fixtures pass content/language, A4 bounds, glyph-overlap and embedded-font checks. All twelve short samples fit one page; work/support stress cases preserve final markers on two pages. All short/stress pages visually reviewed. Local browser import, Prisma-to-Cuidado switch, authored-text/portrait preservation, independent English CV and actual PDF download pass. Simulated 390px preview has no horizontal overflow. Deployment acceptance follows; physical Android and native-speaker acceptance remain separate.
+Validation: 92 tests and build pass; 72 PDF fixtures pass content/language, A4 bounds, glyph-overlap and embedded-font checks. All twelve short samples fit one page; work/support stress cases preserve final markers on two pages. All short/stress pages visually reviewed. Local browser import, Prisma-to-Cuidado switch, authored-text/portrait preservation, independent English CV and actual PDF download pass. Simulated 390px preview has no horizontal overflow. DGC v39 Online: official count 26, twelve exact reviewed PNGs, twelve homepage selections, original CV persistence, mail worker, app/backup health and SEO 15/15 pass. Live PT/EN gallery, telecom results including Circuito/Prumo and Prisma preview verified. Physical Android and native-speaker acceptance remain separate.
 
 ## Mobile editor usability — DGC v38, 28 October 2026
 
@@ -38,7 +38,7 @@ Validation: 78/78 automated tests; typecheck/build pass; browser PT/EN invitatio
 
 ## Delivered
 
-1. Responsive pt-MZ homepage, approved imagery, fourteen public designs including Atlas/Aurora/Fólio/Vértice, twelve homepage selections; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs.
+1. Responsive pt-MZ homepage, approved imagery, twenty-six public compositions including twelve original sector layouts plus Atlas/Aurora/Fólio/Vértice, twelve homepage selections; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs. Target 120 remains open (94 outstanding).
 2. Editor, crop/zoom photo, browser-generated A4 PDF, guest local draft and JSON export; private account library, SQLite autosave, revisions and recovery codes.
 3. Permanent account/CV erasure with password confirmation, session revocation and matching local-copy cleanup.
 4. Resend cvmais.win verified sender, optional email confirmation and expiring single-use password reset; approved owner delivery test reported Delivered. Encrypted daily B2 backup plus real download/restore verification.
@@ -51,6 +51,8 @@ Validation: 78/78 automated tests; typecheck/build pass; browser PT/EN invitatio
 - Interactive browser, physical-phone/slow-network and Mozambican native-speaker acceptance remain pending. HTTP/API checks do not replace these.
 
 ### Next priorities
+
+User's active design priority: grow the 26 distinct compositions to 120 through reviewed milestones 50/74/98/120; prioritise logistics, sales and agriculture, then diversify by career stage and specialist needs. TEMPLATE-EXPANSION.md tracks the 94 remaining primary-field slots. This goal is not marked complete and does not count legacy recolourings.
 
 1. Actual Android/iPhone pilot: guest editing/reload, choosing a new design, photo, PDF PT/EN and industry-letter editing/copying.
 2. Fix issues from that pilot and obtain feedback from consenting Mozambican users, including first-job and experienced applicants.

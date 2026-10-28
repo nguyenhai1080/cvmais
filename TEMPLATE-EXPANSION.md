@@ -1,6 +1,6 @@
 # Distinct CV compositions: target 120
 
-28 October 2026. The target is **120 independently reviewed compositions**. It has not been completed. Before this release the public catalogue contained 14; this batch adds 12, for **26** when deployed. Another **94** remain. The 108 old industry recolourings remain readable in saved CVs but are excluded from discovery and these counts.
+28 October 2026. The target is **120 independently reviewed compositions**. It has not been completed. Before this release the public catalogue contained 14; DGC v39 adds 12, for **26 live compositions**. Another **94** remain. The 108 old industry recolourings remain readable in saved CVs but are excluded from discovery and these counts.
 
 ## Acceptance rule
 
