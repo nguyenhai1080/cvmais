@@ -2,6 +2,12 @@
 
 ## Active deployment: DGC
 
+Current release, 28 October 2026: **v37**, application source `34802ec` (includes `2a87029`), official URL https://cvmais.co.mz. Browser profile visibly confirmed DGC `nguyenhai1080@gmail.com`; connector remains GST and was not used for mutations. Production acceptance: encrypted mail queue enabled, independent worker heartbeat ready, original account/CV persistence preserved, app/backup health 200, anonymous operations denied and SEO 15/15 passes. Live PT/EN navigation checked. Verified sender remains cvmais.win; email links use the official domain.
+
+Release incident: v35 exposed mail disabled because a separate optional encryption-root variable took precedence over the valid existing backup root. Code-only rollback restored v34 as history version v36, with mail enabled confirmed; database/environment were retained. Source 34802ec derives the separate mail cipher key solely from the existing BACKUP_ENCRYPTION_KEY. V37 then passed live acceptance. No secrets were revealed or changed, and no real authentication email was requested during this release.
+
+The entries below retain earlier deployment history; their version/domain details are historical.
+
 The required owner is DGC, email `nguyenhai1080@gmail.com`. The exposed connector still identifies `nguyenhai1080+basic@gmail.com` / GST Vietnam and must not be used for DGC mutations. Deployment was completed through the user's browser after its visible profile confirmed the DGC email, display name `Công ty Cổ Phần Đầu Tư và Truyền Thông Số`, account ID `cmucbxmf00a5j0h5fjwzjwky7`, Pro plan.
 
 - Primary live URL: https://cvmais.win

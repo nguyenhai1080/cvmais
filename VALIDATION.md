@@ -1,5 +1,13 @@
 # Validation — 24 October 2026
 
+## Current acceptance — DGC v37, 28 October 2026
+
+Source 34802ec includes the encrypted authentication-email outbox and Partilhar localization. 89/89 tests and production build pass. The compiled HTTP mock pilot passes registration, durable retry across restart, independent-worker processing, identical body/idempotency replay, verified-email reset, session revocation, private operator state, permanent failure and erasure. It deliberately supplies an invalid unused AUTH_MAIL_ENCRYPTION_KEY to prove mail uses the existing valid BACKUP_ENCRYPTION_KEY root. No external email was sent by these tests.
+
+V35 briefly reported mail disabled due to the optional-root configuration conflict. Code-only rollback to v34 created v36 and restored enabled mail; no database rollback occurred. Corrected v37 is Online on the visibly verified DGC account. Official-site acceptance passes enabled mail, independent worker heartbeat, encrypted-queue privacy disclosure, application/backup health 200 and unauthenticated operations 403. Original account credentials and CV content survived redeployment. SEO 15/15 passes. Live browser confirms PT Partilhar and EN Sharing; screenshot: work/cvmais-partilhar-v37.png. No production authentication mail requested, real user password changed or real CV edited during acceptance. Real Android and Mozambican native-speaker pilot, and real queued-provider inbox acceptance, remain pending.
+
+Earlier sections below are historical validation records.
+
 Canonical source: `D:\Projects\CVMais`. All CVs used in checks are fictional.
 
 - Ten unit/storage tests pass: migration, validation, bounds, PDF readiness, safe filenames, long-sidebar fallback, safe photo round-trip and persisted account lifecycle.

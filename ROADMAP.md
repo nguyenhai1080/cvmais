@@ -2,11 +2,11 @@
 
 Updated 28 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
 
-## Reliability release — 28 October 2026 (production acceptance pending)
+## Reliability release — DGC v37, 28 October 2026
 
 Implemented the next independent roadmap step: encrypted durable authentication-email outbox, bounded retry/backoff, stable provider idempotency, token cancellation and a supervised background worker. The verified-operator panel shows non-sensitive queue counts and worker status. No additional message recipients, SMS service or marketing sends were added. Portuguese sharing navigation is now Partilhar; English remains Sharing.
 
-Final 89/89 tests, compiled build, local mocked HTTP restart/reset pilot and storage HTTP regression passed; browser PT/EN navigation checked. Final production deployment acceptance follows. Physical Android and Mozambican native-speaker acceptance are still pending. WhatsApp channel activation still requires the owner's actual channel link.
+Final 89/89 tests, compiled build, local mocked HTTP restart/reset pilot and storage HTTP regression passed. DGC v37 is online: mail enabled and independent worker heartbeat confirmed, old account/CV persistence preserved, application/backup health pass and SEO 15/15 passes. Live browser confirms Partilhar in PT and Sharing in EN. No production authentication email requested during this release. Physical Android and Mozambican native-speaker acceptance are still pending. WhatsApp channel activation still requires the owner's actual channel link.
 
 ## Account access update — 27 October 2026
 
@@ -80,7 +80,7 @@ Portuguese for Mozambique is the default; English is available. Examples are exp
 ## Current limits
 
 - Single application container with persistent SQLite. Do not horizontally scale independent SQLite replicas.
-- Authentication-email outbox is implemented; production acceptance is pending for this release. Permanent failures/exhausted retries still require a fresh user request after repair. Backup incident/recovery email alerts and independent StatusCake monitoring are active. External checks run every five minutes; provider confirmation/delivery can add delay.
+- Authentication-email outbox is active in DGC v37; retry transport tests used a simulated provider. Observe delivery during the next owner-requested real verification/reset. Permanent failures/exhausted retries still require a fresh user request after repair. Backup incident/recovery email alerts and independent StatusCake monitoring are active. External checks run every five minutes; provider confirmation/delivery can add delay.
 - Backups expire after about 30 days; restoration must reconcile subsequent erasure requests.
 
 ## Delivered in DGC v11: backup operations
