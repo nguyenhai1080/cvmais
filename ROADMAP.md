@@ -1,5 +1,12 @@
 # CVMais delivery roadmap
 
+## Milestone 74 — 28 October 2026
+
+Adds two authored compositions per primary field (24 total), taking the public catalogue to **74/120**. **46 remain**, next milestone98. Administration/accounting now have seven each; the other ten fields have six each. Colours and field labels are not counted as new layouts. Homepage keeps twelve curated selections spanning twelve fields.
+
+New roster: administration Conselho/Processos; accounting Fiscal/Controlo; technology Arquitectura/Dados; healthcare Triagem/Prevenção; education Investigação/Mentoria; engineering Projectista/Segurança; logistics Rotas/Cadeia; sales Negócio/Relação; hospitality Destino/Eventos; communications Marca/Campanha; agriculture Irrigação/Colheita; community programmes Programa/Terreno. Each has a distinct region arrangement with optional portrait, PT/EN labels, search aliases and matching editor/PDF structure. Samples remain fictional.
+
+
 Updated 28 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
 
 ## Milestone 50 — 28 October 2026

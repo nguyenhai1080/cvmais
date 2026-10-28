@@ -22,6 +22,6 @@ for(const d of selected){
   support:{...sample,skills:Array.from({length:48},(_,i)=>`Competência ${i+1}: documentação e acompanhamento das actividades.`).join('\n')+'\nEND-SKILLS-'+d.id,languages:'Português - fluente\nInglês - intermédio\nEND-LANGUAGES-'+d.id},
   sparse:{...sample,photo:'',role:'',phone:'',website:'',profile:'',experiences:[],skills:'',languages:''},
  };
- for(const [kind,data] of Object.entries(fixtures)){const bytes=await renderToBuffer(<CVDocument data={data}/>);await writeFile(path.join(directory,`${d.id}-${kind}.pdf`),bytes);}
+ for(const [kind,data] of Object.entries(fixtures)){if(process.env.QA_CASE&&process.env.QA_CASE!==kind)continue;const bytes=await renderToBuffer(<CVDocument data={data}/>);await writeFile(path.join(directory,`${d.id}-${kind}.pdf`),bytes);}
  await writeFile(path.join(directory,`${d.id}.json`),JSON.stringify(sample));console.log(`${d.id}: 6 PDF fixtures generated`);
 }
