@@ -2,6 +2,14 @@
 
 Updated 28 October 2026. Current status verified against the official site; dated sections below also retain historical delivery records.
 
+## Distinct template expansion — 28 October 2026, deployment acceptance pending
+
+The target remains **120 distinct, reviewed CV compositions** and is not complete. This batch adds twelve independently arranged sector designs to the existing fourteen, making **26**, with **94 still outstanding** after release. No recolours, industry tags or portrait changes are counted as new layouts. Detailed primary-sector allocation, acceptance criteria and milestones 50/74/98/120 are in TEMPLATE-EXPANSION.md.
+
+Implemented: Balanço, Circuito, Cuidado, Cátedra, Prumo, Travessia, Impulso, Estância, Prisma, Campo, Elo and Pauta. Each has matching editor/PDF structure, optional portrait, PT/EN titles, curated search tags and long-content stacking. Twelve actual PDF previews; homepage retains twelve distinct editorial selections, now including eight new sector layouts. Public counts and SEO descriptions derive from the catalogue.
+
+Validation: 92 tests and build pass; 72 PDF fixtures pass content/language, A4 bounds, glyph-overlap and embedded-font checks. All twelve short samples fit one page; work/support stress cases preserve final markers on two pages. All short/stress pages visually reviewed. Local browser import, Prisma-to-Cuidado switch, authored-text/portrait preservation, independent English CV and actual PDF download pass. Simulated 390px preview has no horizontal overflow. Deployment acceptance follows; physical Android and native-speaker acceptance remain separate.
+
 ## Mobile editor usability — DGC v38, 28 October 2026
 
 Live: sticky mobile Edit/Preview/PDF toolbar, labelled section jump, 16px mobile input text and 44px primary touch controls. Uses the existing CV review/download flow; desktop actions remain unchanged. Simulated 320px/390px local checks cover retained draft, model switch, review-to-education focus and actual PT/EN PDF downloads. Official 390px editor confirms 16px fields, sticky toolbar at top, section focus and no horizontal overflow. Build and 89 tests pass; old account/CV persistence, mail worker, app/backup health and SEO 15/15 pass after deployment. Physical Android keyboard/file-manager acceptance remains pending; see PILOT.md.

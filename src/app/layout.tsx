@@ -1,3 +1,4 @@
+import './sector-designs.css';
 import type { Metadata } from 'next';
 import './globals.css';
 import { LanguageSync } from '@/lib/ui-language';

@@ -1,3 +1,4 @@
+import {sectorDesign} from './sector-designs.ts';
 import { signatureDesign } from './signature-designs.ts';
 import { designModel, industryVariant } from './industry-catalogue.ts';
 
@@ -56,6 +57,7 @@ const generalTags: Record<string,string[]> = {
  engenharia:['engineering','construction','electrical','maintenance','logistics','telecom','networks'],servico:['hospitality','tourism','food-service','customer-service','sales'],
 };
 export function tagIdsForTemplate(model:string):string[] {
+ const sector=sectorDesign(model);if(sector)return [...sector.tags];
  const signature=signatureDesign(model);if(signature)return [...signature.tags];
  const variant=industryVariant(model);
  const ids=variant?[...(sectorTags[variant.industry.id]||[])]:[...(generalTags[model]||[])];

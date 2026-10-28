@@ -1,8 +1,12 @@
+import {sectorDesigns} from './sector-designs.ts';
 import { letterTranslationPairs } from './letter-guide.ts';
 import { interviewTranslationPairs } from './interview-guide.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
 export const uiEnglish: Record<string,string> = {
+  "Composições distintas, sem contar mudanças de cor:": "Distinct compositions, excluding recolours:",
+  "As versões antigas por área continuam disponíveis nos CVs já guardados.": "Earlier industry editions remain available in saved CVs.",
+  ...Object.fromEntries(sectorDesigns.flatMap(d=>[[d.description,d.enDescription],[d.detail,d.enDetail]])),
   "Ir para uma secção": "Jump to a section",
   "Escolher secção": "Choose a section",
   "Para repetir o envio após falhas temporárias, guardamos uma cópia cifrada da mensagem e da ligação numa fila privada. A cópia é removida quando o fornecedor aceita a mensagem, quando a ligação é substituída ou utilizada, quando expira ou quando a conta é eliminada. Após esgotar as tentativas ou uma falha definitiva, o conteúdo cifrado é apagado. A aceitação pelo fornecedor não garante a entrega na caixa de entrada.": "To retry after temporary failures, we store an encrypted copy of the message and link in a private queue. It is removed when the provider accepts the message, when the link is replaced or used, when it expires or when the account is deleted. After all attempts are exhausted or a permanent failure occurs, the encrypted content is cleared. Provider acceptance does not guarantee inbox delivery.",
@@ -931,7 +935,6 @@ Object.assign(uiEnglish,{
  'Competências à vista. Experiência com estrutura.':'Skills in view. Experience with structure.',
  'Cabeçalho grafite · Competências primeiro · Datas numa coluna própria':'Graphite masthead · Skills first · A dedicated date column',
  'A área sugere composições adequadas. Cada modelo aparece uma só vez, sem contar mudanças de cor como novos desenhos.':'Your field suggests suitable layouts. Each template appears once; colour changes are not counted as new designs.',
- '14 composições: quatro novos desenhos e dez modelos essenciais. As versões antigas por área continuam disponíveis nos CVs já guardados.':'14 compositions: four new designs and ten essential templates. Earlier industry editions remain available in saved CVs.',
  'Explorar os modelos':'Explore templates',
  'O teu modelo anterior foi mantido. Podes continuar a usá-lo ou escolher uma nova composição sem perder conteúdo.':'Your earlier template has been preserved. Keep using it or choose a new composition without losing content.'
 });

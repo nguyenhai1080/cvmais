@@ -1,3 +1,5 @@
+import SectorDocument from './sector-pdf';
+import {sectorDesign} from '../lib/sector-designs';
 import SignatureDocument from './signature-pdf';
 import { signatureDesign } from '../lib/signature-designs';
 import { designModel } from '../lib/industry-catalogue';
@@ -56,6 +58,7 @@ function Entries({ entries, accent, timeline, compact=false }: { entries: Entry[
   </View>)}</>;
 }
 export function CVDocument({ data }: { data: CVData }) {
+  if(sectorDesign(data.model))return <SectorDocument data={data}/>;
   if(signatureDesign(data.model))return <SignatureDocument data={data}/>;
   const family=designModel(data.model);
   const labels = labelsForCV(data);

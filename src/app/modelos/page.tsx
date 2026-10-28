@@ -1,10 +1,11 @@
+import {catalogueTemplates} from '@/lib/templates';
 import type { Metadata } from 'next';
 import Header from '@/components/header';
 import TemplateGallery from '@/components/template-gallery';
 import ProfessionLinks from '@/components/profession-links';
 import { SITE_ORIGIN } from '@/lib/site';
 const title = 'Modelos de CV Grátis para Moçambique | CVMais';
-const description = 'Explora 14 modelos profissionais de CV para diferentes áreas. Escolhe um estilo, cria o teu currículo online e descarrega o PDF grátis.';
+const description = `Explora ${catalogueTemplates.length} modelos profissionais de CV para diferentes áreas. Escolhe um estilo, cria o teu currículo online e descarrega o PDF grátis.`;
 export const metadata: Metadata = {
   title, description,
   alternates: { canonical: `${SITE_ORIGIN}/modelos` },

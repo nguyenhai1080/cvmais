@@ -8,7 +8,7 @@ test('discovery finds professions in Portuguese and English without accents and 
   assert.equal(discoverTemplates({area:'hotelaria',style:'Criativo',query:'receptionist'}).length,1);
   assert.equal(discoverTemplates({area:'tecnologia',style:'Todos',query:'Índico'}).length,1);
   assert.equal(discoverTemplates({...defaultTemplateFilters,query:'xyz-inexistent'}).length,0);
-  assert.equal(discoverTemplates(defaultTemplateFilters).length,14);
+  assert.equal(discoverTemplates(defaultTemplateFilters).length,26);
 });
 test('template library URLs retain selection and search through editor and sanitise foreign return targets',()=>{
   const filters={area:'saude',style:'Primeiro emprego',query:'enfermagem'};
@@ -36,7 +36,7 @@ test('all templates expose curated multilingual tags and every tag is assigned',
 });
 test('telecom equivalents find suitable engineering/IT designs without conflating marketing',()=>{
  const expected=search('telecom').map(t=>t.id);
- assert.equal(expected.length,3);
+ assert.equal(expected.length,5);
  for(const query of ['telecommunications','telecomunicações','telecomunicacoes','telecom engineer','engenheiro de telecomunicações','5G','fibra óptica'])assert.deepEqual(new Set(search(query).map(t=>t.id)),new Set(expected),query);
  assert.ok(search('telecom').every(t=>t.tagIds.includes('telecom')));
  assert.ok(search('communication').some(t=>t.id==='folio'));

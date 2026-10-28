@@ -1,8 +1,9 @@
+import {catalogueTemplates} from '@/lib/templates';
 import type { Metadata } from 'next';
 import Content from '@/components/home-content';
 import { SITE_ORIGIN } from '@/lib/site';
 const title = 'Criar CV Grátis Online em Moçambique | CVMais';
-const description = 'Cria o teu CV profissional grátis em Moçambique. Escolhe entre 14 modelos, personaliza o teu percurso e descarrega o currículo em PDF sem marca de água.';
+const description = `Cria o teu CV profissional grátis em Moçambique. Escolhe entre ${catalogueTemplates.length} modelos, personaliza o teu percurso e descarrega o currículo em PDF sem marca de água.`;
 export const metadata: Metadata = {
   title, description,
   alternates: { canonical: SITE_ORIGIN },

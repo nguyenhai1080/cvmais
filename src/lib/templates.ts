@@ -1,9 +1,10 @@
+import {sectorDesigns,sectorDesign,sectorModels} from './sector-designs.ts';
 import { signatureDesigns, signatureModels, signatureDesign } from './signature-designs.ts';
 import { tagIdsForTemplate } from './template-taxonomy.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 import { emptyCV, type Model, type LegacyModel, type CVData } from './cv.ts';
 export type TemplateCategory = 'Profissional' | 'Criativo' | 'Primeiro emprego';
-export const newTemplateIds:Model[]=[...signatureModels];
+export const newTemplateIds:Model[]=[...sectorModels,...signatureModels];
 export const templateAreas=[{id:'administracao',label:'Administração'},{id:'contabilidade',label:'Contabilidade e finanças'},{id:'tecnologia',label:'Tecnologias de informação'},{id:'saude',label:'Saúde e cuidados'},{id:'educacao',label:'Educação e formação'},{id:'engenharia',label:'Engenharia e construção'},{id:'logistica',label:'Logística e armazém'},{id:'vendas',label:'Vendas e atendimento'},{id:'hotelaria',label:'Hotelaria e turismo'},{id:'comunicacao',label:'Comunicação e marketing'},{id:'agricultura',label:'Agricultura'},{id:'projectos',label:'ONG e projectos comunitários'}] as const;
 export type TemplateArea=(typeof templateAreas)[number]['id'];
 const areas:Record<LegacyModel,TemplateArea[]>={classico:['administracao','logistica','vendas'],moderno:['administracao','tecnologia','projectos'],minimalista:['contabilidade','engenharia','educacao'],criativo:['comunicacao'],executivo:['contabilidade','administracao','projectos'],primeiro:['educacao','tecnologia','vendas'],tecnico:['tecnologia','comunicacao'],saude:['saude','educacao','projectos'],engenharia:['engenharia','logistica','agricultura'],servico:['hotelaria','vendas','administracao']};
@@ -19,13 +20,14 @@ const generalTemplates: { id: Model; name: string; category: TemplateCategory; d
   {id:'engenharia',name:'Estrutura',category:'Profissional',description:'Um percurso técnico com estrutura e precisão.',colour:'#2556A0',detail:'Uma coluna · Secções em faixas · Azul e ocre'},
   {id:'servico',name:'Acolher',category:'Profissional',description:'Uma apresentação próxima, com elegância.',colour:'#824253',detail:'Retrato centrado · Tipografia editorial · Coluna de apoio à esquerda'},
 ];
-export const templates=[...signatureDesigns.map(d=>({id:d.id,name:d.name,category:d.category as TemplateCategory,description:d.description,colour:d.accent,detail:d.detail})),...generalTemplates,...industryModels.map(id=>{const {industry,layout}=industryVariant(id)!;return {id,name:`${industry.brand} · ${layout.label}`,category:(['editorial','expressivo'].includes(layout.id)?'Criativo':layout.id==='formacao'?'Primeiro emprego':'Profissional') as TemplateCategory,description:`${industry.label} · ${layout.label}`,colour:industry.accent,detail:layout.description};})].map(template=>({...template,tagIds:tagIdsForTemplate(template.id)}));
+export const templates=[...sectorDesigns.map(d=>({id:d.id,name:d.name,category:d.category as TemplateCategory,description:d.description,colour:d.accent,detail:d.detail})),...signatureDesigns.map(d=>({id:d.id,name:d.name,category:d.category as TemplateCategory,description:d.description,colour:d.accent,detail:d.detail})),...generalTemplates,...industryModels.map(id=>{const {industry,layout}=industryVariant(id)!;return {id,name:`${industry.brand} · ${layout.label}`,category:(['editorial','expressivo'].includes(layout.id)?'Criativo':layout.id==='formacao'?'Primeiro emprego':'Profissional') as TemplateCategory,description:`${industry.label} · ${layout.label}`,colour:industry.accent,detail:layout.description};})].map(template=>({...template,tagIds:tagIdsForTemplate(template.id)}));
 export const catalogueTemplates=templates.filter(t=>!industryVariant(t.id));
 export function templateMatchesArea(model:Model,area:string){if(area==='all')return true;const variant=industryVariant(model);if(area==='gerais')return !variant;return variant?variant.industry.id===area:areasForTemplate(model).some(item=>item.id===area);}
-export function areasForTemplate(model:Model){const variant=industryVariant(model);return variant?[templateAreas.find(area=>area.id===variant.industry.id)!]:((signatureDesign(model)?.areas||areas[model as LegacyModel]) as readonly TemplateArea[]).map(id=>templateAreas.find(area=>area.id===id)!);}
-export function templatePortrait(model:Model):'man'|'woman'{const variant=industryVariant(model);return signatureDesign(model)?.portrait||(variant?(layoutEditions.findIndex(layout=>layout.id===variant.layout.id)%2===0?'woman':'man'):['executivo','primeiro','tecnico','engenharia'].includes(model)?'man':'woman');}
+export function areasForTemplate(model:Model){const variant=industryVariant(model);return variant?[templateAreas.find(area=>area.id===variant.industry.id)!]:((sectorDesign(model)?[sectorDesign(model)!.area]:signatureDesign(model)?.areas||areas[model as LegacyModel]) as readonly TemplateArea[]).map(id=>templateAreas.find(area=>area.id===id)!);}
+export function templatePortrait(model:Model):'man'|'woman'{const variant=industryVariant(model);return sectorDesign(model)?.portrait||signatureDesign(model)?.portrait||(variant?(layoutEditions.findIndex(layout=>layout.id===variant.layout.id)%2===0?'woman':'man'):['executivo','primeiro','tecnico','engenharia'].includes(model)?'man':'woman');}
 /** Fictional demonstration content; never a customer or testimonial. */
 export function templateSample(model: Model): CVData {
+  const sector=sectorDesign(model);if(sector)return {...templateSample(`${sector.area}--linha` as Model),model,name:sector.portrait==='man'?'Daniel Mondlane':'Celina Macamo',email:sector.portrait==='man'?'daniel@exemplo.com':'celina@exemplo.com'};
   const signature=signatureDesign(model);if(signature)return {...templateSample(signature.sample),model};
   const variant=industryVariant(model);
   if(variant){const {industry}=variant;const male=templatePortrait(model)==='man';return {...emptyCV(),model,name:male?'João Matusse':'Celina Macamo',role:industry.role,email:male?'joao@exemplo.com':'celina@exemplo.com',phone:'+258 84 000 0000',city:'Maputo, Moçambique',website:'linkedin.com/in/exemplo',profile:industry.profile,experiences:[{id:'demo-work-1',title:industry.role,organisation:'Organização de exemplo · Maputo',period:'2022 — actual',description:industry.tasks.join('\n')},{id:'demo-work-2',title:'Apoio à equipa',organisation:'Empresa de demonstração · Matola',period:'2020 — 2022',description:'Organização de materiais e informação.\nColaboração no acompanhamento das actividades.'}],education:[{id:'demo-study',title:industry.course,organisation:'Instituição de exemplo · Maputo',period:'2017 — 2020',description:'Projecto de exemplo e actividades práticas de formação.'}],skills:industry.skills.join('\n'),languages:'Português · Fluente\nInglês · Intermédio'};}
@@ -55,7 +57,7 @@ export function templateSample(model: Model): CVData {
   return sample;
 }
 
-// Editorial showcase: twelve distinct compositions, led by the four new designs.
+// Editorial showcase: twelve distinct compositions, including eight purpose-built sector compositions.
 // These are design selections, not popularity or hiring-performance rankings.
-export const featuredTemplateIds:readonly Model[]=['atlas','folio','aurora','vertice','classico','moderno','minimalista','executivo','primeiro','saude','engenharia','servico'];
+export const featuredTemplateIds:readonly Model[]=['atlas','aurora','folio','vertice','balanco','cuidado','catedra','travessia','impulso','estancia','campo','elo'];
 export const featuredTemplates=featuredTemplateIds.map(id=>templates.find(template=>template.id===id)!);

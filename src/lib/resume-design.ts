@@ -1,7 +1,9 @@
+import {sectorDesigns} from './sector-designs.ts';
 import { signatureDesigns } from './signature-designs.ts';
 import { industryModels, industryVariant } from './industry-catalogue.ts';
 import type { CVData, Model } from './cv';
 export const themes: Record<Model, { accent: string; pale: string; ink: string }> = {
+  ...Object.fromEntries(sectorDesigns.map(d=>[d.id,{accent:d.accent,pale:d.pale,ink:d.ink}])),
   ...Object.fromEntries(industryModels.map(id=>{const {industry}=industryVariant(id)!;return [id,{accent:industry.accent,pale:industry.pale,ink:'#263D49'}];})),
   ...Object.fromEntries(signatureDesigns.map(d=>[d.id,{accent:d.accent,pale:d.pale,ink:d.ink}])),
   classico: { accent: '#087F82', pale: '#E9F3F2', ink: '#183B55' },
