@@ -99,6 +99,19 @@ export default function Editor() {const {translate:ui}=useUILanguage();
     } finally { setExporting(false); }
   }
 
+  function focusField(id: string) {
+    setView('edit');
+    requestAnimationFrame(() => {
+      const field = document.getElementById(id);
+      field?.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center'});
+      field?.focus({preventScroll: true});
+    });
+  }
+  function switchView(next: 'edit' | 'preview') {
+    setView(next);
+    requestAnimationFrame(() => document.getElementById('editor-workspace')?.scrollIntoView({block:'start',behavior:'auto'}));
+  }
+
   function samples(kind: SampleKind, value: string, onApply: (value:string)=>void, key?: string) { return <ContentSamples key={key} kind={kind} value={value} onApply={onApply} cvLanguage={data.cvLanguage} filters={sampleFilters} onFilters={setSampleFilters}/>; }
 
   function entriesSection(kind: EntryKind) {
@@ -130,7 +143,7 @@ export default function Editor() {const {translate:ui}=useUILanguage();
       <div className="editor-top"><div><Link className="text-link" href={libraryHref}><ArrowLeft size={16} />{ui(" Voltar aos modelos")}</Link>
         <h1>{ui("O teu percurso, nas tuas palavras.")}</h1><p>{ui("Personaliza o teu CV e descarrega um PDF pronto para enviar.")}</p></div>
         <div className="editor-top-actions"><button className="button outline" disabled={!ready || exporting} onClick={save}><Save size={17} />{ui(" Guardar")}</button>
-          <CVExportReview data={data} ready={ready} exporting={exporting} onDownload={exportPDF} onEdit={id=>{setView('edit');requestAnimationFrame(()=>{const field=document.getElementById(id);field?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});field?.focus({preventScroll:true});});}}/></div>
+          <CVExportReview data={data} ready={ready} exporting={exporting} onDownload={exportPDF} onEdit={focusField}/></div>
       </div>
       <div className="editor-feedback"><p className={saveError ? 'saved-status save-error' : 'saved-status'} role="status">{ui(status)}</p>
         <span><ShieldCheck size={14} /> {cloud ? ui("CV privado na tua conta.") : ui("Os teus dados ficam no teu dispositivo.")}</span></div>
@@ -148,9 +161,16 @@ export default function Editor() {const {translate:ui}=useUILanguage();
         entries.splice(Math.min(removed.index, entries.length), 0, removed.entry);
         change({ ...data, [removed.kind]: entries }); setRemoved(null);
       }}>{ui("Anular")}</button></div>}
-      <div className="editor-mobile-switch" aria-label={ui("Vista do editor")}><button aria-pressed={view === 'edit'} onClick={() => setView('edit')}><PenLine size={16} />{ui(" Editar")}</button>
-        <button aria-pressed={view === 'preview'} onClick={() => setView('preview')}><Eye size={16} />{ui(" Pré-visualizar")}</button></div>
-      <div className="editor-grid editor-workspace" data-view={view}>
+      <div className="editor-mobile-switch" aria-label={ui("Vista do editor")}>
+        <button type="button" aria-pressed={view === 'edit'} onClick={() => switchView('edit')}><PenLine size={16} />{ui(" Editar")}</button>
+        <button type="button" aria-pressed={view === 'preview'} onClick={() => switchView('preview')}><Eye size={16} />{ui(" Pré-visualizar")}</button>
+        <CVExportReview compact data={data} ready={ready} exporting={exporting} onDownload={exportPDF} onEdit={focusField}/>
+      </div>
+      <div className="editor-section-jump"><label htmlFor="editor-section-jump">{ui('Ir para uma secção')}</label><select id="editor-section-jump" value="" disabled={!ready || exporting} onChange={event=>focusField(event.target.value)}>
+        <option value="" disabled>{ui('Escolher secção')}</option>
+        <option value="cv-name">{ui('Os teus dados')}</option><option value="cv-profile">{ui('Perfil profissional')}</option><option value="experiencia">{ui('Experiência profissional')}</option><option value="formacao">{ui('Formação académica')}</option><option value="cv-skills">{ui('Competências e línguas')}</option>
+      </select></div>
+      <div id="editor-workspace" className="editor-grid editor-workspace" data-view={view}>
         <form className="editor-form v2-form" onSubmit={e => { e.preventDefault(); save(); }}>
           <fieldset disabled={!ready || exporting}>
             <section className="editor-section" id="dados"><div className="editor-section-title"><span>01</span><div><h2>{ui("Os teus dados")}</h2><p>{ui("Como te apresentas e como podem contactar-te.")}</p></div></div>

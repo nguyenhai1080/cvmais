@@ -40,7 +40,7 @@ The viewport test emulates a mobile browser size; it does not substitute for an 
 Use the owner-controlled address nguyenhai1080@gmail.com. The owner enters passwords and completes password changes themselves; passwords must not be sent in chat or recorded in this report.
 
 1. Open https://cvmais.co.mz/conta and register or sign in. Registration should continue directly without a code acknowledgement. Optional code controls are inside Account security.
-2. Open the verification email, check the hostname is cvmais.win, and select Confirmar email. In Os meus CVs, confirm Email confirmado.
+2. Open the verification email, check the link hostname is cvmais.co.mz, and select Confirmar email. The approved sender currently uses cvmais.win. In Os meus CVs, confirm Email confirmado.
 3. Reopen the same verification link; it must be rejected as already used. Request another link only when necessary.
 4. Sign out, select Esqueci-me da palavra-passe, and request recovery. Open the newest email and personally enter/submit a new password.
 5. Confirm the old sessions no longer access the account. Sign in with the new password; confirm previous CVs remain.
@@ -88,3 +88,16 @@ Live production regression also passed: portrait and CV text survive read/update
 - Cancel review with Close/Escape where a keyboard is available. Confirm no download starts. After intentionally accepting the reminders, Download anyway must still produce a readable PDF.
 - Complete the fields and add a contact. Confirm ordinary download proceeds directly once the specific checks pass. This review does not verify the truth of the CV and is not an ATS/hiring score.
 - Record actual device/browser, success/failure and confusing wording. These tasks remain pending on physical Android/iPhone devices; isolated viewport checks do not count as that acceptance.
+
+
+## Mobile editor refinement — 28 October 2026
+
+Isolated local browser origin 127.0.0.1:3006, fictional Amélia Teste CV; no production user draft edited. Simulated 390×844 and 320×740 viewports, not physical Android.
+
+- Found 12px form text and top-only preview/download actions. Added 16px mobile field text, 44px controls, sticky Edit/Preview/PDF toolbar and labelled section jump menu. Desktop toolbar and controls remain unchanged.
+- Filled contact/profile/education through the UI; restored the guest draft after reload. Switched Maputo to Atlas without losing authored text. Preview-to-review-to-education returns to editing with focus on the section.
+- Downloaded actual browser PDFs in PT and EN (17,011 and 16,782 bytes) using the mobile toolbar. Files have valid PDF header and end markers; preview section titles changed independently of the authored Portuguese text. These checks do not claim new pagination/render acceptance for all designs.
+- English UI section jump works; 320px viewport has 305px content/scroll width, no horizontal overflow, main toolbar buttons 44px high. At desktop width the mobile toolbar and jump selector are hidden.
+- Final production build and 89 existing tests pass. Production acceptance is recorded separately after deployment.
+
+Physical Android task still required: open the official editor in Chrome, enter fictional details, switch between editing/preview while the keyboard is open, choose a model, download/open a PDF in Files, close/reopen the tab and confirm the draft. Report device/Android/Chrome versions and any difficulty. Do not share passwords, recovery links or private CV contents. A screenshot-size simulation does not establish Android keyboard, file-manager or memory behaviour.
