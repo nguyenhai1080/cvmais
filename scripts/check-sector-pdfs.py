@@ -1,4 +1,4 @@
-"""Inspect the 72 fictional sector fixtures and render the actual PDF previews.
+"""Inspect fictional sector fixtures and render the actual PDF previews.
 Run with the bundled Python and a Poppler pdftoppm path as the first argument.
 """
 import json, re, subprocess, sys
@@ -10,16 +10,18 @@ from PIL import Image, ImageDraw
 root=Path('work/sector-qa')
 poppler=sys.argv[1]
 def folded(value): return ''.join(c for c in value.casefold() if c.isalnum())
-models=[p.stem for p in sorted(root.glob('*.json')) if (root/f'{p.stem}-short.pdf').exists()]
-assert len(models)==12
+models=json.loads((root/'manifest.json').read_text())
+assert models and len(set(models))==len(models)
+if len(sys.argv)>2: assert len(models)==int(sys.argv[2])
 page_counts={}
 for model in models:
     sample=json.loads((root/f'{model}.json').read_text(encoding='utf-8'))
     for kind in ['short','no-photo','en','long','support','sparse']:
         path=root/f'{model}-{kind}.pdf'
         reader=PdfReader(path)
+        assert all(page.extract_text().strip() for page in reader.pages),(path.name,'blank page')
         text='\n'.join(page.extract_text() for page in reader.pages)
-        assert sample['name'] in text, path.name
+        assert folded(sample['name']) in folded(text), path.name
         assert folded(sample['education'][0]['title']) in folded(text), path.name
         assert 'O teu nome' not in text, path.name
         if kind=='short': assert len(reader.pages)==1,(path.name,len(reader.pages))
@@ -73,11 +75,11 @@ def contact_sheet(paths,target,columns=3,width=360):
         x=20+(i%columns)*(width+20);y=20+(i//columns)*(height+42)
         sheet.paste(image,(x,y));draw.text((x,y+height+8),label,fill='#183B55')
     sheet.save(target)
-contact_sheet([(model,Path('public/template-previews')/f'{model}.png') for model in models],root/'all-twelve.png')
-stress=[(path.stem,path) for path in sorted(root.glob('*-long-*.png'))+sorted(root.glob('*-support-*.png'))]
+for start in range(0,len(models),12): contact_sheet([(model,Path('public/template-previews')/f'{model}.png') for model in models[start:start+12]],root/f'collection-{start//12+1}.png')
+stress=[(path.stem,path) for model in models for kind in ['long','support'] for path in sorted(root.glob(f'{model}-{kind}-[0-9]*.png'))]
 for stale in root.glob('stress-[0-9]*.png'):
     assert stale.parent.resolve()==root.resolve()
     stale.unlink()
 for start in range(0,len(stress),12): contact_sheet(stress[start:start+12],root/f'stress-{start//12+1}.png')
 (root/'acceptance.json').write_text(json.dumps(page_counts,indent=2))
-print(f'PASS: {len(page_counts)} PDFs; content, language, A4 bounds and embedded fonts; 12 previews and stress sheets rendered.')
+print(f'PASS: {len(page_counts)} PDFs; content, language, A4 bounds and embedded fonts; {len(models)} previews and stress sheets rendered.')

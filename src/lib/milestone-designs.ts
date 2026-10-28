@@ -1,0 +1,103 @@
+import type {CVData} from './cv';
+export type CompositionBlock='identity'|'portrait'|'contact'|'profile'|'work'|'study'|'skills'|'languages';
+export type CompositionNode=CompositionBlock|{columns:readonly (readonly CompositionNode[])[];widths:readonly number[];tone?:'plain'|'panel'|'rule'|'outline'|'band'|'rail'|'accent'};
+type Area='administracao'|'contabilidade'|'tecnologia'|'saude'|'educacao'|'engenharia'|'logistica'|'vendas'|'hotelaria'|'comunicacao'|'agricultura'|'projectos';
+const palettes:Record<Area,{accent:string;pale:string;ink:string;tags:readonly string[]}>= {
+ administracao:{accent:'#24566B',pale:'#ECF3F5',ink:'#243E49',tags:['administration','hr','customer-service']},
+ contabilidade:{accent:'#3C4768',pale:'#F0F1F7',ink:'#2A3148',tags:['accounting','finance','data']},
+ tecnologia:{accent:'#185F73',pale:'#EAF4F7',ink:'#203A46',tags:['software','it-support','networks','telecom','cybersecurity','data']},
+ saude:{accent:'#346D60',pale:'#EDF5EF',ink:'#29483E',tags:['healthcare','nursing']},
+ educacao:{accent:'#665284',pale:'#F3EFF7',ink:'#3D334A',tags:['education','first-job','community']},
+ engenharia:{accent:'#365778',pale:'#EDF2F7',ink:'#2B3D50',tags:['engineering','construction','electrical','maintenance','telecom','networks']},
+ logistica:{accent:'#7C5E32',pale:'#F7F1E6',ink:'#40372B',tags:['logistics','warehouse','transport']},
+ vendas:{accent:'#8B4D3D',pale:'#F8EFE9',ink:'#44342E',tags:['sales','customer-service','marketing']},
+ hotelaria:{accent:'#755162',pale:'#F7EFF3',ink:'#44313C',tags:['hospitality','tourism','food-service','customer-service']},
+ comunicacao:{accent:'#A04F3E',pale:'#F9EDE6',ink:'#402E28',tags:['communications','marketing','design']},
+ agricultura:{accent:'#4E6B38',pale:'#F0F4E8',ink:'#36422E',tags:['agriculture','maintenance','logistics']},
+ projectos:{accent:'#2B6871',pale:'#EBF5F5',ink:'#284248',tags:['community','project-management','administration']},
+};
+type Input={id:string;name:string;area:Area;role:string;description:string;detail:string;enDescription:string;enDetail:string;layout:readonly CompositionNode[];portrait:'man'|'woman';category?:'Profissional'|'Criativo'|'Primeiro emprego';entry?:'stack'|'ledger'|'boxed'|'ribbon'|'timeline';heading?:'line'|'serif'|'tab'|'margin'|'capsule';nameStyle?:'regular'|'display'|'center'|'serif';photoShape?:'round'|'square'|'wide'|'tall';sampleMode?:'experienced'|'first'};
+type Resolved<Id extends string>=Omit<Input,'id'>&Required<Pick<Input,'category'|'entry'|'heading'|'nameStyle'|'photoShape'|'sampleMode'>>&{id:Id;accent:string;pale:string;ink:string;tags:readonly string[]};
+function define<const T extends Input>(input:T):Resolved<T['id']>{return {...palettes[input.area],...input,category:input.category??'Profissional',entry:input.entry??'stack',heading:input.heading??'line',nameStyle:input.nameStyle??'regular',photoShape:input.photoShape??'square',sampleMode:input.sampleMode??'experienced'};}
+const row=(widths:readonly number[],tone:NonNullable<Exclude<CompositionNode,string>['tone']>,...columns:readonly (readonly CompositionNode[])[]):CompositionNode=>({widths,tone,columns});
+/** Twenty-four manually authored whole-page structures. No cross-product of colours/industries. */
+export const milestoneDesigns=[
+ define({id:'arquivo',name:'Arquivo',area:'administracao',portrait:'woman',role:'Assistente de gestão documental',entry:'boxed',heading:'tab',
+ description:'Arquivo e operações em três zonas de leitura.',detail:'Identidade em faixa · Contactos na margem · Percurso central',enDescription:'Records and operations in three reading zones.',enDetail:'Identity band · Margin contacts · Central career column',
+ layout:[row([80,20],'band',['identity'],['portrait']),'profile',row([22,48,30],'rule',['contact'],['work'],['study','skills','languages'])]}),
+ define({id:'secretariado',name:'Secretariado',area:'administracao',portrait:'man',role:'Assistente de direcção',nameStyle:'serif',entry:'ribbon',heading:'serif',photoShape:'round',
+ description:'Coordenação e apoio à direcção com uma base editorial.',detail:'Retrato em abertura · Percurso à esquerda · Formação e competências na base',enDescription:'Coordination and executive support with an editorial foundation.',enDetail:'Opening portrait · Career on the left · Education and skills at the base',
+ layout:[row([21,79],'outline',['portrait'],['identity']),row([68,32],'rule',['profile','work'],['contact','languages']),row([52,48],'panel',['skills'],['study'])]}),
+ define({id:'auditoria',name:'Auditoria',area:'contabilidade',portrait:'woman',role:'Assistente de auditoria',entry:'ledger',heading:'margin',nameStyle:'display',
+ description:'Um percurso de análise com evidência bem organizada.',detail:'Identidade ampla · Introdução em duas zonas · Base tripartida',enDescription:'An analytical career with clearly organised evidence.',enDetail:'Wide identity · Two-zone introduction · Three-part supporting base',
+ layout:['identity',row([68,32],'outline',['profile'],['portrait','contact']),'work',row([42,36,22],'rule',['study'],['skills'],['languages'])]}),
+ define({id:'tesouraria',name:'Tesouraria',area:'contabilidade',portrait:'man',role:'Assistente de tesouraria',entry:'boxed',heading:'capsule',photoShape:'tall',
+ description:'Rotinas financeiras e competências numa coluna de trabalho.',detail:'Faixa de identidade e contactos · Formação lateral · Percurso principal',enDescription:'Financial routines and capabilities in a working column.',enDetail:'Identity and contact band · Side education · Main career history',
+ layout:[row([64,36],'accent',['identity'],['contact']),row([30,70],'panel',['portrait','study'],['profile','skills','work']),'languages']}),
+ define({id:'sistemas',name:'Sistemas',area:'tecnologia',portrait:'man',role:'Técnico de sistemas e redes',entry:'ribbon',heading:'tab',photoShape:'round',
+ description:'Identidade técnica em margem, competências em destaque.',detail:'Coluna de identidade · Formação lateral · Competências antes do percurso',enDescription:'Technical identity in the margin, capabilities in focus.',enDetail:'Identity column · Side education · Skills before career history',
+ layout:[row([33,67],'rail',['identity','portrait','contact','study'],['skills','profile','work','languages'])]}),
+ define({id:'clinica',name:'Clínica',area:'saude',portrait:'woman',role:'Profissional de cuidados clínicos',entry:'ledger',heading:'capsule',photoShape:'round',
+ description:'Prática clínica e formação em colunas complementares.',detail:'Contactos em abertura · Competências junto do perfil · Prática e formação paralelas',enDescription:'Clinical practice and education in complementary columns.',enDetail:'Opening contacts · Skills beside profile · Parallel practice and education',
+ layout:['contact',row([80,20],'outline',['identity'],['portrait']),row([39,61],'panel',['skills'],['profile']),row([65,35],'rule',['work'],['study']),'languages']}),
+ define({id:'comunitaria',name:'Comunitária',area:'saude',portrait:'man',role:'Técnico de saúde comunitária em início de carreira',category:'Primeiro emprego',sampleMode:'first',entry:'boxed',heading:'line',
+ description:'Formação e colaboração comunitária antes da experiência formal.',detail:'Abertura em três partes · Formação dominante · Prática no fecho',enDescription:'Training and community collaboration before formal employment.',enDetail:'Three-part opening · Education-led body · Practice at the close',
+ layout:[row([18,49,33],'band',['portrait'],['identity'],['contact']),'profile',row([66,34],'panel',['study'],['skills','languages']),'work']}),
+ define({id:'didactica',name:'Didáctica',area:'educacao',portrait:'woman',role:'Assistente de educação em início de carreira',category:'Primeiro emprego',sampleMode:'first',entry:'stack',heading:'serif',nameStyle:'serif',photoShape:'round',
+ description:'Formação pedagógica com espaço para o primeiro projecto.',detail:'Identidade na coluna principal · Formação à direita · Contactos em rodapé',enDescription:'Teaching foundations with room for a first project.',enDetail:'Main-column identity · Education on the right · Contacts at the foot',
+ layout:[row([60,40],'outline',['identity','profile','languages','work'],['portrait','study','skills']),'contact']}),
+ define({id:'canteiro',name:'Canteiro',area:'engenharia',portrait:'man',role:'Técnico de acompanhamento de obras',entry:'ribbon',heading:'tab',
+ description:'Operações de obra, com especialidades na margem.',detail:'Identidade repartida · Perfil técnico lateral · Percurso e formação contínuos',enDescription:'Site operations with specialities in the margin.',enDetail:'Divided identity · Side technical profile · Continuous career and education',
+ layout:[row([21,48,31],'band',['portrait'],['identity'],['contact']),row([28,72],'rule',['profile','skills'],['work','study']),'languages']}),
+ define({id:'oficina',name:'Oficina',area:'engenharia',portrait:'woman',role:'Aprendiz de manutenção industrial',category:'Primeiro emprego',sampleMode:'first',entry:'boxed',heading:'capsule',
+ description:'Aprendizagem técnica com a formação perto do perfil.',detail:'Identidade e contactos em par · Formação no resumo · Apoio em três blocos',enDescription:'Technical learning with education beside the introduction.',enDetail:'Paired identity and contacts · Education beside profile · Three supporting blocks',
+ layout:[row([68,32],'outline',['identity'],['contact']),row([52,48],'panel',['profile'],['study']),'work',row([20,51,29],'band',['portrait'],['skills'],['languages'])]}),
+ define({id:'expedicao',name:'Expedição',area:'logistica',portrait:'woman',role:'Assistente de expedição',entry:'timeline',heading:'tab',photoShape:'round',
+ description:'Fluxo de expedições e percurso numa coluna ampla.',detail:'Identidade no corpo principal · Margem de apoio à direita · Linha de operações',enDescription:'Dispatch operations and career history in a broad column.',enDetail:'Identity inside the main body · Right support rail · Operations timeline',
+ layout:[row([72,28],'panel',['identity','profile','work','study'],['portrait','contact','skills','languages'])]}),
+ define({id:'inventario',name:'Inventário',area:'logistica',portrait:'man',role:'Assistente de controlo de inventário',entry:'boxed',heading:'capsule',
+ description:'Competências de armazém antes das funções exercidas.',detail:'Retrato entre identidade e contactos · Competências em faixa · Formação paralela',enDescription:'Warehouse capabilities before previous responsibilities.',enDetail:'Portrait between identity and contacts · Skills band · Parallel education',
+ layout:[row([51,19,30],'band',['identity'],['portrait'],['contact']),'profile',row([100],'outline',['skills']),row([65,35],'rule',['work'],['study']),'languages']}),
+ define({id:'mobilidade',name:'Mobilidade',area:'logistica',portrait:'man',role:'Motorista de distribuição',entry:'ledger',heading:'line',photoShape:'tall',nameStyle:'display',
+ description:'Percurso de transporte com uma apresentação ampla.',detail:'Retrato junto da apresentação · Contactos em faixa · Três blocos de apoio',enDescription:'Transport experience with a broad introduction.',enDetail:'Portrait beside introduction · Contact band · Three supporting blocks',
+ layout:[row([26,74],'plain',['portrait'],['identity','profile']),row([100],'band',['contact']),'work',row([45,32,23],'rule',['study'],['skills'],['languages'])]}),
+ define({id:'vitrine',name:'Vitrine',area:'vendas',portrait:'woman',role:'Assistente comercial',entry:'boxed',heading:'serif',nameStyle:'center',photoShape:'round',
+ description:'Apresentação comercial, com uma introdução visual.',detail:'Nome centrado · Retrato junto do perfil · Contactos e competências na base',enDescription:'A commercial introduction with a visual opening.',enDetail:'Centred name · Portrait beside profile · Contacts and skills at the base',
+ layout:['identity',row([25,75],'panel',['portrait'],['profile']),'work',row([38,38,24],'rule',['contact'],['skills'],['languages']),'study']}),
+ define({id:'carteira',name:'Carteira',area:'vendas',portrait:'man',role:'Coordenador de atendimento comercial',entry:'ribbon',heading:'tab',photoShape:'tall',
+ description:'Coordenação comercial e competências antes do percurso.',detail:'Identidade junto dos contactos · Competências em abertura · Perfil lateral',enDescription:'Commercial coordination with capabilities before career history.',enDetail:'Identity beside contacts · Opening skills · Side profile',
+ layout:[row([66,34],'outline',['identity'],['contact']),row([100],'band',['skills']),row([65,35],'rule',['work'],['profile','portrait','languages']),'study']}),
+ define({id:'balcao',name:'Balcão',area:'vendas',portrait:'woman',role:'Assistente de atendimento em início de carreira',category:'Primeiro emprego',sampleMode:'first',entry:'stack',heading:'capsule',nameStyle:'center',photoShape:'round',
+ description:'Potencial de atendimento com a formação no topo.',detail:'Identidade ao lado da formação · Perfil transversal · Prática junto das competências',enDescription:'Customer-service potential with education at the top.',enDetail:'Identity beside education · Full-width profile · Practice beside skills',
+ layout:[row([45,55],'panel',['portrait','identity'],['study']),'profile',row([41,59],'rule',['skills'],['work']),row([62,38],'band',['contact'],['languages'])]}),
+ define({id:'hospede',name:'Hóspede',area:'hotelaria',portrait:'man',role:'Assistente de recepção e reservas',entry:'timeline',heading:'serif',nameStyle:'serif',photoShape:'tall',
+ description:'Línguas e serviço de recepção em primeiro plano.',detail:'Contacto entre retrato e identidade · Línguas em faixa · Perfil de apoio',enDescription:'Languages and reception service in the foreground.',enDetail:'Contacts between portrait and identity · Language band · Supporting profile',
+ layout:[row([19,30,51],'plain',['portrait'],['contact'],['identity']),row([100],'band',['languages']),row([68,32],'rule',['work'],['profile']),row([48,52],'panel',['study'],['skills'])]}),
+ define({id:'sabores',name:'Sabores',area:'hotelaria',portrait:'woman',role:'Assistente de cozinha em início de carreira',category:'Primeiro emprego',sampleMode:'first',entry:'ribbon',heading:'serif',nameStyle:'serif',
+ description:'Formação e prática de serviço com competências em abertura.',detail:'Identidade transversal · Competências em faixa · Retrato na margem de serviço',enDescription:'Training and service practice with opening capabilities.',enDetail:'Full-width identity · Skills band · Portrait in the service margin',
+ layout:['identity',row([100],'band',['skills']),row([28,72],'outline',['portrait','languages','contact'],['profile','work','study'])]}),
+ define({id:'narrativa',name:'Narrativa',area:'comunicacao',portrait:'man',role:'Assistente de produção de conteúdos',category:'Criativo',entry:'ribbon',heading:'serif',nameStyle:'display',photoShape:'wide',
+ description:'Um percurso de conteúdos com uma entrada editorial.',detail:'Identidade em escala ampla · Retrato panorâmico · Percurso com margem de línguas',enDescription:'A content-production career with an editorial opening.',enDetail:'Large-scale identity · Wide portrait · Career beside languages',
+ layout:['identity',row([62,38],'panel',['profile'],['portrait']),'contact',row([75,25],'rule',['work'],['languages']),row([45,55],'outline',['skills'],['study'])]}),
+ define({id:'safra',name:'Safra',area:'agricultura',portrait:'man',role:'Assistente de produção agrícola',entry:'ledger',heading:'tab',photoShape:'wide',
+ description:'Identidade de campo em margem, produção na coluna principal.',detail:'Perfil junto da identidade · Retrato na área de formação · Competências em base',enDescription:'Field identity in the margin, production in the main column.',enDetail:'Profile beside identity · Portrait above training · Skills at the base',
+ layout:[row([34,66],'outline',['identity','profile','contact','languages'],['portrait','study','work']),'skills']}),
+ define({id:'extensao',name:'Extensão',area:'agricultura',portrait:'woman',role:'Assistente de extensão rural em início de carreira',category:'Primeiro emprego',sampleMode:'first',entry:'boxed',heading:'line',photoShape:'round',
+ description:'Formação rural e primeiro projecto numa abertura académica.',detail:'Formação ao lado da identidade · Perfil transversal · Prática com apoio lateral',enDescription:'Rural training and a first project in an education-led opening.',enDetail:'Education beside identity · Full-width profile · Practice with side support',
+ layout:[row([61,39],'panel',['study'],['portrait','identity']),'contact','profile',row([62,38],'rule',['work'],['skills','languages'])]}),
+ define({id:'agronomia',name:'Agronomia',area:'agricultura',portrait:'woman',role:'Técnico de acompanhamento agronómico',entry:'timeline',heading:'margin',
+ description:'Prática agronómica com especialidades em três zonas.',detail:'Identidade em esquadria · Perfil central · Linha de campo e formação em base',enDescription:'Agronomic practice with specialities in three zones.',enDetail:'Framed identity · Central profile · Field timeline and education at the base',
+ layout:[row([80,20],'outline',['identity'],['portrait']),row([23,42,35],'rule',['contact'],['profile'],['skills']),'work',row([66,34],'panel',['study'],['languages'])]}),
+ define({id:'missao',name:'Missão',area:'projectos',portrait:'man',role:'Coordenador de actividades comunitárias',entry:'boxed',heading:'tab',
+ description:'Coordenação de actividades com o percurso em destaque.',detail:'Identidade em contraste · Perfil ao lado das actividades · Contactos em fecho',enDescription:'Activity coordination with career history in focus.',enDetail:'Contrast identity · Profile beside activities · Closing contacts',
+ layout:[row([21,79],'accent',['portrait'],['identity']),row([65,35],'panel',['work'],['profile']),'skills',row([62,38],'rule',['study'],['contact','languages'])]}),
+ define({id:'cooperacao',name:'Cooperação',area:'projectos',portrait:'woman',role:'Assistente de projectos em início de carreira',category:'Primeiro emprego',sampleMode:'first',entry:'ribbon',heading:'capsule',photoShape:'round',
+ description:'Formação, línguas e colaboração para uma primeira candidatura.',detail:'Línguas junto da identidade · Formação primeiro · Prática depois das competências',enDescription:'Education, languages and collaboration for a first application.',enDetail:'Languages beside identity · Education first · Practice after capabilities',
+ layout:[row([19,54,27],'band',['portrait'],['identity'],['languages']),'study',row([57,43],'panel',['profile'],['skills']),'work','contact']}),
+] as const;
+export type CompositionModel=(typeof milestoneDesigns)[number]['id'];
+export const compositionModels=milestoneDesigns.map(d=>d.id);
+export function compositionDesign(id:string){return milestoneDesigns.find(d=>d.id===id);}
+export function compositionBlocks(nodes:readonly CompositionNode[]):CompositionBlock[]{return nodes.flatMap(n=>typeof n==='string'?[n]:n.columns.flatMap(c=>compositionBlocks(c)));}
+export function compositionPresent(kind:CompositionBlock,data:CVData){if(kind==='identity')return true;if(kind==='portrait')return !!data.photo;if(kind==='contact')return !![data.email,data.phone,data.city,data.website].some(v=>v.trim());if(kind==='work'||kind==='study')return (kind==='work'?data.experiences:data.education).some(e=>[e.title,e.organisation,e.period,e.description].some(v=>v.trim()));return !!data[kind].trim();}
+export function compositionCompact(data:CVData){const text=[data.name,data.role,data.profile,data.skills,data.languages,...data.experiences.flatMap(e=>[e.title,e.organisation,e.description]),...data.education.flatMap(e=>[e.title,e.organisation,e.description])];return text.reduce((n,v)=>n+v.length,0)<2700&&text.every(v=>v.length<900)&&data.skills.length+data.languages.length<550&&data.experiences.length<=3&&data.education.length<=2;}

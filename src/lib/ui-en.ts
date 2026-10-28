@@ -1,9 +1,11 @@
+import {milestoneDesigns} from './milestone-designs.ts';
 import {sectorDesigns} from './sector-designs.ts';
 import { letterTranslationPairs } from './letter-guide.ts';
 import { interviewTranslationPairs } from './interview-guide.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
 export const uiEnglish: Record<string,string> = {
+  ...Object.fromEntries(milestoneDesigns.flatMap(d=>[[d.description,d.enDescription],[d.detail,d.enDetail]])),
   "Composições distintas, sem contar mudanças de cor:": "Distinct compositions, excluding recolours:",
   "As versões antigas por área continuam disponíveis nos CVs já guardados.": "Earlier industry editions remain available in saved CVs.",
   ...Object.fromEntries(sectorDesigns.flatMap(d=>[[d.description,d.enDescription],[d.detail,d.enDetail]])),

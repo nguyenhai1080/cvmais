@@ -1,3 +1,4 @@
+import {compositionDesign} from './milestone-designs.ts';
 import {sectorDesign} from './sector-designs.ts';
 import { signatureDesign } from './signature-designs.ts';
 import { designModel, industryVariant } from './industry-catalogue.ts';
@@ -57,6 +58,7 @@ const generalTags: Record<string,string[]> = {
  engenharia:['engineering','construction','electrical','maintenance','logistics','telecom','networks'],servico:['hospitality','tourism','food-service','customer-service','sales'],
 };
 export function tagIdsForTemplate(model:string):string[] {
+ const composition=compositionDesign(model);if(composition)return [...new Set([...composition.tags,...(composition.sampleMode==='first'?['first-job']:[])])];
  const sector=sectorDesign(model);if(sector)return [...sector.tags];
  const signature=signatureDesign(model);if(signature)return [...signature.tags];
  const variant=industryVariant(model);

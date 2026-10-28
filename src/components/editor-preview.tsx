@@ -1,3 +1,5 @@
+import CompositionPreview from './composition-preview';
+import {compositionDesign} from '../lib/milestone-designs';
 import SectorPreview from './sector-preview';
 import {sectorDesign} from '../lib/sector-designs';
 import SignaturePreview from './signature-preview';
@@ -12,6 +14,7 @@ function Section({title,kind,children}:{title:string;kind:IconKind;children:Reac
 function Description({text}:{text:string}) { const lines=text.trim().split('\n').filter(line=>line.trim()); return lines.length>1&&lines.length<=12&&lines.every(line=>line.length<400)?<ul className="cv3-bullets">{lines.map((line,i)=><li key={i}>{line.replace(/^[•\-]\s*/,'')}</li>)}</ul>:<p className="cv3-description">{text.trim()}</p>; }
 function Entries({entries}:{entries:Entry[]}) { return <>{entries.filter(hasEntryContent).map(e=><div className="cv3-entry" key={e.id}>{e.title.trim()&&<h4>{e.title.trim()}</h4>}{e.organisation.trim()&&<p className="cv3-org">{e.organisation.trim()}</p>}{e.period.trim()&&<p className="cv3-period">{e.period.trim()}</p>}{e.description.trim()&&<Description text={e.description}/>}</div>)}</>; }
 export default function EditorPreview({data}:{data:CVData}) {
+  if(compositionDesign(data.model))return <CompositionPreview data={data}/>;
   if(sectorDesign(data.model))return <SectorPreview data={data}/>;
   if(signatureDesign(data.model))return <SignaturePreview data={data}/>;
   const family=designModel(data.model);

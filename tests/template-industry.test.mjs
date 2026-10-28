@@ -8,14 +8,14 @@ test('switching to each new design preserves real text, photo and CV language',(
 
 test('industry handoff follows the primary recommendation and empty supporting columns collapse',()=>{assert.equal(areasForTemplate('servico')[0].id,'hotelaria');assert.equal(areasForTemplate('engenharia')[0].id,'engenharia');for(const model of ['saude','servico'])assert.equal(usesSidebar({...emptyCV(),model,profile:'Experiência real'}),false);});
 
-test('public catalogue counts distinct compositions while old industry IDs remain loadable',()=>{assert.equal(catalogueTemplates.length,26);assert.equal(new Set(catalogueTemplates.map(t=>designModel(t.id))).size,26);assert.ok(catalogueTemplates.every(t=>!t.id.includes('--')));for(const area of templateAreas){const group=templates.filter(t=>t.id.startsWith(area.id+'--'));assert.equal(group.length,9);for(const t of group)assert.equal(normaliseCV({...emptyCV(),model:t.id}).model,t.id);}});
+test('public catalogue counts distinct compositions while old industry IDs remain loadable',()=>{assert.equal(catalogueTemplates.length,50);assert.equal(new Set(catalogueTemplates.map(t=>designModel(t.id))).size,50);assert.ok(catalogueTemplates.every(t=>!t.id.includes('--')));for(const area of templateAreas){const group=templates.filter(t=>t.id.startsWith(area.id+'--'));assert.equal(group.length,9);for(const t of group)assert.equal(normaliseCV({...emptyCV(),model:t.id}).model,t.id);}});
 
 test('all industry IDs retain author content and language while near-matching unknown IDs are rejected',()=>{const profile='Dados reais que não devem mudar.';for(const t of templates.filter(t=>!templateMatchesArea(t.id,'gerais'))){const saved=normaliseCV({...emptyCV(),model:t.id,name:'João',profile,cvLanguage:'en'});assert.equal(saved.model,t.id);assert.equal(saved.profile,profile);assert.equal(saved.cvLanguage,'en');}assert.equal(normaliseCV({...emptyCV(),model:'saude--unknown'}).model,'classico');});
 
 import {featuredTemplates,templatePortrait} from '../src/lib/templates.ts';
-test('homepage selection has twelve different compositions and includes every new design',()=>{
+test('homepage selection has twelve different compositions across twelve primary fields',()=>{
  assert.equal(featuredTemplates.length,12);assert.equal(new Set(featuredTemplates.map(t=>t.id)).size,12);
- for(const id of ['atlas','aurora','folio','vertice'])assert.ok(featuredTemplates.some(t=>t.id===id));
+ assert.equal(new Set(featuredTemplates.map(t=>areasForTemplate(t.id)[0].id)).size,12);
  for(const area of templateAreas)assert.ok(featuredTemplates.some(t=>templateMatchesArea(t.id,area.id)),area.id);
  assert.equal(new Set(featuredTemplates.map(t=>designModel(t.id))).size,12);
  assert.ok(featuredTemplates.every(t=>templates.some(item=>item.id===t.id)));

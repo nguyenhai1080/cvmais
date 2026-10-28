@@ -1,6 +1,28 @@
 # Distinct CV compositions: target 120
 
-28 October 2026. The target is **120 independently reviewed compositions**. It has not been completed. Before this release the public catalogue contained 14; DGC v39 adds 12, for **26 live compositions**. Another **94** remain. The 108 old industry recolourings remain readable in saved CVs but are excluded from discovery and these counts.
+28 October 2026. The target is **120 independently reviewed compositions**. It has not been completed. Milestone 50 adds 24 to the 26 in DGC v39: **50 compositions**, with **70** remaining. The 108 old industry recolourings remain readable in saved CVs but are excluded from discovery and these counts.
+
+## Milestone 50: second expansion batch
+
+Twenty-four separately authored region trees, matching HTML/PDF reading orders and actual PDF preview images. No colour/industry cross product. Each includes identity, optional portrait, contact, profile, work, education, skills and languages once. Empty regions disappear; long content stacks and can span multiple A4 pages. Seven first-job examples use a clearly fictional training project rather than invented employment.
+
+| Primary field | Added compositions | Current primary total |
+| --- | --- | ---: |
+| Administration | Arquivo, Secretariado | 5 |
+| Accounting | Auditoria, Tesouraria | 5 |
+| Technology | Sistemas | 4 |
+| Healthcare | Clínica, Comunitária | 4 |
+| Education | Didáctica | 4 |
+| Engineering | Canteiro, Oficina | 4 |
+| Logistics | Expedição, Inventário, Mobilidade | 4 |
+| Sales | Vitrine, Carteira, Balcão | 4 |
+| Hospitality | Hóspede, Sabores | 4 |
+| Communications | Narrativa | 4 |
+| Agriculture | Safra, Extensão, Agronomia | 4 |
+| Community projects | Missão, Cooperação | 4 |
+| **Total** | **24 new** | **50** |
+
+Homepage selections cover all twelve primary fields: Secretariado, Tesouraria, Sistemas, Clínica, Didáctica, Canteiro, Mobilidade, Vitrine, Hóspede, Narrativa, Agronomia and Missão. The gallery remains searchable by PT/EN professions and specialties. Next milestones: **74, 98, 120**. To reach ten per primary field: five more administration, five accounting, six for each of the other ten fields, totalling **70**.
 
 ## Acceptance rule
 
@@ -25,7 +47,7 @@ A design needs its own content arrangement: masthead hierarchy, region placement
 
 Samples are fictional and use Mozambique Portuguese; portraits are existing illustrative assets. Layout changes never replace a user's prose with the sample. Each design has curated profession aliases and one primary field. Secondary recommendations do not increase the unique count.
 
-## Remaining work to reach 120
+## Historical allocation at 26 (DGC v39)
 
 Assign each composition to one primary field for accounting purposes; the gallery may recommend it in several fields. Target ten per primary field, not the same ten structures recoloured across all fields.
 
@@ -47,7 +69,7 @@ Assign each composition to one primary field for accounting purposes; the galler
 
 Existing primary assignments: administration Maputo/Índico; accounting Essencial/Prestígio; technology Código/Vértice; healthcare Vital; education Horizonte/Aurora; engineering Estrutura; hospitality Acolher; communications Coral/Fólio; community projects Atlas. These assignments count each design once and do not restrict user choice.
 
-Next milestones: 50, 74, 98, 120. Prioritise the thinner logistics/sales/agriculture ranges; then add first-job, technical-specialist, field-work, research/teaching, leadership and career-change structures where the content needs differ. Each milestone requires a fresh monochrome/thumbnail comparison and the PDF acceptance above. No scheduled background design task or completion date has been promised.
+Original milestone sequence: 50, 74, 98, 120. Milestone 50 is implemented in the batch above. Future designs should address technical-specialist, field-work, research/teaching, leadership and career-change content needs. Each milestone requires a fresh thumbnail comparison and PDF acceptance. No scheduled background design task or completion date has been promised.
 
 ## Research and original design
 

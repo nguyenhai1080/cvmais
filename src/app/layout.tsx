@@ -1,3 +1,4 @@
+import './composition-designs.css';
 import './sector-designs.css';
 import type { Metadata } from 'next';
 import './globals.css';
