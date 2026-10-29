@@ -949,3 +949,5 @@ Object.assign(uiEnglish,{
  'Se estás a estudar e ainda não tens experiência formal, vê um exemplo de CV para estudante com formação, projectos e competências reais.':'If you are studying and do not have formal work experience, see a student CV example featuring education, projects and genuine skills.',
  'Ver modelo de CV para estudante':'See the student CV example'
 });
+
+Object.assign(uiEnglish,{'Nenhum modelo corresponde a esta pesquisa nesta área.':'No templates match this search in this field.','Ver todos os modelos':'View all templates'});
