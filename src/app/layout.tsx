@@ -2,6 +2,7 @@ import './composition-designs.css';
 import './sector-designs.css';
 import type { Metadata } from 'next';
 import './globals.css';
+import './brand-home.css';
 import { LanguageSync } from '@/lib/ui-language';
 import AddressNotice from '@/components/address-notice';
 import AnonymousPageviews from '@/components/anonymous-pageviews';

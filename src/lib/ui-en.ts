@@ -5,6 +5,12 @@ import { interviewTranslationPairs } from './interview-guide.ts';
 import { industryModels, industryVariant, layoutEditions } from './industry-catalogue.ts';
 // Original English UI catalogue. User CV text is never translated through this dictionary.
 export const uiEnglish: Record<string,string> = {
+  "começa aqui.": "starts here.",
+  "CV · Candidaturas · Entrevistas": "CV · Applications · Interviews",
+  "Imagem ilustrativa de dois profissionais moçambicanos a preparar uma candidatura": "Illustration of two Mozambican professionals preparing an application",
+  "O teu percurso, bem apresentado.": "Your experience, well presented.",
+  "Dicas para o teu próximo passo.": "Tips for your next step.",
+  "Segue o CVMais Moçambique no WhatsApp para receber dicas de CV, candidaturas e entrevistas.": "Follow CVMais Moçambique on WhatsApp for CV, application and interview tips.",
   ...Object.fromEntries(milestoneDesigns.flatMap(d=>[[d.description,d.enDescription],[d.detail,d.enDetail]])),
   "Composições distintas, sem contar mudanças de cor:": "Distinct compositions, excluding recolours:",
   "As versões antigas por área continuam disponíveis nos CVs já guardados.": "Earlier industry editions remain available in saved CVs.",

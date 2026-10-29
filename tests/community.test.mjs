@@ -16,7 +16,7 @@ test('invitations share only the public site, with no preselected recipient or C
 });
 
 test('join CTA requires an official channel URL; rejects lookalikes and arbitrary links',()=>{
-  assert.equal(officialChannelURL(WHATSAPP_CHANNEL_URL),null);
+  assert.equal(officialChannelURL(WHATSAPP_CHANNEL_URL),'https://whatsapp.com/channel/0029VbEAD4VG8l58vnbH4u1t');
   assert.equal(officialChannelURL('https://whatsapp.com/channel/0029VaExampleChannel'),'https://whatsapp.com/channel/0029VaExampleChannel');
   for(const input of ['', 'https://whatsapp.com.evil.test/channel/0029VaExampleChannel','https://user:pass@whatsapp.com/channel/0029VaExampleChannel','http://whatsapp.com/channel/0029VaExampleChannel','https://whatsapp.com/channel/0029VaExampleChannel?redirect=https://example.test','https://whatsapp.com/channel/0029VaExampleChannel#private','https://whatsapp.com:8443/channel/0029VaExampleChannel','https://cvmais.co.mz']) assert.equal(officialChannelURL(input),null);
 });

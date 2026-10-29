@@ -1,7 +1,7 @@
 import { SITE_ORIGIN } from './site.ts';
 
-// Add the public invitation link after the owner creates the official channel.
-export const WHATSAPP_CHANNEL_URL = '';
+// Official public channel supplied by the owner.
+export const WHATSAPP_CHANNEL_URL = 'https://whatsapp.com/channel/0029VbEAD4VG8l58vnbH4u1t';
 export function officialChannelURL(value: string): string | null {
   try {
     const url = new URL(value);

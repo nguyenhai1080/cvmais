@@ -1,0 +1,14 @@
+CVMais homepage identity update — 30 October 2026
+
+Homepage now applies the navy/teal/mint identity with an HTML PT/EN headline, independent illustrative candidate photograph, live CV sample overlay, refined benefit/how-to cards, resource cards, final CTA and official WhatsApp follow action. Portuguese remains the default. Shared editor/PDF styling is not changed by the homepage CSS.
+
+Official channel supplied by the owner:
+https://whatsapp.com/channel/0029VbEAD4VG8l58vnbH4u1t
+The website offers a normal external follow link; no automatic follow, contacts access, post or invitation dispatch. Existing invitation sharing remains user-confirmed in WhatsApp.
+
+New original: cvmais-hero-photo.png, generated with the built-in ImageGen tool by editing the campaign cover. Web derivatives: public/images/brand-hero-800.webp (31,414 bytes) and brand-hero-1440.webp (63,794 bytes). Sharp only resizes/encodes delivery images; the creative image edit was performed by ImageGen.
+
+Exact image edit prompt:
+Edit this CVMais campaign artwork into a website hero photography asset. Keep the same two fictional young Mozambican professionals, natural expressions, clothes, bright Maputo workspace and bridge background, on the RIGHT 55 percent of a wide 1536x1024 composition. REMOVE ALL text, letters, logos, labels, CV paper illustrations, buttons and graphic swooshes completely. The LEFT 45 percent must be clean warm off-white/pale mint #E9F5F2 negative space, subtly blending into the photograph, for real HTML headline overlay. Keep faces away from the right edge, natural skin, realistic hands, warm believable office light. Finished premium editorial photography, no border, no text or watermark. Preserve original photographic people identity and mood. Background opaque.
+
+Checks before deployment: production build/typecheck and 99 tests pass. Browser verified desktop composition, mobile 390 x 844 without horizontal overflow and the smaller image selected, PT/EN hero and WhatsApp follow labels, exact official follow destination. The page does not automatically follow or send messages.
