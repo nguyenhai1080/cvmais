@@ -1,5 +1,10 @@
 # CVMais delivery roadmap
 
+## Milestone 98 — 29 October 2026
+
+Implemented 24 further authored compositions after milestone 74: **98/120**, with **22 remaining**. Primary allocation is nine administration, nine accounting and eight in each other field. New roster: Gestão/Gabinete, Património/Planeamento, Plataforma/Produto, Reabilitação/Bem-estar, Aprendizagem/Academia, Energia/Inspecção, Operação/Frota, Mercado/Parcerias, Recepção/Serviços, Estúdio/Publicação, Sustentável/Cultivo, Avaliação/Desenvolvimento. They have separately authored region arrangements, optional portraits, PT/EN headings and actual PDF thumbnails. Old saved designs remain readable; twelve homepage selections remain unchanged. To reach 120: one more administration, one accounting and two in each of the other ten fields. Historical milestone records follow.
+
+
 ## Milestone 74 — 28 October 2026
 
 Adds two authored compositions per primary field (24 total), taking the public catalogue to **74/120**. **46 remain**, next milestone98. Administration/accounting now have seven each; the other ten fields have six each. Colours and field labels are not counted as new layouts. Homepage keeps twelve curated selections spanning twelve fields.

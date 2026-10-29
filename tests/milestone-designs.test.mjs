@@ -5,12 +5,12 @@ import {milestoneDesigns,compositionBlocks,compositionCompact} from '../src/lib/
 import {catalogueTemplates,templateSample,templateAreas,areasForTemplate} from '../src/lib/templates.ts';
 import {emptyCV,normaliseCV} from '../src/lib/cv.ts';
 import {discoverTemplates,defaultTemplateFilters} from '../src/lib/template-discovery.ts';
-test('milestone 74 registers forty-eight whole-page compositions with complete unique content regions',()=>{
- assert.equal(milestoneDesigns.length,48);assert.equal(catalogueTemplates.length,74);
- assert.equal(new Set(milestoneDesigns.map(d=>JSON.stringify(d.layout))).size,48);
+test('milestone 98 registers seventy-two whole-page compositions with complete unique content regions',()=>{
+ assert.equal(milestoneDesigns.length,72);assert.equal(catalogueTemplates.length,98);
+ assert.equal(new Set(milestoneDesigns.map(d=>JSON.stringify(d.layout))).size,72);
  for(const d of milestoneDesigns){const blocks=compositionBlocks(d.layout);for(const key of ['identity','portrait','contact','profile','work','study','skills','languages'])assert.equal(blocks.filter(x=>x===key).length,1,`${d.id}: ${key}`);assert.equal(areasForTemplate(d.id)[0].id,d.area);assert.ok(catalogueTemplates.some(t=>t.id===d.id));assert.ok(d.description&&d.enDescription&&d.detail&&d.enDetail);}
  for(const area of templateAreas)assert.ok(milestoneDesigns.some(d=>d.area===area.id),area.id);
- for(const area of ['logistica','vendas','agricultura'])assert.equal(milestoneDesigns.filter(d=>d.area===area).length,5);
+ for(const area of ['logistica','vendas','agricultura'])assert.equal(milestoneDesigns.filter(d=>d.area===area).length,7);
 });
 test('new layouts retain real candidate text, portrait, language and existing entry order',()=>{
  const data={...emptyCV(),name:'Nome real',profile:'Conteúdo real [sem substituir]',cvLanguage:'en',photo:'data:image/jpeg;base64,'+readFileSync(new URL('../public/images/demo-portrait-woman.jpg',import.meta.url)).toString('base64'),experiences:[{id:'one',title:'Função real',organisation:'Organização',period:'2024',description:'Actividades reais'}]};
