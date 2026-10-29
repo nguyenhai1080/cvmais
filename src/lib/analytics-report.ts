@@ -1,6 +1,7 @@
+import {metricPage} from './anonymous-metrics.ts';
 export type MetricRow={day:string;event:string;page:string;source:string;count:number};
 export type MetricWindow=7|30|90;
-export const metricEvents=['page_view','cv_builder_started','cv_template_selected','cv_pdf_exported'] as const;
+export const metricEvents=['page_view','cv_builder_started','cv_template_selected','cv_pdf_exported','guide_editor_clicked'] as const;
 export const metricSources=['direct','internal','google','bing','duckduckgo','social','other'] as const;
 const dayFormat=new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Maputo',year:'numeric',month:'2-digit',day:'2-digit'});
 export function maputoDay(date:Date){return dayFormat.format(date);}
@@ -25,7 +26,10 @@ export function analyticsSummary(rows:MetricRow[],days:MetricWindow,now=new Date
  const pages=new Map<string,number>();
  for(const row of chosen){if(row.event!=='page_view')continue;pages.set(row.page,(pages.get(row.page)||0)+row.count);}
  const topPages=[...pages].map(([page,count])=>({page,count})).sort((a,b)=>b.count-a.count||a.page.localeCompare(b.page));
- return {totals,sources,topPages,daily:dailySeries(chosen,days,now)};
+ const guideMap=new Map<string,{page:string;views:number;editorClicks:number}>();
+ for(const row of chosen){if(!row.page.startsWith('/modelos/para/')||metricPage(row.page)!==row.page||!['page_view','guide_editor_clicked'].includes(row.event))continue;const item=guideMap.get(row.page)||{page:row.page,views:0,editorClicks:0};if(row.event==='page_view')item.views+=row.count;else item.editorClicks+=row.count;guideMap.set(row.page,item);}
+ const guidePerformance=[...guideMap.values()].sort((a,b)=>b.editorClicks-a.editorClicks||b.views-a.views||a.page.localeCompare(b.page));
+ return {totals,sources,topPages,guidePerformance,daily:dailySeries(chosen,days,now)};
 }
 
 // Axis labels are deliberately sparse so 30/90-day charts remain legible.

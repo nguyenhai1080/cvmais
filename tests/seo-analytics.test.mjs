@@ -2,6 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {metricPage,metricSource,parseMetricPayload} from '../src/lib/anonymous-metrics.ts';
+
+test('guide editor clicks accept only finite public profession paths and no extra data',()=>{
+ const value={event:'guide_editor_clicked',page:'/modelos/para/programador',source:'none'};
+ assert.deepEqual(parseMetricPayload(value),value);
+ for(const page of ['/criar-cv','/','/modelos/para/unknown','/modelos/para/programador?email=secret'])assert.equal(parseMetricPayload({...value,page}),null);
+ assert.equal(parseMetricPayload({...value,source:'google'}),null);
+ assert.equal(parseMetricPayload({...value,cv:'private text'}),null);
+});
 const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 test('no external analytics scripts or consent banner',()=>{
  const source=read('src/lib/seo-analytics.ts');

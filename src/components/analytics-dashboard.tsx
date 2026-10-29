@@ -4,6 +4,7 @@ import {analyticsSummary,chartAxisTick,type MetricRow,type MetricWindow} from '@
 import styles from './analytics-dashboard.module.css';
 
 const labels:Record<string,{pt:string;en:string}>={
+ guide_editor_clicked:{pt:'Cliques dos guias para o editor',en:'Guide clicks to editor'},
  page_view:{pt:'Visualizações',en:'Page views'},
  cv_builder_started:{pt:'Aberturas do editor',en:'Builder starts'},
  cv_template_selected:{pt:'Selecções de modelos',en:'Template selections'},
@@ -53,7 +54,8 @@ export default function AnalyticsDashboard({rows,locale}:{rows:MetricRow[];local
       {data.sources.filter(s=>s.count>0).length===0?<p>{en?'No views in this period.':'Sem visualizações neste período.'}</p>:data.sources.filter(s=>s.count>0).map(s=><div className={styles.source} key={s.source}><div><span>{makeLabel(s.source,en)}</span><strong>{s.count}</strong></div><div className={styles.track}><div style={{width:(totalSources?s.count/totalSources*100:0)+'%'}}/></div></div>)}
     </section>
    </div>
-   <section className={styles.panel}><h3>{en?'Most viewed pages':'Páginas mais visualizadas'}</h3><div className={styles.tableScroll}><table><thead><tr><th>{en?'Page':'Página'}</th><th>{en?'Page views':'Visualizações'}</th></tr></thead><tbody>{data.topPages.map(p=><tr key={p.page}><td><code>{p.page}</code></td><td>{p.count}</td></tr>)}{data.topPages.length===0&&<tr><td colSpan={2}>{en?'No data for this period.':'Sem dados no período.'}</td></tr>}</tbody></table></div>
+   <section className={styles.panel}><h3>{en?'Guides that lead to the editor':'Guias que levam ao editor'}</h3><p className={styles.subtle}>{en?'Anonymous event counts since this measurement was enabled. Repeated clicks are counted; this does not establish unique visitors, completed CVs or PDF attribution.':'Contagens anónimas desde a activação desta medição. Cliques repetidos contam; não identificam pessoas únicas, CVs concluídos ou atribuição de PDFs.'}</p>{data.guidePerformance.length?<div className={styles.tableScroll}><table><thead><tr><th>{en?'Guide':'Guia'}</th><th>{en?'Views':'Visualizações'}</th><th>{en?'Editor clicks':'Cliques para o editor'}</th></tr></thead><tbody>{data.guidePerformance.map(g=><tr key={g.page}><td><a href={g.page}>{g.page}</a></td><td>{g.views}</td><td>{g.editorClicks}</td></tr>)}</tbody></table></div>:<p>{en?'No guide events recorded in this period.':'Sem eventos de guias registados neste período.'}</p>}</section>
+   <section className={styles.panel}><h3>{en?'Most viewed pages' :'Páginas mais visualizadas'}</h3><div className={styles.tableScroll}><table><thead><tr><th>{en?'Page':'Página'}</th><th>{en?'Page views':'Visualizações'}</th></tr></thead><tbody>{data.topPages.map(p=><tr key={p.page}><td><code>{p.page}</code></td><td>{p.count}</td></tr>)}{data.topPages.length===0&&<tr><td colSpan={2}>{en?'No data for this period.':'Sem dados no período.'}</td></tr>}</tbody></table></div>
    </section>
    <p className={styles.note}>{en?'Days use Africa/Maputo time. Data is retained for about 90 days. Google Search Console remains the source for indexed URLs, impressions and queries.':'Os dias seguem a hora de Moçambique. Os dados são conservados cerca de 90 dias. O Google Search Console continua a ser a fonte para indexação, impressões e palavras-chave.'}</p>
  </section>;

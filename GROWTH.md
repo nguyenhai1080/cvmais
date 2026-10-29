@@ -30,4 +30,12 @@ Um projecto pessoal pode ajudar a explicar o que sabes construir, sem ser aprese
 
 ## Editorial reference
 
+## Guide-to-editor measurement and channel preparation — 29 October
+
+Added a finite `guide_editor_clicked` event to the three editor actions on each of the twelve profession guides. The private report groups guide views and editor clicks for 7/30/90-day windows. Repeated clicks count; this is not unique-user conversion, completed CVs, WhatsApp follower measurement or guide-to-PDF attribution. Click measurement starts with this release; old guide views may already exist, so the two columns do not share a historical start date. No historical click counts were fabricated. Payloads exclude query strings, visitor identifiers and CV text. Existing SQLite aggregate storage needs no schema migration.
+
+Validation: production build and 99 tests pass, including guide allowlisting, rejection of personal/query payloads, date-window aggregation and empty reports. Local browser navigation from the programming guide opened the selected editor; local end-to-end database recording was not confirmed because the local origin configuration prevented collection and restarting with corrected configuration was blocked by automatic approval review.
+
+The owner has no official distribution channel yet. Updated brand/whatsapp/launch-guide.txt with the proposed name CVMais Moçambique, operator/contact, description, welcome draft, three industry/first-job post drafts, a manual editorial plan and launch checklist. Reuses public/community/cvmais-channel-avatar.png and cvmais-channel-cover.png. No channel creation, public posting, messages, advertising spend or scheduled automation.
+
 Google Search Central recommends useful, people-first content: https://developers.google.com/search/docs/fundamentals/creating-helpful-content . New guides address distinct candidate needs rather than a keyword-volume quota. EN interface hub labels accompany PT-MZ articles; these are not fully translated English articles.

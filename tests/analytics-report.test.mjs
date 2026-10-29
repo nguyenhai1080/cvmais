@@ -3,6 +3,22 @@ import assert from 'node:assert/strict';
 import {analyticsSummary,dailySeries,maputoDay,chartAxisTick} from '../src/lib/analytics-report.ts';
 
 const now=new Date('2026-10-27T11:00:00Z');
+
+test('guide report separates click events from editor opens and aggregates within the selected window',()=>{
+ const page='/modelos/para/programador';
+ const entries=[
+  {day:'2026-10-27',event:'page_view',page,source:'google',count:4},
+  {day:'2026-10-27',event:'guide_editor_clicked',page,source:'none',count:2},
+  {day:'2026-10-27',event:'cv_builder_started',page:'/criar-cv',source:'none',count:9},
+  {day:'2026-10-01',event:'guide_editor_clicked',page,source:'none',count:6},
+ ];
+ const seven=analyticsSummary(entries,7,now);
+ assert.deepEqual(seven.guidePerformance,[{page,views:4,editorClicks:2}]);
+ assert.equal(seven.totals.cv_builder_started,9);
+ assert.equal(seven.totals.guide_editor_clicked,2);
+ assert.equal(analyticsSummary(entries,30,now).guidePerformance[0].editorClicks,8);
+ assert.deepEqual(analyticsSummary([],7,now).guidePerformance,[]);
+});
 const rows=[
  {day:'2026-10-27',event:'page_view',page:'/',source:'google',count:10},
  {day:'2026-10-27',event:'page_view',page:'/modelos',source:'internal',count:3},

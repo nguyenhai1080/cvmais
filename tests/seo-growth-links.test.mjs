@@ -24,7 +24,7 @@ test('first CV guide links contextually to student example',()=>{
 test('each profession offers editor action after article and factual examples',()=>{
  const page=read('src/app/modelos/para/[profissao]/page.tsx');
  assert.match(page,/className=\{styles\.nextStep\}/);
- assert.match(page,/<Link className="button" href=\{editor\}>Criar o meu CV grátis<\/Link>/);
+ assert.match(page,/<GuideEditorLink className="button" href=\{editor\}>Criar o meu CV grátis<\/GuideEditorLink>/);
  assert.ok(page.indexOf('Exemplos para adaptar ao teu percurso')<page.indexOf('className={styles.nextStep}'));
  assert.match(page,/href="\/orientacoes\/antes-de-enviar"/);
  const sitemap=read('src/app/sitemap.ts');

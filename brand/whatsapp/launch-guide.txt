@@ -39,5 +39,28 @@ cvmais-channel-avatar.png: square channel icon; keep the established website wor
 cvmais-channel-cover.png: landscape launch illustration with fictional people; no real-user endorsement.
 Created using built-in ImageGen. Original files preserved. No QR code until the actual channel URL exists.
 
+READY-TO-ADAPT POSTS — DRAFTS, NOT PUBLISHED
+
+POST 1 — PRIMEIRO CV
+Estás a preparar o teu primeiro CV? Começa pela tua formação, projectos e competências que consegues demonstrar. Não precisas de inventar experiência profissional.
+Vê um exemplo ilustrativo e adapta-o ao teu percurso real:
+https://cvmais.co.mz/modelos/para/estudante
+
+POST 2 — LOGÍSTICA E ARMAZÉM
+No teu CV de armazém, explica as tarefas que realmente realizaste: recepção de mercadorias, registo de movimentos, organização do stock ou preparação de encomendas. Inclui ferramentas apenas se souberes utilizá-las.
+O nosso guia tem exemplos ilustrativos para adaptar:
+https://cvmais.co.mz/modelos/para/fiel-de-armazem
+
+POST 3 — TECNOLOGIA
+Preparas uma candidatura em programação? Mostra os projectos em que trabalhaste, o teu contributo e as tecnologias que utilizaste. Confirma que as ligações ao portefólio funcionam e não revelam dados confidenciais.
+Consulta o guia e cria o teu CV:
+https://cvmais.co.mz/modelos/para/programador
+
+OWNER LAUNCH CHECKLIST
+Create the official channel using the account you control; review its name, description and avatar. Publish the welcome draft after reviewing it. Copy the actual channel URL and provide it for the website join button. There is no official channel URL configured yet. The promotional cover is public/community/cvmais-channel-cover.png; the avatar is public/community/cvmais-channel-avatar.png. No invitation link or QR code has been invented.
+
+MEASUREMENT
+The private website report counts public guide page views and clicks on guide-to-editor buttons. Clicks are aggregate events, not unique people, completed CVs or WhatsApp followers. There is no historical click backfill or per-person tracking. Review after collecting real events; do not infer growth from an empty report.
+
 WEBSITE STATUS
 Invite via WhatsApp opens an invitation containing only the public website address and general product information. The user selects recipients and confirms sending in WhatsApp. Copy invitation has a readable manual-copy fallback. No contact access, personal referral IDs, CV content or automated message dispatch. Following the channel remains hidden until an owner-provided official link is configured.

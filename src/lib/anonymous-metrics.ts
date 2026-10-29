@@ -1,5 +1,5 @@
 // Low-cardinality, anonymous counters only. No free text, document/user IDs or raw URLs.
-export const METRIC_EVENTS = ['page_view','cv_builder_started','cv_template_selected','cv_pdf_exported'] as const;
+export const METRIC_EVENTS = ['page_view','cv_builder_started','cv_template_selected','cv_pdf_exported','guide_editor_clicked'] as const;
 export const METRIC_SOURCES = ['none','direct','internal','google','bing','duckduckgo','social','other'] as const;
 export type MetricEvent = typeof METRIC_EVENTS[number];
 export type MetricSource = typeof METRIC_SOURCES[number];
@@ -44,5 +44,6 @@ export function parseMetricPayload(value: unknown): MetricPayload | null {
       typeof obj.page !== 'string' || metricPage(obj.page) !== obj.page ||
       typeof obj.source !== 'string' || !(METRIC_SOURCES as readonly string[]).includes(obj.source)) return null;
   if ((obj.event === 'page_view') === (obj.source === 'none')) return null;
+  if(obj.event==='guide_editor_clicked'&&!/^\/modelos\/para\//.test(obj.page))return null;
   return {event: obj.event as MetricEvent,page: obj.page,source: obj.source as MetricSource};
 }

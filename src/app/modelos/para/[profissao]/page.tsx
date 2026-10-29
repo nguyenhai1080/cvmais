@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import {notFound} from 'next/navigation';
 import Link from 'next/link';
+import GuideEditorLink from '@/components/guide-editor-link';
 import Header from '@/components/header';
 import {professions,professionBySlug,professionUrl} from '@/lib/profession-seo';
 import {SITE_ORIGIN} from '@/lib/site';
@@ -40,7 +41,7 @@ export default async function ProfessionLandingPage({params}:Props){
         <span className={styles.badge}>MODELO DE CV GRATUITO · MOÇAMBIQUE</span>
         <h1>{p.h1}</h1><p>{p.intro}</p>
         <div className={styles.actions}>
-          <Link className="button" href={editor}>Criar o meu CV grátis</Link>
+          <GuideEditorLink className="button" href={editor}>Criar o meu CV grátis</GuideEditorLink>
           <Link className={styles.secondaryAction} href={library}>Ver modelos da área</Link>
         </div>
       </header>
@@ -67,7 +68,7 @@ export default async function ProfessionLandingPage({params}:Props){
             <h2 id={'proximo-'+p.slug}>Agora prepara o teu CV de {p.name.toLowerCase()}</h2>
             <p>Abre o modelo gratuito, substitui os exemplos fictícios pelos teus dados verdadeiros e revê o PDF antes de o enviares. Não é necessário pagar para começar.</p>
             <div className={styles.actions}>
-              <Link className="button" href={editor}>Criar o meu CV grátis</Link>
+              <GuideEditorLink className="button" href={editor}>Criar o meu CV grátis</GuideEditorLink>
               <Link className={styles.secondaryAction} href="/orientacoes/antes-de-enviar">Ver o guia de revisão do PDF</Link>
             </div>
           </section>
@@ -84,7 +85,7 @@ export default async function ProfessionLandingPage({params}:Props){
           <span className="eyebrow">PASSA À PRÁTICA</span>
           <h2>Começa com {p.modelName}</h2>
           <p>Este desenho é uma sugestão para {p.audience.toLowerCase()}. Podes escolher outro modelo e editar todas as secções.</p>
-          <Link className="button" href={editor}>Usar este modelo grátis</Link>
+          <GuideEditorLink className="button" href={editor}>Usar este modelo grátis</GuideEditorLink>
           <p>Descarrega um PDF sem marca de água. Inclui apenas qualificações e experiências que possas confirmar.</p>
           <Link className={styles.secondaryAction} href="/modelos">Explorar a biblioteca</Link>
         </aside>
