@@ -1,5 +1,14 @@
 # CVMais delivery roadmap
 
+## Mobile picker follow-up — live DGC v44, 29 October 2026
+
+Source `0dfa8bf`: the editor picker starts in the selected model's primary/legacy field, provides labelled PT/EN tagged search and a result count, and offers a reset to all120 designs when empty. The dialog is portalled to the document body so a mobile edit/preview ancestor cannot hide an open modal when viewport changes. Search input is16px and at least44px high.
+
+Build and96 tests pass. Isolated invented draft on3011: Engenho digital defaults to technology (12 recommendations including secondary suitability), telecom returns10 within that field, unknown query produces0 and an explicit recovery button. Open-dialog resize to390px remains visible/accessible after the portal fix; dialog339px, page client/scroll375px, input16px. Switching to Sistemas preserves invented name/profile. No new PDF-render acceptance claimed because renderer/content are unchanged. Physical Android and native-speaker wording checks remain pending; owner task and review prompts are in PILOT.md.
+
+DGC nguyenhai1080@gmail.com visibly confirmed and v44 Online. Postdeploy checker passes120 catalogue,106 identical reviewed preview assets,12 homepage designs, app/backup health and mail worker. Fictional persistence passes; SEO15/15 passes. Live editor opens the new labelled picker with13 administration recommendations for Maputo; no production draft fields edited or model changed. Screenshot cropped to the public-template dialog only: work/cvmais-picker-v44.png. No environment, credentials, database or real email changes.
+
+
 ## Milestone 120 — live DGC v43, 29 October 2026
 
 The final22 compositions bring the catalogue to **120 distinct compositions**: **ten per primary field**. This completes the numerical roadmap milestone. It does not establish actual Android/native-speaker acceptance or guarantee recruiter/ATS outcomes. Changing colours, photos or field tags does not increase the count. The homepage retains twelve curated designs across twelve fields; the Novos filter identifies this final22.

@@ -101,3 +101,23 @@ Isolated local browser origin 127.0.0.1:3006, fictional Amélia Teste CV; no pro
 - Final production build and 89 existing tests pass. DGC v38/source e6760fa is live: original persistence, email worker, application/backup health and SEO 15/15 pass. Official 390px editor confirms sticky controls, 16px field text, section focus and no overflow; screenshot work/cvmais-mobile-editor-v38.png. No real CV content edited. Production acceptance does not replace a physical Android test.
 
 Physical Android task still required: open the official editor in Chrome, enter fictional details, switch between editing/preview while the keyboard is open, choose a model, download/open a PDF in Files, close/reopen the tab and confirm the draft. Report device/Android/Chrome versions and any difficulty. Do not share passwords, recovery links or private CV contents. A screenshot-size simulation does not establish Android keyboard, file-manager or memory behaviour.
+
+## Android preparation and picker repair — 29 October 2026
+
+Local isolated origin3011, invented Amélia Teste draft; no production user content edited. After the 120-template milestone, picker opened all designs instead of the selected field. It now opens the current primary/legacy field and supports the same bilingual tagged search as the library. All fields remain explicitly selectable; zero-results recovery clears search/field and shows the full catalogue. New input has a visible label, 16px text and44px minimum height, with a live count.
+
+Found a second issue while resizing an open desktop picker to390px: its preview ancestor becomes hidden in edit mode, hiding the modal and its accessibility tree. The dialog now uses a body portal. Retest at390×844 confirms it remains open/accessible, with375px client/scroll widths and a339px dialog. Search and selecting Sistemas preserve the invented name/profile; dialog closes normally. Build and96 tests pass. This is viewport simulation, not an actual Android pilot. No PDF renderer changes or new all-model PDF acceptance claimed.
+
+### Short owner task — physical Android still pending
+
+Open https://cvmais.co.mz/criar-cv on the phone. Use invented information. Record only device/browser, pass/fail and the troublesome step, without CV text, passwords, codes or email-link tokens.
+
+1. Enter name, contact, short profile and education. Optional photo: select, crop and save.
+2. Preview, open Mudar modelo; confirm the field is relevant, search telecom or a model name, then choose a different design. Confirm the draft remains.
+3. With keyboard open, switch Editar/Pré-visualizar and change a field. Check controls remain usable.
+4. Download the PDF, find it in Downloads/Files, open it and check pages/accents/photo. Repeat with English CV headings if convenient.
+5. Close/reopen the tab. Confirm the guest draft remains. Clearing browser data can remove it; export a backup if needed.
+
+### Mozambican Portuguese wording review — awaiting native-speaker feedback
+
+Ask a consenting speaker to read: Os teus dados, Título profissional, Perfil profissional, Responsabilidades e resultados, Curso / qualificação, Formação académica, Competências e línguas, Guardar rascunho, Rever CV, Descarregar PDF and the sample guidance. Ask whether each is clear, whether any phrase is unnatural locally, and which replacement they prefer. Record phrase and proposed correction only. Agent review is not native-speaker acceptance; no invitations or contact messages have been sent.
