@@ -1,0 +1,37 @@
+CVMais — Identidade visual v1
+29 Outubro 2026 | Soltech LDA | admin@soltech.co.mz
+
+CONCEITO
+O teu próximo passo começa aqui.
+Uma identidade clara e próxima: azul marinho para a estrutura, verde-petróleo para acções, fundos brancos e menta. A linha ascendente representa preparação e progresso; não promete contratação.
+
+FICHEIROS
+cvmais-brand-board.png — prancha de referência, 1536 x 1024.
+cvmais-campaign-cover.png — imagem promocional horizontal, 1536 x 1024, pronta para publicação. Não é um campo de capa obrigatório do WhatsApp.
+cvmais-first-cv-post.png — publicação quadrada, 1024 x 1024, pronta para acompanhar o guia de primeiro CV.
+cvmais-channel-avatar.png — avatar original preservado, CV+ e documento. Usar como ícone do canal; manter centrado no recorte circular.
+cvmais-logo.svg — assinatura editável em duas cores, fundo transparente.
+cvmais-logo-white.svg — assinatura branca para fundos escuros, fundo transparente.
+cvmais-pattern.svg — fundo gráfico editável, 1600 x 900.
+prompts.json — instruções exactas usadas para gerar as três imagens novas.
+
+CORES EXACTAS PARA FUTURAS PEÇAS
+Azul marinho: #183B55
+Verde-petróleo: #079C91
+Menta de campanha: #E9F5F2
+Branco: #FFFFFF
+Texto branco pequeno em botões: preferir fundo #06786F e verificar o contraste final.
+As imagens geradas contêm fotografia e gradações; não são amostras técnicas de cor. Usar estes códigos para produção.
+
+TIPOGRAFIA
+Manrope Bold/ExtraBold para títulos e assinatura, em continuidade com o website. Noto Sans para o corpo das peças de campanha. O website mantém as suas fontes actuais; esta entrega não alterou o site.
+As referências tipográficas da prancha gerada são ilustrativas, não provas de fonte. Os SVGs contêm texto editável: instalar Manrope antes de editar/exportar, ou converter em contornos no editor gráfico. Sem a fonte, pode existir substituição por Arial.
+
+APLICAÇÃO
+Deixar pelo menos 10% de margem nas publicações. Proteger a assinatura com espaço livre de pelo menos metade da altura das letras. Não esticar, rodar ou adicionar sombras ao logo.
+Usar o logo a duas cores em branco/menta e a versão branca em azul marinho. Reservar o monograma CV+ para avatares e espaços pequenos; usar o nome CVMais em peças de divulgação.
+Manter fotografias naturais, texto curto e hierarquia clara. Legendar pessoas e CVs gerados como ilustração. Todo o texto de campanha segue português de Moçambique; exemplos devem ser adaptados ao percurso real.
+
+ESTADO
+Prancha, capa e publicação criadas com a ferramenta integrada ImageGen. As pessoas são fictícias; não são utilizadores nem testemunhos reais. O avatar existente foi preservado. Assinaturas SVG e fundo prolongam o sistema gráfico do projecto.
+Nenhuma peça foi publicada, nenhum canal criado e nenhum ficheiro do website substituído. O endereço oficial é https://cvmais.co.mz. Não foi inventado link de canal nem código QR.
