@@ -8,7 +8,7 @@ Uma identidade clara e próxima: azul marinho para a estrutura, verde-petróleo 
 FICHEIROS
 cvmais-brand-board.png — prancha de referência, 1536 x 1024.
 cvmais-campaign-cover.png — imagem promocional horizontal, 1536 x 1024, pronta para publicação. Não é um campo de capa obrigatório do WhatsApp.
-cvmais-first-cv-post.png — publicação quadrada, 1024 x 1024, pronta para acompanhar o guia de primeiro CV.
+cvmais-first-cv-post.png — publicação quadrada, 1254 x 1254, pronta para acompanhar o guia de primeiro CV.
 cvmais-channel-avatar.png — avatar original preservado, CV+ e documento. Usar como ícone do canal; manter centrado no recorte circular.
 cvmais-logo.svg — assinatura editável em duas cores, fundo transparente.
 cvmais-logo-white.svg — assinatura branca para fundos escuros, fundo transparente.
