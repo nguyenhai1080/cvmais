@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {professions,professionUrl} from '../src/lib/profession-seo.ts';
 const read=(path)=>fs.readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
-test('homepage exposes existing profession hub without generating new pages',()=>{
+test('homepage exposes the profession guidance hub',()=>{
  const home=read('src/components/home-content.tsx');
  const hub=read('src/components/profession-links.tsx');
  assert.match(home,/<ProfessionLinks\/>/);
@@ -13,7 +13,7 @@ test('homepage exposes existing profession hub without generating new pages',()=
  assert.match(hub,/professionUrl\(p\.slug\)/);
  assert.deepEqual(professions.map(p=>professionUrl(p.slug)),[
   '/modelos/para/motorista','/modelos/para/vendedor','/modelos/para/estudante',
-  '/modelos/para/administrativo','/modelos/para/enfermeiro'
+  '/modelos/para/administrativo','/modelos/para/enfermeiro','/modelos/para/contabilista','/modelos/para/programador','/modelos/para/engenheiro','/modelos/para/fiel-de-armazem','/modelos/para/recepcionista','/modelos/para/tecnico-agricola','/modelos/para/assistente-de-projectos'
  ]);
 });
 test('first CV guide links contextually to student example',()=>{

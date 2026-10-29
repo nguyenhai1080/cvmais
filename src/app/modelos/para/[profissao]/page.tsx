@@ -21,6 +21,7 @@ export default async function ProfessionLandingPage({params}:Props){
   if(!p)notFound();
   const url=SITE_ORIGIN+professionUrl(p.slug);
   const editor='/criar-cv?'+new URLSearchParams({modelo:p.model,area:p.area}).toString();
+  const share='https://wa.me/?text='+encodeURIComponent('Estás a preparar uma candidatura? Vê este guia de CV para '+p.name.toLowerCase()+', com exemplos fictícios para adaptar e um editor gratuito: '+url);
   const library='/modelos?'+new URLSearchParams({area:p.area}).toString();
   const breadcrumbs={'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[
     {'@type':'ListItem',position:1,name:'Início',item:SITE_ORIGIN},
@@ -70,6 +71,7 @@ export default async function ProfessionLandingPage({params}:Props){
               <Link className={styles.secondaryAction} href="/orientacoes/antes-de-enviar">Ver o guia de revisão do PDF</Link>
             </div>
           </section>
+          <p><a className={styles.secondaryAction} href={share} target="_blank" rel="noopener noreferrer">Partilhar este guia no WhatsApp</a></p>
           <section className={styles.related}><h2>Outros modelos e orientações</h2>
             <div className={styles.relatedList}>
               {professions.filter(other=>other.slug!==p.slug).map(other=>

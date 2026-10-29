@@ -82,11 +82,11 @@ for (const path of ['/conta', '/criar-cv', '/meus-cvs']) {
 }
 
 
-const professionSlugs = ['motorista', 'vendedor', 'estudante', 'administrativo', 'enfermeiro'];
-inspect('Sitemap: 17 public URLs including 5 professions', sitemap, (r, body) => {
+const professionSlugs = ['motorista', 'vendedor', 'estudante', 'administrativo', 'enfermeiro','contabilista','programador','engenheiro','fiel-de-armazem','recepcionista','tecnico-agricola','assistente-de-projectos'];
+inspect('Sitemap: 24 public URLs including 12 professions', sitemap, (r, body) => {
   if (r.status !== 200) return `HTTP ${r.status}`;
   const entries = [...body.matchAll(/<loc>/g)].length;
-  if (entries !== 17) return `Expected 17 URLs, found ${entries}`;
+  if (entries !== 24) return `Expected 24 URLs, found ${entries}`;
   for (const slug of professionSlugs) {
     if (!body.includes(`${origin}/modelos/para/${slug}`)) return `Missing ${slug} in sitemap`;
   }

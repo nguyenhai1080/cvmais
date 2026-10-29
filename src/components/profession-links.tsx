@@ -7,14 +7,14 @@ import styles from './profession-pages.module.css';
 const englishLabels:Record<string,string>={
  motorista:'CV for driver',vendedor:'CV for sales assistant',
  estudante:'CV for student',administrativo:'CV for administrative assistant',
- enfermeiro:'CV for nurse'
+ enfermeiro:'CV for nurse',"contabilista":"CV for accountant","programador":"CV for developer","engenheiro":"CV for engineer","fiel-de-armazem":"CV for warehouse assistant","recepcionista":"CV for receptionist","tecnico-agricola":"CV for agricultural technician","assistente-de-projectos":"CV for project assistant"
 };
 const englishAudiences:Record<string,string>={
  motorista:'Driving, deliveries and transport',
  vendedor:'Shops, customer service and sales',
  estudante:'First jobs, internships and recent graduates',
  administrativo:'Office support, reception and administration',
- enfermeiro:'Nursing and supervised clinical placements'
+ enfermeiro:'Nursing and supervised clinical placements',"contabilista":"Accounting and finance","programador":"Software and IT support","engenheiro":"Engineering and construction","fiel-de-armazem":"Warehouse and stock operations","recepcionista":"Reception and hospitality","tecnico-agricola":"Agriculture and field work","assistente-de-projectos":"NGOs and community projects"
 };
 
 export default function ProfessionLinks(){
