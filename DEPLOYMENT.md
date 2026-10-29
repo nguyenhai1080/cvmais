@@ -1,5 +1,14 @@
 # Vibehost deployment
 
+## Acceptance — DGC v42, 29 October 2026
+
+Milestone 74 was deployed as DGC v41 from `0f96e95`, then milestone 98 as **v42** from `d3ce4b2`. Visible DGC profile confirmed nguyenhai1080@gmail.com. Official catalogue has **98 compositions**, with **22 remaining** to target120. Homepage retains twelve curated designs across twelve primary fields. No recolours counted as new designs.
+
+Build and 95 tests pass. Two new batches each pass144 PDF cases; an additional144 regression cases for the first24 composition designs pass after shared pagination changes: **432 cases** checked during this work. Checks cover short/no-photo/EN/sparse/long/support content, end markers, A4 bounds, glyph overlap, embedded fonts and blank pages. All48 new short examples fit one page and their contact sheets were visually reviewed; representative long/support sheets reviewed. Long content uses a linear flow to prevent page-boundary clipping/overlap, rather than retaining narrow columns. A reproducible isolated-process fixture runner avoids font-subset state leaking between separate PDF renders. Browser PDF download from Plataforma preserves fictional content and English headings; simulated390px preview has equal375px content/scroll widths. Physical Android acceptance remains pending.
+
+V42 Online confirmed. Public checker passes98 catalogue count,84 byte-identical composition/sector preview PNGs,12 homepage selections, app/backup health and email worker. Existing fictional account/CV persistence survives; SEO15/15 passes. Live browser loads all98 cards; English telecom search returns16 results; Portuguese restored. Screenshot: work/cvmais-milestone-98-v42.png. No production CV edit, real email send, credential/environment change or database migration.
+
+
 ## Active deployment: DGC
 
 Latest release, 28 October 2026: **v40**, source `44b1ef4`, milestone **50 distinct compositions** (24 additions). Deployed through the visibly confirmed DGC browser nguyenhai1080@gmail.com; connector identifies GST and was unused for mutations. V40 Online confirmed. Official count is 50, homepage contains twelve selections covering twelve primary fields, and all 36 new/earlier sector PNGs match the reviewed PDFs byte-for-byte. Original fictional account/CV persistence, mail enabled/worker ready, app/backup health and SEO 15/15 pass. Live browser loads all fifty cards with no remaining load-more control; English telecom search returns eight including Sistemas/Canteiro/Oficina, Portuguese default restored and Sistemas PDF preview visually confirmed. Screenshot: work/cvmais-milestone-50-v40.png. No database migration, environment or credential change, real CV edit or real email send. **70** compositions remain to target 120; next milestone 74.

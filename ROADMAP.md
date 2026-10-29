@@ -1,6 +1,6 @@
 # CVMais delivery roadmap
 
-## Milestone 98 — 29 October 2026
+## Milestone 98 — DGC v42, 29 October 2026
 
 Implemented 24 further authored compositions after milestone 74: **98/120**, with **22 remaining**. Primary allocation is nine administration, nine accounting and eight in each other field. New roster: Gestão/Gabinete, Património/Planeamento, Plataforma/Produto, Reabilitação/Bem-estar, Aprendizagem/Academia, Energia/Inspecção, Operação/Frota, Mercado/Parcerias, Recepção/Serviços, Estúdio/Publicação, Sustentável/Cultivo, Avaliação/Desenvolvimento. They have separately authored region arrangements, optional portraits, PT/EN headings and actual PDF thumbnails. Old saved designs remain readable; twelve homepage selections remain unchanged. To reach 120: one more administration, one accounting and two in each of the other ten fields. Historical milestone records follow.
 
@@ -58,7 +58,7 @@ Validation: 78/78 automated tests; typecheck/build pass; browser PT/EN invitatio
 
 ## Delivered
 
-1. Responsive pt-MZ homepage, approved imagery, fifty public compositions, twelve homepage selections covering twelve primary fields; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs. Target 120 remains open (70 outstanding).
+1. Responsive pt-MZ homepage, approved imagery, ninety-eight public compositions, twelve homepage selections covering twelve primary fields; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs. Target 120 remains open (22 outstanding).
 2. Editor, crop/zoom photo, browser-generated A4 PDF, guest local draft and JSON export; private account library, SQLite autosave, revisions and recovery codes.
 3. Permanent account/CV erasure with password confirmation, session revocation and matching local-copy cleanup.
 4. Resend cvmais.win verified sender, optional email confirmation and expiring single-use password reset; approved owner delivery test reported Delivered. Encrypted daily B2 backup plus real download/restore verification.
