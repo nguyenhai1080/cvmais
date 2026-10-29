@@ -32,6 +32,8 @@ Um projecto pessoal pode ajudar a explicar o que sabes construir, sem ser aprese
 
 ## Guide-to-editor measurement and channel preparation — 29 October
 
+Deployed source 762ed64 as DGC v46, confirmed Online in the signed-in browser with nguyenhai1080@gmail.com. Public release checks pass: 120 compositions, 106 reviewed preview files, twelve featured designs, application/backup health and mail worker; fictional persistence fixture survives redeployment; SEO 22/22. Evidence: work/cvmais-v46-live.png. Updated launch kit: work/cvmais-whatsapp-launch-kit.zip. No synthetic guide-click events were injected into production.
+
 Added a finite `guide_editor_clicked` event to the three editor actions on each of the twelve profession guides. The private report groups guide views and editor clicks for 7/30/90-day windows. Repeated clicks count; this is not unique-user conversion, completed CVs, WhatsApp follower measurement or guide-to-PDF attribution. Click measurement starts with this release; old guide views may already exist, so the two columns do not share a historical start date. No historical click counts were fabricated. Payloads exclude query strings, visitor identifiers and CV text. Existing SQLite aggregate storage needs no schema migration.
 
 Validation: production build and 99 tests pass, including guide allowlisting, rejection of personal/query payloads, date-window aggregation and empty reports. Local browser navigation from the programming guide opened the selected editor; local end-to-end database recording was not confirmed because the local origin configuration prevented collection and restarting with corrected configuration was blocked by automatic approval review.
