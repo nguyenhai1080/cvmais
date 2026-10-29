@@ -1,5 +1,12 @@
 # CVMais pilot and launch acceptance
 
+## Owner Android pilot feedback — 29 October 2026
+
+The owner replied to the requested Android pilot (choose a model, enter fictional details, optional photo, download/open PDF, reopen draft): “Không gặp khó khăn gì” (“No difficulties encountered”). Record this as a positive owner-reported Android usability result, not an agent-observed device test or a separately verified pass for every optional step. Device model, Android version and browser were not supplied; no specific defect was reported. No private CV data or credentials collected.
+
+This closes the outstanding request for initial owner Android usability feedback. Broader multi-device testing and Mozambican native-speaker wording review remain open. Historical sections below retain the status at their release dates.
+
+
 Updated 27 October 2026. Current production: https://cvmais.co.mz, fourteen public designs and six guides. Distinguish technical QA from real-user acceptance; no testers or feedback are invented. Earlier dated evidence below describes historical releases.
 
 ## Current phone pilot — ready, awaiting real-device feedback

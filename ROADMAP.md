@@ -1,5 +1,12 @@
 # CVMais delivery roadmap
 
+## Owner Android pilot feedback — 29 October 2026
+
+The owner replied to the requested Android pilot (choose a model, enter fictional details, optional photo, download/open PDF, reopen draft): “Không gặp khó khăn gì” (“No difficulties encountered”). Record this as a positive owner-reported Android usability result, not an agent-observed device test or a separately verified pass for every optional step. Device model, Android version and browser were not supplied; no specific defect was reported. No private CV data or credentials collected.
+
+This closes the outstanding request for initial owner Android usability feedback. Broader multi-device testing and Mozambican native-speaker wording review remain open. Historical sections below retain the status at their release dates.
+
+
 ## Mobile picker follow-up — live DGC v44, 29 October 2026
 
 Source `0dfa8bf`: the editor picker starts in the selected model's primary/legacy field, provides labelled PT/EN tagged search and a result count, and offers a reset to all120 designs when empty. The dialog is portalled to the document body so a mobile edit/preview ancestor cannot hide an open modal when viewport changes. Search input is16px and at least44px high.
