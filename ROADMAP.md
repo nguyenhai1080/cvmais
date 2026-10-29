@@ -1,5 +1,14 @@
 # CVMais delivery roadmap
 
+## Milestone 120 — 29 October 2026
+
+The final22 compositions bring the catalogue to **120 distinct compositions**: **ten per primary field**. This completes the numerical roadmap milestone. It does not establish actual Android/native-speaker acceptance or guarantee recruiter/ATS outcomes. Changing colours, photos or field tags does not increase the count. The homepage retains twelve curated designs across twelve fields; the Novos filter identifies this final22.
+
+New roster: administration Direcção; accounting Capital; technology Infraestrutura/Engenho digital; health Assistência/Vigilância; education Pedagogia/Conhecimento; engineering Obra/Mecânica; logistics Terminal/Abastecimento; sales Cliente/Expansão; hospitality Acolhimento/Hospitalidade; communication Criação/Voz; agriculture Rural/Produção; community projects Inclusão/Impacto. Each has an authored region arrangement, optional portrait, PT/EN headings, tags and actual PDF preview. Atlas and Aurora primary suitability order now matches the roadmap assignments (community projects and education); their secondary suggestions remain available. A test verifies all twelve primary counts equal ten.
+
+Further work should prioritise real-device and native-speaker feedback, content quality and usability rather than another numerical template quota. Historical milestone records follow.
+
+
 ## Milestone 98 — DGC v42, 29 October 2026
 
 Implemented 24 further authored compositions after milestone 74: **98/120**, with **22 remaining**. Primary allocation is nine administration, nine accounting and eight in each other field. New roster: Gestão/Gabinete, Património/Planeamento, Plataforma/Produto, Reabilitação/Bem-estar, Aprendizagem/Academia, Energia/Inspecção, Operação/Frota, Mercado/Parcerias, Recepção/Serviços, Estúdio/Publicação, Sustentável/Cultivo, Avaliação/Desenvolvimento. They have separately authored region arrangements, optional portraits, PT/EN headings and actual PDF thumbnails. Old saved designs remain readable; twelve homepage selections remain unchanged. To reach 120: one more administration, one accounting and two in each of the other ten fields. Historical milestone records follow.
@@ -58,7 +67,7 @@ Validation: 78/78 automated tests; typecheck/build pass; browser PT/EN invitatio
 
 ## Delivered
 
-1. Responsive pt-MZ homepage, approved imagery, ninety-eight public compositions, twelve homepage selections covering twelve primary fields; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs. Target 120 remains open (22 outstanding).
+1. Responsive pt-MZ homepage, approved imagery, 120 public compositions, twelve homepage selections covering twelve primary fields; earlier industry IDs retained for existing CVs without advertising recolourings as independent designs. The 120-composition milestone is implemented.
 2. Editor, crop/zoom photo, browser-generated A4 PDF, guest local draft and JSON export; private account library, SQLite autosave, revisions and recovery codes.
 3. Permanent account/CV erasure with password confirmation, session revocation and matching local-copy cleanup.
 4. Resend cvmais.win verified sender, optional email confirmation and expiring single-use password reset; approved owner delivery test reported Delivered. Encrypted daily B2 backup plus real download/restore verification.

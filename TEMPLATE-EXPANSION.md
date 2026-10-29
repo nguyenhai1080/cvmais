@@ -1,5 +1,14 @@
 # Distinct CV compositions: target 120
 
+## Milestone 120 — 29 October 2026
+
+The final22 compositions bring the catalogue to **120 distinct compositions**: **ten per primary field**. This completes the numerical roadmap milestone. It does not establish actual Android/native-speaker acceptance or guarantee recruiter/ATS outcomes. Changing colours, photos or field tags does not increase the count. The homepage retains twelve curated designs across twelve fields; the Novos filter identifies this final22.
+
+New roster: administration Direcção; accounting Capital; technology Infraestrutura/Engenho digital; health Assistência/Vigilância; education Pedagogia/Conhecimento; engineering Obra/Mecânica; logistics Terminal/Abastecimento; sales Cliente/Expansão; hospitality Acolhimento/Hospitalidade; communication Criação/Voz; agriculture Rural/Produção; community projects Inclusão/Impacto. Each has an authored region arrangement, optional portrait, PT/EN headings, tags and actual PDF preview. Atlas and Aurora primary suitability order now matches the roadmap assignments (community projects and education); their secondary suggestions remain available. A test verifies all twelve primary counts equal ten.
+
+Further work should prioritise real-device and native-speaker feedback, content quality and usability rather than another numerical template quota. Historical milestone records follow.
+
+
 ## Milestone 98 — 29 October 2026
 
 Implemented 24 further authored compositions after milestone 74: **98/120**, with **22 remaining**. Primary allocation is nine administration, nine accounting and eight in each other field. New roster: Gestão/Gabinete, Património/Planeamento, Plataforma/Produto, Reabilitação/Bem-estar, Aprendizagem/Academia, Energia/Inspecção, Operação/Frota, Mercado/Parcerias, Recepção/Serviços, Estúdio/Publicação, Sustentável/Cultivo, Avaliação/Desenvolvimento. They have separately authored region arrangements, optional portraits, PT/EN headings and actual PDF thumbnails. Old saved designs remain readable; twelve homepage selections remain unchanged. To reach 120: one more administration, one accounting and two in each of the other ten fields. Historical milestone records follow.
