@@ -1,6 +1,6 @@
 # CVMais delivery roadmap
 
-## Milestone 120 — 29 October 2026
+## Milestone 120 — live DGC v43, 29 October 2026
 
 The final22 compositions bring the catalogue to **120 distinct compositions**: **ten per primary field**. This completes the numerical roadmap milestone. It does not establish actual Android/native-speaker acceptance or guarantee recruiter/ATS outcomes. Changing colours, photos or field tags does not increase the count. The homepage retains twelve curated designs across twelve fields; the Novos filter identifies this final22.
 

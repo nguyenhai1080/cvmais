@@ -1,5 +1,16 @@
 # Vibehost deployment
 
+## Acceptance — DGC v43, 29 October 2026
+
+Source `548d759` completes the catalogue milestone: **120 distinct compositions**, ten in each of twelve primary fields. The final22 models have reviewed actual PDF thumbnails and individual layout descriptions. Newest filter contains22; homepage retains12 selections. Atlas and Aurora primary order now matches the documented community/education assignments, with secondary fields retained. Existing saved model IDs remain supported.
+
+Production build and96 tests pass, including all twelve primary counts, unique layout trees, section completeness, preserved authored content/language/photo and search aliases. **132 PDF cases** pass across the final22 designs (short, no-photo, English, long work/education, long supporting sections, sparse). Tests cover content/end markers, A4 bounds, glyph overlap, blank pages and embedded fonts. All22 short samples fit one page; all new short contact sheets and representative stress sheets reviewed. Local library loads120 cards and hands off the selected model to editor. A follow-up local browser PDF download was not completed because that tab could not load; no new end-to-end editor download acceptance is claimed for this release. Shared editor/PDF rendering is unchanged from v42 apart from new model metadata and the two primary-field order changes. Physical Android/native-speaker acceptance remains pending.
+
+DGC account nguyenhai1080@gmail.com visibly confirmed; connector still GST and unused for mutations. Browser locator actions stopped opening dialogs; native tab actions recovered deployment. V43 Online visibly confirmed. Official checker passes120 compositions,106 byte-identical composition/sector preview PNGs,12 homepage selections, app/backup health and mail worker ready. Fictional account/CV persistence passes and SEO15/15 passes. Live Portuguese library shows120 and Engenho digital preview opens. Screenshot: work/cvmais-milestone-120-v43.png. No production CV modification, authentication email send, migration or credential/environment change.
+
+The numerical target120 is complete. Further priorities are actual Android/native-speaker acceptance and quality improvements driven by feedback, not an additional template-count quota.
+
+
 ## Acceptance — DGC v42, 29 October 2026
 
 Milestone 74 was deployed as DGC v41 from `0f96e95`, then milestone 98 as **v42** from `d3ce4b2`. Visible DGC profile confirmed nguyenhai1080@gmail.com. Official catalogue has **98 compositions**, with **22 remaining** to target120. Homepage retains twelve curated designs across twelve primary fields. No recolours counted as new designs.
