@@ -1,5 +1,9 @@
 # Validation — 24 October 2026
 
+## Acquisition acceptance — v45, 29 October 2026
+
+Build and97 tests pass, including original role-specific content, preserved old five routes, twelve distinct samples and anonymous path recognition for all twelve professions. Official SEO audit checks24 sitemap URLs and all twelve profession routes with correct canonical, breadcrumb and editor action:22/22 pass. Release integrity and fictional persistence pass. New programador page inspected locally and in production, with clear fictional-sample labels, editor/library links and WhatsApp public-guide compose link. No WhatsApp recipient selected and no message sent. Existing responsive page layout reused; no new physical-device pilot claimed. Search Console resubmission acknowledged, not evidence of indexing or search uplift. See GROWTH.md for measurement limits and next manual review.
+
 ## Owner Android pilot feedback — 29 October 2026
 
 The owner replied to the requested Android pilot (choose a model, enter fictional details, optional photo, download/open PDF, reopen draft): “Không gặp khó khăn gì” (“No difficulties encountered”). Record this as a positive owner-reported Android usability result, not an agent-observed device test or a separately verified pass for every optional step. Device model, Android version and browser were not supplied; no specific defect was reported. No private CV data or credentials collected.

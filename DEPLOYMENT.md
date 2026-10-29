@@ -1,5 +1,9 @@
 # Vibehost deployment
 
+## DGC v45 — 29 October 2026
+
+Source 49268c5 adds seven profession acquisition guides, contextual WhatsApp guide sharing and bounded anonymous page counters. DGC nguyenhai1080@gmail.com visibly confirmed; v45 Online. Production SEO22/22, 120-composition/106-preview integrity, 12 homepage selections, app/backup/mail health and fictional persistence pass. Official programador page visually inspected; screenshot work/cvmais-acquisition-v45.png. Search Console acknowledged resubmission of the updated 24-URL sitemap; screenshot work/cvmais-sitemap-submitted-v45.png. No indexing or traffic uplift claim, real CV edit, message send, ad spend, migration or credential change.
+
 ## Mobile picker follow-up — live DGC v44, 29 October 2026
 
 Source `0dfa8bf`: the editor picker starts in the selected model's primary/legacy field, provides labelled PT/EN tagged search and a result count, and offers a reset to all120 designs when empty. The dialog is portalled to the document body so a mobile edit/preview ancestor cannot hide an open modal when viewport changes. Search input is16px and at least44px high.

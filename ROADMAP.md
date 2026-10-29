@@ -1,5 +1,9 @@
 # CVMais delivery roadmap
 
+## Organic acquisition — live DGC v45, 29 October 2026
+
+Expanded profession guides from five to twelve with distinct practical advice, fictional samples, editor/library actions and contextual WhatsApp sharing. Home/library links, 24-URL sitemap, English hub labels and anonymous per-guide path counters updated. Build/97 tests pass; official SEO22/22, 120-template integrity, app/backup/mail health and fictional CV persistence pass. Search Console domain cvmais.co.mz verified in the owner's signed-in account; updated sitemap resubmission acknowledged successfully. Indexing/traffic uplift is not yet established. GROWTH.md records baseline limitations, manual measurement plan and three Portuguese post drafts. No social messages, outreach, ad spend or recurring monitor created.
+
 ## Owner Android pilot feedback — 29 October 2026
 
 The owner replied to the requested Android pilot (choose a model, enter fictional details, optional photo, download/open PDF, reopen draft): “Không gặp khó khăn gì” (“No difficulties encountered”). Record this as a positive owner-reported Android usability result, not an agent-observed device test or a separately verified pass for every optional step. Device model, Android version and browser were not supplied; no specific defect was reported. No private CV data or credentials collected.
