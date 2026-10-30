@@ -8,13 +8,13 @@ be assumed to equal the first-party counters (different collection and filtering
 
 1. In Umami Cloud, create a website named `CVMais` for `cvmais.co.mz`.
 2. Copy the Website ID (public tracking identifier, **not** a Cloud API key).
-3. Configure `NEXT_PUBLIC_UMAMI_WEBSITE_ID=<your-website-id>` for the **production build** in Vibehost.
+3. Public Website ID `e4cf3c29-d0ae-47c7-85a3-c729cd959546` is configured in `src/lib/umami-config.ts`. An optional `NEXT_PUBLIC_UMAMI_WEBSITE_ID` can override it for other installations.
 4. Redeploy the production build. Next.js inlines `NEXT_PUBLIC_*` variables at build time.
 5. Open `https://cvmais.co.mz` and verify `cloud.umami.is/script.js` plus Umami traffic in the
    browser Network tab; check Realtime, Pages and Events inside Umami.
 6. Check the publicly visible Portuguese and English privacy notice before activating.
 
-The script is not rendered if the Website ID environment variable is unset.
+The public ID is bundled at build time. The tracker sends data only on `cvmais.co.mz`; it does not send traffic from localhost or preview domains.
 The code only sends events while running at hostname `cvmais.co.mz`.
 No private API key is required in browser or repository.
 
