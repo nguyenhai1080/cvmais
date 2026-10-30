@@ -1,5 +1,6 @@
 'use client';
 import {metricPage,metricSource,type MetricEvent,type MetricPayload} from './anonymous-metrics.ts';
+import {trackUmamiConversion} from './umami-analytics';
 
 // First-party aggregated telemetry. No third-party tracking or persistent client state,
 // IP capture in the application, persistent identifier, CV content or text fields.
@@ -29,4 +30,5 @@ export function trackAnalyticsPage(path:string):void {
 }
 export function trackConversion(event:Exclude<MetricEvent,'page_view'>):void {
   send({event,page:metricPage(window.location.pathname),source:'none'});
+  trackUmamiConversion(event);
 }
