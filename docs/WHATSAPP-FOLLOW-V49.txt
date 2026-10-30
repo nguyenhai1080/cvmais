@@ -1,0 +1,5 @@
+30 October 2026 — official channel discoverability
+
+The existing follow action was near the bottom of the homepage in Sharing. Added a second, clearly labelled public follow action beneath the hero assurances, before the photograph on mobile. Uses the existing validated official URL, PT/EN labels, a normal external link and no automatic subscription/message.
+
+Source d6c6644 deployed through the visibly confirmed DGC nguyenhai1080@gmail.com browser account as v49 (Online). Official homepage browser confirms the hero link and existing bottom action. Proof: work/cvmais-follow-hero-v49.png. Local desktop and simulated 390 x 844 checks show the hero action with no horizontal overflow; PT and EN labels work. Build/typecheck and 102 tests pass. No WhatsApp follow or message was submitted by the agent.
