@@ -1,5 +1,5 @@
 /* CVMais identity v1: public homepage only. Editor and documents retain their styles. */
-.hero-channel-follow{display:inline-flex;align-items:center;gap:9px;margin-top:22px;padding:12px 15px;border:1px solid #b0d7ce;border-radius:12px;color:#06786f;background:#fff;font-size:13px;font-weight:700;line-height:1.5;max-width:100%;box-shadow:0 4px 15px #183b5505}.hero-channel-follow svg{flex:none}.hero-channel-follow:hover{background:#dcefe9;border-color:#06786f}
+.hero-channel-follow{display:inline-flex;align-items:center;gap:9px;margin-top:22px;padding:12px 15px;border:1px solid #06786f;border-radius:12px;color:#fff;background:#06786f;font-size:13px;font-weight:700;line-height:1.5;max-width:100%;box-shadow:0 4px 15px #183b5505}.hero-channel-follow svg{flex:none}.hero-channel-follow:hover{background:#05665e;border-color:#05665e}
 .home-page{--mint:#e9f5f2;--teal-dark:#06786f;background:#fff}
 .home-page .header{border-bottom:1px solid #e4eeeb}
 .brand-hero{background:linear-gradient(115deg,#f7fbfa,#e9f5f2);position:relative;overflow:hidden;padding:48px 0 64px}
