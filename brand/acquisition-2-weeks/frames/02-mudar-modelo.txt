@@ -1,0 +1,13 @@
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/02-mudar-modelo-00.png'
+duration 4
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/02-mudar-modelo-01.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/02-mudar-modelo-02.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/02-mudar-modelo-03.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/02-mudar-modelo-04.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/02-mudar-modelo-05.png'
+duration 4
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/02-mudar-modelo-05.png'

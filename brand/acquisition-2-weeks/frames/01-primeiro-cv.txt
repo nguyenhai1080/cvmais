@@ -1,0 +1,15 @@
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/01-primeiro-cv-00.png'
+duration 4
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/01-primeiro-cv-01.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/01-primeiro-cv-02.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/01-primeiro-cv-03.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/01-primeiro-cv-04.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/01-primeiro-cv-05.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/01-primeiro-cv-06.png'
+duration 4
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/01-primeiro-cv-06.png'

@@ -1,0 +1,29 @@
+[
+  {
+    "file": "01-primeiro-cv.mp4",
+    "seconds": 38,
+    "width": 720,
+    "height": 1280,
+    "bytes": 225125,
+    "audio": false,
+    "campaign_url": "https://cvmais.co.mz/criar-cv?utm_source=whatsapp&utm_medium=channel&utm_campaign=launch_01"
+  },
+  {
+    "file": "02-mudar-modelo.mp4",
+    "seconds": 32,
+    "width": 720,
+    "height": 1280,
+    "bytes": 209043,
+    "audio": false,
+    "campaign_url": "https://cvmais.co.mz/modelos?utm_source=whatsapp&utm_medium=channel&utm_campaign=launch_03"
+  },
+  {
+    "file": "03-descarregar-pdf.mp4",
+    "seconds": 32,
+    "width": 720,
+    "height": 1280,
+    "bytes": 198217,
+    "audio": false,
+    "campaign_url": "https://cvmais.co.mz/criar-cv?utm_source=whatsapp&utm_medium=channel&utm_campaign=launch_04"
+  }
+]

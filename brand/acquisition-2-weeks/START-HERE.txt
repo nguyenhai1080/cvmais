@@ -1,0 +1,25 @@
+CVMAIS — BỘ NỘI DUNG QUẢNG BÁ 2 TUẦN
+Chuẩn bị ngày 30/10/2026. Soltech LDA.
+
+1. VIDEO SẴN DÙNG
+videos/01-primeiro-cv.mp4 — 38 giây: tạo CV đầu tiên.
+videos/02-mudar-modelo.mp4 — 32 giây: đổi mẫu, giữ nội dung.
+videos/03-descarregar-pdf.mp4 — 32 giây: kiểm tra, sửa cảnh báo và tải PDF.
+Định dạng dọc 720 x 1280, MP4 H.264, 15 fps, chữ PT-MZ trên video; không có giọng đọc hoặc nhạc. Mỗi file khoảng 0,2 MB. Đây là video hướng dẫn từng bước ghép từ ảnh chụp thao tác thật, không phải bản quay màn hình liên tục. Bố cục và chữ phủ dùng màu nhận diện CVMais.
+
+2. ĐĂNG NHƯ THẾ NÀO
+Mở POSTS-PT-MZ.txt, chọn bài, đính kèm video/ảnh tương ứng và sao chép nội dung cùng liên kết. Lịch CSV đề xuất 6 bài trong 14 ngày, bắt đầu 30/10/2026. Nếu bắt đầu muộn hơn, dịch ngày theo số thứ tự; không cần đăng dồn. Chưa tạo lịch tự động và chưa đăng bài hay gửi lời mời.
+Kênh chính thức: https://whatsapp.com/channel/0029VbEAD4VG8l58vnbH4u1t
+
+3. ĐO HIỆU QUẢ
+Các link có utm_source=whatsapp, utm_medium=channel, utm_campaign=launch_01 đến launch_06. CVMais đã có bộ lọc chấp nhận ba nhãn này; không gắn tên, số điện thoại hay thông tin cá nhân vào link. Việc xuất hiện số liệu chiến dịch phụ thuộc Umami được bật, mạng và trình duyệt; không khẳng định mọi lượt bấm đều được ghi.
+RESULTS-TEMPLATE.csv để trống toàn bộ số liệu, chờ kết quả thật. Lượt xem, lượt bấm và người dùng riêng biệt là những chỉ số khác nhau. Bộ đếm guide-editor tổng hợp không gắn với người hoặc bài WhatsApp cụ thể; không tính tỷ lệ chuyển đổi người dùng từ các tổng này. Báo cáo không chứng minh người dùng đã được tuyển dụng.
+Ngày 7 và 14: xem bài nào có người đọc/bấm, ghi câu hỏi thực tế, điều chỉnh chủ đề. Chỉ so sánh cửa sổ thời gian tương đương; không so số ngày đầy đủ với bài mới đăng vài giờ.
+
+4. NGUỒN VÀ DỮ LIỆU MINH HỌA
+Các màn hình được chụp trên bản CVMais chạy cục bộ ở kích thước mô phỏng 390 x 844. Chỉ dùng tên, email, trường và nội dung fictitious; không tạo tài khoản hay lưu CV thật trên máy chủ. PDF trong bộ này được tải qua giao diện sản phẩm và kiểm tra bản xuất. Không thực hiện phép thử trên thiết bị Android thật trong lượt này.
+cv-demonstracao.pdf chỉ là minh họa. Người dùng cần điền thông tin thật và kiểm tra PDF của mình trước khi nộp.
+Captures và frames là nguồn dựng có thể chỉnh lại. build-videos.py dùng Pillow để dàn trang video và FFmpeg qua imageio-ffmpeg để xuất MP4; không sửa ảnh ứng viên hay tạo giao diện giả.
+
+5. GIỚI HẠN PHÂN PHỐI
+Không mua quảng cáo, không gửi hàng loạt, không đăng vào nhóm khi chưa được quản trị viên cho phép. Không tuyên bố tuyển dụng, đối tác, số người dùng hay kết quả chưa có bằng chứng.

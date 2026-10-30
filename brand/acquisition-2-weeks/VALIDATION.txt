@@ -1,0 +1,9 @@
+Validation — 30 October 2026
+
+Three actual MP4 outputs fully decoded without error using FFmpeg. H.264, 720 x 1280, yuv420p, 15 fps; durations independently probed as 38.0, 32.0 and 32.0 seconds. No audio track. Captions burned into frames; editable UTF-8 SRT accompanies each video. Files are 225125, 209043 and 198217 bytes respectively.
+
+Visual QA: inspected final contact sheet, an extracted encoded frame, the filled profile capture and the exported PDF rendering. No clipped instructional caption observed. Sources are actual local browser UI states; steps use cuts between still captures rather than continuous motion recording.
+
+PDF exported through the product's Download action, then opened with pypdf and rendered with Poppler: one readable page, correct fictional candidate name/profile/education and example.com address. This is a demonstration fixture, not a real application.
+
+Calendar CSV checked for consistent columns and 14 data rows; results template has six rows and no invented metric values. UTM keys match the site's existing allowlist: source, medium, campaign. Campaigns are launch_01 through launch_06. Posts and schedule remain drafts. No publication, message, channel subscription, automated scheduling or advertising spend executed.

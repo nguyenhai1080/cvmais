@@ -1,0 +1,29 @@
+1
+00:00:00,000 --> 00:00:04,000
+CVMais · Passo a passo
+Um novo estilo. O mesmo percurso.
+
+2
+00:00:04,000 --> 00:00:10,000
+1 · Abre a pré-visualização
+No editor, selecciona «Pré-visualizar» para veres o teu CV.
+
+3
+00:00:10,000 --> 00:00:16,000
+2 · Mudar modelo
+Abre a escolha de modelos. As miniaturas ajudam a comparar os estilos.
+
+4
+00:00:16,000 --> 00:00:22,000
+3 · Filtra pela tua área
+Escolhe uma área profissional para encontrar opções relevantes.
+
+5
+00:00:22,000 --> 00:00:28,000
+4 · Escolhe e confirma
+O nome, o perfil e a formação mantêm-se. Revê sempre o resultado.
+
+6
+00:00:28,000 --> 00:00:32,000
+Agora é a tua vez
+Escolhe o estilo da tua candidatura. Visita cvmais.co.mz.

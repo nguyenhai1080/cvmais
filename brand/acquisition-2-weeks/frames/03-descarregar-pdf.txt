@@ -1,0 +1,13 @@
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/03-descarregar-pdf-00.png'
+duration 4
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/03-descarregar-pdf-01.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/03-descarregar-pdf-02.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/03-descarregar-pdf-03.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/03-descarregar-pdf-04.png'
+duration 6
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/03-descarregar-pdf-05.png'
+duration 4
+file 'D:/Projects/CVMais/brand/acquisition-2-weeks/frames/03-descarregar-pdf-05.png'
