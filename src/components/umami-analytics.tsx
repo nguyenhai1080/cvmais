@@ -4,8 +4,9 @@ import {useEffect, useState} from 'react';
 import Script from 'next/script';
 import {usePathname} from 'next/navigation';
 import {trackUmamiPage} from '@/lib/umami-analytics';
+import {UMAMI_WEBSITE_ID} from '@/lib/umami-config';
 
-const websiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+const websiteId = UMAMI_WEBSITE_ID;
 
 export default function UmamiAnalytics() {
   const pathname = usePathname();
