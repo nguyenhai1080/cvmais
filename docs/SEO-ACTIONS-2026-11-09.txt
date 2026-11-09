@@ -21,5 +21,8 @@ Production build/typecheck and 103 tests pass. Built HTML confirms privacy canon
 DEPLOYMENT DEPENDENCY
 Both Vibehost connector and visible browser session identify GST Vietnam nguyenhai1080+basic@gmail.com. The DGC project is not accessible in that browser account. No GST mutations or deployment were made. An asynchronous request asks the owner to sign into DGC nguyenhai1080@gmail.com. Deploy only after confirming that identity, then run scripts/check-seo-production.mjs (expected 25 checks) and work/check-indexability.mjs. Preserve unrelated untracked Billing proof/ files.
 
+DEPLOYMENT COMPLETED AFTER OWNER SIGN-IN
+Owner confirmed DGC sign-in. Visible Vibehost profile verified nguyenhai1080@gmail.com; project cmvlbkah40mef0i5fzrjkbvcd deployed source fb98fc0 as v51, Online confirmed. All changes above are now deployed. Public SEO audit passes 25/25, catalogue/preview/health/mail checks pass, and the existing fictional CV persistence fixture survives redeployment. Browser verified the contextual guide links on the official site; screenshot work/cvmais-seo-v51.png. Google request acceptance remains the previously observed status; no repeated indexing request and no indexed/ranking claim.
+
 MANUAL DISTRIBUTION AND REVIEW
 Posts are prepared, not published or scheduled. Publish email and interview tips 2–3 days apart when authorised; record actual publication dates and compare equivalent reporting windows. Review GSC URL Inspection, impressions/clicks and available campaign visits after sufficient time has elapsed. No monitoring automation created. Do not interpret aggregate guide clicks as distinct visitors, PDF attribution or job outcomes.
