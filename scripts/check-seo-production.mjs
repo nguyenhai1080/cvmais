@@ -57,6 +57,23 @@ inspect('Guide: Article schema', guide, (r, body) => {
 });
 
 const sitemap = await request('/sitemap.xml');
+const privacy = await request('/privacidade');
+inspect('Privacy: canonical and indexability', privacy, (r, body) => {
+  if (r.status !== 200) return `HTTP ${r.status}`;
+  if ((r.headers.get('x-robots-tag') || '').includes('noindex')) return 'Privacy page unexpectedly noindex';
+  return /<link\b[^>]*rel="canonical"[^>]*href="https:\/\/cvmais\.co\.mz\/privacidade"/.test(body) ? '' : 'Privacy canonical missing';
+});
+inspect('Guide: contextual application links', guide, (r, body) => {
+  if (r.status !== 200) return `HTTP ${r.status}`;
+  if (!body.includes('id="application-next-steps"')) return 'Contextual next steps missing';
+  return ['/orientacoes/email-de-candidatura','/orientacoes/preparar-entrevista'].every(path=>body.includes(`href="${path}"`)) ? '' : 'Application guide links missing';
+});
+const interview = await request('/orientacoes/preparar-entrevista');
+inspect('Interview guide: search title and indexability', interview, (r, body) => {
+  if (r.status !== 200) return `HTTP ${r.status}`;
+  if ((r.headers.get('x-robots-tag') || '').includes('noindex')) return 'Interview guide unexpectedly noindex';
+  return body.includes('Como Preparar uma Entrevista de Emprego em Moçambique') ? '' : 'Interview search title missing';
+});
 inspect('Sitemap: indexable pages only', sitemap, (r, body) => {
   if (r.status !== 200) return `HTTP ${r.status}`;
   if (!body.includes('https://cvmais.co.mz/modelos')) return 'Official models URL missing';
