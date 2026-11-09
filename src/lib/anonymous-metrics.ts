@@ -7,7 +7,7 @@ export type MetricPayload = { event: MetricEvent; page: string; source: MetricSo
 
 const publicPaths = new Set(['/','/modelos','/orientacoes','/sobre','/termos','/privacidade']);
 const privatePaths = new Set(['/criar-cv','/conta','/meus-cvs']);
-const guideSlugs = new Set(['primeiro-cv','adaptar-a-oportunidade','email-de-candidatura','antes-de-enviar']);
+const guideSlugs = new Set(['primeiro-cv','adaptar-a-oportunidade','email-de-candidatura','antes-de-enviar','preparar-entrevista','cartas-por-area']);
 const professionSlugs = new Set(['motorista','vendedor','estudante','administrativo','enfermeiro','contabilista','programador','engenheiro','fiel-de-armazem','recepcionista','tecnico-agricola','assistente-de-projectos']);
 const allPaths = new Set([...publicPaths,...privatePaths,'/outras-paginas']);
 

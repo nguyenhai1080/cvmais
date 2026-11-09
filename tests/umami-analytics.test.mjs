@@ -8,6 +8,13 @@ test('Umami only receives allowlisted page paths', () => {
   assert.equal(safeUmamiUrl('/repor-acesso/secret-token'), '/outras-paginas');
 });
 
+test('interview and letter guide campaigns retain their public landing pages without private query data',()=>{
+  for(const slug of ['preparar-entrevista','cartas-por-area']){
+    assert.equal(safeUmamiUrl('/orientacoes/'+slug,'?utm_source=whatsapp&utm_medium=channel&utm_campaign=nov09_entrevista&email=private%40example.com'),'/orientacoes/'+slug+'?utm_source=whatsapp&utm_medium=channel&utm_campaign=nov09_entrevista');
+  }
+  assert.equal(safeUmamiUrl('/orientacoes/private-token'),'/outras-paginas');
+});
+
 test('Umami strips unknown query keys and accepts only safe campaign values', () => {
   const url = safeUmamiUrl(
     '/modelos/para/estudante',
