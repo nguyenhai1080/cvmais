@@ -17,6 +17,10 @@ const seo: Record<string,{title:string;description:string}> = {
     title:'Como Enviar um CV por Email: Exemplo | CVMais',
     description:'Vê como escrever um email de candidatura, escolher o assunto e enviar o teu CV em PDF com uma mensagem profissional.',
   },
+  'preparar-entrevista': {
+    title:'Como Preparar uma Entrevista de Emprego em Moçambique | CVMais',
+    description:'Prepara a apresentação, pratica perguntas com exemplos reais e organiza a entrevista presencial ou online. Guia gratuito para candidatos em Moçambique.',
+  },
 };
 export function generateStaticParams(){return guides.map(({slug})=>({slug}));}
 export const dynamicParams=false;
