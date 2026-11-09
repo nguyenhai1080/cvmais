@@ -1,0 +1,25 @@
+SEO and acquisition actions — 9 November 2026
+
+COMPLETED EXTERNALLY
+Google Search Console property sc-domain:cvmais.co.mz, signed-in owner nguyenhai1080@gmail.com:
+1. Inspected /orientacoes/preparar-entrevista and selected Request indexing. Google displayed Indexing requested and stated the URL was added to a priority crawl queue.
+2. Inspected /orientacoes/email-de-candidatura and selected Request indexing. Google displayed the same Indexing requested confirmation.
+No CAPTCHA challenge was manually solved. No repeated submissions. These confirmations establish request acceptance, not indexing, ranking or traffic gains. Interview screenshot: work/gsc-interview-requested-2026-11-09.png.
+
+READY IN REPOSITORY — NOT DEPLOYED IN THIS SESSION
+Source 463ef64 includes bfca873 and 0d93c46:
+- Privacy page has an explicit self-canonical and descriptive metadata.
+- Interview page has a concrete job-interview preparation search title and description.
+- First-CV, tailoring and final-review guides now link contextually to the application email and interview guides, with PT/EN UI text.
+- Fixed an analytics allowlist omission that grouped interview and industry-letter pages under Other pages; both now keep their finite public path, while personal query fields and unknown paths remain rejected. Existing 3 campaign parameters retain their safe-value restrictions.
+- Expanded the public SEO release check with privacy canonical, contextual guide links and interview indexability checks.
+- Two PT-MZ WhatsApp post drafts include distinct nov09_email and nov09_entrevista campaign labels. Both URLs verified against the actual campaign sanitizer; no personal identifiers. File: brand/acquisition-2-weeks/POSTS-SEO-FOLLOWUP-2026-11-09.txt.
+
+VALIDATION
+Production build/typecheck and 103 tests pass. Built HTML confirms privacy canonical and the contextual guide section. Existing private route noindex policy was not changed. New production checks must run after deployment; no false production pass claimed.
+
+DEPLOYMENT DEPENDENCY
+Both Vibehost connector and visible browser session identify GST Vietnam nguyenhai1080+basic@gmail.com. The DGC project is not accessible in that browser account. No GST mutations or deployment were made. An asynchronous request asks the owner to sign into DGC nguyenhai1080@gmail.com. Deploy only after confirming that identity, then run scripts/check-seo-production.mjs (expected 25 checks) and work/check-indexability.mjs. Preserve unrelated untracked Billing proof/ files.
+
+MANUAL DISTRIBUTION AND REVIEW
+Posts are prepared, not published or scheduled. Publish email and interview tips 2–3 days apart when authorised; record actual publication dates and compare equivalent reporting windows. Review GSC URL Inspection, impressions/clicks and available campaign visits after sufficient time has elapsed. No monitoring automation created. Do not interpret aggregate guide clicks as distinct visitors, PDF attribution or job outcomes.
